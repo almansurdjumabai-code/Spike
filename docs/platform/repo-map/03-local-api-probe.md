@@ -1,9 +1,9 @@
-# Live API probe — Clips Kitty local API (sandbox, 2026-10-06)
+# Live API probe — SpikeClip local API (sandbox, 2026-10-06)
 
-Repo: /home/user/clips-studio, branch claude/open-platform-w4eh9g. Sandbox: Linux, no GPU, no Ollama,
+Repo: /home/user/spikeclip, branch claude/open-platform-w4eh9g. Sandbox: Linux, no GPU, no Ollama,
 FFmpeg 6.1.1 (`ffmpeg -version` → "ffmpeg version 6.1.1-3ubuntu5"), Python 3.13.16 (`python3 --version`).
 Everything written by this probe lives under
-`/tmp/claude-0/-home-user-clips-studio/8828d716-03cc-5de9-81b9-53d443093a47/scratchpad/repo-map/probe/`.
+`/tmp/claude-0/-home-user-spikeclip/8828d716-03cc-5de9-81b9-53d443093a47/scratchpad/repo-map/probe/`.
 
 ## 1. How the config path and data_dir are chosen
 
@@ -13,10 +13,10 @@ Everything written by this probe lives under
 - `core/paths.py` `user_config_path()`: in a non-frozen checkout it returns the bundled path unchanged
   (`if not getattr(sys, "frozen", False): return bundled`).
 - `main.py:68-114` `load_config()`: reads YAML, normalises the "quick setup" keys, honours env overrides
-  `CLIPS_STUDIO_OLLAMA_HOST` (`main.py:102`) and `CLIPS_STUDIO_DATA_DIR` (`main.py:106-108`), then
+  `SPIKECLIP_OLLAMA_HOST` (`main.py:102`) and `SPIKECLIP_DATA_DIR` (`main.py:106-108`), then
   `config["paths"]["data_dir"] = str(resolve_data_dir(config))` (`main.py:110`).
 - `core/paths.py` `resolve_data_dir()`: key is `paths.data_dir`; an absolute path is honoured as-is; a relative
-  path resolves against `_REPO_ROOT` in a checkout (`return _REPO_ROOT / raw`) or `%LOCALAPPDATA%/Clips Studio/<raw>`
+  path resolves against `_REPO_ROOT` in a checkout (`return _REPO_ROOT / raw`) or `%LOCALAPPDATA%/SpikeClip/<raw>`
   when frozen.
 - `config/settings.yaml:149-150` — `paths:` / `  data_dir: data` (relative → `<repo>/data` in a checkout).
 - `main.py:199-200` — the DB is opened at `<data_dir>/state.db` before the subcommand dispatch; `serve` then does
@@ -27,13 +27,13 @@ Everything written by this probe lives under
 ## 2. Probe config
 
 `probe/settings.yaml` is a copy of `config/settings.yaml` with line 150 rewritten to
-`  data_dir: /tmp/claude-0/-home-user-clips-studio/8828d716-03cc-5de9-81b9-53d443093a47/scratchpad/repo-map/probe/data`
+`  data_dir: /tmp/claude-0/-home-user-spikeclip/8828d716-03cc-5de9-81b9-53d443093a47/scratchpad/repo-map/probe/data`
 (command: `cp config/settings.yaml $P/settings.yaml && sed -i "s|^  data_dir: data$|  data_dir: $P/data|" ...`;
 verified with `grep -n -A1 "^paths:"`).
 
 ## 3. Server start attempt — FAILED (missing `fastapi`)
 
-Command run from `/home/user/clips-studio`:
+Command run from `/home/user/spikeclip`:
 `(timeout 240 python3 main.py --config $P/settings.yaml serve --port 8799 > $P/server.log 2>&1 &); sleep 8;
 curl -s -m 5 -w "\nHTTP %{http_code}\n" http://127.0.0.1:8799/health`
 
@@ -42,12 +42,12 @@ process. `probe/server.log` verbatim:
 
 ```
 Traceback (most recent call last):
-  File "/home/user/clips-studio/main.py", line 402, in <module>
+  File "/home/user/spikeclip/main.py", line 402, in <module>
     sys.exit(main())
              ~~~~^^
-  File "/home/user/clips-studio/main.py", line 272, in main
+  File "/home/user/spikeclip/main.py", line 272, in main
     from server.api import create_app
-  File "/home/user/clips-studio/server/api.py", line 20, in <module>
+  File "/home/user/spikeclip/server/api.py", line 20, in <module>
     from fastapi import FastAPI, HTTPException, WebSocket, WebSocketDisconnect
 ModuleNotFoundError: No module named 'fastapi'
 ```
@@ -78,7 +78,7 @@ substitute built from `server/api.py` route decorators and `docs/API.md`, each c
 `probe/openapi.json` was NOT saved: the server never bound the port (section 3). The following is derived from
 the `@app.<method>("...")` decorators in the modules `create_app()` wires together, so it is the set of routes the
 live `/openapi.json` would enumerate, minus FastAPI's own `/docs`, `/redoc`, `/openapi.json` (enabled by default:
-`app = FastAPI(title="Clips Kitty API", version="0.1")` at `server/api.py:576`; documented at `docs/API.md:62-70`).
+`app = FastAPI(title="SpikeClip API", version="0.1")` at `server/api.py:576`; documented at `docs/API.md:62-70`).
 
 Wiring (`server/api.py`): `youtube_api.install(` :631, `uploadpost_api.install(` :646,
 `remote_render_service.install(app, config, data_dir)` :659, `woopsocial_api.install(` :666,
@@ -304,8 +304,8 @@ string (`sport: dict | str | None`, `server/api.py:49`); `sports.clean('fakeball
   → exit 1 (nothing matched). (A first `pkill -f 'serve --port 8799'` killed its own shell, exit 144, because the
   pattern matched the shell's command line; the bracket pattern avoids that.)
 - Isolation held: `probe/data/state.db` (159744 bytes) was created by `StateDB(...)` at `main.py:200` before the
-  import failed; `ls /home/user/clips-studio/data` → "No such file or directory".
-- `git -C /home/user/clips-studio status --short`, verbatim at the end of the probe:
+  import failed; `ls /home/user/spikeclip/data` → "No such file or directory".
+- `git -C /home/user/spikeclip status --short`, verbatim at the end of the probe:
 
 ```
 ?? docs/platform/research-notes/

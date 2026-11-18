@@ -3,7 +3,7 @@
 - Platform: Home Assistant (custom integrations) + HACS (Home Assistant Community Store, the `hacs/default` list)
 - Tier: Track C, Tier 2 (registry-design precedent; point 6 matters most)
 - Date read: 2026-10-06
-- Brief's question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
+- Brief's question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
 - Verdict (two lines): HACS is the largest "Git list + CI checks + human review" registry in the set: a plain JSON array of `owner/repo` per category, submitted by PR, gated by eleven automated checks and then by a human queue that the HACS docs themselves say "take months"; installs are pinned to GitHub release tags, and a `removed`/`critical` list acts as a kill switch. Home Assistant itself runs custom integrations in-process with no isolation, warns in the log, and keeps a hard-coded block list of known-bad versions; the 2021 disclosure showed what in-process access costs. Borrow the release-pinned install, the mandatory `version`, the kill list, `iot_class`-style local/cloud declaration and the graduated quality scale; do not borrow in-process execution or a review queue measured in months.
 
 Every claim carries a URL and the read date 2026-10-06 unless stated. "not confirmed" marks what could not be verified.
@@ -116,7 +116,7 @@ Local process; integrations declare whether they talk to the cloud via `iot_clas
 1. In-process execution with the host's full file and credential access (2021 disclosure; crash block list).
 2. A human review queue that takes months with no automated fast path for well-formed submissions.
 3. pip `requirements` into one shared environment with no conflict handling.
-4. Claiming any trust signal beyond "checks passed and a maintainer merged" — HACS does not, and neither should Clips Kitty.
+4. Claiming any trust signal beyond "checks passed and a maintainer merged" — HACS does not, and neither should SpikeClip.
 5. Letting the registry client install from a moving branch by default.
 
 ## 13. Sources, with dates

@@ -67,8 +67,8 @@ recorded above. Inspect the replacement head's PR Checks tab for GitHub status.
   main as `0963ff2e`. The separately authorized first-entry documentation PR
   #199 merged as `f88bea2c`; this follow-up changes no first-entry files.
 - Post-merge main commit `f88bea2c40d33b945619c14597e1d25db074cc91` passed
-  [CI](https://github.com/ColinGPT9/clips-studio/actions/runs/41173928365)
-  and [CodeQL](https://github.com/ColinGPT9/clips-studio/actions/runs/41173928295).
+  [CI](https://github.com/ColinGPT9/spikeclip/actions/runs/41173928365)
+  and [CodeQL](https://github.com/ColinGPT9/spikeclip/actions/runs/41173928295).
   Python, plugin platform, Windows SDK, desktop and website jobs passed;
   the vendored-code job was skipped by its condition. Both CodeQL analyses passed.
 - After the owner confirmed quitting the older research-checkout app, Codex
@@ -231,8 +231,8 @@ job-watch recovery checks passed. The final full suite passed with 5,515
 passed, ten skipped, zero failures/errors in 14m14s. The exact expanded
 platform run took 5m37s. Saved JUnit reports confirm both totals. GitHub
 follow-up checks passed on `275edf671af96b45090c052049fe77fa1bd5043b`:
-[CI](https://github.com/ColinGPT9/clips-studio/actions/runs/41256603085)
-and [CodeQL](https://github.com/ColinGPT9/clips-studio/actions/runs/41256602980).
+[CI](https://github.com/ColinGPT9/spikeclip/actions/runs/41256603085)
+and [CodeQL](https://github.com/ColinGPT9/spikeclip/actions/runs/41256602980).
 All six CI jobs and both CodeQL analyses passed before PR #205 merged as
 `fb1b002b33356afe10ac65b0c1687021fc7ed053`. The earlier main CI links
 apply to the merged base, not these follow-up checks.
@@ -257,7 +257,7 @@ measured audio RMS is -19.76 dB, not silence. Opening release dates were
 checked against Blizzard, Nintendo and Rockstar; personal satire remains
 video-only. Export and report hashes are preserved with the artifact.
 The owner explicitly chose to upload the contest demo to YouTube themselves.
-YouTube remains disabled in Clips Kitty. The public demo URL, client `/status`
+YouTube remains disabled in SpikeClip. The public demo URL, client `/status`
 capture and remaining live phases are still pending; this is not a claim
 that the complete submission is finished.
 

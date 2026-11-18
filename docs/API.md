@@ -1,12 +1,12 @@
 # The local API
 
-Clips Kitty is a desktop app on top of a **local HTTP service**. The desktop
+SpikeClip is a desktop app on top of a **local HTTP service**. The desktop
 window is one client of it. Anything else can be another: a Discord bot that
 clips a stream on command, a batch runner, a web front end, an OBS integration,
 a script that queues last night's VOD every morning.
 
 Nothing needs to be added to the app for that to work. The service is already
-running whenever Clips Kitty is open, on `127.0.0.1:8765`.
+running whenever SpikeClip is open, on `127.0.0.1:8765`.
 
 The service has about 175 HTTP routes and a WebSocket. This document covers the
 subset meant to be built against. Most of the rest are the desktop UI talking
@@ -110,7 +110,7 @@ Easy to lose an hour to, so it is near the top:
 
 | How it is running | Where its database and videos live |
 |---|---|
-| Installed build | `%LOCALAPPDATA%\Clips Studio\data` |
+| Installed build | `%LOCALAPPDATA%\SpikeClip\data` |
 | A source checkout | `<repo>/data` |
 
 These are **separate libraries with separate databases**. A checkout resolves
@@ -132,7 +132,7 @@ The endpoints in this document are the ones intended to be built on. They will
 not change shape without a note in [CHANGELOG.md](../CHANGELOG.md).
 
 These are the routes labelled **stable** in
-[`server/api_stability.py`](../server/api_stability.py), and
+[`server/api_stability.py`](../backend/server/api_stability.py), and
 `tests/test_api_contract.py` fails if one stops accepting what it accepted.
 A few routes this document only mentions in passing are **experimental**: meant
 for outside use, but not yet promised. The [API reference](developers/api-reference.md)
@@ -180,7 +180,7 @@ guarantee of never changing.
 The liveness check. Cheap enough to poll.
 
 - **`api_version`** changes only when a supported endpoint changes shape. A tool
-  can check it once and tell its user to update Clips Kitty, instead of failing
+  can check it once and tell its user to update SpikeClip, instead of failing
   in some stranger way later.
 - **`app_version`** is the installed release.
 
@@ -257,13 +257,13 @@ values in `config/settings.yaml`:
 | `watermark_profile_id` | int | branding profile applied to every clip |
 | `webhook_url` | string | http(s) URL to POST once when this job finishes |
 | `webhook_secret` | string | signs that POST, so the listener can trust it |
-| `pipeline` | object or string | an installed Marketplace pipeline picks the moments instead of Clips Kitty's own scoring: `{"id": "publisher/name", "version": "1.2.0", "settings": {...}}`, or just the id. Not with `sport`, `gaming_scoring` or `longform` |
+| `pipeline` | object or string | an installed Marketplace pipeline picks the moments instead of SpikeClip's own scoring: `{"id": "publisher/name", "version": "1.2.0", "settings": {...}}`, or just the id. Not with `sport`, `gaming_scoring` or `longform` |
 | `understand` | list | up to 3 installed Marketplace plugins that say what happens in each moment once it is found, in this order; their notes go to the AI that writes the titles, descriptions and hashtags. Each item is shaped like `pipeline`; one item alone is taken as a list of one |
 | `rate` | list | up to 3 installed Marketplace plugins that give each moment a new score once it is found (and any understanding is done), in this order; the last one's score counts. A moment rated under `min_score` is set aside, unless it is a must-have. Shaped like `understand` |
 | `edit` | list | up to 3 installed Marketplace plugins that suggest edits for the clips that will be made, once they are chosen (after any rating and the clip limit), in this order; each is handed what the ones before it suggested. The suggestions wait for the creator in the timeline editor and change no clip. Shaped like `understand` |
 
-**`rate` and `understand`** work on the moments whoever found them: Clips
-Kitty's own scoring, `sport`, `gaming_scoring` or a `pipeline`. They can't be
+**`rate` and `understand`** work on the moments whoever found them:
+SpikeClip's own scoring, `sport`, `gaming_scoring` or a `pipeline`. They can't be
 combined with `longform` (`shorts` included): "Rate & understand can't be
 combined with Longform: Longform picks and writes its clips its own way. Turn
 one of them off." Naming the job's own `pipeline` again is refused too:
@@ -287,7 +287,7 @@ inputs and edits in outputs`. Each suggestion is kept in the clip's
 `scores.plugin_edits` ([below](#get-videosvideo_idclips)); the clip itself is
 made exactly as it would be without `edit`, and the edit step never writes a
 clip's `render_opts` (what a run writes to a clip it makes again is under
-**Clips the video already has**, below). Clips Kitty doesn’t put a suggestion into a clip until you use it in the editor and apply your edits (Apply edits, or Apply edits & upload).
+**Clips the video already has**, below). SpikeClip doesn’t put a suggestion into a clip until you use it in the editor and apply your edits (Apply edits, or Apply edits & upload).
 An edit plugin that couldn't run holds nothing back: its suggestions change
 no clip, so watched channels and `then` publish as they would without it.
 `{"clear": ["edit"]}` on `PATCH /jobs/{id}` drops it. The word means three
@@ -357,7 +357,7 @@ its video was identified.
 Add `webhook_secret` and the body is signed:
 
 ```
-X-Clips-Kitty-Signature: sha256=<hmac-sha256 of the exact body bytes>
+X-SpikeClip-Signature: sha256=<hmac-sha256 of the exact body bytes>
 ```
 
 Verify against the **raw bytes you received**, not a re-serialised copy of them:
@@ -584,7 +584,7 @@ or `null`). `outcome.intent` and `outcome.sport` are described with `focus` and
     "description": "A short summary written by the model.",
     "hashtags": ["#clip", "#stream", "#funny"],
     "hook": "the transcript line the clip was chosen for",
-    "path": "C:\\Users\\you\\AppData\\Local\\Clips Studio\\data\\clips\\…\\clip_03574-03590.mp4",
+    "path": "C:\\Users\\you\\AppData\\Local\\SpikeClip\\data\\clips\\…\\clip_03574-03590.mp4",
     "status": "queued", "scheduled_for": null,
     "created_at": "2026-08-12T22:00:50",
     "scores": {"text": 88, "audio": 54, "visual": 72, "reaction": 66,
@@ -615,7 +615,7 @@ A clip a plugin suggested edits for (the job's `edit`) carries them in
 run and every version, so the creator's decision carries over a forced re-run.
 `window` is the clip's start and end when it was suggested, and `edit` holds
 `cuts`, `mutes`, `volume`, `fade_in`, `fade_out`, `speed`, `title_overlay` and
-`crop` as Clips Kitty fitted them, its times in seconds of the video. `state`
+`crop` as SpikeClip fitted them, its times in seconds of the video. `state`
 is `new`, `hidden` (put away by the creator, or used once and no longer in the
 clip's saved edit) or `used`. A used entry has `applied`, what it put in the
 clip and is still there: `{"removed", "mutes", "muted_words", "values"}`, the
@@ -635,7 +635,7 @@ state must be hidden or new; a suggestion is used by applying it", and an id
 the clip doesn't have is 404 "no such suggestion on this clip". A used
 suggestion whose parts the clip's saved edit still holds can't be hidden or
 shown: that is 409 "suggestion: some of it is still in the clip's saved
-edit. Take it back and apply your edits, and Clips Kitty hides it then".
+edit. Take it back and apply your edits, and SpikeClip hides it then".
 A clip from a `sport` job also carries the moment it is: `sport_event`
 (`goal`, `save`...), `sport_label`, `sport_minute` (from the match clock),
 `sport_t` (seconds into the video), `sport_team`, `sport_player`, `sport_period`,
@@ -711,7 +711,7 @@ returns `{"started": tag, "already": true}`.
 
 Local (Ollama and Whisper on this machine) is the default. For a machine that
 cannot run the models, a cloud provider can do the AI work, or the transcription,
-on **the user's own API key**, billed by that provider. There is no Clips Kitty key
+on **the user's own API key**, billed by that provider. There is no SpikeClip key
 or proxy. See [AI-BACKENDS.md](AI-BACKENDS.md) for what each provider does.
 
 `GET /ai`:
@@ -943,13 +943,13 @@ video to someone's channel twice. Ask the user to check their channel instead.
 
 ## Streamer integrations
 
-For a tool that sits next to a livestream, such as the Clips Kitty OBS Plugin.
+For a tool that sits next to a livestream, such as the SpikeClip OBS Plugin.
 
 - **Your tool** decides the stream has really ended, then hands it over.
-- **Clips Kitty** finds the VOD the platform publishes afterwards, queues it once,
+- **SpikeClip** finds the VOD the platform publishes afterwards, queues it once,
   and reports progress in terms a small dock can show.
 
-Clips Kitty does not need to be running while the stream is live. Launch it
+SpikeClip does not need to be running while the stream is live. Launch it
 after the stream, wait for `GET /health`, then post the stream.
 
 ### `POST /integrations/streams`
@@ -1004,12 +1004,12 @@ Returns the stream, as below, plus `"created": true` or `false`.
 Poll it every few seconds while a dock is open. It reads the queue live, so it
 never goes stale.
 
-**It never starts other videos.** Clips Kitty does not start processing on its
+**It never starts other videos.** SpikeClip does not start processing on its
 own; the queue starts stopped. A stream you hand over counts as the go-ahead for
 that stream only.
 - **Nothing else waiting, queue stopped:** the queue starts.
 - **Other videos already waiting:** it stays stopped and `queue_paused` is
-  `true`. Tell the user to press Start in Clips Kitty.
+  `true`. Tell the user to press Start in SpikeClip.
 
 The percentages use the same stage weights as the app, so a dock and the app
 never disagree about the same job.
@@ -1114,13 +1114,13 @@ and the type from a font already on the machine.
 
 ## Watched channels
 
-Clips Kitty watches a YouTube, Twitch or Kick channel. When the channel posts,
-Clips Kitty queues the video exactly once, like a pasted link, and then
+SpikeClip watches a YouTube, Twitch or Kick channel. When the channel posts,
+SpikeClip queues the video exactly once, like a pasted link, and then
 publishes the clips through WoopSocial, asks first, or leaves them alone,
 depending on the watch's settings. This is what the Watch page in the app uses.
 
 Nothing happens until automation is switched on (`PATCH /automation`) and the
-watch is enabled. Watching only happens while Clips Kitty is running. Anything
+watch is enabled. Watching only happens while SpikeClip is running. Anything
 posted while it was closed is found on the next look, and the watch's `backlog`
 choice decides what happens to it.
 
@@ -1256,7 +1256,7 @@ PATCH takes any of the following, and changes only what it is sent:
 | `publish.ai_hashtags` | `false` leaves out the hashtags the AI chose, so only the ones above are used. |
 | `publish.footer` | Optional text under each caption. Links and "clipped from" wording can get TikTok posts flagged as unoriginal content. |
 | `publish.overrides` | Per platform, the fields WoopSocial takes: `youtube.privacy` (`public`, `unlisted`, `private`); `tiktok.privacyLevel` (`PUBLIC_TO_EVERYONE`, `FOLLOWER_OF_CREATOR`, `MUTUAL_FOLLOW_FRIENDS`, `SELF_ONLY`) and the booleans `allowComment`, `allowDuet`, `allowStitch`, `isYourBrand`, `isBrandedContent`; `instagram.postType` (`REEL`, `STORY`); `facebook.postType` (`REEL`, `VIDEO`, `STORY`); `pinterest.pinterestBoardId`. |
-| `backlog` | What to do when several videos appeared while Clips Kitty wasn't watching: `newest` (default), `all`, `day` (the last 24 hours) or `none`. Videos that aren't taken are listed as `skipped`, never dropped. |
+| `backlog` | What to do when several videos appeared while SpikeClip wasn't watching: `newest` (default), `all`, `day` (the last 24 hours) or `none`. Videos that aren't taken are listed as `skipped`, never dropped. |
 | `min_minutes` | Shorter videos (Shorts) are skipped. |
 | `min_views` | Clip-watch view target, applied before deduplication on the next poll. |
 | `lookback_days` | Clip-watch lookback, 1–90 days; daily windows split further at Twitch's approximate 1,000-result cap. |
@@ -1331,7 +1331,7 @@ of an observed crossing, otherwise 0), and `clipper` (viewer display name).
 | `waiting_for_video` | Live, premiering or still processing on the platform. Checked again every 15 minutes, for up to a week. `reason` says which. |
 | `waiting_for_queue` | Ready, but the queue is full. |
 | `queued` · `processing` · `complete` · `failed` · `cancelled` | Read live from the video's job, as in `GET /integrations/streams/{session_id}`, with the same extra fields. |
-| `skipped` | Set aside. `reason` says why: too short, posted while Clips Kitty wasn't watching, already clipped, members-only. |
+| `skipped` | Set aside. `reason` says why: too short, posted while SpikeClip wasn't watching, already clipped, members-only. |
 
 `publish_state` is empty until the clips exist. Then it is one of:
 
@@ -1343,10 +1343,10 @@ of an observed crossing, otherwise 0), and `clipper` (viewer display name).
 
 **When a plugin the job chose didn't run.** If the job named plugins under
 `rate` or `understand` and one of them couldn't run, an `auto` watch doesn't
-post the clips: the item goes to `ask` with `publish_error` "Clips Kitty made
+post the clips: the item goes to `ask` with `publish_error` "SpikeClip made
 these clips without {names}, so they weren't posted automatically. Check them
 and publish, or turn off Rate & understand in this channel's settings." An
-`ask` watch says "Clips Kitty made these clips without {names}. Check them
+`ask` watch says "SpikeClip made these clips without {names}. Check them
 before you publish." A job whose options name neither is never held this way, and neither is one
 whose only skipped plugin was named under `edit`: its suggestions change no
 clip.
@@ -1363,7 +1363,7 @@ choice, even when a forced re-run has changed the scores since. A clip
 trimmed in the editor since stays part of that choice. When none of the
 chosen clips is left, the item is `done` with "The clips chosen when this
 video was first published aren't there any more, so there was nothing to
-send." An item published before Clips Kitty remembered the choice chooses
+send." An item published before SpikeClip remembered the choice chooses
 again, once.
 
 `deliveries` holds one row per clip and platform. Its state is `sending`,
@@ -1407,7 +1407,7 @@ Set aside a video that hasn't been queued yet, or decline an `ask`.
 
 **Experimental.** Community pipelines: plugins that find a video's moments,
 say what happens in them and rate them, or suggest edits for the clips, while
-Clips Kitty does the rest.
+SpikeClip does the rest.
 Installing one never runs anything from it; a job runs it when its options
 say `pipeline: {"id": "publisher/name"}`, or name it under `understand`,
 `rate` or `edit` ([`POST /jobs`](#post-jobs)). Each plugin's `details.steps` says which
@@ -1418,21 +1418,21 @@ may take. Developer guide:
 [Getting started](developers/getting-started.md) and [Steps](developers/steps.md).
 
 Routes that fetch, install, change or remove plugins need the
-`X-Clips-Kitty-Session` header. The desktop app sends it; a script reads it from
+`X-SpikeClip-Session` header. The desktop app sends it; a script reads it from
 `<data folder>/plugins/session.secret`. It keeps web pages and stray calls out;
 it is not a password against software already running as you.
 
 ```bash
-# Installed app: %LOCALAPPDATA%\Clips Studio\data. A checkout: data/ in the repository.
+# Installed app: %LOCALAPPDATA%\SpikeClip\data. A checkout: data/ in the repository.
 SECRET=$(cat data/plugins/session.secret)
-curl -X POST localhost:8765/plugins/plan -H "X-Clips-Kitty-Session: $SECRET" \
+curl -X POST localhost:8765/plugins/plan -H "X-SpikeClip-Session: $SECRET" \
   -H 'Content-Type: application/json' \
   -d '{"source": {"kind": "git", "url": "https://github.com/example-dev/example-plugin",
                   "commit": "<40-character commit hash>"}}'
 # → {"plan_id": "...", "ok": true, "plugin": {...}, "details": {"permissions": [...],
 #    "data_warnings": ["⚠ Sends ..."], ...}, "errors": [], "warnings": [], "technical": [],
 #    "update": null, "text": "Install ...?\n..."}
-curl -X POST localhost:8765/plugins/install -H "X-Clips-Kitty-Session: $SECRET" \
+curl -X POST localhost:8765/plugins/install -H "X-SpikeClip-Session: $SECRET" \
   -H 'Content-Type: application/json' -d '{"plan_id": "..."}'
 ```
 
@@ -1463,19 +1463,19 @@ apply), its numbers (`metrics`, each from its own source) and, on each of its
 `versions`, the `compatibility` record when there is one; the answer's
 `sections` lists the sections of each installable kind. Each listing's
 `problems_here` says what the engine can tell would stop it running on this PC
-(`{"need": "app" | "python", "text": ...}`: a Clips Kitty version outside its
+(`{"need": "app" | "python", "text": ...}`: a SpikeClip version outside its
 range, no Python for a plugin that runs with one), and each of its `versions`
 has its own `problem_here`. `GET /plugins` gives installed plugins the same
 `problems_here`.
 The answer's `indexes` names each list with its `kind`: `bundled` (the copy
-that came with the app), `online` (Clips Kitty's online list, the catalog's
+that came with the app), `online` (SpikeClip's online list, the catalog's
 index on the project's main branch) or `other` (an address in
 `plugins.registry_urls`); `online` says whether the Marketplace checks that
 list by itself, when its copy was fetched (`fetched_at`), whether that copy is
 in use (`in_use`: one older than the bundled list is set aside) and how the
 last try went (`tried_at`, `error`). What the online list adds shows as Community and is
 never counted; only the bundled list labels (DECISIONS D29).
-`POST /marketplace/refresh` (session header) fetches Clips Kitty's online list
+`POST /marketplace/refresh` (session header) fetches SpikeClip's online list
 and the indexes in `plugins.registry_urls` again and answers
 `{"checked": true, "indexes": [{"url", "ok", "error"}]}`; with
 `{"automatic": true}`, as the Marketplace sends when it opens (and the app at start, when a pipeline is installed), it fetches only
@@ -1484,7 +1484,7 @@ the online list, and only when the automatic checks are on (`PUT
 hour, or the last day after a list that wasn't there or couldn't be read
 (`{"checked": false, "indexes": []}` otherwise); one check runs at a time. `error` is one
 of a few fixed sentences (no connection, nothing at the address, the website's
-error, too large, not a list Clips Kitty can read, not https://, couldn't be
+error, too large, not a list SpikeClip can read, not https://, couldn't be
 saved); the details of what went wrong go to the engine's log.
 `GET /marketplace/online` (no header) answers like `online` above, and
 `PUT /marketplace/online` `{"enabled": false}` (session header) switches the
@@ -1492,13 +1492,13 @@ automatic checks off for this Windows account (or on again). See
 [Marketplace publishing](developers/marketplace-publishing.md).
 
 `GET /marketplace/catalog` (`?q=`, `kind`, `section`; no header) lists the rest
-of Awesome Clips Kitty: its apps, models, workflows, integrations and tools.
+of Awesome SpikeClip: its apps, models, workflows, integrations and tools.
 They are not installed from here; each entry has an `id` (`apps/<name>`, the
 folder and file it comes from), its `source` (GitHub,
 Hugging Face or a home page, and the project's own website, `homepage`, and
 download page, `download`, when the list has them), `setup` when given
 (`installer`, or `technical` for one that needs the command line or Python),
-its `relationship` to Clips Kitty (`built-with`
+its `relationship` to SpikeClip (`built-with`
 or `related`), its `license`, its labels and its numbers. `kind` is one of
 `app`, `model`, `workflow`, `integration` or `tool` (anything else is a 400).
 The answer also carries the `sections`, `kinds`, `relationships`, what each
@@ -1513,7 +1513,7 @@ other index can count installs), which is the case today, so nothing is counted.
 `{"enabled": false}` switches counting off for this Windows account (or on again), needs the
 session header, and answers the same way. `POST /plugins/install` answers with
 `counted`: whether that install was counted, which only a first install from a
-listing can be. What a count sends: [Security](developers/security.md#what-clips-kitty-sends-when-you-install).
+listing can be. What a count sends: [Security](developers/security.md#what-spikeclip-sends-when-you-install).
 
 `GET /plugin-models` lists every model the installed plugins name, once, with
 where it is, its licence and size, and which plugins use it (no header).
@@ -1529,10 +1529,10 @@ Twitch connections belong to the main desktop engine and are reusable by other
 integrations. The experimental `/connected-accounts` routes provide provider
 configuration, public desktop device authorization, sanitized account status,
 testing, disconnection, own-channel watch creation, and bounded Twitch operations.
-Every route, including metadata reads, requires `X-Clips-Kitty-Session`.
+Every route, including metadata reads, requires `X-SpikeClip-Session`.
 
 No endpoint returns OAuth tokens. The public Twitch client ID is configured in
-Settings; no embedded client secret or Clips Kitty cloud account is required.
+Settings; no embedded client secret or SpikeClip cloud account is required.
 Only named stream/VOD, live clip, timestamp link, chat, and host-owned EventSub
 actions are accepted. Their OAuth scopes and connected broadcaster identity are
 checked by the trusted host. A watched channel is not an authorization grant.
@@ -1554,7 +1554,7 @@ routes do not implement Discord authentication or bot posting. See
 
 ## MCP: let an AI agent drive it
 
-Clips Kitty ships an **MCP server**, so Claude, Cursor or any MCP client can use the
+SpikeClip ships an **MCP server**, so Claude, Cursor or any MCP client can use the
 endpoints above in plain language: queue a stream, follow the job, read the clips it
 chose, export one. It is a translation layer over this same API, talking to the running
 engine on `127.0.0.1:8765`, and it needs no API key of any kind, because the model that
@@ -1562,11 +1562,11 @@ picks the clips is the one on this machine, or a cloud model the user chose in S
 AI on their own key, which the MCP client never sees.
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 Installed builds ship the engine as `api.exe` in the app's `resources\backend` folder, so
-the command there is `api.exe mcp`. `CLIPS_STUDIO_API` overrides the address if the engine
+the command there is `api.exe mcp`. `SPIKECLIP_API` overrides the address if the engine
 is on another port.
 
 Thirteen tools. Processing: `queue_video`, `queue_local_file`, `job_status`,
@@ -1588,7 +1588,7 @@ The tools carry the traps in their own output, since an agent reads nothing else
 `job_id` of `null` means "not queued" rather than "failed", an unknown video id returns an
 empty clip list rather than a 404, and a paused queue looks exactly like a stalled app.
 
-An agent skill for clients that support them is in [`skills/clips-kitty/`](../skills/clips-kitty/).
+An agent skill for clients that support them is in [`skills/spikeclip/`](../skills/spikeclip/).
 
 ## WebSocket events
 
@@ -1646,7 +1646,7 @@ itself.
 
 ## A complete example
 
-**[`examples/drive_the_api.py`](../examples/drive_the_api.py) is a working
+**[`examples/drive_the_api.py`](../backend/examples/drive_the_api.py) is a working
 program** that walks the whole path: preflight, submit, follow the WebSocket,
 read the clips, and it is kept running as part of the repo:
 
@@ -1738,7 +1738,7 @@ Collected because each one has cost somebody time:
 
 ## Building something?
 
-- **Get it listed:** add it to [Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)
+- **Get it listed:** add it to [Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)
   with a pull request ([how](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)), so people
   can find it there and in the Marketplace.
 - **Need an internal endpoint?** Open an issue saying what you are building. The

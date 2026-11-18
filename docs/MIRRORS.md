@@ -1,6 +1,6 @@
 # Mirrors
 
-Clips Kitty lives on GitHub, but people look for software in more than one
+SpikeClip lives on GitHub, but people look for software in more than one
 place. These mirrors exist so the project can be found by someone who never
 visits GitHub, and so it survives any single platform.
 
@@ -14,7 +14,7 @@ workflow is harmless until you set one up, and starts working the moment you do.
 | GitHub Pages | The website (`site/`) | none: uses the built-in token |
 | Hugging Face Space | The website (`site/`) | `HF_TOKEN`, `HF_SPACE` |
 
-A third Hugging Face repository, `clips-studio-releases`, holds the installer
+A third Hugging Face repository, `spikeclip-releases`, holds the installer
 payload. It is **not** a mirror and not automated. It exists because a GitHub
 release asset is capped at 2 GiB and the payload is roughly twice that, so it
 is the primary download rather than a copy of one. Uploading is a manual step
@@ -42,13 +42,13 @@ the project in front of people already searching for local AI tools.
 2. Create a token at <https://huggingface.co/settings/tokens> with **write**
    access.
 3. Add secrets: `HF_TOKEN` (the token) and `HF_SPACE` (e.g.
-   `ColinGPT9/clips-studio`).
+   `ColinGPT9/spikeclip`).
 
 `site/README.md` carries the YAML frontmatter that tells Hugging Face this is a
 static Space. It is pushed as the Space's root, which is why every path in the
 HTML is relative.
 
-**A Space cannot run Clips Kitty.** It is a Windows desktop app needing a local
+**A Space cannot run SpikeClip.** It is a Windows desktop app needing a local
 GPU, FFmpeg and your files. The Space is the website, and says so.
 
 ## Why the website is mirrored but the code is not

@@ -1,8 +1,8 @@
-# Translating and testing Clips Kitty in your language
+# Translating and testing SpikeClip in your language
 
 **The person who wrote this app only speaks English.**
 
-Clips Kitty ships in 19 languages, and the maintainer cannot tell whether 18
+SpikeClip ships in 19 languages, and the maintainer cannot tell whether 18
 of them read naturally, use the right words for video editing, or make sense to
 somebody who actually speaks the language. Machine translation gets the meaning
 across and still sounds wrong, and there is no way to notice that from the
@@ -21,27 +21,27 @@ pull request. Saying "this word is wrong, here is the right one" is enough.
 ## The languages
 
 Each language has its own issue. Find yours here, or in
-[the issue list](https://github.com/ColinGPT9/clips-studio/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation).
+[the issue list](https://github.com/ColinGPT9/spikeclip/issues?q=is%3Aissue+is%3Aopen+label%3Atranslation).
 
 | Complete, needs **checking** | Half-finished, needs **finishing** |
 |---|---|
-| [العربية (Arabic)](https://github.com/ColinGPT9/clips-studio/issues/52) | [ไทย (Thai)](https://github.com/ColinGPT9/clips-studio/issues/46) |
-| [Deutsch (German)](https://github.com/ColinGPT9/clips-studio/issues/53) | [Tagalog (Filipino)](https://github.com/ColinGPT9/clips-studio/issues/47) |
-| [Español (Spanish)](https://github.com/ColinGPT9/clips-studio/issues/54) | [اردو (Urdu)](https://github.com/ColinGPT9/clips-studio/issues/49) |
-| [Français (French)](https://github.com/ColinGPT9/clips-studio/issues/55) | [Tiếng Việt (Vietnamese)](https://github.com/ColinGPT9/clips-studio/issues/50) |
-| [हिन्दी (Hindi)](https://github.com/ColinGPT9/clips-studio/issues/56) | |
-| [Bahasa Indonesia (Indonesian)](https://github.com/ColinGPT9/clips-studio/issues/57) | |
-| [日本語 (Japanese)](https://github.com/ColinGPT9/clips-studio/issues/58) | |
-| [Português (Portuguese)](https://github.com/ColinGPT9/clips-studio/issues/59) | |
-| [Русский (Russian)](https://github.com/ColinGPT9/clips-studio/issues/60) | |
+| [العربية (Arabic)](https://github.com/ColinGPT9/spikeclip/issues/52) | [ไทย (Thai)](https://github.com/ColinGPT9/spikeclip/issues/46) |
+| [Deutsch (German)](https://github.com/ColinGPT9/spikeclip/issues/53) | [Tagalog (Filipino)](https://github.com/ColinGPT9/spikeclip/issues/47) |
+| [Español (Spanish)](https://github.com/ColinGPT9/spikeclip/issues/54) | [اردو (Urdu)](https://github.com/ColinGPT9/spikeclip/issues/49) |
+| [Français (French)](https://github.com/ColinGPT9/spikeclip/issues/55) | [Tiếng Việt (Vietnamese)](https://github.com/ColinGPT9/spikeclip/issues/50) |
+| [हिन्दी (Hindi)](https://github.com/ColinGPT9/spikeclip/issues/56) | |
+| [Bahasa Indonesia (Indonesian)](https://github.com/ColinGPT9/spikeclip/issues/57) | |
+| [日本語 (Japanese)](https://github.com/ColinGPT9/spikeclip/issues/58) | |
+| [Português (Portuguese)](https://github.com/ColinGPT9/spikeclip/issues/59) | |
+| [Русский (Russian)](https://github.com/ColinGPT9/spikeclip/issues/60) | |
 
 বাংলা (Bengali), Italiano (Italian), 한국어 (Korean), Türkçe (Turkish) and 中文
 (Chinese) were finished by contributors
-([#95](https://github.com/ColinGPT9/clips-studio/pull/95),
-[#90](https://github.com/ColinGPT9/clips-studio/pull/90),
-[#45](https://github.com/ColinGPT9/clips-studio/issues/45),
-[#96](https://github.com/ColinGPT9/clips-studio/pull/96),
-[#107](https://github.com/ColinGPT9/clips-studio/pull/107)); a check by
+([#95](https://github.com/ColinGPT9/spikeclip/pull/95),
+[#90](https://github.com/ColinGPT9/spikeclip/pull/90),
+[#45](https://github.com/ColinGPT9/spikeclip/issues/45),
+[#96](https://github.com/ColinGPT9/spikeclip/pull/96),
+[#107](https://github.com/ColinGPT9/spikeclip/pull/107)); a check by
 another speaker is just as welcome for those.
 
 The complete ones need **checking**. The half-finished ones stopped at 57
@@ -50,17 +50,17 @@ long had, so comparing your file with it shows what is missing. Strings added
 to the app since then show in English until someone translates them.
 That is a known gap, not something to report. Italian, Portuguese, Russian,
 Arabic and Chinese have gone further and cover most of those later strings
-too ([#90](https://github.com/ColinGPT9/clips-studio/pull/90),
-[#108](https://github.com/ColinGPT9/clips-studio/pull/108),
-[#109](https://github.com/ColinGPT9/clips-studio/pull/109)); their files are
+too ([#90](https://github.com/ColinGPT9/spikeclip/pull/90),
+[#108](https://github.com/ColinGPT9/spikeclip/pull/108),
+[#109](https://github.com/ColinGPT9/spikeclip/pull/109)); their files are
 the place to look for the newer ones.
 
-Your language not listed? [Ask for it](https://github.com/ColinGPT9/clips-studio/issues/61).
+Your language not listed? [Ask for it](https://github.com/ColinGPT9/spikeclip/issues/61).
 
 ## Where the words live
 
 ```
-ui/src/renderer/src/locales/<code>.json
+frontend/src/renderer/src/locales/<code>.json
 ```
 
 A flat JSON file: the English string is the key, your language is the value.
@@ -117,7 +117,7 @@ Anything from one string to a hundred is welcome.
 
 Optional, and a much bigger job than the wording. Skip it freely.
 
-Clips Kitty transcribes speech, picks moments, and writes titles, all locally.
+SpikeClip transcribes speech, picks moments, and writes titles, all locally.
 Whether it does that well in your language is unknown, and nobody has measured
 it. If you want to find out, run a video that is naturally spoken in your
 language, a podcast, an interview, a talking-head video, and report what
@@ -138,7 +138,7 @@ Two honest caveats:
   trying for non-English content, since it is reputed to be strong
   multilingually. That is reputation, not a measurement, which is exactly the
   gap worth closing. See
-  [#38](https://github.com/ColinGPT9/clips-studio/issues/38).
+  [#38](https://github.com/ColinGPT9/spikeclip/issues/38).
 - **AI dubbing works in an installed copy as of 1.1.3.** The speech engine
   ships with the app. The voice for a language is downloaded the first time
   that language is dubbed (~60 MB), so the first run needs a connection.
@@ -158,8 +158,8 @@ Say plainly which kind of problem you found, because the fixes are unrelated:
 
 If you want to make the change yourself:
 
-1. Fork, and edit `ui/src/renderer/src/locales/<code>.json`.
-2. Run it: `cd ui && npm install && npm run dev`, then switch to your language.
+1. Fork, and edit `frontend/src/renderer/src/locales/<code>.json`.
+2. Run it: `cd frontend && npm install && npm run dev`, then switch to your language.
 3. Open a pull request that mentions the issue number.
 
 Change only your own locale file. Nothing else needs touching, and a pull

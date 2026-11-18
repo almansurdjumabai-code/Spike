@@ -18,10 +18,10 @@ on:
   workflow_dispatch:
   pull_request:
     paths:
-      - 'ui/electron-builder.yml'
-      - 'scripts/build_msix.py'
-      - 'scripts/build_appx_assets.py'
-      - 'ui/src/main/distribution.ts'
+      - 'frontend/electron-builder.yml'
+      - 'backend/scripts/build_msix.py'
+      - 'backend/scripts/build_appx_assets.py'
+      - 'frontend/src/main/distribution.ts'
 
 permissions:
   contents: read
@@ -44,10 +44,10 @@ jobs:
         run: |
           python - <<'PY'
           import sys, yaml, pathlib
-          cfg = yaml.safe_load(pathlib.Path("ui/electron-builder.yml").read_text(encoding="utf-8"))
+          cfg = yaml.safe_load(pathlib.Path("frontend/electron-builder.yml").read_text(encoding="utf-8"))
           appx = cfg.get("appx")
           if not appx:
-              sys.exit("no `appx:` block in ui/electron-builder.yml")
+              sys.exit("no `appx:` block in frontend/electron-builder.yml")
 
           required = ("identityName", "publisher", "publisherDisplayName", "applicationId")
           missing = [k for k in required if not appx.get(k)]
@@ -57,8 +57,8 @@ jobs:
           # applicationId is part of the app's identity to Windows. Changing it
           # makes the next release look like a different app to everyone who
           # already installed it.
-          if appx["applicationId"] != "ClipsStudio":
-              sys.exit(f"applicationId changed to {appx['applicationId']!r} — it must stay 'ClipsStudio'")
+          if appx["applicationId"] != "SpikeClip":
+              sys.exit(f"applicationId changed to {appx['applicationId']!r} — it must stay 'SpikeClip'")
           if appx["applicationId"][0].isdigit():
               sys.exit("applicationId cannot start with a digit")
 
@@ -76,17 +76,17 @@ jobs:
         run: |
           python - <<'PY'
           import json, pathlib, sys
-          sys.path.insert(0, "scripts")
+          sys.path.insert(0, "backend/scripts")
 
           # store_version() alone, without importing build_installer (Windows-only).
-          src = pathlib.Path("scripts/build_msix.py").read_text(encoding="utf-8")
+          src = pathlib.Path("backend/scripts/build_msix.py").read_text(encoding="utf-8")
           start = src.index("def store_version")
           end = src.index("def developer_mode_on")
           ns = {"sys": sys}
           exec(src[start:end], ns)
           store_version = ns["store_version"]
 
-          app = json.loads(pathlib.Path("ui/package.json").read_text(encoding="utf-8"))["version"]
+          app = json.loads(pathlib.Path("frontend/package.json").read_text(encoding="utf-8"))["version"]
           got = store_version(app)
           print(f"app {app} -> package {got}")
 
@@ -125,13 +125,13 @@ jobs:
           python - <<'PY'
           import sys, pathlib
           from PIL import Image
-          sys.path.insert(0, "scripts")
+          sys.path.insert(0, "backend/scripts")
           from build_appx_assets import SIZES, DEST
 
           for name, (w, h) in SIZES.items():
               p = DEST / name
               if not p.exists():
-                  sys.exit(f"missing {p} — run: python scripts/build_appx_assets.py")
+                  sys.exit(f"missing {p} — run: python backend/scripts/build_appx_assets.py")
               got = Image.open(p).size
               if got != (w, h):
                   sys.exit(f"{name} is {got}, expected {(w, h)}")

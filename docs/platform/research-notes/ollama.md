@@ -97,25 +97,25 @@ Both: local server at `http://localhost:11434/api` (also `/v1` OpenAI-compatible
 - Only LLM-shaped artifacts: GGUF or safetensors "for a supported architecture"; no path for detectors (YOLO), OCR or audio taggers.
 - "Ollama does not quantize GGUF models during import."
 - The `hf.co/` pull syntax is documented on Hugging Face's site, not on docs.ollama.com (as of 2026-10-06).
-- Structured output: `format` "Supports either the string `"json"` or a JSON schema object" on `/api/generate` and `/api/chat` (https://docs.ollama.com/api/generate.md and /api/chat.md, read 2026-10-06), which Clips Kitty's scorer can use for typed range output.
+- Structured output: `format` "Supports either the string `"json"` or a JSON schema object" on `/api/generate` and `/api/chat` (https://docs.ollama.com/api/generate.md and /api/chat.md, read 2026-10-06), which SpikeClip's scorer can use for typed range output.
 - Security incidents: not searched within the Tier 3 budget; "not confirmed".
 
-## 11. Borrow (for Clips Kitty's shared model manager)
+## 11. Borrow (for SpikeClip's shared model manager)
 
 1. **One record shape for both sources.** Store every model as {`source` (`hf` | `ollama` | `local`), `ref` (HF `owner/repo@revision` or Ollama `host/namespace/model:tag@digest`), `digest`, `size`, `format`, `quantization_level`, `license`, `capabilities`}; `/api/tags` + `/api/show` supply all of these for Ollama; the HF hub API supplies the rest for HF. The `hf.co/owner/repo:quant` bridge means one HF GGUF repo can be the *same* record under both sources.
 2. **Content digest as the pin.** Use `@digest` (Ollama) and commit hash (HF, H7) as the only "pinned" form; treat `:latest`/`main` as floating and say so in the UI.
 3. **Introspect, do not trust the manifest.** Read `license`, `details.family`, `model_info.*.context_length` and `capabilities` from the running server at install time, the way `/api/show` exposes them, and show them next to the plugin's declared needs.
 4. **`REQUIRES <version>` and `CAPABILITY`** are tiny, honest compatibility declarations; mirror them in the plugin manifest (`requires_engine`, `requires_capabilities`).
 5. **JSON-schema `format`** for the LLM scoring step gives typed "scored, labelled time ranges" (H2) without parsing prose.
-6. **Expose `OLLAMA_MODELS`** in the model manager so the user can point Ollama and Clips Kitty's own cache at the same drive; do not copy blobs.
+6. **Expose `OLLAMA_MODELS`** in the model manager so the user can point Ollama and SpikeClip's own cache at the same drive; do not copy blobs.
 
 ## 12. Avoid
 
 1. Modelling non-LLM models (YOLOv8, RapidOCR, PANNs, faster-whisper) as Ollama models; Ollama has no slot for them. The abstraction must be source-agnostic with Ollama as one backend.
 2. Depending on `ADAPTER`/LoRA through Ollama; it is gone.
 3. Relying on `:latest`; always resolve and record the digest after pull.
-4. Using `insecure: true` anywhere in Clips Kitty's pull path.
-5. Assuming the local server is private: it is loopback by default, but `OLLAMA_HOST` can expose it with no authentication, the same class of risk as Clips Kitty's own engine on 127.0.0.1:8765.
+4. Using `insecure: true` anywhere in SpikeClip's pull path.
+5. Assuming the local server is private: it is loopback by default, but `OLLAMA_HOST` can expose it with no authentication, the same class of risk as SpikeClip's own engine on 127.0.0.1:8765.
 
 ## 13. Sources (all read 2026-10-06)
 

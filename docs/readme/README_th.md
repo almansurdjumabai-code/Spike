@@ -4,46 +4,44 @@
 
 </div>
 
-<a id="clips-kitty-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
+<a id="spikeclip-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
 
-# Clips Kitty: ทางเลือกแทน Opus Clip ที่ฟรีและเป็นโอเพนซอร์ส สำหรับคลิปพูดคุย เกม และกีฬา ทำงานบนพีซีของคุณเอง
+# SpikeClip: ทางเลือกแทน Opus Clip ที่ฟรีและเป็นโอเพนซอร์ส สำหรับคลิปพูดคุย เกม และกีฬา ทำงานบนพีซีของคุณเอง
 
 > README นี้แปลโดย AI จาก [README ภาษาอังกฤษ](../../README.md) ซึ่งเป็นฉบับอ้างอิงและจะได้รับการอัปเดตก่อนเสมอ ยินดีอย่างยิ่งหากเจ้าของภาษาช่วยแก้ไขให้
 >
-> 🌐 [หน้าเว็บไซต์ภาษาไทย](https://colingpt9.github.io/clips-studio/th.html)
+> 🌐 [หน้าเว็บไซต์ภาษาไทย](https://colingpt9.github.io/spikeclip/th.html)
 
 <a href="https://apps.microsoft.com/detail/9NB6XT7DSQZZ">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg">
-    <img alt="ดาวน์โหลด Clips Kitty จาก Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
+    <img alt="ดาวน์โหลด SpikeClip จาก Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
   </picture>
 </a>
 
-[![Latest release](https://badgen.net/github/tag/ColinGPT9/clips-studio?label=release)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/clips-studio/total?label=downloads)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Licence](https://img.shields.io/github/license/ColinGPT9/clips-studio)](../../LICENSE)
-[![Stars](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars)](https://github.com/ColinGPT9/clips-studio/stargazers)
-[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/clips-studio)
+[![Latest release](https://badgen.net/github/tag/ColinGPT9/spikeclip?label=release)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/spikeclip/total?label=downloads)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Licence](https://img.shields.io/github/license/ColinGPT9/spikeclip)](../../LICENSE)
+[![Stars](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars)](https://github.com/ColinGPT9/spikeclip/stargazers)
+[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/spikeclip)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](../../CONTRIBUTING.md)
 [![Docker](https://img.shields.io/badge/docker-compose%20up-2496ED?logo=docker&logoColor=white)](../../docs/DOCKER.md)
 
-<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="Clips Kitty turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
+<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="SpikeClip turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
 
-<a id="star-and-share-clips-kitty--goal-225"></a>
+<a id="star-and-share-spikeclip--goal-225"></a>
 
-### กดดาวและแชร์ Clips Kitty ⭐ เป้าหมาย: 225
+### กดดาวและแชร์ SpikeClip ⭐ เป้าหมาย: 225
 
-[![Stars so far](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/clips-studio/stargazers) **จาก 225**
+[![Stars so far](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/spikeclip/stargazers) **จาก 225**
 
 **ช่วยกดดาวให้ repo นี้และแชร์ต่อด้วยนะครับ** คุณไม่เสียอะไรเลย และโปรเจกต์นี้ไม่มีงบการตลาด การบอกต่อจึงเป็นทางเดียวที่ YouTuber หรือสตรีมเมอร์ตัวเล็ก ๆ คนต่อไปจะรู้ว่ามีตัวเลือกฟรีอยู่
 
 **ผมทำมันขึ้นมาเพื่อ YouTuber สตรีมเมอร์ Twitch และผู้สร้างคอนเทนต์** ที่ไม่มีเงินจ่ายเครื่องมืออื่นหรือจ้างคนตัดต่อ มันคือทางเลือกแทน Opus Clip, Vizard และ Klap ที่ฟรี ซึ่งรัน **Google Gemma** บนพีซีของคุณเอง: ไม่มีค่าเซิร์ฟเวอร์ ไม่มีค่าธรรมเนียมต่อคลิป ไม่มีค่าใช้งาน AI
 
-> **Clips Kitty เคยชื่อ Clips Studio จนถึงเวอร์ชัน 1.1.3** และเปลี่ยนชื่อเพื่อให้ตรงตามข้อกำหนดการตั้งชื่อของ Microsoft Store แอปเดิม repository เดิม ข้อมูลเดิม
-
 <img src="../../docs/brand/mascot.png" alt="" width="150" align="right">
 
-**เปลี่ยนสตรีมและวิดีโอยาว ๆ ให้เป็น Shorts, Reels และ TikTok ที่พร้อมโพสต์ ทั้งหมดบนเครื่องของคุณเอง** Clips Kitty คือเครื่องมือสร้างคลิปด้วย AI และโปรแกรมตัดต่อวิดีโอสำหรับครีเอเตอร์ที่ฟรีและเป็นโอเพนซอร์ส: วางลิงก์ YouTube, Twitch หรือ Kick แล้วมันจะหาช่วงที่ดีที่สุด ครอปเป็น 9:16 โดยให้คนที่กำลังพูดอยู่กลางเฟรม ฝังซับไตเติลที่ซิงก์ทีละคำ และเขียนชื่อเรื่อง คำอธิบาย และแฮชแท็กให้
+**เปลี่ยนสตรีมและวิดีโอยาว ๆ ให้เป็น Shorts, Reels และ TikTok ที่พร้อมโพสต์ ทั้งหมดบนเครื่องของคุณเอง** SpikeClip คือเครื่องมือสร้างคลิปด้วย AI และโปรแกรมตัดต่อวิดีโอสำหรับครีเอเตอร์ที่ฟรีและเป็นโอเพนซอร์ส: วางลิงก์ YouTube, Twitch หรือ Kick แล้วมันจะหาช่วงที่ดีที่สุด ครอปเป็น 9:16 โดยให้คนที่กำลังพูดอยู่กลางเฟรม ฝังซับไตเติลที่ซิงก์ทีละคำ และเขียนชื่อเรื่อง คำอธิบาย และแฮชแท็กให้
 
 ค่าเริ่มต้นไม่ใช้ AI บนคลาวด์ ไม่มีค่าสมาชิก ไม่มีค่าธรรมเนียมต่อคลิป ฟุตเทจของคุณไม่เคยออกจากคอมพิวเตอร์ของคุณ เว้นแต่คุณจะสั่งให้มันเผยแพร่คลิปไปยังช่อง YouTube ของคุณเอง
 
@@ -52,7 +50,7 @@
 **ทำไมถึงมีโปรเจกต์นี้:** ครีเอเตอร์ส่วนใหญ่ที่กำลังปั้นช่องทำทุกอย่างเองหมด: ถ่าย สตรีม ตัดต่อ โพสต์ คลิปสั้นคือช่องทางที่คนจะค้นเจอคุณ และมักเป็นสิ่งแรกที่ถูกตัดทิ้ง: การจ้างคนตัดต่อเป็นต้นทุนที่ช่องส่วนใหญ่ยังไม่คุ้มจะจ่าย เครื่องมือทำคลิปก็คิดเงินต่อวิดีโอหรือต่อเดือน และการตัดเองด้วยมือก็กินเวลาไปทั้งวันที่คุณควรได้ใช้ทำอย่างอื่น โปรแกรมนี้รันบนฮาร์ดแวร์ที่คุณมีอยู่แล้ว จึงใช้ได้ฟรี และไม่มีขีดจำกัดว่าจะทำคลิปได้กี่คลิป
 
 <img src="../../docs/store-screenshots/fs-dashboard-202754.png" width="100%"
-     alt="แดชบอร์ดของ Clips Kitty: วาง URL ของ YouTube, Twitch หรือ Kick เลือกตัวเลือกซับไตเติลและรูปแบบ พร้อมแถววิดีโอที่เสร็จแล้วซึ่งแสดงว่าได้ 38 คลิปใน 19 นาที 38 วินาที และมีค่า CPU, RAM, GPU และพื้นที่จัดเก็บแบบสดอยู่ข้าง ๆ">
+     alt="แดชบอร์ดของ SpikeClip: วาง URL ของ YouTube, Twitch หรือ Kick เลือกตัวเลือกซับไตเติลและรูปแบบ พร้อมแถววิดีโอที่เสร็จแล้วซึ่งแสดงว่าได้ 38 คลิปใน 19 นาที 38 วินาที และมีค่า CPU, RAM, GPU และพื้นที่จัดเก็บแบบสดอยู่ข้าง ๆ">
 
 <sub>38 คลิปจากวิดีโอเดียวใน 19 นาที บนพีซีเครื่องเดียว โดยไม่มีอะไรถูกอัปโหลด</sub>
 
@@ -90,7 +88,7 @@
 
 ## มันทำอะไรได้บ้าง
 
-คุณให้วิดีโอยาวหนึ่งเรื่องกับ Clips Kitty แล้วมันจะคืนโฟลเดอร์ที่มีคลิปแนวตั้งพร้อมโพสต์กลับมาให้ พร้อมสตูดิโอสำหรับตรวจทานและแก้ไขก่อนโพสต์
+คุณให้วิดีโอยาวหนึ่งเรื่องกับ SpikeClip แล้วมันจะคืนโฟลเดอร์ที่มีคลิปแนวตั้งพร้อมโพสต์กลับมาให้ พร้อมสตูดิโอสำหรับตรวจทานและแก้ไขก่อนโพสต์
 
 มันสร้างมาเพื่อคอนเทนต์ที่เครื่องมือทำคลิปส่วนใหญ่รับมือได้แย่ที่สุด: **ไลฟ์สตรีม, คอนเทนต์ IRL และแบบพูดหน้ากล้อง, พอดแคสต์ และคอนเทนต์ยิม/ฟิตเนส** ซึ่งเป็นวิดีโอยาวที่โครงสร้างหลวม ๆ ช่วงดี ๆ ถูกฝังอยู่ข้างใน และแค่ทรานสคริปต์อย่างเดียวหาไม่เจอ
 
@@ -98,11 +96,11 @@
 
 ## เทียบกับ Opus Clip, Klap, Vizard และ CapCut
 
-Clips Kitty คือทางเลือกโอเพนซอร์สแทนเครื่องมือทำคลิปบนคลาวด์ ความแตกต่างที่สำคัญคือการทำงานเกิดขึ้นที่ไหน: วิดีโอของคุณไม่เคยถูกอัปโหลด จึงไม่มีอะไรให้นับโควตาและไม่มีอะไรให้เก็บเงิน
+SpikeClip คือทางเลือกโอเพนซอร์สแทนเครื่องมือทำคลิปบนคลาวด์ ความแตกต่างที่สำคัญคือการทำงานเกิดขึ้นที่ไหน: วิดีโอของคุณไม่เคยถูกอัปโหลด จึงไม่มีอะไรให้นับโควตาและไม่มีอะไรให้เก็บเงิน
 
 | เครื่องมือ | ราคา (รายเดือน) | แพ็กเกจฟรี | หาคลิปให้คุณ | ลายน้ำ | อัปโหลดวิดีโอของคุณ | โอเพนซอร์ส |
 | ---- | --------------------- | --------- | ----------------------- | --------- | ------------------ | ----------- |
-| **Clips Kitty** | ฟรี ไม่มีแพ็กเกจเสียเงิน | ทั้งแอป | ใช่ | ไม่มีเลย | ไม่ รันบนพีซีของคุณ | ใช่, AGPL-3.0 |
+| **SpikeClip** | ฟรี ไม่มีแพ็กเกจเสียเงิน | ทั้งแอป | ใช่ | ไม่มีเลย | ไม่ รันบนพีซีของคุณ | ใช่, AGPL-3.0 |
 | Opus Clip | $15 Starter, $29 Pro | 1080p มีลายน้ำ หมดอายุใน 3 วัน | ใช่ | ในแพ็กเกจฟรี | ใช่ | ไม่ |
 | Klap | $29 Pro, $14 Basic เมื่อจ่ายรายปี | หนึ่งวิดีโอ | ใช่ | ไม่ได้ระบุ | ใช่ | ไม่ |
 | Vizard | $29 Creator, $14.50 เมื่อจ่ายรายปี | 60 เครดิตต่อเดือน, 720p | ใช่ | ในแพ็กเกจฟรี | ใช่ | ไม่ |
@@ -111,11 +109,11 @@ Clips Kitty คือทางเลือกโอเพนซอร์สแ�
 | Descript | $16, $24, $50 | 60 นาทีต่อเดือน, 720p | บางส่วน เพราะเป็นโปรแกรมแก้ไขทรานสคริปต์ | ใน Free และ Hobbyist | ใช่ | ไม่ |
 | CapCut | ใช้ฟรีได้ มีแพ็กเกจเสียเงินที่ capcut.com | ทั้งโปรแกรมตัดต่อ | **ไม่ คุณตัดเองด้วยมือ** | แล้วแต่ฟีเจอร์ | ไม่ ในแอปเดสก์ท็อป | ไม่ |
 
-**CapCut คือตัวที่ควรทำความเข้าใจ** เพราะมันเป็นคำตอบฟรีที่ใคร ๆ ก็แนะนำ มันเป็นโปรแกรมตัดต่อที่ดีและไม่เสียเงิน แต่คุณต้องหาทุกช่วงและครอปทุกคลิปเอง Clips Kitty ก็ฟรีเหมือนกัน และขั้นแรกนั้นแหละคือส่วนที่มันทำแทนคุณ
+**CapCut คือตัวที่ควรทำความเข้าใจ** เพราะมันเป็นคำตอบฟรีที่ใคร ๆ ก็แนะนำ มันเป็นโปรแกรมตัดต่อที่ดีและไม่เสียเงิน แต่คุณต้องหาทุกช่วงและครอปทุกคลิปเอง SpikeClip ก็ฟรีเหมือนกัน และขั้นแรกนั้นแหละคือส่วนที่มันทำแทนคุณ
 
-**Opus Clip, Klap หรือ Vizard เป็นตัวเลือกที่ดีกว่า** ถ้าคุณไม่มีพีซี Windows ที่มีการ์ดจอ ทำคลิปแค่นาน ๆ ครั้ง หรือต้องทำงานจากมือถือ Clips Kitty สร้างมาเพื่อทำคลิปจำนวนมากบนฮาร์ดแวร์ที่คุณมีอยู่แล้ว
+**Opus Clip, Klap หรือ Vizard เป็นตัวเลือกที่ดีกว่า** ถ้าคุณไม่มีพีซี Windows ที่มีการ์ดจอ ทำคลิปแค่นาน ๆ ครั้ง หรือต้องทำงานจากมือถือ SpikeClip สร้างมาเพื่อทำคลิปจำนวนมากบนฮาร์ดแวร์ที่คุณมีอยู่แล้ว
 
-**[เปรียบเทียบทั้งเจ็ดตัวแบบเต็ม พร้อมจุดเด่นของแต่ละตัว](https://colingpt9.github.io/clips-studio/alternatives.html)**
+**[เปรียบเทียบทั้งเจ็ดตัวแบบเต็ม พร้อมจุดเด่นของแต่ละตัว](https://colingpt9.github.io/spikeclip/alternatives.html)**
 
 <sub>ราคาตรวจสอบจากหน้าราคาของแต่ละบริษัทเอง เมื่อวันที่ 17 กันยายน 2026 CapCut ไม่ได้เผยแพร่หน้าราคาที่เราอ่านได้ จึงไม่ได้ระบุราคาไว้ แพ็กเกจเปลี่ยนแปลงได้ และตารางนี้จะไม่อัปเดตตัวเอง</sub>
 
@@ -174,7 +172,7 @@ LLM ในเครื่องจะเห็นทรานสคริปต�
   ดู [docs/SPORTS.md](../../docs/SPORTS.md)
 - **ซับไตเติลฝังที่แก้ไขได้**: ซิงก์ทีละคำ และปรับสไตล์ได้ตามต้องการ (สี ขนาด ตำแหน่ง จำนวนคำต่อบรรทัด ตัวพิมพ์ หรือปิด) แก้คำที่ถอดเสียงผิดทีละบรรทัดได้ก่อนส่งออก เมื่อมีสองคนพูด ซับของผู้พูดคนที่สองใช้อีกสีได้ และถ้าระบบระบุผู้พูดผิด ก็สลับเองด้วยมือได้
 - **แชตแก้ไขด้วย AI**: อธิบายสิ่งที่ผิดด้วยภาษาธรรมดา แล้วมันจะตัดต่อใหม่ให้
-- **Ask Clips Kitty**: ช่องข้อความด้านล่างของแดชบอร์ด บอกสิ่งที่คุณต้องการเป็นประโยค เช่น *"ทำคลิปจากสตรีมนี้ ต้องมีตอนที่ฉันตายให้บอสด้วย ใส่ซับตัวใหญ่สีเหลือง"* แล้วมันจะเข้าคิววิดีโอ บอกตัวเลือกคลิปว่าต้องมองหาอะไร และตั้งค่าตามที่คุณระบุ **ต้องใช้โมเดล Gemma 4**: ดู [ช่องข้อความด้านล่างต้องใช้ Gemma 4](#the-text-box-at-the-bottom-needs-gemma-4)
+- **Ask SpikeClip**: ช่องข้อความด้านล่างของแดชบอร์ด บอกสิ่งที่คุณต้องการเป็นประโยค เช่น *"ทำคลิปจากสตรีมนี้ ต้องมีตอนที่ฉันตายให้บอสด้วย ใส่ซับตัวใหญ่สีเหลือง"* แล้วมันจะเข้าคิววิดีโอ บอกตัวเลือกคลิปว่าต้องมองหาอะไร และตั้งค่าตามที่คุณระบุ **ต้องใช้โมเดล Gemma 4**: ดู [ช่องข้อความด้านล่างต้องใช้ Gemma 4](#the-text-box-at-the-bottom-needs-gemma-4)
 - **ชื่อเรื่อง คำอธิบาย และแฮชแท็กด้วย AI** แก้ไขได้ทั้งหมดก่อนส่งออก
 - **โปรไฟล์ครีเอเตอร์**: แอปจะเรียนรู้ครีเอเตอร์แต่ละคนไปเรื่อย ๆ เพื่อเลือกคลิปและตั้งชื่อได้ดีขึ้น ทุกอย่างอยู่บนคอมพิวเตอร์ของคุณ และคุณตรวจดู แก้ไข หรือลบทิ้งได้
 - **เผยแพร่หลายภาษา**: 19 ภาษา พร้อมการตรวจทานก่อนจะฝังอะไรลงไป
@@ -220,7 +218,7 @@ LLM ในเครื่องจะเห็นทรานสคริปต�
 - **RAM 16 GB ไม่ใช่แค่คำแนะนำ** ด้วย 8 GB มันจะวิเคราะห์วิดีโอทั้งเรื่องแล้วไม่เรนเดอร์อะไรออกมาเลย ซึ่งดูเหมือนแอปแครชมากกว่าจะดูเหมือนหน่วยความจำไม่พอ
 - **GPU เป็นตัวเลือกเสริม ไม่ใช่สิ่งจำเป็น** ถ้าไม่มี ทุกอย่างจะรันบน CPU ช้ากว่า แต่ครบถ้วน RTX 2060 คือจุดที่เส้นทาง GPU เริ่มใช้งานได้ ดู [การเร่งความเร็วด้วย GPU](#gpu-acceleration)
 
-ตัวแอป **รองรับเฉพาะ Windows** เอนจิน Python น่าจะรันบน Linux/macOS ได้ แต่ยังไม่มีบิลด์สำหรับ Mac และผู้ดูแลโปรเจกต์ก็ไม่มี Mac ไว้ทดสอบ ดู [#62](https://github.com/ColinGPT9/clips-studio/issues/62) ถ้าคุณมีและอยากช่วย
+ตัวแอป **รองรับเฉพาะ Windows** เอนจิน Python น่าจะรันบน Linux/macOS ได้ แต่ยังไม่มีบิลด์สำหรับ Mac และผู้ดูแลโปรเจกต์ก็ไม่มี Mac ไว้ทดสอบ ดู [#62](https://github.com/ColinGPT9/spikeclip/issues/62) ถ้าคุณมีและอยากช่วย
 
 การรันจากซอร์สโค้ดต้องใช้สิ่งที่ตัวติดตั้งปกติจะรวมมาให้:
 
@@ -232,11 +230,11 @@ LLM ในเครื่องจะเห็นทรานสคริปต�
 
 ## ติดตั้งและใช้งาน
 
-**วิธีที่ง่ายที่สุดคือ [Microsoft Store](https://apps.microsoft.com/detail/9NB6XT7DSQZZ)** คลิกเดียว อัปเดตตัวเองได้ และ Windows ไม่แสดงคำเตือนด้านความปลอดภัย Microsoft ได้รับรองและลงนามแพ็กเกจแล้ว คำเตือน SmartScreen ที่อธิบายไว้ด้านล่างจึงไม่ปรากฏเลย Store จะติดตั้งเวอร์ชันใหม่เมื่อถึงคิว ถ้าอยากได้ทันที ให้เปิดหน้าของ Clips Kitty ใน Microsoft Store แล้วกด **Update** (อัปเดต)
+**วิธีที่ง่ายที่สุดคือ [Microsoft Store](https://apps.microsoft.com/detail/9NB6XT7DSQZZ)** คลิกเดียว อัปเดตตัวเองได้ และ Windows ไม่แสดงคำเตือนด้านความปลอดภัย Microsoft ได้รับรองและลงนามแพ็กเกจแล้ว คำเตือน SmartScreen ที่อธิบายไว้ด้านล่างจึงไม่ปรากฏเลย Store จะติดตั้งเวอร์ชันใหม่เมื่อถึงคิว ถ้าอยากได้ทันที ให้เปิดหน้าของ SpikeClip ใน Microsoft Store แล้วกด **Update** (อัปเดต)
 
-**หรือดาวน์โหลดตัวติดตั้ง** ดาวน์โหลด **Web Setup** เวอร์ชันล่าสุดจาก [Releases](https://github.com/ColinGPT9/clips-studio/releases) แล้วรัน มันรวมแอป เอนจิน Python ไลบรารีทุกตัว FFmpeg รันไทม์ AI และเวทของการตรวจจับและการถอดเสียงทั้งหมดไว้แล้ว: ไม่ต้องมี Python ไม่ต้องตั้ง PATH ไม่ต้องใช้เทอร์มินัล และไม่ต้องติดตั้งโปรแกรมที่สอง
+**หรือดาวน์โหลดตัวติดตั้ง** ดาวน์โหลด **Web Setup** เวอร์ชันล่าสุดจาก [Releases](https://github.com/ColinGPT9/spikeclip/releases) แล้วรัน มันรวมแอป เอนจิน Python ไลบรารีทุกตัว FFmpeg รันไทม์ AI และเวทของการตรวจจับและการถอดเสียงทั้งหมดไว้แล้ว: ไม่ต้องมี Python ไม่ต้องตั้ง PATH ไม่ต้องใช้เทอร์มินัล และไม่ต้องติดตั้งโปรแกรมที่สอง
 
-**หรือใช้ winget** `winget install ColinGPT9.ClipsKitty` จะติดตั้ง Web Setup ตัวเดียวกันจากเทอร์มินัล
+**หรือใช้ winget** `winget install ColinGPT9.SpikeClip` จะติดตั้ง Web Setup ตัวเดียวกันจากเทอร์มินัล
 
 สิ่งเดียวที่ไม่ได้รวมมาคือตัวโมเดลภาษา เพราะโมเดลเหล่านั้นมาพร้อมสัญญาอนุญาตที่ผู้ดาวน์โหลดต้องยอมรับเอง ไม่ใช่สิ่งที่ใครจะยอมรับแทนคุณได้ ตัวช่วยตั้งค่าจะเริ่มดาวน์โหลดให้เอง เลือกขนาดที่เหมาะกับการ์ดจอของคุณ และแสดงแถบความคืบหน้า สรุปคือ: ดาวน์โหลดครั้งเดียว ดับเบิลคลิกครั้งเดียว แถบความคืบหน้าอันเดียว หลังจากนั้นก็ทำงานออฟไลน์ได้
 
@@ -247,13 +245,13 @@ LLM ในเครื่องจะเห็นทรานสคริปต�
 ### จากซอร์สโค้ด
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 pip install -r requirements.txt
 
-cd ui
+cd frontend
 npm install
-npm run dev        # opens the Clips Kitty desktop app
+npm run dev        # opens the SpikeClip desktop app
 ```
 
 แอปจะเริ่มเอนจิน Python ของตัวเองโดยอัตโนมัติ วางลิงก์ใน **Clip Editor** กด *Generate clips* (สร้างคลิป) แล้วดูความคืบหน้าแบบสด
@@ -267,8 +265,8 @@ npm run dev        # opens the Clips Kitty desktop app
 สำหรับผู้ร่วมพัฒนา คุณต้องมี [Docker Desktop](https://docs.docker.com/get-started/get-docker/) เท่านั้น: ไม่ต้องมี Python, Node, FFmpeg หรือ PyTorch
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 docker compose up
 ```
 
@@ -299,7 +297,7 @@ docker compose run --rm ui npm run typecheck
 
 เปิดหน้า **Models** (โมเดล) เพื่อดูว่าติดตั้งอะไรไว้แล้ว และ GPU ของคุณรับไหวแค่ไหน:
 
-มีแกนเดียวเท่านั้น: คุณมี VRAM เท่าไร แถวเหล่านี้เป็นแถวเดียวกับที่แอปแสดง มาจาก `RECOMMENDATIONS` ใน [`llm/manager.py`](../../llm/manager.py) ตัวช่วยตั้งค่าและหน้า Models อ่านจากตารางเดียวกันนี้ จึงขัดแย้งกันเองหรือขัดแย้งกับตารางนี้ไม่ได้
+มีแกนเดียวเท่านั้น: คุณมี VRAM เท่าไร แถวเหล่านี้เป็นแถวเดียวกับที่แอปแสดง มาจาก `RECOMMENDATIONS` ใน [`llm/manager.py`](../../backend/llm/manager.py) ตัวช่วยตั้งค่าและหน้า Models อ่านจากตารางเดียวกันนี้ จึงขัดแย้งกันเองหรือขัดแย้งกับตารางนี้ไม่ได้
 
 | ฮาร์ดแวร์ของคุณ | โมเดลที่แนะนำ | |
 |---|---|---|
@@ -317,7 +315,7 @@ docker compose run --rm ui npm run typecheck
 | การแปล / หลายภาษา | `qwen3:8b` หรือ `qwen3:14b` |
 | สัญญาอนุญาตแบบเปิดกว้าง | `mistral-nemo:12b` (Apache-2.0) · `phi4:14b` (MIT) |
 
-**มีเพียงสามตัวที่ระบุว่า "ทดสอบแล้ว" เท่านั้นที่ถูกรันกับสตรีมจริง** และ `gemma:7b` คือตัวที่ใช้งานมานานที่สุด และเป็นตัวที่ `config/settings.yaml` ตั้งไว้ตอนส่งมอบ ตัวอื่น ๆ อยู่ในรายการเพราะขนาดเหมาะสมและใช้เชิงพาณิชย์ได้ฟรี ไม่ใช่เพราะวัดคุณภาพคลิปกับมันแล้ว ทุกตัวใช้งานได้ เพราะแอปคุยกับทุกโมเดลผ่าน Ollama ด้วยวิธีเดียวกัน แต่ยังไม่มีใครตรวจว่ามันเลือกช่วงได้ดีกว่าหรือไม่ การปิดช่องว่างนี้คือ [#38](https://github.com/ColinGPT9/clips-studio/issues/38)
+**มีเพียงสามตัวที่ระบุว่า "ทดสอบแล้ว" เท่านั้นที่ถูกรันกับสตรีมจริง** และ `gemma:7b` คือตัวที่ใช้งานมานานที่สุด และเป็นตัวที่ `config/settings.yaml` ตั้งไว้ตอนส่งมอบ ตัวอื่น ๆ อยู่ในรายการเพราะขนาดเหมาะสมและใช้เชิงพาณิชย์ได้ฟรี ไม่ใช่เพราะวัดคุณภาพคลิปกับมันแล้ว ทุกตัวใช้งานได้ เพราะแอปคุยกับทุกโมเดลผ่าน Ollama ด้วยวิธีเดียวกัน แต่ยังไม่มีใครตรวจว่ามันเลือกช่วงได้ดีกว่าหรือไม่ การปิดช่องว่างนี้คือ [#38](https://github.com/ColinGPT9/spikeclip/issues/38)
 
 อะไรก็ตามที่ Ollama ให้บริการใช้ได้หมด และสลับได้ในคลิกเดียว การแปลใช้โมเดล *คนละตัว* กับการทำคลิปได้ ตั้งค่าที่ `llm.translation_model`
 
@@ -325,7 +323,7 @@ docker compose run --rm ui npm run typecheck
 
 ### ช่องข้อความด้านล่างต้องใช้ Gemma 4
 
-**Ask Clips Kitty** ช่องข้อความด้านล่างของแดชบอร์ด ใช้งานได้กับโมเดลที่ใช้เครื่องมือของแอปได้เท่านั้น Gemma 4 ทำได้ แต่ `gemma:7b` และโมเดล Gemma 3 ทำไม่ได้ และตัวตั้งค่าจะติดตั้งหนึ่งในโมเดลเหล่านั้นบนพีซีที่ไม่มีการ์ดจอหรือมี VRAM ตั้งแต่ 8 GB ขึ้นไป ในเครื่องแบบนั้น ช่องนี้จะใช้ไม่ได้จนกว่าคุณจะเพิ่มโมเดล Gemma 4: เวอร์ชัน 2.0 จะแสดงว่า *"No installed model can use tools"* (ไม่มีโมเดลที่ติดตั้งไว้ตัวใดใช้เครื่องมือได้) และเวอร์ชันหลังจากนั้นจะเสนอให้ดาวน์โหลดในช่องนั้นเลย
+**Ask SpikeClip** ช่องข้อความด้านล่างของแดชบอร์ด ใช้งานได้กับโมเดลที่ใช้เครื่องมือของแอปได้เท่านั้น Gemma 4 ทำได้ แต่ `gemma:7b` และโมเดล Gemma 3 ทำไม่ได้ และตัวตั้งค่าจะติดตั้งหนึ่งในโมเดลเหล่านั้นบนพีซีที่ไม่มีการ์ดจอหรือมี VRAM ตั้งแต่ 8 GB ขึ้นไป ในเครื่องแบบนั้น ช่องนี้จะใช้ไม่ได้จนกว่าคุณจะเพิ่มโมเดล Gemma 4: เวอร์ชัน 2.0 จะแสดงว่า *"No installed model can use tools"* (ไม่มีโมเดลที่ติดตั้งไว้ตัวใดใช้เครื่องมือได้) และเวอร์ชันหลังจากนั้นจะเสนอให้ดาวน์โหลดในช่องนั้นเลย
 
 ไม่ว่าโมเดลไหนจะเป็นตัวเลือกคลิป ให้ติดตั้งโมเดล Gemma 4 ไว้ข้าง ๆ ในหน้า **Models**: `gemma4:e4b` สำหรับการ์ดจอที่มี 6 GB ขึ้นไป และ `gemma4:e2b` ถ้าน้อยกว่านั้น คุณไม่ต้องสลับไปใช้มัน ช่องนี้จะหาเจอเอง และคลิปของคุณจะยังคงถูกเลือกโดยโมเดลที่คุณเลือกไว้ ถ้าคุณรัน AI ผ่าน OpenRouter แทน ช่องนี้จะใช้โมเดลนั้นและไม่ต้องติดตั้งอะไร
 
@@ -333,7 +331,7 @@ docker compose run --rm ui npm run typecheck
 
 ## ฮาร์ดแวร์ที่ทดสอบและประสิทธิภาพ
 
-Clips Kitty ถูกพัฒนาและทดสอบทุกวันบนเครื่องนี้ จึงเป็นจุดอ้างอิงที่มีประโยชน์ถ้าคุณจะเทียบกับผลลัพธ์ของตัวเอง:
+SpikeClip ถูกพัฒนาและทดสอบทุกวันบนเครื่องนี้ จึงเป็นจุดอ้างอิงที่มีประโยชน์ถ้าคุณจะเทียบกับผลลัพธ์ของตัวเอง:
 
 | | |
 |---|---|
@@ -346,7 +344,7 @@ Clips Kitty ถูกพัฒนาและทดสอบทุกวัน�
 
 ทุกอย่างใน repo นี้ (ค่าเริ่มต้น, `parallel_renders: 3`, ขนาดช่วงการวิเคราะห์ 5 นาที) ถูกปรับจูนสำหรับเครื่องระดับประมาณนี้ ถ้า GPU ใหญ่กว่า ให้เพิ่ม `llm.num_ctx` และ `analysis.chunk_seconds` ไปพร้อมกัน และขยับขึ้นไปใช้โมเดลขนาดใหญ่ขึ้นหนึ่งขั้น ถ้าเล็กกว่า ให้ลดลงมาใช้ `gemma3:4b`
 
-ถ้าคุณวัดประสิทธิภาพ Clips Kitty บนฮาร์ดแวร์อื่น ช่วยโพสต์ไว้ใน [Discussions](https://github.com/ColinGPT9/clips-studio/discussions) ด้วยนะครับ ตัวเลขจริงจากเครื่องจริงช่วยให้ทุกคนเลือกสเปกเครื่องได้เหมาะสม
+ถ้าคุณวัดประสิทธิภาพ SpikeClip บนฮาร์ดแวร์อื่น ช่วยโพสต์ไว้ใน [Discussions](https://github.com/ColinGPT9/spikeclip/discussions) ด้วยนะครับ ตัวเลขจริงจากเครื่องจริงช่วยให้ทุกคนเลือกสเปกเครื่องได้เหมาะสม
 
 <a id="supported-platforms"></a>
 
@@ -368,7 +366,7 @@ Clips Kitty ถูกพัฒนาและทดสอบทุกวัน�
 
 อังกฤษ · สเปน · โปรตุเกส (บราซิล) · ฝรั่งเศส · เยอรมัน · ฮินดี · อินโดนีเซีย · ญี่ปุ่น · รัสเซีย · อาหรับ · จีน (ตัวย่อ) · เวียดนาม · ฟิลิปปินส์ · ตุรกี · อูรดู · เบงกาลี · ไทย · เกาหลี · อิตาลี
 
-การเพิ่มภาษาคือการเพิ่มหนึ่งแถวใน `multilingual/languages.py` และไฟล์ locale หนึ่งไฟล์ใน `ui/src/renderer/src/locales/` ตัวแปลและตัวเขียนซับไตเติลไม่ขึ้นกับภาษา
+การเพิ่มภาษาคือการเพิ่มหนึ่งแถวใน `multilingual/languages.py` และไฟล์ locale หนึ่งไฟล์ใน `frontend/src/renderer/src/locales/` ตัวแปลและตัวเขียนซับไตเติลไม่ขึ้นกับภาษา
 
 <a id="help-wanted-the-maintainer-only-speaks-english"></a>
 
@@ -376,17 +374,17 @@ Clips Kitty ถูกพัฒนาและทดสอบทุกวัน�
 
 คำแปลอินเทอร์เฟซ 18 จาก 19 ภาษายังไม่เคยมีคนที่พูดภาษานั้นได้อ่านเลย และครึ่งหนึ่งยังแปลไม่เสร็จ ทุกภาษามี issue ของตัวเอง เขียนทั้งภาษาอังกฤษและภาษานั้น ๆ และ **การรายงานคำที่ผิดก็ถือเป็นการมีส่วนร่วมที่สมบูรณ์แล้ว**: ไม่ต้องส่ง pull request [วิธีการ](../../docs/TRANSLATING.md)
 
-**ต้องแปลให้เสร็จ** (ยังมีข้อความภาษาอังกฤษเหลืออยู่ประมาณ 68 ข้อความ): [বাংলা (เบงกาลี)](https://github.com/ColinGPT9/clips-studio/issues/43) · [Italiano (อิตาลี)](https://github.com/ColinGPT9/clips-studio/issues/44) · [한국어 (เกาหลี)](https://github.com/ColinGPT9/clips-studio/issues/45) · [ไทย](https://github.com/ColinGPT9/clips-studio/issues/46) · [Tagalog (ฟิลิปปินส์)](https://github.com/ColinGPT9/clips-studio/issues/47) · [Türkçe (ตุรกี)](https://github.com/ColinGPT9/clips-studio/issues/48) · [اردو (อูรดู)](https://github.com/ColinGPT9/clips-studio/issues/49) · [Tiếng Việt (เวียดนาม)](https://github.com/ColinGPT9/clips-studio/issues/50) · [中文 (จีน)](https://github.com/ColinGPT9/clips-studio/issues/51)
+**ต้องแปลให้เสร็จ** (ยังมีข้อความภาษาอังกฤษเหลืออยู่ประมาณ 68 ข้อความ): [বাংলা (เบงกาลี)](https://github.com/ColinGPT9/spikeclip/issues/43) · [Italiano (อิตาลี)](https://github.com/ColinGPT9/spikeclip/issues/44) · [한국어 (เกาหลี)](https://github.com/ColinGPT9/spikeclip/issues/45) · [ไทย](https://github.com/ColinGPT9/spikeclip/issues/46) · [Tagalog (ฟิลิปปินส์)](https://github.com/ColinGPT9/spikeclip/issues/47) · [Türkçe (ตุรกี)](https://github.com/ColinGPT9/spikeclip/issues/48) · [اردو (อูรดู)](https://github.com/ColinGPT9/spikeclip/issues/49) · [Tiếng Việt (เวียดนาม)](https://github.com/ColinGPT9/spikeclip/issues/50) · [中文 (จีน)](https://github.com/ColinGPT9/spikeclip/issues/51)
 
-**ต้องตรวจทาน** (แปลครบแล้ว แต่ยังไม่มีใครยืนยันว่าอ่านแล้วเป็นธรรมชาติ): [العربية (อาหรับ)](https://github.com/ColinGPT9/clips-studio/issues/52) · [Deutsch (เยอรมัน)](https://github.com/ColinGPT9/clips-studio/issues/53) · [Español (สเปน)](https://github.com/ColinGPT9/clips-studio/issues/54) · [Français (ฝรั่งเศส)](https://github.com/ColinGPT9/clips-studio/issues/55) · [हिन्दी (ฮินดี)](https://github.com/ColinGPT9/clips-studio/issues/56) · [Bahasa Indonesia (อินโดนีเซีย)](https://github.com/ColinGPT9/clips-studio/issues/57) · [日本語 (ญี่ปุ่น)](https://github.com/ColinGPT9/clips-studio/issues/58) · [Português (โปรตุเกส)](https://github.com/ColinGPT9/clips-studio/issues/59) · [Русский (รัสเซีย)](https://github.com/ColinGPT9/clips-studio/issues/60)
+**ต้องตรวจทาน** (แปลครบแล้ว แต่ยังไม่มีใครยืนยันว่าอ่านแล้วเป็นธรรมชาติ): [العربية (อาหรับ)](https://github.com/ColinGPT9/spikeclip/issues/52) · [Deutsch (เยอรมัน)](https://github.com/ColinGPT9/spikeclip/issues/53) · [Español (สเปน)](https://github.com/ColinGPT9/spikeclip/issues/54) · [Français (ฝรั่งเศส)](https://github.com/ColinGPT9/spikeclip/issues/55) · [हिन्दी (ฮินดี)](https://github.com/ColinGPT9/spikeclip/issues/56) · [Bahasa Indonesia (อินโดนีเซีย)](https://github.com/ColinGPT9/spikeclip/issues/57) · [日本語 (ญี่ปุ่น)](https://github.com/ColinGPT9/spikeclip/issues/58) · [Português (โปรตุเกส)](https://github.com/ColinGPT9/spikeclip/issues/59) · [Русский (รัสเซีย)](https://github.com/ColinGPT9/spikeclip/issues/60)
 
-อยากได้ภาษาที่ไม่มีอยู่ที่นี่ใช่ไหม? [#61](https://github.com/ColinGPT9/clips-studio/issues/61)
+อยากได้ภาษาที่ไม่มีอยู่ที่นี่ใช่ไหม? [#61](https://github.com/ColinGPT9/spikeclip/issues/61)
 
 <a id="publish-to-youtube"></a>
 
 ## เผยแพร่ไปยัง YouTube
 
-ปิดไว้โดยค่าเริ่มต้น เปิดได้ที่ **Settings → Publish to YouTube** (การตั้งค่า → เผยแพร่ไปยัง YouTube) แล้วแท็บ **YouTube** จะปรากฏในโปรแกรมตัดต่อ: กรอกชื่อเรื่อง คำอธิบาย แท็ก ภาพปก เพลย์ลิสต์ กลุ่มผู้ชม และการมองเห็น แล้วกด **Upload now** (อัปโหลดเลย) Clips Kitty จะเรนเดอร์คลิปให้หากคุณมีการแก้ไขที่ยังไม่ได้บันทึก และอัปโหลดตรงไปยังช่องของคุณ ไม่มีขั้นตอนส่งออกและไม่มีหน้าเผยแพร่แยกต่างหาก คุณไม่ต้องออกจากโปรแกรมตัดต่อเลย
+ปิดไว้โดยค่าเริ่มต้น เปิดได้ที่ **Settings → Publish to YouTube** (การตั้งค่า → เผยแพร่ไปยัง YouTube) แล้วแท็บ **YouTube** จะปรากฏในโปรแกรมตัดต่อ: กรอกชื่อเรื่อง คำอธิบาย แท็ก ภาพปก เพลย์ลิสต์ กลุ่มผู้ชม และการมองเห็น แล้วกด **Upload now** (อัปโหลดเลย) SpikeClip จะเรนเดอร์คลิปให้หากคุณมีการแก้ไขที่ยังไม่ได้บันทึก และอัปโหลดตรงไปยังช่องของคุณ ไม่มีขั้นตอนส่งออกและไม่มีหน้าเผยแพร่แยกต่างหาก คุณไม่ต้องออกจากโปรแกรมตัดต่อเลย
 
 ถ้าคุณปิดไว้ ก็จะไม่มีอะไรเปลี่ยนแปลงในแอปเลย
 
@@ -396,13 +394,13 @@ Clips Kitty ถูกพัฒนาและทดสอบทุกวัน�
 
 เมื่อเลือก **Schedule on YouTube** (ตั้งเวลาบน YouTube) วิดีโอจะถูกอัปโหลด *ทันที* ตั้งเป็นส่วนตัว และส่งเวลาเผยแพร่ให้ YouTube แล้ว YouTube จะเผยแพร่เองเมื่อถึงวัน
 
-**คุณปิด Clips Kitty และปิดคอมพิวเตอร์ได้เลย** แอปนี้ไม่มีตัวจับเวลา ไม่มีบริการเบื้องหลัง และไม่มีอะไรที่ต้องเปิดค้างไว้ เมื่อ YouTube รับวิดีโอแล้ว งานของ Clips Kitty ก็จบ
+**คุณปิด SpikeClip และปิดคอมพิวเตอร์ได้เลย** แอปนี้ไม่มีตัวจับเวลา ไม่มีบริการเบื้องหลัง และไม่มีอะไรที่ต้องเปิดค้างไว้ เมื่อ YouTube รับวิดีโอแล้ว งานของ SpikeClip ก็จบ
 
 <a id="you-need-your-own-google-api-key"></a>
 
 ### คุณต้องใช้ Google API key ของคุณเอง
 
-Clips Kitty ไม่ได้แจกคีย์ส่วนกลางมาให้ และนี่ไม่ใช่แค่ความระมัดระวัง โควตาการอัปโหลดของ Google คิด **ต่อ Cloud project**: ถ้าใช้คีย์ร่วมกันหนึ่งคีย์ ผู้ใช้ทุกคนทั่วโลกจะต้องแย่งกันใช้โควตา 100 อัปโหลดต่อวันเดียวกัน โปรเจกต์ของคุณเองจะให้โควตาของคุณเอง และข้อมูลรับรองของคุณจะไม่ออกจากเครื่องของคุณเลย ไม่มีเซิร์ฟเวอร์ของ Clips Kitty อยู่ตรงกลาง
+SpikeClip ไม่ได้แจกคีย์ส่วนกลางมาให้ และนี่ไม่ใช่แค่ความระมัดระวัง โควตาการอัปโหลดของ Google คิด **ต่อ Cloud project**: ถ้าใช้คีย์ร่วมกันหนึ่งคีย์ ผู้ใช้ทุกคนทั่วโลกจะต้องแย่งกันใช้โควตา 100 อัปโหลดต่อวันเดียวกัน โปรเจกต์ของคุณเองจะให้โควตาของคุณเอง และข้อมูลรับรองของคุณจะไม่ออกจากเครื่องของคุณเลย ไม่มีเซิร์ฟเวอร์ของ SpikeClip อยู่ตรงกลาง
 
 การตั้งค่าฟรีและใช้เวลาประมาณสิบนาที ตัวช่วยในหน้าการตั้งค่าจะพาคุณทำทีละขั้น:
 
@@ -422,7 +420,7 @@ Clips Kitty ไม่ได้แจกคีย์ส่วนกลางม�
 
 > **จนกว่า Google Cloud project ของคุณจะผ่านการตรวจสอบ API ฟรีของ YouTube ทุกวิดีโอที่อัปโหลดผ่านโปรเจกต์นั้นจะถูก YouTube ล็อกให้เป็นส่วนตัว** การล็อกนี้ถาวร คุณเปลี่ยนวิดีโอเป็นสาธารณะใน Studio ภายหลังไม่ได้ และไม่มีการอุทธรณ์ ทางแก้เดียวคืออัปโหลดใหม่จากโปรเจกต์ที่ผ่านการตรวจสอบแล้ว
 
-Clips Kitty จะตรวจสอบหลังการอัปโหลดทุกครั้งและบอกคุณตรง ๆ ถ้าเกิดเรื่องนี้ขึ้น แทนที่จะรายงานว่าสำเร็จสำหรับวิดีโอที่ไม่มีใครดูได้ ถ้าคุณตั้งใจจะเผยแพร่แบบสาธารณะ ให้ส่ง [แบบฟอร์มตรวจสอบ YouTube API Services](https://support.google.com/youtube/contact/yt_api_form) ก่อน การอัปโหลดแบบ **ไม่เป็นสาธารณะ** หรือ **ส่วนตัว** จะไม่ได้รับผลกระทบ
+SpikeClip จะตรวจสอบหลังการอัปโหลดทุกครั้งและบอกคุณตรง ๆ ถ้าเกิดเรื่องนี้ขึ้น แทนที่จะรายงานว่าสำเร็จสำหรับวิดีโอที่ไม่มีใครดูได้ ถ้าคุณตั้งใจจะเผยแพร่แบบสาธารณะ ให้ส่ง [แบบฟอร์มตรวจสอบ YouTube API Services](https://support.google.com/youtube/contact/yt_api_form) ก่อน การอัปโหลดแบบ **ไม่เป็นสาธารณะ** หรือ **ส่วนตัว** จะไม่ได้รับผลกระทบ
 
 <a id="what-it-can-and-cannot-set"></a>
 
@@ -440,13 +438,13 @@ Shorts ไม่ต้องทำอะไรพิเศษ: ไม่มี�
 
 ปิดไว้โดยค่าเริ่มต้นเช่นกัน เปิดได้ที่ **Settings → Publish through WoopSocial** (การตั้งค่า → เผยแพร่ผ่าน WoopSocial) แล้วแท็บ **Publish** (เผยแพร่) จะปรากฏในโปรแกรมตัดต่อ: เลือกแพลตฟอร์มของคุณ — หรือกด **Everywhere** (ทุกที่) — เขียนชื่อเรื่องและคำอธิบายครั้งเดียว แล้วการอัปโหลดครั้งเดียวจะไปถึง YouTube, TikTok, Instagram, Facebook, X, Threads, LinkedIn, Pinterest และ Bluesky พร้อมกัน **Publish all** (เผยแพร่ทั้งหมด) ใน Clip Editor จะจัดการทั้งชุด โดยเว้นระยะเวลาไว้ เพื่อไม่ให้คลิปนับสิบลงพร้อมกันในวินาทีเดียว
 
-ฟีเจอร์นี้ **ไม่ได้ทำงานในเครื่อง** คลิปและรายละเอียดจะถูกส่งไปยังบริการเผยแพร่ ซึ่งจะส่งต่อให้และถือการเชื่อมต่อกับบัญชีโซเชียลของคุณไว้ Clips Kitty จึงไม่เคยขอรหัสผ่านโซเชียลของคุณ ส่วนอื่นทั้งหมดในแอปยังคงรันบนพีซีของคุณ
+ฟีเจอร์นี้ **ไม่ได้ทำงานในเครื่อง** คลิปและรายละเอียดจะถูกส่งไปยังบริการเผยแพร่ ซึ่งจะส่งต่อให้และถือการเชื่อมต่อกับบัญชีโซเชียลของคุณไว้ SpikeClip จึงไม่เคยขอรหัสผ่านโซเชียลของคุณ ส่วนอื่นทั้งหมดในแอปยังคงรันบนพีซีของคุณ
 
 รองรับสองบริการ: **[WoopSocial](https://woopsocial.com/?via=clipskitty)** ซึ่งแพ็กเกจฟรีเชื่อมต่อได้สองบัญชีและโพสต์ YouTube ได้ประมาณ 5 โพสต์ต่อวัน โดยแพ็กเกจเสียเงินจะเพิ่มทั้งสองอย่าง และ **[Upload-Post](https://www.upload-post.com/)** ซึ่งไปถึงปลายทางได้มากกว่า และเพิ่มภาพปก คอมเมนต์แรก และคิวการโพสต์ เปิดตัวใดตัวหนึ่งหรือทั้งสองตัวก็ได้
 
-<sub>ลิงก์แอฟฟิลิเอต - Clips Kitty อาจได้รับค่าคอมมิชชันหากคุณสมัครผ่านลิงก์นี้ โดยคุณไม่เสียค่าใช้จ่ายเพิ่ม</sub>
+<sub>ลิงก์แอฟฟิลิเอต - SpikeClip อาจได้รับค่าคอมมิชชันหากคุณสมัครผ่านลิงก์นี้ โดยคุณไม่เสียค่าใช้จ่ายเพิ่ม</sub>
 
-**ใช้คีย์ของคุณเอง** คุณสร้างบัญชีเอง เชื่อมต่อโซเชียลของคุณเอง และใช้โควตาของคุณเอง Clips Kitty ไม่เก็บเงิน ไม่ถือคีย์ส่วนกลาง และไม่จ่ายค่าอะไรเลย — แบบเดียวกับการเชื่อมต่อ YouTube และด้วยเหตุผลเดียวกัน
+**ใช้คีย์ของคุณเอง** คุณสร้างบัญชีเอง เชื่อมต่อโซเชียลของคุณเอง และใช้โควตาของคุณเอง SpikeClip ไม่เก็บเงิน ไม่ถือคีย์ส่วนกลาง และไม่จ่ายค่าอะไรเลย — แบบเดียวกับการเชื่อมต่อ YouTube และด้วยเหตุผลเดียวกัน
 
 คู่มือฉบับเต็ม การรองรับของแต่ละแพลตฟอร์ม และข้อจำกัด: **[docs/UPLOAD-POST.md](../../docs/UPLOAD-POST.md)**
 
@@ -490,20 +488,20 @@ python main.py status                                               # processing
 python main.py serve                                                # just the API engine
 ```
 
-การตั้งค่าอยู่ใน [config/settings.yaml](../../config/settings.yaml) ส่วนบนของไฟล์เป็นบล็อกตั้งค่าด่วนสั้น ๆ ส่วนการตั้งค่าขั้นสูงทั้งหมดอยู่ด้านล่าง พรอมต์ LLM ทุกอันเป็นไฟล์ข้อความธรรมดาใน [config/prompts/](../../config/prompts/) คุณจึงปรับวิธีให้คะแนนคลิปได้โดยไม่ต้องแตะ Python
+การตั้งค่าอยู่ใน [config/settings.yaml](../../backend/config/settings.yaml) ส่วนบนของไฟล์เป็นบล็อกตั้งค่าด่วนสั้น ๆ ส่วนการตั้งค่าขั้นสูงทั้งหมดอยู่ด้านล่าง พรอมต์ LLM ทุกอันเป็นไฟล์ข้อความธรรมดาใน [config/prompts/](../../backend/config/prompts/) คุณจึงปรับวิธีให้คะแนนคลิปได้โดยไม่ต้องแตะ Python
 
 <a id="write-a-plugin"></a>
 
 ## เขียนปลั๊กอิน
 
-รู้จักเกม กีฬา หรือรายการประเภทหนึ่งดีกว่าตัวตรวจจับทั่วไปใช่ไหม? เขียนปลั๊กอิน Python เล็ก ๆ ที่หา ทำความเข้าใจ หรือให้คะแนนช่วงเวลาในวิดีโอ แล้ว Clips Kitty จะจัดการส่วนที่เหลือ SDK ใช้สัญญาอนุญาต MIT ปลั๊กอินของคุณจึงใช้สัญญาอนุญาตแบบไหนก็ได้ และไม่ต้อง fork อะไรเลย
+รู้จักเกม กีฬา หรือรายการประเภทหนึ่งดีกว่าตัวตรวจจับทั่วไปใช่ไหม? เขียนปลั๊กอิน Python เล็ก ๆ ที่หา ทำความเข้าใจ หรือให้คะแนนช่วงเวลาในวิดีโอ แล้ว SpikeClip จะจัดการส่วนที่เหลือ SDK ใช้สัญญาอนุญาต MIT ปลั๊กอินของคุณจึงใช้สัญญาอนุญาตแบบไหนก็ได้ และไม่ต้อง fork อะไรเลย
 
 ```text
-Clips Kitty SDK
+SpikeClip SDK
 
 Input                      a link or a video file
   ↓
-Video                      Clips Kitty downloads it and writes down what is said
+Video                      SpikeClip downloads it and writes down what is said
   ↓
 Your plugin                every step is optional
   ├── find                 picks the moments                  built
@@ -511,45 +509,45 @@ Your plugin                every step is optional
   ├── rate                 scores each moment                 built
   └── edit                 suggests edits for the creator     built
   ↓
-Clips Kitty                does every step no plugin does, then cuts, frames and captions the clips
+SpikeClip                does every step no plugin does, then cuts, frames and captions the clips
   ↓
 Creator / Social Platform  posts when the creator clicks Publish, or on a schedule or automatic posting the creator switched on
 ```
 
-- ปลั๊กอินหนึ่งตัวหาช่วงเวลาสำหรับวิดีโอได้ และจะใช้แทนการค้นหาของ Clips Kitty เอง
+- ปลั๊กอินหนึ่งตัวหาช่วงเวลาสำหรับวิดีโอได้ และจะใช้แทนการค้นหาของ SpikeClip เอง
 - ปลั๊กอินได้สูงสุด 3 ตัวทำความเข้าใจ และสูงสุด 3 ตัวให้คะแนน ต่อจากตัวค้นหา (ถ้ามี)
 - บทบาทของปลั๊กอินมาจาก `inputs` และ `outputs` ในแมนิเฟสต์ของมัน ([Steps](../../docs/developers/steps.md))
 - ปลั๊กอินได้สูงสุด 3 ตัวเสนอการแก้ไขให้คลิปที่จะถูกสร้าง
 - ปลั๊กอินแก้ไขจะเสนอการแก้ไขที่รอให้ครีเอเตอร์ตัดสินใจในโปรแกรมตัดต่อ ([Steps](../../docs/developers/steps.md#suggest-edits-the-edit-step))
-- การโพสต์ไม่ใช่ขั้นตอนของปลั๊กอิน: Clips Kitty โพสต์คลิปเอง และผ่าน WoopSocial มันโพสต์ไปหลายเว็บพร้อมกันได้ด้วยบัญชีของครีเอเตอร์เอง ([เผยแพร่ไปทุกแพลตฟอร์มพร้อมกัน](#publish-to-every-platform-at-once)) `kind: publisher` จะถูกปฏิเสธ: ปลั๊กอินไม่โพสต์
+- การโพสต์ไม่ใช่ขั้นตอนของปลั๊กอิน: SpikeClip โพสต์คลิปเอง และผ่าน WoopSocial มันโพสต์ไปหลายเว็บพร้อมกันได้ด้วยบัญชีของครีเอเตอร์เอง ([เผยแพร่ไปทุกแพลตฟอร์มพร้อมกัน](#publish-to-every-platform-at-once)) `kind: publisher` จะถูกปฏิเสธ: ปลั๊กอินไม่โพสต์
 
 สามคำสั่งนี้จะติดตั้ง SDK สร้างปลั๊กอินจากเทมเพลต `game-events` (สำหรับ Quarkbloom Arena ซึ่งเป็นเกมสมมติ) และรันมันกับวิดีโอทดสอบที่ SDK สร้างขึ้น ต้องมี Python 3.11, FFmpeg และ Git
 
 PowerShell (Windows):
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash (macOS, Linux):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
-Clips Kitty 2.1.0 เป็นเวอร์ชันแรกที่รันปลั๊กอินได้ และมาพร้อมกับ SDK 1.3.0
+SpikeClip 2.1.0 เป็นเวอร์ชันแรกที่รันปลั๊กอินได้ และมาพร้อมกับ SDK 1.3.0
 
-**[ไปป์ไลน์เกมแรกของคุณ](../../docs/developers/first-game-pipeline.md)** จะพาต่อจากตรงนั้นทีละขั้น ไปจนถึงปลั๊กอินที่ติดตั้งใน Clips Kitty และอยู่ใน Marketplace [Signals cookbook](../../docs/developers/signals-cookbook.md) มีสูตรสำหรับอ่านวิดีโอของเกม [ข้อมูลอ้างอิง SDK](../../docs/developers/sdk.md) มีทุกคำสั่งและทุกการเรียก และ [เอกสารสำหรับนักพัฒนา](../../docs/developers/README.md) มีทุกอย่างที่เหลือ หน้า [Clips Kitty SDK](https://colingpt9.github.io/clips-studio/developers.html) บนเว็บไซต์คือฉบับย่อ
+**[ไปป์ไลน์เกมแรกของคุณ](../../docs/developers/first-game-pipeline.md)** จะพาต่อจากตรงนั้นทีละขั้น ไปจนถึงปลั๊กอินที่ติดตั้งใน SpikeClip และอยู่ใน Marketplace [Signals cookbook](../../docs/developers/signals-cookbook.md) มีสูตรสำหรับอ่านวิดีโอของเกม [ข้อมูลอ้างอิง SDK](../../docs/developers/sdk.md) มีทุกคำสั่งและทุกการเรียก และ [เอกสารสำหรับนักพัฒนา](../../docs/developers/README.md) มีทุกอย่างที่เหลือ หน้า [SpikeClip SDK](https://colingpt9.github.io/spikeclip/developers.html) บนเว็บไซต์คือฉบับย่อ
 
 <a id="build-on-it"></a>
 
 ## ต่อยอดจากมัน
 
-แอปเดสก์ท็อปเป็นหน้าต่างที่เชื่อมไปยัง **HTTP API ในเครื่อง** ซึ่งทำงานอยู่ตลอดเวลาที่ Clips Kitty เปิดอยู่ บอต Discord ตัวรันงานเป็นชุด หน้าเว็บ หรือการเชื่อมต่อกับ OBS สามารถสั่งงานไปป์ไลน์เดียวกันนี้ได้ โดยไม่ต้องเพิ่มอะไรลงในแอปก่อน
+แอปเดสก์ท็อปเป็นหน้าต่างที่เชื่อมไปยัง **HTTP API ในเครื่อง** ซึ่งทำงานอยู่ตลอดเวลาที่ SpikeClip เปิดอยู่ บอต Discord ตัวรันงานเป็นชุด หน้าเว็บ หรือการเชื่อมต่อกับ OBS สามารถสั่งงานไปป์ไลน์เดียวกันนี้ได้ โดยไม่ต้องเพิ่มอะไรลงในแอปก่อน
 
 ```bash
 python main.py serve --port 8765          # the engine on its own, no window
@@ -575,9 +573,9 @@ curl -s http://127.0.0.1:8765/videos/VIDEO_ID/clips \
 
 ### หรือใช้โมเดลของคุณเอง
 
-นั่นคือการสร้าง *รอบ ๆ* แอป คุณยังสร้าง *ภายใน* แอปได้ด้วย และจุดเริ่มต้นคือปลั๊กอิน ([เขียนปลั๊กอิน](#write-a-plugin)) ถ้าฟุตเทจที่คุณสนใจไม่ใช่สิ่งที่แอปนี้ปรับจูนมา ไม่ว่าจะเป็นกีฬา เกม รีแอ็กชัน การบรรยาย หรืออะไรที่ยังไม่มีใครลอง ปลั๊กอินก็หา ทำความเข้าใจ หรือให้คะแนนช่วงเวลาของมันได้โดยไม่ต้อง fork มันรันบน Python ของ Clips Kitty เอง พร้อมไลบรารีมาตรฐาน (ยกเว้นบางโมดูลที่แอปไม่ได้ใส่มา) และ SDK: ตอนนี้ Clips Kitty ยังติดตั้งแพ็กเกจ Python อื่นให้ปลั๊กอินไม่ได้
+นั่นคือการสร้าง *รอบ ๆ* แอป คุณยังสร้าง *ภายใน* แอปได้ด้วย และจุดเริ่มต้นคือปลั๊กอิน ([เขียนปลั๊กอิน](#write-a-plugin)) ถ้าฟุตเทจที่คุณสนใจไม่ใช่สิ่งที่แอปนี้ปรับจูนมา ไม่ว่าจะเป็นกีฬา เกม รีแอ็กชัน การบรรยาย หรืออะไรที่ยังไม่มีใครลอง ปลั๊กอินก็หา ทำความเข้าใจ หรือให้คะแนนช่วงเวลาของมันได้โดยไม่ต้อง fork มันรันบน Python ของ SpikeClip เอง พร้อมไลบรารีมาตรฐาน (ยกเว้นบางโมดูลที่แอปไม่ได้ใส่มา) และ SDK: ตอนนี้ SpikeClip ยังติดตั้งแพ็กเกจ Python อื่นให้ปลั๊กอินไม่ได้
 
-ถ้าต้องการเปลี่ยนตัวแอปเองแทน: ไปป์ไลน์รัน **YOLOv8 (ultralytics), OpenCV และ TalkNet-ASD** ในเครื่อง และสิ่งที่ตัดสินว่าช่วงไหนจะกลายเป็นคลิปคือชุดสัญญาณรายวินาที ไม่ใช่ความคิดที่เขียนตายตัวไว้ว่าอะไรน่าสนใจ ตัวตรวจจับที่ให้ค่าความมั่นใจตลอดไทม์ไลน์สามารถเพิ่มเป็นอีกหนึ่งสัญญาณได้ และจุดพีกของมันจะกลายเป็นคลิปตัวเลือก ถ้าการตรวจจับของคุณต้องใช้แพ็กเกจ Python ที่ Clips Kitty ยังติดตั้งให้ปลั๊กอินไม่ได้ ให้ fork แล้วเสียบการตรวจจับของคุณเข้าไป **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model)** มีสัญญาการเชื่อมต่อ ไฟล์ที่ให้คัดลอก และกับดักด้านประสิทธิภาพที่ควรรู้ก่อนเริ่ม
+ถ้าต้องการเปลี่ยนตัวแอปเองแทน: ไปป์ไลน์รัน **YOLOv8 (ultralytics), OpenCV และ TalkNet-ASD** ในเครื่อง และสิ่งที่ตัดสินว่าช่วงไหนจะกลายเป็นคลิปคือชุดสัญญาณรายวินาที ไม่ใช่ความคิดที่เขียนตายตัวไว้ว่าอะไรน่าสนใจ ตัวตรวจจับที่ให้ค่าความมั่นใจตลอดไทม์ไลน์สามารถเพิ่มเป็นอีกหนึ่งสัญญาณได้ และจุดพีกของมันจะกลายเป็นคลิปตัวเลือก ถ้าการตรวจจับของคุณต้องใช้แพ็กเกจ Python ที่ SpikeClip ยังติดตั้งให้ปลั๊กอินไม่ได้ ให้ fork แล้วเสียบการตรวจจับของคุณเข้าไป **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model)** มีสัญญาการเชื่อมต่อ ไฟล์ที่ให้คัดลอก และกับดักด้านประสิทธิภาพที่ควรรู้ก่อนเริ่ม
 
 **ไม่ต้องคอยถามซ้ำ ๆ** ส่งงานพร้อม `webhook_url` แล้วเอนจินจะส่ง POST มาหนึ่งครั้งเมื่อเสร็จ โดยลงนามด้วย secret ของคุณเองถ้าคุณส่งมา ด็อกหรือโฟลว์ n8n จึงรอเงียบ ๆ ได้ตลอดสี่สิบนาทีที่สตรีมหนึ่งเรื่องใช้ แทนที่จะคอยถามทุกไม่กี่วินาที รายละเอียดอยู่ใน [docs/API.md](../../docs/API.md#webhooks-being-told-instead-of-asking)
 
@@ -585,21 +583,21 @@ curl -s http://127.0.0.1:8765/videos/VIDEO_ID/clips \
 
 ### ให้เอเจนต์ AI ทำให้
 
-Clips Kitty มาพร้อม **เซิร์ฟเวอร์ MCP** ดังนั้น Claude, Cursor หรือไคลเอนต์ MCP ตัวใดก็ได้จะสั่งงานไปป์ไลน์เดียวกันนี้ด้วยภาษาธรรมดาได้: เข้าคิวสตรีม ติดตามงาน อ่านคลิปที่มันเลือก และส่งออกคลิป
+SpikeClip มาพร้อม **เซิร์ฟเวอร์ MCP** ดังนั้น Claude, Cursor หรือไคลเอนต์ MCP ตัวใดก็ได้จะสั่งงานไปป์ไลน์เดียวกันนี้ด้วยภาษาธรรมดาได้: เข้าคิวสตรีม ติดตามงาน อ่านคลิปที่มันเลือก และส่งออกคลิป
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 ในบิลด์ที่ติดตั้งแล้ว ไฟล์ไบนารีของเอนจินคือ `api.exe` (อยู่ในโฟลเดอร์ `resources\backend` ของแอป) คำสั่งในกรณีนั้นจึงเป็น `api.exe mcp`
 
-มันคุยกับเอนจินที่กำลังทำงานผ่าน `127.0.0.1:8765` ดังนั้น Clips Kitty ต้องเปิดอยู่ และไม่ต้องใช้ API key ใด ๆ เลย: โมเดลที่ทำคลิปคือโมเดลบนเครื่องของคุณเอง (หรือ ถ้าคุณเลือกไว้ใน Settings → AI ก็จะเป็นโมเดลคลาวด์ด้วยคีย์ของคุณเอง ซึ่งไคลเอนต์ MCP ไม่เคยเห็น) สกิลเอเจนต์สำหรับไคลเอนต์ที่รองรับอยู่ใน [skills/clips-kitty/](../../skills/clips-kitty/)
+มันคุยกับเอนจินที่กำลังทำงานผ่าน `127.0.0.1:8765` ดังนั้น SpikeClip ต้องเปิดอยู่ และไม่ต้องใช้ API key ใด ๆ เลย: โมเดลที่ทำคลิปคือโมเดลบนเครื่องของคุณเอง (หรือ ถ้าคุณเลือกไว้ใน Settings → AI ก็จะเป็นโมเดลคลาวด์ด้วยคีย์ของคุณเอง ซึ่งไคลเอนต์ MCP ไม่เคยเห็น) สกิลเอเจนต์สำหรับไคลเอนต์ที่รองรับอยู่ใน [skills/spikeclip/](../../skills/spikeclip/)
 
-<a id="built-with-clips-kitty"></a>
+<a id="built-with-spikeclip"></a>
 
-### สร้างด้วย Clips Kitty
+### สร้างด้วย SpikeClip
 
-โปรเจกต์ที่ทำงานบน API นี้ถูกรวบรวมไว้ใน **[Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)** ซึ่งเป็นรายการไปป์ไลน์ ปลั๊กอิน การเชื่อมต่อ แอป และเครื่องมือที่สร้างด้วย Clips Kitty ตัวแรกคือ [Clips Kitty OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin) ด็อกของ OBS Studio ที่ส่งสตรีมของคุณให้ Clips Kitty หลังสตรีมจบ สร้างของตัวเองแล้วใช่ไหม? เพิ่มเข้าไปด้วย pull request ([วิธีการ](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)) และใส่ topic `clips-kitty` ให้ repository ของคุณ
+โปรเจกต์ที่ทำงานบน API นี้ถูกรวบรวมไว้ใน **[Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)** ซึ่งเป็นรายการไปป์ไลน์ ปลั๊กอิน การเชื่อมต่อ แอป และเครื่องมือที่สร้างด้วย SpikeClip ตัวแรกคือ [SpikeClip OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin) ด็อกของ OBS Studio ที่ส่งสตรีมของคุณให้ SpikeClip หลังสตรีมจบ สร้างของตัวเองแล้วใช่ไหม? เพิ่มเข้าไปด้วย pull request ([วิธีการ](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)) และใส่ topic `spikeclip` ให้ repository ของคุณ
 
 <a id="architecture"></a>
 
@@ -611,7 +609,7 @@ claude mcp add clips-kitty -- python main.py mcp
 
 ## ร่วมพัฒนา
 
-ยินดีต้อนรับการมีส่วนร่วม ดู **[CONTRIBUTING.md](../../CONTRIBUTING.md)** สำหรับการตั้งค่าสภาพแวดล้อมพัฒนาและสิ่งที่คาดหวังจาก pull request และดู **[SECURITY.md](../../SECURITY.md)** เพื่อรายงานช่องโหว่ issue ที่ติดป้าย [`good-first-issue`](https://github.com/ColinGPT9/clips-studio/labels/good-first-issue) เป็นงานเล็ก ๆ ที่ขอบเขตชัดเจน ถ้าคุณอยากหาจุดเริ่มต้น
+ยินดีต้อนรับการมีส่วนร่วม ดู **[CONTRIBUTING.md](../../CONTRIBUTING.md)** สำหรับการตั้งค่าสภาพแวดล้อมพัฒนาและสิ่งที่คาดหวังจาก pull request และดู **[SECURITY.md](../../SECURITY.md)** เพื่อรายงานช่องโหว่ issue ที่ติดป้าย [`good-first-issue`](https://github.com/ColinGPT9/spikeclip/labels/good-first-issue) เป็นงานเล็ก ๆ ที่ขอบเขตชัดเจน ถ้าคุณอยากหาจุดเริ่มต้น
 
 เว็บไซต์อยู่ใน [site/](../../site/) และเผยแพร่ไปยัง GitHub Pages และ Hugging Face Space ดู [docs/MIRRORS.md](../../docs/MIRRORS.md) **งานเกิดขึ้นที่ GitHub** และมิเรอร์ของเว็บไซต์ถูก force-push ทางเดียว ดังนั้นคอมมิตที่ทำบนมิเรอร์จะถูกเขียนทับ
 
@@ -619,10 +617,10 @@ claude mcp add clips-kitty -- python main.py mcp
 
 - **[docs/RELEASING.md](../../docs/RELEASING.md)**: การบิลด์และเผยแพร่ตัวติดตั้ง Windows ซึ่งเป็นช่องทางหลัก
 - **[docs/MSSTORE.md](../../docs/MSSTORE.md)**: แพ็กเกจ Microsoft Store ตั้งแต่สร้างบัญชีนักพัฒนาไปจนถึงการรับรอง
-- **[packaging/winget/](../../packaging/winget/)**: แมนิเฟสต์ของ winget ซึ่งชี้ไปที่ตัวติดตั้งด้านบน
-- **[whop-app/](../../whop-app/)**: แอป Whop ซึ่งนำ Clips Kitty ไปให้สมาชิกของชุมชนทำคลิปได้เห็น เป็นหน้าการตลาดเท่านั้น: มันไม่ประมวลผลวิดีโอ ไม่เก็บอะไร และไม่คุยกับแอปเดสก์ท็อป
+- **[packaging/winget/](../../backend/packaging/winget/)**: แมนิเฟสต์ของ winget ซึ่งชี้ไปที่ตัวติดตั้งด้านบน
+- **[whop-app/](../../whop-app/)**: แอป Whop ซึ่งนำ SpikeClip ไปให้สมาชิกของชุมชนทำคลิปได้เห็น เป็นหน้าการตลาดเท่านั้น: มันไม่ประมวลผลวิดีโอ ไม่เก็บอะไร และไม่คุยกับแอปเดสก์ท็อป
 - **[docs/DOCKER.md](../../docs/DOCKER.md)**: การรันเอนจินโดยไม่ต้องติดตั้ง Python, FFmpeg และ PyTorch เอง
-- **[PRIVACY](https://colingpt9.github.io/clips-studio/privacy.html)**: แอปเก็บอะไรไว้บ้าง และอะไรออกจากเครื่องของคุณได้ (คำตอบสั้น ๆ: ไม่มีเลย เว้นแต่คุณจะส่งรายงานบั๊ก)
+- **[PRIVACY](https://colingpt9.github.io/spikeclip/privacy.html)**: แอปเก็บอะไรไว้บ้าง และอะไรออกจากเครื่องของคุณได้ (คำตอบสั้น ๆ: ไม่มีเลย เว้นแต่คุณจะส่งรายงานบั๊ก)
 
 <a id="changelog-known-issues-roadmap"></a>
 
@@ -659,14 +657,14 @@ claude mcp add clips-kitty -- python main.py mcp
 
 การตรวจจับลูกบอล ห่วง และผู้เล่นของบาสเกตบอลใช้โมเดลตรวจจับ [E-BARD](https://github.com/GabrieleGiudic/E-BARD) (YOLOv8n) โดยไม่ได้แก้ไข ภายใต้ CC BY 4.0 ขอบคุณที่เผยแพร่อย่างเปิดกว้าง ส่วนประกอบอื่นทุกตัวที่รวมมาและสัญญาอนุญาตของแต่ละตัวอยู่ใน [NOTICE](../../NOTICE)
 
-มีสามส่วนที่ใช้สัญญาอนุญาตแยกต่างหาก เพื่อให้การต่อยอดจาก Clips Kitty ยังง่ายอยู่:
+มีสามส่วนที่ใช้สัญญาอนุญาตแยกต่างหาก เพื่อให้การต่อยอดจาก SpikeClip ยังง่ายอยู่:
 
 | ส่วน | สัญญาอนุญาต |
 |---|---|
-| Clips Kitty (ตัวแอป เอนจิน และ repository นี้) | AGPL-3.0-or-later |
-| SDK ปลั๊กอิน [`sdk/python/`](../../sdk/python/) | MIT ([sdk/python/LICENSE](../../sdk/python/LICENSE)) |
-| ปลั๊กอินตัวอย่าง [`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) และ [`examples/pipelines/keyword-rater/`](../../examples/pipelines/keyword-rater/) | MIT |
-| สำเนาของรายการ Awesome Clips Kitty ที่มากับแอป `plugins/catalog_index.json` (ตัวรายการเป็น [repository ของตัวเอง](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
+| SpikeClip (ตัวแอป เอนจิน และ repository นี้) | AGPL-3.0-or-later |
+| SDK ปลั๊กอิน [`sdk/python/`](../../backend/sdk/python/) | MIT ([sdk/python/LICENSE](../../backend/sdk/python/LICENSE)) |
+| ปลั๊กอินตัวอย่าง [`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) และ [`examples/pipelines/keyword-rater/`](../../backend/examples/pipelines/keyword-rater/) | MIT |
+| สำเนาของรายการ Awesome SpikeClip ที่มากับแอป `plugins/catalog_index.json` (ตัวรายการเป็น [repository ของตัวเอง](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
 
 ปลั๊กอิน ไปป์ไลน์ และแอปที่คนอื่นสร้าง ใช้สัญญาอนุญาตตามที่ผู้สร้างเลือก โดย Marketplace จะแสดงไว้ในทุกรายการ การใช้ SDK ไม่ได้ทำให้ปลั๊กอินต้องอยู่ภายใต้ AGPL
 
@@ -680,12 +678,12 @@ claude mcp add clips-kitty -- python main.py mcp
 
 ## ประวัติดาว
 
-ขอบคุณทุกคนที่กดดาว แชร์ แจ้งบั๊ก และช่วยแปล Clips Kitty
+ขอบคุณทุกคนที่กดดาว แชร์ แจ้งบั๊ก และช่วยแปล SpikeClip
 
-<a href="https://www.star-history.com/#ColinGPT9/clips-studio&amp;Date">
+<a href="https://www.star-history.com/#ColinGPT9/spikeclip&amp;Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;legend=top-left" />
-    <img alt="ประวัติดาว GitHub ของ Clips Kitty" src="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;legend=top-left" />
+    <img alt="ประวัติดาว GitHub ของ SpikeClip" src="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date" />
   </picture>
 </a>

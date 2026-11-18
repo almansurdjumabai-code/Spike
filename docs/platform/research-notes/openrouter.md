@@ -3,7 +3,7 @@
 - Platform: OpenRouter (openrouter.ai)
 - Tier: 2 (Track B)
 - Date read: 2026-10-06
-- Brief question: can Clips Kitty have a common interface for multiple implementations of the same video-AI capability (for example `highlight_detection` implemented by Clips Kitty, Open Shorts, Community A, Community B and a remote API)?
+- Brief question: can SpikeClip have a common interface for multiple implementations of the same video-AI capability (for example `highlight_detection` implemented by SpikeClip, Open Shorts, Community A, Community B and a remote API)?
 
 **Verdict (two lines).** Yes, and OpenRouter is the clearest working example: one namespaced identifier (`author/slug`, optionally `:variant`) names a catalog entry with typed I/O metadata, and behind each entry sits a list of competing *endpoints* (provider implementations) selected at request time by declared preferences (`order`, `only`, `ignore`, `allow_fallbacks`, `require_parameters`, `data_collection`) plus live health. The parts not to copy are the central paid backend, vendor-gated provider onboarding, price-weighted load balancing, and "bring your own implementation" being Enterprise-only.
 
@@ -90,7 +90,7 @@ Referenced by `author/slug[:variant]`. No download or cache: inference is remote
 
 ## 9. Local, remote or both
 
-Remote only. (Clips Kitty already uses OpenRouter optionally on the user's own account; this research does not change that.)
+Remote only. (SpikeClip already uses OpenRouter optionally on the user's own account; this research does not change that.)
 
 ## 10. Known incidents and stated limitations
 
@@ -102,12 +102,12 @@ Remote only. (Clips Kitty already uses OpenRouter optionally on the user's own a
 - Free variants "may have different rate limits or availability compared to paid versions" (free.md, read 2026-10-06).
 - Security incidents: not searched within the Tier 2 budget; "not confirmed".
 
-## 11. Borrow (for Clips Kitty)
+## 11. Borrow (for SpikeClip)
 
-1. **Two-level catalog = capability + implementations.** Model Clips Kitty's registry like OpenRouter's `models` → `endpoints`: a capability entry (`highlight_detection`) with typed `input_modalities`/`output_modalities` and a `supported_parameters` superset, and under it an implementation list (`provider_name` → `publisher/pipeline`, version, `quantization`-like execution notes, `status`, cost/latency hints). This is exactly "several implementations of one capability coexist" (H8).
+1. **Two-level catalog = capability + implementations.** Model SpikeClip's registry like OpenRouter's `models` → `endpoints`: a capability entry (`highlight_detection`) with typed `input_modalities`/`output_modalities` and a `supported_parameters` superset, and under it an implementation list (`provider_name` → `publisher/pipeline`, version, `quantization`-like execution notes, `status`, cost/latency hints). This is exactly "several implementations of one capability coexist" (H8).
 2. **Identifier grammar with a written resolution rule.** `publisher/pipeline` plus colon-suffixed variants, split into *catalog* variants (own metadata entry) and *routing* variants (change selection only). Publish the resolution algorithm (split on `:`, keep catalog variant, drop routing variants) and the failure rule (unknown catalog variant → not found, never silent fallback to base).
 3. **Request-time preferences as a small typed object.** Reuse `order`, `only`, `ignore`, `allow_fallbacks` (default true), `require_parameters` (filter implementations that do not support a parameter the caller sent), and a `data_collection`/locality flag (`local_only`, `remote_allowed`) for the hybrid execution decision.
-4. **Ordered fallback list + report what actually ran.** OpenRouter's `models` array tries the next entry on error and "Requests are priced using the model that was ultimately used, which will be returned in the `model` attribute of the response body." Clips Kitty job results should carry the implementation id and version that produced them.
+4. **Ordered fallback list + report what actually ran.** OpenRouter's `models` array tries the next entry on error and "Requests are priced using the model that was ultimately used, which will be returned in the `model` attribute of the response body." SpikeClip job results should carry the implementation id and version that produced them.
 5. **Measured health beats declared quality.** Expose per-implementation success rate / last-run status the way OpenRouter exposes `uptime_last_*` and `status`; keep "declared" and "measured" visibly separate.
 6. **Honest lifecycle fields.** `expiration_date`, a deprecation date that triggers warnings and eventual hiding, and a `Status` column (Active/Deprecated) for suffixes instead of silent removal.
 7. **`hugging_face_id` cross-reference** on model records so the shared model manager can tie a capability's model to its HF source.
@@ -115,9 +115,9 @@ Remote only. (Clips Kitty already uses OpenRouter optionally on the user's own a
 
 ## 12. Avoid
 
-1. A central hosted catalog service with gated onboarding (form, baseline tests, payment arrangement): Clips Kitty's fixed decisions are $0, no payments, static Git registry (H3).
+1. A central hosted catalog service with gated onboarding (form, baseline tests, payment arrangement): SpikeClip's fixed decisions are $0, no payments, static Git registry (H3).
 2. Price-weighted load balancing ("weighted by inverse square of the price"): irrelevant without payments; use user-declared order and measured health only.
-3. "Bring your own implementation" restricted to an Enterprise tier; in Clips Kitty every publisher must be able to add an implementation of a capability.
+3. "Bring your own implementation" restricted to an Enterprise tier; in SpikeClip every publisher must be able to add an implementation of a capability.
 4. Letting the reference docs and runtime disagree (auth required vs anonymous OK).
 5. Presenting self-declared provider policies without labelling them as declared (OpenRouter does label them "as reflected in each provider's terms"; keep that labelling).
 6. A catalog that is not exhaustive for valid identifiers unless the derivation rule is published alongside it.

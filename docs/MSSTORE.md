@@ -1,4 +1,4 @@
-# Publishing Clips Kitty to the Microsoft Store
+# Publishing SpikeClip to the Microsoft Store
 
 Follow this with Partner Center open in another window. It assumes you have
 never submitted an app before.
@@ -59,7 +59,7 @@ start again from that URL. Do not enter payment details.
 
 A **payout account** and **tax profile** are a different thing and are also not
 needed: those exist to pay money *to* you, and only matter for paid apps or
-in-app purchases. Clips Kitty is free, so skip them.
+in-app purchases. SpikeClip is free, so skip them.
 
 ### The publisher display name is public and permanent
 
@@ -86,8 +86,8 @@ signup. It cannot be undone afterwards.
 
 In Partner Center: **Apps and games → New product → MSIX or PWA app**.
 
-Search for **Clips Kitty** and reserve it if it is free. If it is taken, try
-`Clips Kitty - AI Video Clipper`. Do not add descriptive words just for search
+Search for **SpikeClip** and reserve it if it is free. If it is taken, try
+`SpikeClip - AI Video Clipper`. Do not add descriptive words just for search
 reach. Store policy 10.1.1 says the product name "must not contain marketing
 or descriptive text, including extraneous use of keywords", and a name that
 breaks it fails certification.
@@ -101,15 +101,15 @@ exists.
 future release does not have to go looking. None of these are secrets. Every
 one ships inside the manifest of the package itself.
 
-**Where they came from:** Partner Center → Clips Kitty → General → **View
+**Where they came from:** Partner Center → SpikeClip → General → **View
 product identity**.
 
 | Partner Center calls it | Goes into | Value |
 |---|---|---|
-| Package/Identity/Name | `identityName` | `ClipsStudio.ClipsStudio` |
+| Package/Identity/Name | `identityName` | `SpikeClip.SpikeClip` |
 | Package/Identity/Publisher | `publisher` | `CN=82A1C822-C6B7-41D5-889B-160627060939` |
-| Package/Properties/PublisherDisplayName | `publisherDisplayName` | `Clips Studio` |
-| Package Family Name | *(nothing: quote it in support requests)* | `ClipsStudio.ClipsStudio_315g1r74a6w58` |
+| Package/Properties/PublisherDisplayName | `publisherDisplayName` | `SpikeClip` |
+| Package Family Name | *(nothing: quote it in support requests)* | `SpikeClip.SpikeClip_315g1r74a6w58` |
 | Store ID | *(the links below)* | `9NB6XT7DSQZZ` |
 
 Once the product is live, the Store ID gives you these. Add them to the README
@@ -118,14 +118,14 @@ and the website then, not before, because they 404 until it publishes:
 - Web listing: `https://apps.microsoft.com/detail/9NB6XT7DSQZZ`
 - Opens the Store app directly: `ms-windows-store://pdp/?productid=9NB6XT7DSQZZ`
 
-**The publisher display name is "Clips Kitty", not a personal name**, so the
+**The publisher display name is "SpikeClip", not a personal name**, so the
 listing does not show who owns the account.
 
 A mismatch in any of the three is not caught at build time. It fails at upload,
 after the package has already been built, which is why `build_msix.py` checks
 they are at least present before it starts.
 
-`applicationId: ClipsStudio` is ours, not Microsoft's. Never change it: it is
+`applicationId: SpikeClip` is ours, not Microsoft's. Never change it: it is
 part of the app's identity to Windows, and changing it makes the next release
 look like a different app.
 
@@ -147,7 +147,7 @@ package for testing requires it as well.
 `--skip-backend` reuses the frozen Python engine from a previous build, which
 saves several minutes when you are only changing packaging.
 
-The result is `release/Clips Kitty-<version>-x64.appx`, around 6 GB.
+The result is `release/SpikeClip-<version>-x64.appx`, around 6 GB.
 
 ### About the version number
 
@@ -198,10 +198,10 @@ commands to install it, which need an **admin** PowerShell:
 ```powershell
 Import-Certificate -FilePath "build\msix-signing\test.cer" `
     -CertStoreLocation Cert:\LocalMachine\TrustedPeople
-Add-AppxPackage "build\msix-signing\ClipsStudio-1.1.2-x64.appx"
+Add-AppxPackage "build\msix-signing\SpikeClip-1.1.2-x64.appx"
 ```
 
-To remove it again: `Get-AppxPackage *ClipsStudio* | Remove-AppxPackage`
+To remove it again: `Get-AppxPackage *SpikeClip* | Remove-AppxPackage`
 
 The certificate subject must equal `publisher` exactly, so the script reads it
 from `electron-builder.yml` rather than having it typed twice. A mismatch
@@ -247,11 +247,11 @@ From the app overview, click **Start submission**.
   Changing this later is a metadata-only submission: no package upload, the
   published listing stays live throughout, and with manual publishing it only
   changes when you click.
-- **Privacy policy URL:** `https://colingpt9.github.io/clips-studio/privacy.html`
+- **Privacy policy URL:** `https://colingpt9.github.io/spikeclip/privacy.html`
   This is **required**. Store policy 10.5.1 says Win32 and Desktop Bridge
   products "must always have privacy policies".
-- **Website:** `https://colingpt9.github.io/clips-studio/`
-- **Support contact:** `https://github.com/ColinGPT9/clips-studio/issues`
+- **Website:** `https://colingpt9.github.io/spikeclip/`
+- **Support contact:** `https://github.com/ColinGPT9/spikeclip/issues`
 
 System requirements, taken from the README rather than invented:
 
@@ -269,10 +269,10 @@ response to user input, and it requires the metadata to disclose it and a way
 for users to report bad output. The in-app Feedback Hub covers the last part.
 
 **Do not declare a third-party purchase API.** An earlier version of this page
-said to, and that was wrong. Nothing in Clips Kitty is for sale: the donate
+said to, and that was wrong. Nothing in SpikeClip is for sale: the donate
 button is optional, it buys nothing, and in Store builds it hands PayPal to the
 *system browser* rather than opening a payment page inside the app (see
-`ui/src/main/distribution.ts`). No purchase API is used and no transaction
+`frontend/src/main/distribution.ts`). No purchase API is used and no transaction
 happens in the app, so there is nothing to declare: declaring one would invite
 questions about a payment flow that does not exist.
 
@@ -283,7 +283,7 @@ payment page hosted inside the app.
 
 ### Age rating
 
-Complete the IARC questionnaire honestly. For Clips Kitty the answers are all
+Complete the IARC questionnaire honestly. For SpikeClip the answers are all
 "no": no violence, no sexual content, no gambling, no profanity generated by
 the app, no user-to-user communication, no location sharing, no advertising.
 
@@ -299,7 +299,7 @@ Expect PEGI 3 / ESRB Everyone.
 
 ### Packages
 
-Upload `release/Clips Kitty-<version>-x64.appx`.
+Upload `release/SpikeClip-<version>-x64.appx`.
 
 Microsoft's docs recommend `.msixupload` for Store submissions, but that
 recommendation is for **UWP apps packaged in Visual Studio**, where the wrapper
@@ -320,7 +320,7 @@ Put the certification tester's instructions in **Notes for certification**.
 This is the single highest-value field in the whole submission, because what
 the tester will see on first run is unusual:
 
-> Clips Kitty processes video locally using an AI model that is downloaded on
+> SpikeClip processes video locally using an AI model that is downloaded on
 > first run, so the first launch shows a model download of roughly 3-5 GB with
 > a progress bar. This is model weights (data), not executable code. Nothing is
 > uploaded; all processing is on-device.
@@ -371,7 +371,7 @@ Do **not** create a new product. From the app overview, click **Start update**,
 which copies the previous submission so you only change what moved. A new
 product would throw away the ratings, reviews and Store URL.
 
-1. Bump the version in `ui/package.json` as usual
+1. Bump the version in `frontend/package.json` as usual
 2. `python scripts/build_msix.py`
 3. **Start update** in Partner Center, upload the new package, submit
 
@@ -380,13 +380,13 @@ Ratings and reviews carry across, and existing users update automatically.
 ## What the Store build does differently
 
 Both distributions are the same binary content. Two behaviours differ, decided
-at runtime in `ui/src/main/distribution.ts` by checking `process.windowsStore`
+at runtime in `frontend/src/main/distribution.ts` by checking `process.windowsStore`
 a fact Electron sets from the package itself, so it cannot disagree with
 reality:
 
 | | Standalone | Store |
 |---|---|---|
-| Updates | electron-updater, Hugging Face feed | the Store installs them; the app asks the Store's catalog which version it offers and, when this copy is behind, says so with a button to the Store page (`ui/src/main/storeVersion.ts`) |
+| Updates | electron-updater, Hugging Face feed | the Store installs them; the app asks the Store's catalog which version it offers and, when this copy is behind, says so with a button to the Store page (`frontend/src/main/storeVersion.ts`) |
 | Donate button | PayPal in a locked-down in-app window | PayPal in the system browser |
 
 Everything else (the engine, the models, the pipeline, the data directory) is

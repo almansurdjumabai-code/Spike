@@ -1,6 +1,6 @@
 # Example pipeline
 
-[`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) is a complete pipeline plugin written the way an outside developer would write one: its own folder laid out as a repository, a manifest, a README, a licence and one script that imports nothing from Clips Kitty but the SDK. Copy it to start your own.
+[`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) is a complete pipeline plugin written the way an outside developer would write one: its own folder laid out as a repository, a manifest, a README, a licence and one script that imports nothing from SpikeClip but the SDK. Copy it to start your own.
 
 Status: **built** and tested end to end (`tests/test_example_pipeline.py`).
 
@@ -13,7 +13,7 @@ It does **not** know what is on screen or what is said. Loud is not the same as 
 ## The files
 
 ```text
-clipskitty.yaml   id clips-kitty-examples/scene-cut-highlights; permissions video.read and ffmpeg; three settings
+spikeclip.yaml   id spikeclip-examples/scene-cut-highlights; permissions video.read and ffmpeg; three settings
 README.md         what it does and doesn't, settings, permissions, how to try it
 LICENSE           MIT
 src/main.py       135 lines
@@ -22,7 +22,7 @@ src/main.py       135 lines
 ## How `src/main.py` works
 
 ```python
-from clipskitty_sdk import run
+from spikeclip_sdk import run
 
 
 def main(job):
@@ -42,7 +42,7 @@ run(main)
 
 Things worth copying:
 
-- **Use the FFmpeg Clips Kitty hands over** (`job.tools.ffmpeg`) rather than one on `PATH`; ask for it with the `ffmpeg` permission.
+- **Use the FFmpeg SpikeClip hands over** (`job.tools.ffmpeg`) rather than one on `PATH`; ask for it with the `ffmpeg` permission.
 - **Respect `job.limits`**: the user's shortest and longest clip.
 - **Report progress** at each step; it moves the job's bar inside "Finding the best moments".
 - **Say why** in `reason`; it is saved with the clip.
@@ -54,10 +54,10 @@ Things worth copying:
 
 | Check | What it proves |
 |---|---|
-| Run through the app's own runner (`plugins/runner.find_clips`) | One clip, starting on the cut at 20 s, covering 22-27 s, at least the job's shortest length, recorded as `plugin:clips-kitty-examples/scene-cut-highlights@1.0.0` |
+| Run through the app's own runner (`plugins/runner.find_clips`) | One clip, starting on the cut at 20 s, covering 22-27 s, at least the job's shortest length, recorded as `plugin:spikeclip-examples/scene-cut-highlights@1.0.0` |
 | Run on the same video with no loud part | No moments, and the note saying why |
-| Run with `python -m clipskitty_sdk run` from outside the repository, `PYTHONPATH` set to the SDK alone | It needs nothing from Clips Kitty but the SDK |
-| Parse `src/main.py` and list its imports | Standard library and `clipskitty_sdk` only |
+| Run with `python -m spikeclip_sdk run` from outside the repository, `PYTHONPATH` set to the SDK alone | It needs nothing from SpikeClip but the SDK |
+| Parse `src/main.py` and list its imports | Standard library and `spikeclip_sdk` only |
 | `validate_folder` | Valid with no warnings; local; sends nothing |
 | Unit checks of `loud_stretches` and `to_range` | The clip boundaries: on a cut, a lead-in without one, the longest and shortest clip, the end of the video |
 
@@ -66,7 +66,7 @@ The test video's cut and loud part are at known times and the test checks the cl
 ## Trying it
 
 ```text
-set PYTHONPATH=C:\path\to\clips-studio\sdk\python
-python -m clipskitty_sdk validate examples\pipelines\scene-cut-highlights
-python -m clipskitty_sdk run examples\pipelines\scene-cut-highlights --video some-video.mp4
+set PYTHONPATH=C:\path\to\spikeclip\sdk\python
+python -m spikeclip_sdk validate examples\pipelines\scene-cut-highlights
+python -m spikeclip_sdk run examples\pipelines\scene-cut-highlights --video some-video.mp4
 ```

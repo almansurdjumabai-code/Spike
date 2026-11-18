@@ -35,7 +35,7 @@ export default async function DashboardPage({
 				title="Give your clippers a free tool that does the tedious part"
 			>
 				<p className="cs-lede">
-					Clips Kitty is free, open-source AI clipping that runs on a
+					SpikeClip is free, open-source AI clipping that runs on a
 					member's own PC. It takes a Twitch, Kick or YouTube VOD and
 					returns vertical clips with word-synced captions and the speaker
 					kept in frame.{" "}
@@ -103,7 +103,7 @@ export default async function DashboardPage({
 
 			<h2 className="cs-h2">If your members want more</h2>
 			<p className="cs-note">
-				Clips Kitty runs a local HTTP API, so a developer in your
+				SpikeClip runs a local HTTP API, so a developer in your
 				community can build on it — a Discord bot that clips on command, a
 				batch runner, a dashboard. It is documented at{" "}
 				<a

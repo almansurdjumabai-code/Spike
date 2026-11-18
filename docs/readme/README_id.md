@@ -4,37 +4,37 @@
 
 </div>
 
-<a id="clips-kitty-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
+<a id="spikeclip-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
 
-# Clips Kitty: alternatif Opus Clip yang gratis dan open source untuk konten ngobrol, gaming, dan olahraga, di PC kamu sendiri
+# SpikeClip: alternatif Opus Clip yang gratis dan open source untuk konten ngobrol, gaming, dan olahraga, di PC kamu sendiri
 
 > README ini diterjemahkan oleh AI dari [README bahasa Inggris](../../README.md), yang menjadi
 > acuan dan selalu diperbarui lebih dulu. Koreksi dari penutur asli sangat dinantikan.
 >
-> 🌐 [Situs web dalam Bahasa Indonesia](https://colingpt9.github.io/clips-studio/id.html)
+> 🌐 [Situs web dalam Bahasa Indonesia](https://colingpt9.github.io/spikeclip/id.html)
 
 <a href="https://apps.microsoft.com/detail/9NB6XT7DSQZZ">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg">
-    <img alt="Dapatkan Clips Kitty dari Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
+    <img alt="Dapatkan SpikeClip dari Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
   </picture>
 </a>
 
-[![Latest release](https://badgen.net/github/tag/ColinGPT9/clips-studio?label=release)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/clips-studio/total?label=downloads)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Licence](https://img.shields.io/github/license/ColinGPT9/clips-studio)](../../LICENSE)
-[![Stars](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars)](https://github.com/ColinGPT9/clips-studio/stargazers)
-[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/clips-studio)
+[![Latest release](https://badgen.net/github/tag/ColinGPT9/spikeclip?label=release)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/spikeclip/total?label=downloads)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Licence](https://img.shields.io/github/license/ColinGPT9/spikeclip)](../../LICENSE)
+[![Stars](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars)](https://github.com/ColinGPT9/spikeclip/stargazers)
+[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/spikeclip)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](../../CONTRIBUTING.md)
 [![Docker](https://img.shields.io/badge/docker-compose%20up-2496ED?logo=docker&logoColor=white)](../../docs/DOCKER.md)
 
-<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="Clips Kitty turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
+<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="SpikeClip turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
 
-<a id="star-and-share-clips-kitty--goal-225"></a>
+<a id="star-and-share-spikeclip--goal-225"></a>
 
-### Beri bintang dan bagikan Clips Kitty ⭐ Target: 225
+### Beri bintang dan bagikan SpikeClip ⭐ Target: 225
 
-[![Stars so far](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/clips-studio/stargazers) **dari 225**
+[![Stars so far](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/spikeclip/stargazers) **dari 225**
 
 **Tolong beri bintang pada repo ini dan bagikan.** Tidak ada biayanya untukmu, dan tidak ada
 anggaran pemasaran di baliknya, jadi cerita dari mulut ke mulut adalah satu-satunya cara
@@ -45,13 +45,10 @@ pilihan lain atau seorang editor. Ini adalah alternatif gratis untuk Opus Clip, 
 menjalankan **Google Gemma** di PC kamu sendiri: tanpa biaya server, tanpa biaya per klip, tanpa biaya
 pemakaian AI.
 
-> **Clips Kitty bernama Clips Studio hingga versi 1.1.3**, lalu berganti nama untuk memenuhi
-> persyaratan penamaan Microsoft Store. Aplikasi yang sama, repositori yang sama, data yang sama.
-
 <img src="../../docs/brand/mascot.png" alt="" width="150" align="right">
 
 **Ubah stream dan video panjang menjadi Shorts, Reels, dan TikTok yang siap diunggah,
-sepenuhnya di komputermu sendiri.** Clips Kitty adalah generator klip AI dan editor video
+sepenuhnya di komputermu sendiri.** SpikeClip adalah generator klip AI dan editor video
 gratis dan open source untuk kreator: tempel tautan YouTube, Twitch, atau Kick, lalu aplikasi ini
 menemukan momen terbaik, memotongnya ke 9:16 dengan pembicara tetap di tengah, menanamkan
 caption yang sinkron per kata, serta menulis judul, deskripsi, dan tagar.
@@ -78,7 +75,7 @@ kamu butuhkan untuk hal lain. Aplikasi ini berjalan di perangkat keras yang suda
 tidak ada batas berapa banyak klip yang kamu buat.
 
 <img src="../../docs/store-screenshots/fs-dashboard-202754.png" width="100%"
-     alt="Dasbor Clips Kitty: tempel URL YouTube, Twitch, atau Kick, pilih opsi caption dan
+     alt="Dasbor SpikeClip: tempel URL YouTube, Twitch, atau Kick, pilih opsi caption dan
           format, dan sebuah baris video yang selesai menunjukkan 38 klip dihasilkan dalam 19m 38s,
           dengan angka CPU, RAM, GPU, dan penyimpanan secara langsung di sebelahnya.">
 
@@ -118,7 +115,7 @@ tidak ada batas berapa banyak klip yang kamu buat.
 
 ## Apa yang dilakukannya
 
-Kamu memberi Clips Kitty sebuah video panjang. Aplikasi ini mengembalikan satu folder berisi klip vertikal
+Kamu memberi SpikeClip sebuah video panjang. Aplikasi ini mengembalikan satu folder berisi klip vertikal
 jadi yang siap kamu unggah, ditambah studio untuk meninjau dan memperbaikinya sebelum kamu mengunggahnya.
 
 Aplikasi ini dibuat untuk konten yang paling buruk ditangani kebanyakan alat pembuat klip: **siaran langsung, rekaman IRL dan
@@ -129,13 +126,13 @@ tempat momen-momen bagusnya terkubur dan transkrip saja tidak akan menemukannya.
 
 ## Perbandingan dengan Opus Clip, Klap, Vizard, dan CapCut
 
-Clips Kitty adalah alternatif open source untuk alat pembuat klip berbasis cloud. Perbedaan yang
+SpikeClip adalah alternatif open source untuk alat pembuat klip berbasis cloud. Perbedaan yang
 penting adalah di mana pekerjaan itu dilakukan: videomu tidak pernah diunggah, jadi tidak ada yang perlu
 diukur dan tidak ada yang perlu ditagih.
 
 | Alat | Harga, ditagih bulanan | Paket gratis | Menemukan klip untukmu | Watermark | Mengunggah videomu | Open source |
 | ---- | --------------------- | --------- | ----------------------- | --------- | ------------------ | ----------- |
-| **Clips Kitty** | Gratis, tanpa paket berbayar | Seluruh aplikasi | Ya | Tidak pernah | Tidak, berjalan di PC kamu | Ya, AGPL-3.0 |
+| **SpikeClip** | Gratis, tanpa paket berbayar | Seluruh aplikasi | Ya | Tidak pernah | Tidak, berjalan di PC kamu | Ya, AGPL-3.0 |
 | Opus Clip | $15 Starter, $29 Pro | 1080p, ber-watermark, kedaluwarsa dalam 3 hari | Ya | Di paket gratis | Ya | Tidak |
 | Klap | $29 Pro, $14 Basic ditagih tahunan | Satu video | Ya | Tidak disebutkan | Ya | Tidak |
 | Vizard | $29 Creator, $14.50 ditagih tahunan | 60 kredit per bulan, 720p | Ya | Di paket gratis | Ya | Tidak |
@@ -146,13 +143,13 @@ diukur dan tidak ada yang perlu ditagih.
 
 **CapCut adalah yang paling perlu dipahami**, karena itulah jawaban gratis yang diberikan semua orang.
 CapCut editor yang bagus dan tidak memakan biaya, tetapi kamu sendiri yang harus menemukan setiap momen dan memotong setiap klip.
-Clips Kitty juga gratis, dan tahap pertama itulah bagian yang dikerjakannya untukmu.
+SpikeClip juga gratis, dan tahap pertama itulah bagian yang dikerjakannya untukmu.
 
 **Opus Clip, Klap, atau Vizard adalah pilihan yang lebih baik** jika kamu tidak punya PC Windows dengan
-kartu grafis, hanya sesekali membuat klip, atau perlu bekerja dari ponsel. Clips Kitty
+kartu grafis, hanya sesekali membuat klip, atau perlu bekerja dari ponsel. SpikeClip
 dibuat untuk membuat klip dalam jumlah besar di perangkat keras yang sudah kamu miliki.
 
-**[Perbandingan lengkap ketujuhnya, beserta keunggulan masing-masing](https://colingpt9.github.io/clips-studio/alternatives.html)**
+**[Perbandingan lengkap ketujuhnya, beserta keunggulan masing-masing](https://colingpt9.github.io/spikeclip/alternatives.html)**
 
 <sub>Harga dicek di halaman harga resmi masing-masing perusahaan, 17 September 2026. CapCut
 tidak menerbitkan halaman harga yang bisa kami baca, jadi tidak ada harga yang dikutip untuknya. Paket bisa berubah; tabel
@@ -266,7 +263,7 @@ melalui Ollama.
   sebelum ekspor. Saat dua orang berbicara, caption pembicara kedua bisa memakai
   warna lain, dan caption yang salah dikenali bisa ditukar secara manual.
 - **Chat edit AI**: jelaskan apa yang salah dengan bahasa sehari-hari dan aplikasi ini mengedit ulang.
-- **Ask Clips Kitty**: kotak teks di bagian bawah dasbor. Katakan apa yang kamu mau dalam
+- **Ask SpikeClip**: kotak teks di bagian bawah dasbor. Katakan apa yang kamu mau dalam
   satu kalimat, misalnya *"klip stream ini, pastikan kamu menyertakan saat aku mati melawan bos,
   dengan caption kuning besar"*, dan aplikasi ini memasukkan video ke antrean, memberi tahu pemilih klip apa yang harus
   dicari, dan mengatur opsi yang kamu sebutkan. **Fitur ini membutuhkan model Gemma 4**: lihat
@@ -332,7 +329,7 @@ Dua di antaranya perlu dijelaskan lebih lanjut:
 
 **Hanya Windows** untuk aplikasinya. Engine Python seharusnya bisa berjalan di Linux/macOS, tetapi
 belum ada build untuk Mac dan pengelola proyek tidak punya Mac untuk mengujinya. Lihat
-[#62](https://github.com/ColinGPT9/clips-studio/issues/62) jika kamu punya Mac dan ingin membantu.
+[#62](https://github.com/ColinGPT9/spikeclip/issues/62) jika kamu punya Mac dan ingin membantu.
 
 Menjalankan dari kode sumber membutuhkan hal-hal yang biasanya sudah dibundel oleh installer untukmu:
 
@@ -348,14 +345,14 @@ Menjalankan dari kode sumber membutuhkan hal-hal yang biasanya sudah dibundel ol
 Satu klik, memperbarui dirinya sendiri, dan Windows tidak memunculkan peringatan keamanan apa pun. Microsoft
 telah mensertifikasi dan menandatangani paketnya, jadi peringatan SmartScreen yang dijelaskan di bawah
 sama sekali tidak muncul. Store memasang versi baru saat gilirannya tiba; untuk langsung
-mendapatkannya, buka halaman Clips Kitty di Microsoft Store dan tekan **Update** (Perbarui).
+mendapatkannya, buka halaman SpikeClip di Microsoft Store dan tekan **Update** (Perbarui).
 
 **Atau ambil installernya.** Unduh **Web Setup** terbaru dari
-[Releases](https://github.com/ColinGPT9/clips-studio/releases) lalu jalankan. Isinya sudah mencakup aplikasi, engine Python, semua
+[Releases](https://github.com/ColinGPT9/spikeclip/releases) lalu jalankan. Isinya sudah mencakup aplikasi, engine Python, semua
 library, FFmpeg, runtime AI, serta semua bobot model deteksi dan transkripsi: tanpa
 Python, tanpa PATH, tanpa terminal, dan tanpa program kedua yang harus dipasang.
 
-**Atau gunakan winget.** `winget install ColinGPT9.ClipsKitty` memasang Web Setup yang sama
+**Atau gunakan winget.** `winget install ColinGPT9.SpikeClip` memasang Web Setup yang sama
 dari terminal.
 
 Satu hal yang tidak dibawanya adalah model bahasanya sendiri, karena model-model itu didistribusikan dengan
@@ -372,13 +369,13 @@ klik ganda, satu bilah progres. Setelah itu aplikasi berjalan secara offline.
 ### Dari kode sumber
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 pip install -r requirements.txt
 
-cd ui
+cd frontend
 npm install
-npm run dev        # opens the Clips Kitty desktop app
+npm run dev        # opens the SpikeClip desktop app
 ```
 
 Aplikasi memulai engine Python-nya sendiri secara otomatis. Tempel tautan di **Clip Editor**,
@@ -395,8 +392,8 @@ Untuk kontributor. Kamu hanya butuh [Docker Desktop](https://docs.docker.com/get
 dan tidak ada yang lain: tanpa Python, tanpa Node, tanpa FFmpeg, tanpa PyTorch.
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 docker compose up
 ```
 
@@ -432,7 +429,7 @@ semua yang lain berjalan di dalam container. Detailnya, dan apa yang tidak bisa 
 Buka halaman **Models** untuk melihat apa yang sudah terpasang dan apa yang sanggup ditangani GPU kamu:
 
 Hanya satu ukuran: berapa banyak VRAM yang kamu punya. Ini adalah baris yang sama dengan yang ditampilkan aplikasi, dari
-`RECOMMENDATIONS` di [`llm/manager.py`](../../llm/manager.py). Wizard dan halaman Models
+`RECOMMENDATIONS` di [`llm/manager.py`](../../backend/llm/manager.py). Wizard dan halaman Models
 membaca satu tabel itu sehingga keduanya tidak mungkin saling bertentangan, ataupun bertentangan dengan tabel ini.
 
 | Perangkat keras kamu | Model yang direkomendasikan | |
@@ -456,7 +453,7 @@ adalah yang paling banyak jam pemakaiannya; model inilah yang disertakan di `con
 Yang lain dicantumkan karena ukurannya masuk akal dan bebas dipakai secara komersial,
 bukan karena kualitas klipnya sudah diukur. Semuanya berfungsi, karena aplikasi berkomunikasi
 dengan setiap model dengan cara yang sama melalui Ollama, tetapi belum ada yang memeriksa apakah model-model itu memilih
-momen yang lebih baik. Menutup celah itu adalah tujuan [#38](https://github.com/ColinGPT9/clips-studio/issues/38).
+momen yang lebih baik. Menutup celah itu adalah tujuan [#38](https://github.com/ColinGPT9/spikeclip/issues/38).
 
 Apa pun yang dilayani Ollama bisa dipakai, dan berganti model cukup satu klik. Terjemahan bisa memakai model
 yang *berbeda* dari pembuatan klip. Atur `llm.translation_model`.
@@ -465,7 +462,7 @@ yang *berbeda* dari pembuatan klip. Atur `llm.translation_model`.
 
 ### Kotak teks di bagian bawah membutuhkan Gemma 4
 
-**Ask Clips Kitty**, kotak teks di bagian bawah dasbor, hanya berfungsi dengan model
+**Ask SpikeClip**, kotak teks di bagian bawah dasbor, hanya berfungsi dengan model
 yang bisa memakai tool aplikasi. Gemma 4 bisa. `gemma:7b` dan model Gemma 3 tidak bisa, dan
 penyiapan memasang salah satunya di PC tanpa kartu grafis atau dengan VRAM 8 GB atau lebih.
 Di PC seperti itu, kotak tersebut tidak akan berfungsi sampai kamu menambahkan model Gemma 4: versi 2.0 menampilkan *"No installed
@@ -481,7 +478,7 @@ dan tidak perlu memasang apa pun.
 
 ## Perangkat keras yang diuji dan performa
 
-Clips Kitty dikembangkan dan diuji setiap hari di mesin ini, jadi ini titik acuan yang berguna
+SpikeClip dikembangkan dan diuji setiap hari di mesin ini, jadi ini titik acuan yang berguna
 jika kamu ingin membandingkan hasilmu sendiri:
 
 | | |
@@ -498,8 +495,8 @@ Semua yang ada di repo ini (pengaturan bawaan, `parallel_renders: 3`, ukuran pot
 naikkan `llm.num_ctx` dan `analysis.chunk_seconds` bersamaan dan naikkan satu ukuran model;
 pada GPU yang lebih kecil, turun ke `gemma3:4b`.
 
-Jika kamu melakukan benchmark Clips Kitty di perangkat keras lain, tolong bagikan hasilnya di
-[Discussions](https://github.com/ColinGPT9/clips-studio/discussions). Angka nyata dari mesin nyata membantu semua orang menentukan
+Jika kamu melakukan benchmark SpikeClip di perangkat keras lain, tolong bagikan hasilnya di
+[Discussions](https://github.com/ColinGPT9/spikeclip/discussions). Angka nyata dari mesin nyata membantu semua orang menentukan
 spesifikasi setup mereka.
 
 <a id="supported-platforms"></a>
@@ -527,7 +524,7 @@ Jepang · Rusia · Arab · Mandarin (Sederhana) · Vietnam · Filipino · Turki 
 Urdu · Bengali · Thai · Korea · Italia
 
 Menambahkan bahasa cukup dengan satu baris di `multilingual/languages.py` ditambah file locale di
-`ui/src/renderer/src/locales/`. Penerjemah dan penulis subtitle-nya
+`frontend/src/renderer/src/locales/`. Penerjemah dan penulis subtitle-nya
 tidak bergantung pada bahasa tertentu.
 
 <a id="help-wanted-the-maintainer-only-speaks-english"></a>
@@ -540,28 +537,28 @@ ditulis dalam bahasa Inggris dan dalam bahasa tersebut, dan **melaporkan satu ka
 kontribusi yang utuh**: tidak perlu pull request. [Cara kerjanya](../../docs/TRANSLATING.md).
 
 **Perlu diselesaikan** (sekitar 68 string masih dalam bahasa Inggris):
-[বাংলা (Bengali)](https://github.com/ColinGPT9/clips-studio/issues/43) ·
-[Italiano](https://github.com/ColinGPT9/clips-studio/issues/44) ·
-[한국어 (Korea)](https://github.com/ColinGPT9/clips-studio/issues/45) ·
-[ไทย (Thai)](https://github.com/ColinGPT9/clips-studio/issues/46) ·
-[Tagalog (Filipino)](https://github.com/ColinGPT9/clips-studio/issues/47) ·
-[Türkçe (Turki)](https://github.com/ColinGPT9/clips-studio/issues/48) ·
-[اردو (Urdu)](https://github.com/ColinGPT9/clips-studio/issues/49) ·
-[Tiếng Việt (Vietnam)](https://github.com/ColinGPT9/clips-studio/issues/50) ·
-[中文 (Mandarin)](https://github.com/ColinGPT9/clips-studio/issues/51)
+[বাংলা (Bengali)](https://github.com/ColinGPT9/spikeclip/issues/43) ·
+[Italiano](https://github.com/ColinGPT9/spikeclip/issues/44) ·
+[한국어 (Korea)](https://github.com/ColinGPT9/spikeclip/issues/45) ·
+[ไทย (Thai)](https://github.com/ColinGPT9/spikeclip/issues/46) ·
+[Tagalog (Filipino)](https://github.com/ColinGPT9/spikeclip/issues/47) ·
+[Türkçe (Turki)](https://github.com/ColinGPT9/spikeclip/issues/48) ·
+[اردو (Urdu)](https://github.com/ColinGPT9/spikeclip/issues/49) ·
+[Tiếng Việt (Vietnam)](https://github.com/ColinGPT9/spikeclip/issues/50) ·
+[中文 (Mandarin)](https://github.com/ColinGPT9/spikeclip/issues/51)
 
 **Perlu diperiksa** (sudah lengkap, tetapi belum ada yang memastikan terjemahannya terasa alami):
-[العربية (Arab)](https://github.com/ColinGPT9/clips-studio/issues/52) ·
-[Deutsch (Jerman)](https://github.com/ColinGPT9/clips-studio/issues/53) ·
-[Español (Spanyol)](https://github.com/ColinGPT9/clips-studio/issues/54) ·
-[Français (Prancis)](https://github.com/ColinGPT9/clips-studio/issues/55) ·
-[हिन्दी (Hindi)](https://github.com/ColinGPT9/clips-studio/issues/56) ·
-[Bahasa Indonesia (Indonesia)](https://github.com/ColinGPT9/clips-studio/issues/57) ·
-[日本語 (Jepang)](https://github.com/ColinGPT9/clips-studio/issues/58) ·
-[Português (Portugis)](https://github.com/ColinGPT9/clips-studio/issues/59) ·
-[Русский (Rusia)](https://github.com/ColinGPT9/clips-studio/issues/60)
+[العربية (Arab)](https://github.com/ColinGPT9/spikeclip/issues/52) ·
+[Deutsch (Jerman)](https://github.com/ColinGPT9/spikeclip/issues/53) ·
+[Español (Spanyol)](https://github.com/ColinGPT9/spikeclip/issues/54) ·
+[Français (Prancis)](https://github.com/ColinGPT9/spikeclip/issues/55) ·
+[हिन्दी (Hindi)](https://github.com/ColinGPT9/spikeclip/issues/56) ·
+[Bahasa Indonesia (Indonesia)](https://github.com/ColinGPT9/spikeclip/issues/57) ·
+[日本語 (Jepang)](https://github.com/ColinGPT9/spikeclip/issues/58) ·
+[Português (Portugis)](https://github.com/ColinGPT9/spikeclip/issues/59) ·
+[Русский (Rusia)](https://github.com/ColinGPT9/spikeclip/issues/60)
 
-Ingin bahasa yang belum ada di sini? [#61](https://github.com/ColinGPT9/clips-studio/issues/61).
+Ingin bahasa yang belum ada di sini? [#61](https://github.com/ColinGPT9/spikeclip/issues/61).
 
 <a id="publish-to-youtube"></a>
 
@@ -569,7 +566,7 @@ Ingin bahasa yang belum ada di sini? [#61](https://github.com/ColinGPT9/clips-st
 
 Nonaktif secara bawaan. Nyalakan di **Settings → Publish to YouTube** dan tab **YouTube**
 akan muncul di editor: isi judul, deskripsi, tag, thumbnail,
-playlist, audiens, dan visibilitas, lalu tekan **Upload now**. Clips Kitty merender
+playlist, audiens, dan visibilitas, lalu tekan **Upload now**. SpikeClip merender
 klipnya jika ada suntingan yang belum disimpan dan mengunggahnya langsung ke channel kamu. Tidak
 ada langkah ekspor dan tidak ada halaman publikasi terpisah. Kamu tidak pernah meninggalkan editor.
 
@@ -582,18 +579,18 @@ Jika kamu membiarkannya nonaktif, tidak ada yang berubah di bagian mana pun dari
 Memilih **Schedule on YouTube** mengunggah video *saat itu juga*, menandainya
 sebagai privat, dan menyerahkan waktu publikasinya kepada YouTube. YouTube memublikasikannya pada hari yang ditentukan.
 
-**Kamu boleh menutup Clips Kitty dan mematikan komputermu.** Tidak ada timer di
+**Kamu boleh menutup SpikeClip dan mematikan komputermu.** Tidak ada timer di
 aplikasi ini, tidak ada layanan latar belakang, dan tidak ada yang perlu dibiarkan berjalan. Begitu YouTube
-menerima videonya, tugas Clips Kitty selesai.
+menerima videonya, tugas SpikeClip selesai.
 
 <a id="you-need-your-own-google-api-key"></a>
 
 ### Kamu butuh kunci Google API milikmu sendiri
 
-Clips Kitty tidak menyertakan kunci bersama, dan ini bukan sekadar sikap hati-hati. Kuota
+SpikeClip tidak menyertakan kunci bersama, dan ini bukan sekadar sikap hati-hati. Kuota
 unggah Google berlaku **per proyek Cloud**: satu kunci bersama berarti setiap pengguna di
 seluruh dunia mengambil dari jatah 100 unggahan per hari yang sama. Proyekmu sendiri memberimu jatahmu
-sendiri, dan kredensialmu tidak pernah meninggalkan mesinmu. Tidak ada server Clips Kitty
+sendiri, dan kredensialmu tidak pernah meninggalkan mesinmu. Tidak ada server SpikeClip
 di jalurnya.
 
 Penyiapannya gratis dan memakan waktu sekitar sepuluh menit; wizard di Settings memandumu melewatinya:
@@ -621,7 +618,7 @@ Satu hal yang perlu kamu ketahui sebelum mengandalkan fitur ini, karena tidak ad
 > menjadikan video itu publik setelahnya di Studio, dan tidak ada banding. Satu-satunya solusi
 > adalah mengunggahnya lagi dari proyek yang sudah diaudit.
 
-Clips Kitty memeriksa setelah setiap unggahan dan memberitahumu dengan jelas jika hal itu terjadi, alih-alih
+SpikeClip memeriksa setelah setiap unggahan dan memberitahumu dengan jelas jika hal itu terjadi, alih-alih
 melaporkan keberhasilan untuk video yang tidak bisa ditonton siapa pun. Jika kamu berniat memublikasikan
 secara publik, kirimkan
 [formulir audit YouTube API Services](https://support.google.com/youtube/contact/yt_api_form)
@@ -658,7 +655,7 @@ dengan jeda supaya selusin klip tidak terunggah pada detik yang sama.
 
 Yang ini **tidak lokal**. Klip dan detailnya dikirim ke layanan
 publikasi, yang mengirimkannya dan menyimpan koneksi ke akun media sosialmu,
-jadi Clips Kitty tidak pernah meminta kata sandi media sosial. Semua hal lain di
+jadi SpikeClip tidak pernah meminta kata sandi media sosial. Semua hal lain di
 aplikasi tetap berjalan di PC kamu.
 
 Dua layanan didukung: **[WoopSocial](https://woopsocial.com/?via=clipskitty)**,
@@ -668,11 +665,11 @@ hari, dengan paket berbayar yang menaikkan keduanya, dan
 tujuan dan menambahkan thumbnail, komentar pertama, serta antrean posting. Nyalakan
 salah satunya, atau keduanya.
 
-<sub>Tautan afiliasi - Clips Kitty mungkin mendapat komisi jika kamu mendaftar melalui
+<sub>Tautan afiliasi - SpikeClip mungkin mendapat komisi jika kamu mendaftar melalui
 tautan ini, tanpa biaya tambahan untukmu.</sub>
 
 **Bawa kunci milikmu sendiri.** Kamu yang membuat akun, menghubungkan media sosialmu sendiri, dan
-memakai jatahmu sendiri. Clips Kitty tidak memungut biaya apa pun, tidak menyimpan kunci bersama, dan
+memakai jatahmu sendiri. SpikeClip tidak memungut biaya apa pun, tidak menyimpan kunci bersama, dan
 tidak membayar apa pun — pengaturan yang sama dengan integrasi YouTube, dan dengan
 alasan yang sama.
 
@@ -742,9 +739,9 @@ python main.py status                                               # processing
 python main.py serve                                                # just the API engine
 ```
 
-Pengaturan ada di [config/settings.yaml](../../config/settings.yaml). Bagian atas file berisi
+Pengaturan ada di [config/settings.yaml](../../backend/config/settings.yaml). Bagian atas file berisi
 blok pengaturan cepat yang singkat, semua pengaturan lanjutan ada di bawahnya. Setiap prompt LLM adalah file
-teks biasa di [config/prompts/](../../config/prompts/), jadi kamu bisa menyetel cara klip dinilai
+teks biasa di [config/prompts/](../../backend/config/prompts/), jadi kamu bisa menyetel cara klip dinilai
 tanpa menyentuh Python.
 
 <a id="write-a-plugin"></a>
@@ -753,15 +750,15 @@ tanpa menyentuh Python.
 
 Kamu lebih paham sebuah game, olahraga, atau jenis acara daripada detektor serbaguna?
 Tulis plugin Python kecil yang menemukan, memahami, atau menilai momen-momen dalam video,
-dan Clips Kitty mengerjakan sisanya. SDK-nya berlisensi MIT, jadi plugin kamu bisa memakai lisensi apa pun, dan
+dan SpikeClip mengerjakan sisanya. SDK-nya berlisensi MIT, jadi plugin kamu bisa memakai lisensi apa pun, dan
 tidak ada yang perlu di-fork.
 
 ```text
-Clips Kitty SDK
+SpikeClip SDK
 
 Input                      a link or a video file
   ↓
-Video                      Clips Kitty downloads it and writes down what is said
+Video                      SpikeClip downloads it and writes down what is said
   ↓
 Your plugin                every step is optional
   ├── find                 picks the moments                  built
@@ -769,17 +766,17 @@ Your plugin                every step is optional
   ├── rate                 scores each moment                 built
   └── edit                 suggests edits for the creator     built
   ↓
-Clips Kitty                does every step no plugin does, then cuts, frames and captions the clips
+SpikeClip                does every step no plugin does, then cuts, frames and captions the clips
   ↓
 Creator / Social Platform  posts when the creator clicks Publish, or on a schedule or automatic posting the creator switched on
 ```
 
-- Satu plugin bisa menemukan momen untuk sebuah video; plugin itu menggantikan pencarian bawaan Clips Kitty.
+- Satu plugin bisa menemukan momen untuk sebuah video; plugin itu menggantikan pencarian bawaan SpikeClip.
 - Hingga 3 plugin bisa memahami dan hingga 3 bisa menilai, setelah plugin pencari mana pun.
 - Peran sebuah plugin ditentukan oleh `inputs` dan `outputs` di manifest-nya ([Langkah](../../docs/developers/steps.md)).
 - Hingga 3 plugin bisa menyarankan suntingan untuk klip yang akan dibuat.
 - Plugin edit menyarankan suntingan yang menunggu kreator di editor ([Langkah](../../docs/developers/steps.md#suggest-edits-the-edit-step)).
-- Memposting bukan langkah plugin: Clips Kitty memposting klip sendiri, dan melalui WoopSocial bisa memposting ke banyak situs sekaligus di akun milik kreator ([Publikasikan ke semua platform sekaligus](#publish-to-every-platform-at-once)). `kind: publisher` ditolak: plugin tidak memposting.
+- Memposting bukan langkah plugin: SpikeClip memposting klip sendiri, dan melalui WoopSocial bisa memposting ke banyak situs sekaligus di akun milik kreator ([Publikasikan ke semua platform sekaligus](#publish-to-every-platform-at-once)). `kind: publisher` ditolak: plugin tidak memposting.
 
 Tiga perintah memasang SDK, membuat plugin dari template `game-events` (untuk
 Quarkbloom Arena, sebuah game rekaan), dan menjalankannya pada video uji yang dibuat oleh SDK. Perintah-perintah ini membutuhkan
@@ -788,27 +785,27 @@ Python 3.11, FFmpeg, dan Git.
 PowerShell (Windows):
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash (macOS, Linux):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
-Clips Kitty 2.1.0 adalah rilis pertama yang menjalankan plugin, dan hadir bersama SDK 1.3.0.
+SpikeClip 2.1.0 adalah rilis pertama yang menjalankan plugin, dan hadir bersama SDK 1.3.0.
 
 **[Pipeline game pertamamu](../../docs/developers/first-game-pipeline.md)** melanjutkan dari
-situ, langkah demi langkah, hingga plugin terpasang di Clips Kitty dan tercantum di Marketplace-nya.
+situ, langkah demi langkah, hingga plugin terpasang di SpikeClip dan tercantum di Marketplace-nya.
 [Signals cookbook](../../docs/developers/signals-cookbook.md) berisi resep untuk membaca
 video sebuah game, [referensi SDK](../../docs/developers/sdk.md) berisi setiap perintah dan pemanggilan,
 dan [dokumentasi developer](../../docs/developers/README.md) berisi semua hal lainnya. Halaman
-[Clips Kitty SDK](https://colingpt9.github.io/clips-studio/developers.html) di situs web adalah
+[SpikeClip SDK](https://colingpt9.github.io/spikeclip/developers.html) di situs web adalah
 versi singkatnya.
 
 <a id="build-on-it"></a>
@@ -816,7 +813,7 @@ versi singkatnya.
 ## Bangun di atasnya
 
 Aplikasi desktop adalah jendela ke **API HTTP lokal**, yang berjalan setiap kali
-Clips Kitty terbuka. Bot Discord, batch runner, front end web, atau integrasi
+SpikeClip terbuka. Bot Discord, batch runner, front end web, atau integrasi
 OBS bisa menggerakkan pipeline yang sama, dan tidak ada yang perlu ditambahkan ke aplikasi
 lebih dulu.
 
@@ -852,15 +849,15 @@ Itu berarti membangun *di sekitar* aplikasi. Kamu juga bisa membangun *di dalamn
 memulainya adalah plugin ([Tulis plugin](#write-a-plugin)). Jika rekaman yang kamu pedulikan
 bukan jenis yang menjadi fokus penyetelan aplikasi ini, entah itu olahraga, gaming, reaksi, kuliah, atau
 sesuatu yang belum pernah dicoba siapa pun, sebuah plugin bisa menemukan, memahami, atau menilai momennya tanpa
-fork. Plugin berjalan di Python milik Clips Kitty sendiri, dengan pustaka standar (dikurangi beberapa
-modul yang tidak disertakan aplikasi) dan SDK: Clips Kitty belum bisa memasang paket Python lain
+fork. Plugin berjalan di Python milik SpikeClip sendiri, dengan pustaka standar (dikurangi beberapa
+modul yang tidak disertakan aplikasi) dan SDK: SpikeClip belum bisa memasang paket Python lain
 untuk plugin.
 
 Untuk mengubah aplikasinya sendiri: pipeline menjalankan **YOLOv8 (ultralytics), OpenCV, dan
 TalkNet-ASD** secara lokal, dan yang menentukan momen mana yang menjadi klip adalah sekumpulan
 sinyal per detik, bukan gagasan yang di-hardcode tentang apa yang menarik. Detektor yang mengeluarkan
 nilai keyakinan di sepanjang linimasa bisa ditambahkan sebagai satu sinyal lagi, dan puncak-puncaknya menjadi
-kandidat klip. Jika deteksimu butuh paket Python yang belum bisa dipasang Clips Kitty untuk
+kandidat klip. Jika deteksimu butuh paket Python yang belum bisa dipasang SpikeClip untuk
 plugin, fork aplikasinya dan pasang deteksimu sendiri.
 **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model)** berisi kontraknya,
 file yang perlu disalin, dan jebakan performa yang perlu kamu ketahui sebelum mulai.
@@ -874,33 +871,33 @@ setiap beberapa detik. Detailnya ada di [docs/API.md](../../docs/API.md#webhooks
 
 ### Minta agen AI melakukannya
 
-Clips Kitty menyertakan **server MCP**, jadi Claude, Cursor, atau klien MCP mana pun bisa menggerakkan
+SpikeClip menyertakan **server MCP**, jadi Claude, Cursor, atau klien MCP mana pun bisa menggerakkan
 pipeline yang sama dengan bahasa sehari-hari: memasukkan stream ke antrean, mengikuti job, membaca klip
 yang dipilihnya, mengekspor salah satunya.
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 Pada build yang terpasang, biner engine-nya adalah `api.exe` (di folder
 `resources\backend` milik aplikasi), jadi perintahnya di sana adalah `api.exe mcp`.
 
-Server ini berkomunikasi dengan engine yang sedang berjalan melalui `127.0.0.1:8765`, jadi Clips Kitty harus
+Server ini berkomunikasi dengan engine yang sedang berjalan melalui `127.0.0.1:8765`, jadi SpikeClip harus
 terbuka, dan tidak butuh kunci API apa pun: model yang membuat klip adalah model
 di mesinmu sendiri (atau, jika kamu memilihnya di Settings → AI, model cloud dengan kunci
 milikmu, yang tidak pernah dilihat oleh klien MCP). Skill agen untuk klien yang mendukungnya ada di
-[skills/clips-kitty/](../../skills/clips-kitty/).
+[skills/spikeclip/](../../skills/spikeclip/).
 
-<a id="built-with-clips-kitty"></a>
+<a id="built-with-spikeclip"></a>
 
-### Dibuat dengan Clips Kitty
+### Dibuat dengan SpikeClip
 
-Proyek yang berjalan di atas API ini tercantum di **[Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)**,
-daftar pipeline, plugin, integrasi, aplikasi, dan alat yang dibuat dengan Clips Kitty. Yang
-pertama adalah [Clips Kitty OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin),
-dock OBS Studio yang menyerahkan stream kamu ke Clips Kitty setelah stream selesai. Sudah membuat satu?
+Proyek yang berjalan di atas API ini tercantum di **[Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)**,
+daftar pipeline, plugin, integrasi, aplikasi, dan alat yang dibuat dengan SpikeClip. Yang
+pertama adalah [SpikeClip OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin),
+dock OBS Studio yang menyerahkan stream kamu ke SpikeClip setelah stream selesai. Sudah membuat satu?
 Tambahkan lewat pull request ([caranya](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)), dan beri
-repositorimu topik `clips-kitty`.
+repositorimu topik `spikeclip`.
 
 <a id="architecture"></a>
 
@@ -916,7 +913,7 @@ yang menjaganya tetap modular.
 
 Kontribusi sangat diterima. Lihat **[CONTRIBUTING.md](../../CONTRIBUTING.md)** untuk penyiapan lingkungan pengembangan
 dan harapan terkait pull request, serta **[SECURITY.md](../../SECURITY.md)** untuk melaporkan
-kerentanan. Issue berlabel [`good-first-issue`](https://github.com/ColinGPT9/clips-studio/labels/good-first-issue) berukuran
+kerentanan. Issue berlabel [`good-first-issue`](https://github.com/ColinGPT9/spikeclip/labels/good-first-issue) berukuran
 kecil dan cakupannya jelas jika kamu mencari tempat untuk memulai.
 
 Situs webnya ada di [site/](../../site/) dan dipublikasikan ke GitHub Pages dan sebuah Hugging
@@ -930,14 +927,14 @@ Dokumentasi pengemasan dan rilis:
   Windows, yang merupakan saluran utama
 - **[docs/MSSTORE.md](../../docs/MSSTORE.md)**: paket Microsoft Store, mulai dari
   membuat akun developer hingga sertifikasi
-- **[packaging/winget/](../../packaging/winget/)**: manifest winget, yang mengarah ke
+- **[packaging/winget/](../../backend/packaging/winget/)**: manifest winget, yang mengarah ke
   installer di atas
-- **[whop-app/](../../whop-app/)**: aplikasi Whop, yang menampilkan Clips Kitty di hadapan
+- **[whop-app/](../../whop-app/)**: aplikasi Whop, yang menampilkan SpikeClip di hadapan
   anggota komunitas pembuat klip. Hanya halaman pemasaran: tidak memproses
   video, tidak menyimpan apa pun, dan tidak berkomunikasi dengan aplikasi desktop
 - **[docs/DOCKER.md](../../docs/DOCKER.md)**: menjalankan engine tanpa perlu memasang sendiri
   Python, FFmpeg, dan PyTorch
-- **[PRIVASI](https://colingpt9.github.io/clips-studio/privacy.html)**: apa yang
+- **[PRIVASI](https://colingpt9.github.io/spikeclip/privacy.html)**: apa yang
   disimpan aplikasi dan apa yang bisa keluar dari mesinmu (jawaban singkatnya: tidak ada, kecuali kamu
   mengirim laporan bug)
 
@@ -998,14 +995,14 @@ Deteksi bola, ring, dan pemain untuk Bola basket memakai model deteksi
 di bawah CC BY 4.0. Terima kasih telah
 memublikasikannya secara terbuka. Semua komponen lain yang dibundel beserta lisensinya ada di [NOTICE](../../NOTICE).
 
-Tiga bagian dilisensikan secara terpisah, agar membangun di atas Clips Kitty tetap mudah:
+Tiga bagian dilisensikan secara terpisah, agar membangun di atas SpikeClip tetap mudah:
 
 | Bagian | Lisensi |
 |---|---|
-| Clips Kitty (aplikasinya, engine-nya, repositori ini) | AGPL-3.0-or-later |
-| SDK plugin, [`sdk/python/`](../../sdk/python/) | MIT ([sdk/python/LICENSE](../../sdk/python/LICENSE)) |
-| Contoh plugin, [`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) dan [`examples/pipelines/keyword-rater/`](../../examples/pipelines/keyword-rater/) | MIT |
-| Salinan daftar Awesome Clips Kitty yang disertakan bersama aplikasi, `plugins/catalog_index.json` (daftarnya adalah [repositori tersendiri](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
+| SpikeClip (aplikasinya, engine-nya, repositori ini) | AGPL-3.0-or-later |
+| SDK plugin, [`sdk/python/`](../../backend/sdk/python/) | MIT ([sdk/python/LICENSE](../../backend/sdk/python/LICENSE)) |
+| Contoh plugin, [`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) dan [`examples/pipelines/keyword-rater/`](../../backend/examples/pipelines/keyword-rater/) | MIT |
+| Salinan daftar Awesome SpikeClip yang disertakan bersama aplikasi, `plugins/catalog_index.json` (daftarnya adalah [repositori tersendiri](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
 
 Plugin, pipeline, dan aplikasi yang dibuat orang lain tetap memakai lisensi apa pun yang dipilih
 pembuatnya; Marketplace menampilkannya di setiap listing. Memakai SDK tidak membuat sebuah
@@ -1025,12 +1022,12 @@ Tetap dibuat untuk dimodifikasi: ganti model, setel prompt, tambahkan platform.
 
 ## Riwayat bintang
 
-Terima kasih kepada semua yang memberi bintang, membagikan, melaporkan bug, dan menerjemahkan Clips Kitty.
+Terima kasih kepada semua yang memberi bintang, membagikan, melaporkan bug, dan menerjemahkan SpikeClip.
 
-<a href="https://www.star-history.com/#ColinGPT9/clips-studio&amp;Date">
+<a href="https://www.star-history.com/#ColinGPT9/spikeclip&amp;Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;legend=top-left" />
-    <img alt="Riwayat bintang GitHub Clips Kitty" src="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;legend=top-left" />
+    <img alt="Riwayat bintang GitHub SpikeClip" src="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date" />
   </picture>
 </a>

@@ -1,9 +1,9 @@
 # Connected Accounts
 
-Connected Accounts belongs to the **Clips Kitty desktop engine in clips-studio**.
+Connected Accounts belongs to the **SpikeClip desktop engine in spikeclip**.
 Twitch is the first provider. Game pipelines and other integrations reuse the
 same connections; they do not implement login or receive OAuth credentials.
-There is no required Clips Kitty cloud account. Existing WoopSocial publishing
+There is no required SpikeClip cloud account. Existing WoopSocial publishing
 continues to use its own supported API-key workflow, independently of this feature.
 Discord authorization and bot installation are a separate integration effort.
 
@@ -21,7 +21,7 @@ Discord authorization and bot installation are a separate integration effort.
    watching your own channel needs none) and click **Connect Twitch**. Open
    Twitch's official activation page in the system browser and enter the
    displayed code.
-4. Complete consent in the browser. Clips Kitty polls at Twitch's interval and
+4. Complete consent in the browser. SpikeClip polls at Twitch's interval and
    displays the account once the token's client and user identity are verified.
    If Twitch or the engine doesn't answer one poll, the card keeps waiting until
    the code expires rather than ending the sign-in.
@@ -33,7 +33,7 @@ Discord authorization and bot installation are a separate integration effort.
    Twitch doesn't confirm a disconnect removed its authorization, the card says
    so, and the app can be removed under Connections in Twitch's settings.
 
-On Windows, Clips Kitty stores tokens in its own credential store (core/secrets,
+On Windows, SpikeClip stores tokens in its own credential store (core/secrets,
 Windows DPAPI), one entry per account. Elsewhere it uses the macOS Keychain or a
 Linux Secret Service through `keyring`, which is installed only there. An
 unavailable or locked OS credential store is an error; this system does **not**
@@ -103,7 +103,7 @@ application in Twitch's connections settings. A local credential deletion
 failure is reported rather than claiming disconnection succeeded.
 
 Twitch uses **device authorization**, which has no redirect callback or OAuth
-`state` parameter. Its advertised capability is `pkce: false`; Clips Kitty does
+`state` parameter. Its advertised capability is `pkce: false`; SpikeClip does
 not pretend it supports authorization-code PKCE.
 
 Provider requests use fixed HTTPS endpoints, bounded timeouts, TLS verification,
@@ -114,7 +114,7 @@ after a dropped connection. Plugins cannot choose a transport URL or session ID.
 
 ## Local application API
 
-All `/connected-accounts` endpoints require `X-Clips-Kitty-Session`, including
+All `/connected-accounts` endpoints require `X-SpikeClip-Session`, including
 metadata reads. These experimental routes are described in the generated
 [API reference](developers/api-reference.md#connected-accounts).
 
@@ -122,7 +122,7 @@ Examples of trusted application operations:
 
 ```http
 POST /connected-accounts/twitch:123/twitch
-X-Clips-Kitty-Session: <desktop session>
+X-SpikeClip-Session: <desktop session>
 Content-Type: application/json
 
 {"operation":"stream_context"}
@@ -214,7 +214,7 @@ fake provider responses; they make no consent requests or real clips/posts.
 python -m pytest tests/test_connected_accounts_*.py tests/test_twitch_*.py \
   tests/test_connected_feed.py tests/test_plugin_account_gateway.py \
   tests/test_plugin_sdk_accounts.py
-cd ui
+cd frontend
 node scripts/test-connected-accounts.cjs
 npm run typecheck
 npm run build

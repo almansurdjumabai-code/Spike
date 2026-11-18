@@ -1,6 +1,6 @@
 # Sports framework (shared core + Soccer + Basketball) as a reference plugin implementation
 
-Repo: `/home/user/clips-studio`, branch `claude/open-platform-w4eh9g`. Read-only survey. Every claim cites a repo-relative path; "(inferred)" marks inference.
+Repo: `/home/user/spikeclip`, branch `claude/open-platform-w4eh9g`. Read-only survey. Every claim cites a repo-relative path; "(inferred)" marks inference.
 
 ## 1. What it is, in one paragraph
 
@@ -190,15 +190,15 @@ Then in `core/pipeline.py` (Shorts path; `longform/process.py:82-130,207-235` mi
 
 ## 7. Data shapes
 
-**Job option** (output of `sports.clean`, `sports/__init__.py:72-134`): `{"name", "highlights", "period", "footage"?, "teams"?, "reels"?: [..], "events"?: str, "request"?: str}`. Mirrored by `ui/src/renderer/src/lib/types.ts:391-406` `SportOption`. MCP exposes it as `SPORT_PARAM` at `server/mcp.py:225-234` with `"description": "The sport: soccer or basketball"` (hard-coded names).
+**Job option** (output of `sports.clean`, `sports/__init__.py:72-134`): `{"name", "highlights", "period", "footage"?, "teams"?, "reels"?: [..], "events"?: str, "request"?: str}`. Mirrored by `frontend/src/renderer/src/lib/types.ts:391-406` `SportOption`. MCP exposes it as `SPORT_PARAM` at `server/mcp.py:225-234` with `"description": "The sport: soccer or basketball"` (hard-coded names).
 
 **GET /sports** item (`sports/__init__.py:50-69`): `{id, label, highlights:[{id,label}], periods:[{id,label}], footage:[{id,label}]}`; UI type `SportChoice` `types.ts:408-418`.
 
 **`SportEvent`** (`sports/core/events.py:14-32`): `type, t, confidence, importance, start, end, team, player, period, minute, signals: list[str], is_replay, group, confirmed, when, context, person`; methods `overlaps()`, `why()`.
 
-**Candidate subscores written by `sports.core.clips.mark`** (`sports/core/clips.py:78-105`): `sport_event, sport_label, sport_t, sport_group, sport_why, sport_team?, sport_player?, sport_period?, sport_minute?, sport_when?, sport_context?, sport_person?, sport_replay?, sport_bonus?`; `choose()` adds `required` and `sport_lift` (`clips.py:173-175,191-193`). Reels add `sport_reel, sport_label, sport_parts` (`core/pipeline.py:733`). Candidate `source = "sport"` (`analysis/fusion.py:311`). UI reads them in `types.ts:78-99` and `ui/src/renderer/src/lib/sports.ts:207` `sportMoment()`; `analysis/metadata.py:190-230` reads `sport_when/sport_label/sport_team/sport_context/sport_why/sport_player` for titles.
+**Candidate subscores written by `sports.core.clips.mark`** (`sports/core/clips.py:78-105`): `sport_event, sport_label, sport_t, sport_group, sport_why, sport_team?, sport_player?, sport_period?, sport_minute?, sport_when?, sport_context?, sport_person?, sport_replay?, sport_bonus?`; `choose()` adds `required` and `sport_lift` (`clips.py:173-175,191-193`). Reels add `sport_reel, sport_label, sport_parts` (`core/pipeline.py:733`). Candidate `source = "sport"` (`analysis/fusion.py:311`). UI reads them in `types.ts:78-99` and `frontend/src/renderer/src/lib/sports.ts:207` `sportMoment()`; `analysis/metadata.py:190-230` reads `sport_when/sport_label/sport_team/sport_context/sport_why/sport_player` for titles.
 
-**Report** (`sports/core/clips.py:report`, `clips.py:198-230`): `{sport, highlights, period, found: {label: n}, big_moments, replays_grouped, score, scoreboard: bool, footage, clips, notes: [..]}` -> `outcome["sport"]`; UI `SportReport` `types.ts:21`, rendered by `ui/src/renderer/src/components/SportsNote.tsx`.
+**Report** (`sports/core/clips.py:report`, `clips.py:198-230`): `{sport, highlights, period, found: {label: n}, big_moments, replays_grouped, score, scoreboard: bool, footage, clips, notes: [..]}` -> `outcome["sport"]`; UI `SportReport` `types.ts:21`, rendered by `frontend/src/renderer/src/components/SportsNote.tsx`.
 
 **Scoreboard** (soccer `sports/soccer/scoreboard.py:48-134`): `Scoreboard(box, readings: [Reading], changes: [ScoreChange], halftime)` with `final()`, `teams()`, `period_at(t)`, `minute_at(t)`, `video_time_at()`, `hidden(lo, hi)`. The core (`detect.py:168-197`, `clips.py:141-160`) calls `board.changes/.hidden/.period_at/.minute_at/.box/.final/.teams`; basketball's adds `period_number` (`sports/basketball/profile.py:526`). This is an implicit protocol (inferred: no base class).
 
@@ -244,10 +244,10 @@ What already looks like a plugin system:
 - A registry keyed by id -> module path, lazy-imported (`sports/__init__.py:24,170`).
 - A documented, mostly data-driven contract (`SportProfile` + 6 optional module hooks), where every hook is optional except `profile()` and failures degrade gracefully (section 8).
 - The engine never imports `sports.soccer` / `sports.basketball` by name: `core/pipeline.py`, `analysis/fusion.py`, `server/api.py` import only `sports` and `sports.core.*` (`analysis/fusion.py:35-41`, `core/pipeline.py:898,910,922,939,1001,1555`, `server/api.py:483,2953`). `analysis/fusion.py:35-41` even tolerates the whole `sports` package being absent (`sport_clips = sport_detect = sport_select = None`), and `GET /sports` returns `[]` on ImportError (`server/api.py:2952-2956`).
-- The UI is data-driven from `GET /sports` for the sport list, highlights, periods and footage (`ui/src/renderer/src/lib/sports.ts:5-46`, `SportFields.tsx:28-80`).
+- The UI is data-driven from `GET /sports` for the sport list, highlights, periods and footage (`frontend/src/renderer/src/lib/sports.ts:5-46`, `SportFields.tsx:28-80`).
 - Tests show a sport can be swapped by monkeypatching `sports.profile_for` / `sports.framing` / `pipeline.MatchReading` (`tests/test_sports_pipeline.py:85,201,271,301`).
 
-A third sport inside the repo needs exactly: (1) a yaml entry under `config/sports.yaml` with at least `label, highlights, events, callouts, highlights_choices (incl. best), periods (incl. full)` (`sports/__init__.py:84-95` requires `highlights` and `period` choices to exist, `clean` defaults to `best`/`full`); (2) `sports/<name>/__init__.py` with `profile(config, option, video=None)` returning a `SportProfile` (can be the base class with `name=<name>`); (3) one entry added to `SPORTS` at `sports/__init__.py:24`. Optional: `prepass`, `prepass_wait`, `framing`, `hotwords`, `READS_DESCRIPTION`, a `profile.py` subclass, plus `SPORT_ICONS` / `SPORT_NAMES` / `HIGHLIGHT_HINTS` entries in `ui/src/renderer/src/lib/sports.ts:75-111` for icon, display name and per-choice hints (the UI works without them, inferred from `SPORT_ICONS[s.id] ? ... : ''` at `SportFields.tsx:50`).
+A third sport inside the repo needs exactly: (1) a yaml entry under `config/sports.yaml` with at least `label, highlights, events, callouts, highlights_choices (incl. best), periods (incl. full)` (`sports/__init__.py:84-95` requires `highlights` and `period` choices to exist, `clean` defaults to `best`/`full`); (2) `sports/<name>/__init__.py` with `profile(config, option, video=None)` returning a `SportProfile` (can be the base class with `name=<name>`); (3) one entry added to `SPORTS` at `sports/__init__.py:24`. Optional: `prepass`, `prepass_wait`, `framing`, `hotwords`, `READS_DESCRIPTION`, a `profile.py` subclass, plus `SPORT_ICONS` / `SPORT_NAMES` / `HIGHLIGHT_HINTS` entries in `frontend/src/renderer/src/lib/sports.ts:75-111` for icon, display name and per-choice hints (the UI works without them, inferred from `SPORT_ICONS[s.id] ? ... : ''` at `SportFields.tsx:50`).
 
 What stops a sport living OUTSIDE the repository today:
 
@@ -255,13 +255,13 @@ What stops a sport living OUTSIDE the repository today:
 |---|---|---|
 | Registry is a literal dict; no discovery (entry points, directory scan, env var) | `sports/__init__.py:24` | hard |
 | Single yaml at a hard-coded path, cached once; a sport's data must be a top-level key in the repo's file | `sports/__init__.py:21,29-33` | hard |
-| Module path must be importable as `sports.<name>` from the engine's `sys.path`; the frozen (PyInstaller) build bundles exactly `collect_submodules("sports")` as hidden imports and copies `config/sports.yaml` into `config/` (`clips-studio.spec:51-53,115-116`); weights resolve via `sys._MEIPASS` (`analysis/panns.py:46-50`, `core/binaries.py:131-145`) | `sports/__init__.py:170`, `clips-studio.spec:51-53` | hard for the packaged app: an external sport has no import path and no bundled data |
+| Module path must be importable as `sports.<name>` from the engine's `sys.path`; the frozen (PyInstaller) build bundles exactly `collect_submodules("sports")` as hidden imports and copies `config/sports.yaml` into `config/` (`spikeclip.spec:51-53,115-116`); weights resolve via `sys._MEIPASS` (`analysis/panns.py:46-50`, `core/binaries.py:131-145`) | `sports/__init__.py:170`, `spikeclip.spec:51-53` | hard for the packaged app: an external sport has no import path and no bundled data |
 | Sport code imports private engine internals: `analysis.game_text._ocr` (`sports/basketball/scoreboard.py:980,1016`, `action.py:261`), `analysis.game_vision._jpeg` (`look.py:86`), `video.tracker._infer_lock` (`sports/soccer/ball.py:204`), `video.framing.{is_cut,small_gray,HoldMove,stable_target}` (`ball.py:137`, `action.py:112,123,301`), `video.capture.video_capture`, `core.binaries.{yolo_weights,ffmpeg,ffprobe}`, `core.gpu.{cuda_usable,torch_device}`, `core.cancel`, `core.modes.probe_size`, `analysis.gaming.knowledge` (`sports/__init__.py:44`), `sports.core.scorebug.*` | listed in section 5 and above | medium: needs an SDK surface for OCR, detector, frame grab, cancel, binaries |
 | Cross-sport import: basketball imports `sports.soccer.ball._model/detect` | `sports/basketball/action.py:299`, `reactions.py:147,154` | medium: the detector belongs in core |
 | Profile is a dataclass subclass, and engine code probes ad-hoc attributes (`board`, `curves`, `look`, `title_rules`, `check_titles`, `report_data`, `listed_report`, `footage`) by `getattr` | section 3D | medium: contract is implicit |
 | Scoreboard object protocol is implicit (`changes`, `box`, `readings`, `final()`, `teams()`, `period_at()`, `minute_at()`, `hidden()`, `period_number()`) | `sports/core/detect.py:168-197`, `clips.py:141-160`, `core/pipeline.py:978-983` | medium |
 | `detect.moments` hard-codes the signal set and thresholds (`CROWD_AT`, `VOICE_AT`, `CLUSTER`, ...) and the soccer-shaped flow (goals, replays, score changes) | `sports/core/detect.py:29-42,94-241` | design: a non-ball sport can only hook via `classify/extra_moments/confirmed_type` |
-| UI hard-codes `SPORT_ICONS`, `SPORT_NAMES`, `HIGHLIGHT_HINTS`, `COMING_SOON` | `ui/src/renderer/src/lib/sports.ts:75-111` | soft: cosmetic |
+| UI hard-codes `SPORT_ICONS`, `SPORT_NAMES`, `HIGHLIGHT_HINTS`, `COMING_SOON` | `frontend/src/renderer/src/lib/sports.ts:75-111` | soft: cosmetic |
 | MCP tool schema hard-codes "soccer or basketball" | `server/mcp.py:225-234` | soft |
 | Sound classes come from `config/gaming.yaml` `sound_groups` + yaml `sound_groups`; PANNs label set is fixed (`config/audioset_labels.txt`) | `sports/__init__.py:41-47`, `analysis/panns.py:34` | design |
 | `sports.clean` validation (option schema) is fixed: `highlights, period, footage, teams, reels, events, request` only; no sport-defined extra fields | `sports/__init__.py:72-134` | medium |
@@ -283,7 +283,7 @@ What stops a sport living OUTSIDE the repository today:
 | Clip subscore vocabulary `sport_*`, `required`, `sport_lift`, `source="sport"`, the outcome `report` schema and the UI that renders them | `sports/core/clips.py:78-105,198-230`, `SportsNote.tsx`, `ClipCard.tsx:38` | Values for `team/player/when/context/person` | `SportEvent` fields |
 | Reels (`plan/join/chapters`) and `events_import` (user-listed moments) | `sports/core/reels.py`, `sports/core/events_import.py` | `listed_words`, `match_minutes`, `listed_hint` | `config/sports.yaml:426-430,502` |
 | Logging/progress primitives (`print` convention, `core/progress.emit`) | `core/progress.py:30` | human-readable notes (`notes` in report) | `sports/core/clips.py:123-127` |
-| UI: Sport menu, highlight/period/footage menus, chips, clip-card moment line driven by `GET /sports` + subscores | `ui/src/renderer/src/lib/sports.ts`, `SportFields.tsx` | Icon, display name, per-choice hint text (today hard-coded in the UI; should move to the sport's data) | `ui/src/renderer/src/lib/sports.ts:75-111` |
+| UI: Sport menu, highlight/period/footage menus, chips, clip-card moment line driven by `GET /sports` + subscores | `frontend/src/renderer/src/lib/sports.ts`, `SportFields.tsx` | Icon, display name, per-choice hint text (today hard-coded in the UI; should move to the sport's data) | `frontend/src/renderer/src/lib/sports.ts:75-111` |
 
 ## 14. Extra signatures worth copying into an SDK
 

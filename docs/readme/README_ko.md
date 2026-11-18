@@ -4,46 +4,44 @@
 
 </div>
 
-<a id="clips-kitty-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
+<a id="spikeclip-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
 
-# Clips Kitty: 내 PC에서 돌아가는 토크, 게임, 스포츠용 무료 오픈 소스 Opus Clip 대안
+# SpikeClip: 내 PC에서 돌아가는 토크, 게임, 스포츠용 무료 오픈 소스 Opus Clip 대안
 
 > 이 README는 [영어 README](../../README.md)를 AI로 번역한 것입니다. 기준이 되는 문서는 영어 README이며, 항상 영어판이 먼저 업데이트됩니다. 원어민분들의 수정 제안을 언제든 환영합니다.
 >
-> 🌐 [웹사이트 한국어 페이지](https://colingpt9.github.io/clips-studio/ko.html)
+> 🌐 [웹사이트 한국어 페이지](https://colingpt9.github.io/spikeclip/ko.html)
 
 <a href="https://apps.microsoft.com/detail/9NB6XT7DSQZZ">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg">
-    <img alt="Microsoft Store에서 Clips Kitty 받기" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
+    <img alt="Microsoft Store에서 SpikeClip 받기" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
   </picture>
 </a>
 
-[![Latest release](https://badgen.net/github/tag/ColinGPT9/clips-studio?label=release)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/clips-studio/total?label=downloads)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Licence](https://img.shields.io/github/license/ColinGPT9/clips-studio)](../../LICENSE)
-[![Stars](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars)](https://github.com/ColinGPT9/clips-studio/stargazers)
-[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/clips-studio)
+[![Latest release](https://badgen.net/github/tag/ColinGPT9/spikeclip?label=release)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/spikeclip/total?label=downloads)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Licence](https://img.shields.io/github/license/ColinGPT9/spikeclip)](../../LICENSE)
+[![Stars](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars)](https://github.com/ColinGPT9/spikeclip/stargazers)
+[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/spikeclip)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](../../CONTRIBUTING.md)
 [![Docker](https://img.shields.io/badge/docker-compose%20up-2496ED?logo=docker&logoColor=white)](../../docs/DOCKER.md)
 
-<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="Clips Kitty turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
+<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="SpikeClip turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
 
-<a id="star-and-share-clips-kitty--goal-225"></a>
+<a id="star-and-share-spikeclip--goal-225"></a>
 
-### Clips Kitty에 스타를 누르고 공유해 주세요 ⭐ 목표: 225
+### SpikeClip에 스타를 누르고 공유해 주세요 ⭐ 목표: 225
 
-[![Stars so far](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/clips-studio/stargazers) **/ 225**
+[![Stars so far](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/spikeclip/stargazers) **/ 225**
 
 **저장소에 스타를 누르고 공유해 주세요.** 여러분에게는 비용이 전혀 들지 않습니다. 이 프로젝트에는 마케팅 예산이 없어서, 다음 소규모 유튜버나 스트리머가 무료 선택지가 있다는 사실을 알게 되는 길은 입소문뿐입니다.
 
 **저는 다른 도구나 편집자를 쓸 여유가 없는 유튜버, Twitch 스트리머, 콘텐츠 크리에이터를 위해 이 앱을 만들었습니다.** 내 PC에서 **Google Gemma**를 실행하는 무료 Opus Clip, Vizard, Klap 대안으로, 서버 비용도, 클립당 요금도, AI 사용료도 없습니다.
 
-> **Clips Kitty는 버전 1.1.3까지 Clips Studio라는 이름이었으며**, Microsoft Store의 이름 규정에 맞추기 위해 이름을 바꿨습니다. 앱도, 저장소도, 데이터도 그대로입니다.
-
 <img src="../../docs/brand/mascot.png" alt="" width="150" align="right">
 
-**긴 방송과 영상을 바로 올릴 수 있는 Shorts, Reels, TikTok 영상으로 바꿔 줍니다. 모든 작업이 내 컴퓨터에서 이루어집니다.** Clips Kitty는 크리에이터를 위한 무료 오픈 소스 AI 클립 생성기이자 동영상 편집기입니다. YouTube, Twitch, Kick 링크를 붙여 넣으면 가장 좋은 순간을 찾아내고, 말하는 사람을 가운데에 둔 채 9:16으로 잘라 내고, 단어 단위로 싱크된 자막을 영상에 입히고, 제목·설명·해시태그까지 작성합니다.
+**긴 방송과 영상을 바로 올릴 수 있는 Shorts, Reels, TikTok 영상으로 바꿔 줍니다. 모든 작업이 내 컴퓨터에서 이루어집니다.** SpikeClip는 크리에이터를 위한 무료 오픈 소스 AI 클립 생성기이자 동영상 편집기입니다. YouTube, Twitch, Kick 링크를 붙여 넣으면 가장 좋은 순간을 찾아내고, 말하는 사람을 가운데에 둔 채 9:16으로 잘라 내고, 단어 단위로 싱크된 자막을 영상에 입히고, 제목·설명·해시태그까지 작성합니다.
 
 기본적으로 클라우드 AI를 쓰지 않습니다. 구독도 없습니다. 클립당 요금도 없습니다. 내 YouTube 채널에 클립을 게시해 달라고 직접 요청하지 않는 한, 영상은 내 컴퓨터 밖으로 나가지 않습니다.
 
@@ -52,7 +50,7 @@
 **이 앱을 만든 이유:** 채널을 키워 가는 크리에이터 대부분은 촬영, 방송, 편집, 업로드를 전부 혼자 합니다. 클립은 사람들이 나를 발견하는 통로인데도, 보통 가장 먼저 포기하게 되는 일입니다. 편집자를 두는 건 아직 대부분의 채널에 부담스러운 비용이고, 클리핑 도구는 영상 단위나 월 단위로 요금을 받으며, 손으로 직접 자르려면 다른 데 써야 할 하루가 통째로 날아갑니다. 이 앱은 이미 가진 하드웨어에서 돌아가므로 쓰는 데 비용이 들지 않고, 만들 수 있는 클립 수에도 제한이 없습니다.
 
 <img src="../../docs/store-screenshots/fs-dashboard-202754.png" width="100%"
-     alt="Clips Kitty 대시보드: YouTube, Twitch 또는 Kick URL을 붙여 넣고 자막과 형식 옵션을 고르는 화면입니다. 완료된 영상 행에는 19분 38초 만에 만든 클립 38개가 표시되고, 그 옆에 실시간 CPU, RAM, GPU, 저장 공간 수치가 나와 있습니다.">
+     alt="SpikeClip 대시보드: YouTube, Twitch 또는 Kick URL을 붙여 넣고 자막과 형식 옵션을 고르는 화면입니다. 완료된 영상 행에는 19분 38초 만에 만든 클립 38개가 표시되고, 그 옆에 실시간 CPU, RAM, GPU, 저장 공간 수치가 나와 있습니다.">
 
 <sub>영상 하나에서 19분 만에 클립 38개. PC 한 대로, 아무것도 업로드하지 않고.</sub>
 
@@ -90,7 +88,7 @@
 
 ## 하는 일
 
-Clips Kitty에 긴 영상을 넣으면, 바로 올릴 수 있는 완성된 세로 클립이 담긴 폴더를 돌려줍니다. 올리기 전에 클립을 검토하고 고칠 수 있는 스튜디오도 함께 제공합니다.
+SpikeClip에 긴 영상을 넣으면, 바로 올릴 수 있는 완성된 세로 클립이 담긴 폴더를 돌려줍니다. 올리기 전에 클립을 검토하고 고칠 수 있는 스튜디오도 함께 제공합니다.
 
 대부분의 클리핑 도구가 가장 서툰 콘텐츠를 위해 만들었습니다. **라이브 방송, IRL과 토킹 헤드 영상, 팟캐스트, 헬스/피트니스 콘텐츠**처럼, 길고 구성이 느슨해서 좋은 순간이 묻혀 있고 대본만으로는 찾아낼 수 없는 영상들입니다.
 
@@ -98,11 +96,11 @@ Clips Kitty에 긴 영상을 넣으면, 바로 올릴 수 있는 완성된 세�
 
 ## Opus Clip, Klap, Vizard, CapCut과 비교
 
-Clips Kitty는 클라우드 클리핑 도구의 오픈 소스 대안입니다. 중요한 차이는 작업이 어디서 이루어지느냐입니다. 영상이 업로드되지 않으니 사용량을 잴 것도, 요금을 매길 것도 없습니다.
+SpikeClip는 클라우드 클리핑 도구의 오픈 소스 대안입니다. 중요한 차이는 작업이 어디서 이루어지느냐입니다. 영상이 업로드되지 않으니 사용량을 잴 것도, 요금을 매길 것도 없습니다.
 
 | 도구 | 가격(월 결제 기준) | 무료 플랜 | 클립을 대신 찾아 줌 | 워터마크 | 영상을 업로드함 | 오픈 소스 |
 | ---- | --------------------- | --------- | ----------------------- | --------- | ------------------ | ----------- |
-| **Clips Kitty** | 무료, 유료 플랜 없음 | 앱 전체 | 예 | 절대 없음 | 아니요, 내 PC에서 실행 | 예, AGPL-3.0 |
+| **SpikeClip** | 무료, 유료 플랜 없음 | 앱 전체 | 예 | 절대 없음 | 아니요, 내 PC에서 실행 | 예, AGPL-3.0 |
 | Opus Clip | Starter $15, Pro $29 | 1080p, 워터마크, 3일 후 만료 | 예 | 무료 플랜에서 | 예 | 아니요 |
 | Klap | Pro $29, Basic $14(연 결제) | 영상 1개 | 예 | 명시 안 됨 | 예 | 아니요 |
 | Vizard | Creator $29, 연 결제 시 $14.50 | 월 60크레딧, 720p | 예 | 무료 플랜에서 | 예 | 아니요 |
@@ -111,11 +109,11 @@ Clips Kitty는 클라우드 클리핑 도구의 오픈 소스 대안입니다. �
 | Descript | $16, $24, $50 | 월 60분, 720p | 일부, 대본 편집기임 | Free와 Hobbyist 플랜에서 | 예 | 아니요 |
 | CapCut | 무료 사용, capcut.com에 유료 플랜 | 편집기 전체 | **아니요, 직접 잘라야 함** | 기능마다 다름 | 데스크톱 앱은 아니요 | 아니요 |
 
-**CapCut은 제대로 알아 둘 만합니다.** 누구나 무료 답으로 꼽는 도구이기 때문입니다. 좋은 편집기이고 비용도 들지 않지만, 모든 순간을 찾고 모든 클립을 자르는 일은 직접 해야 합니다. Clips Kitty도 무료이며, 바로 그 첫 작업을 대신해 줍니다.
+**CapCut은 제대로 알아 둘 만합니다.** 누구나 무료 답으로 꼽는 도구이기 때문입니다. 좋은 편집기이고 비용도 들지 않지만, 모든 순간을 찾고 모든 클립을 자르는 일은 직접 해야 합니다. SpikeClip도 무료이며, 바로 그 첫 작업을 대신해 줍니다.
 
-그래픽 카드가 달린 Windows PC가 없거나, 클립을 가끔만 만들거나, 휴대폰으로 작업해야 한다면 **Opus Clip, Klap, Vizard가 더 나은 선택입니다**. Clips Kitty는 이미 가진 하드웨어로 클립을 대량으로 만드는 용도에 맞춰져 있습니다.
+그래픽 카드가 달린 Windows PC가 없거나, 클립을 가끔만 만들거나, 휴대폰으로 작업해야 한다면 **Opus Clip, Klap, Vizard가 더 나은 선택입니다**. SpikeClip는 이미 가진 하드웨어로 클립을 대량으로 만드는 용도에 맞춰져 있습니다.
 
-**[7가지 도구 전체 비교와 각 도구가 가장 잘하는 것](https://colingpt9.github.io/clips-studio/alternatives.html)**
+**[7가지 도구 전체 비교와 각 도구가 가장 잘하는 것](https://colingpt9.github.io/spikeclip/alternatives.html)**
 
 <sub>가격은 2026년 9월 17일에 각 회사의 공식 가격 페이지에서 확인했습니다. CapCut은 저희가 읽을 수 있는 가격 페이지를 공개하지 않아서 가격을 적지 않았습니다. 요금제는 바뀌며, 이 표는 저절로 업데이트되지 않습니다.</sub>
 
@@ -174,7 +172,7 @@ flowchart TD
   [docs/SPORTS.md](../../docs/SPORTS.md)를 참고하세요.
 - **편집 가능한 하드 자막**: 단어 단위로 싱크되며 원하는 스타일로 꾸밀 수 있습니다(색상, 크기, 위치, 줄당 단어 수, 대소문자, 또는 끄기). 내보내기 전에 받아쓰기 실수를 한 줄씩 고칠 수 있습니다. 두 사람이 대화할 때는 두 번째 화자의 자막을 다른 색으로 표시할 수 있고, 화자를 잘못 잡은 자막은 직접 바꿀 수 있습니다.
 - **AI 편집 채팅**: 무엇이 잘못됐는지 평소 말로 설명하면 다시 편집합니다.
-- **Ask Clips Kitty**: 대시보드 맨 아래에 있는 텍스트 상자입니다. 원하는 것을 한 문장으로 말하면 됩니다. 예를 들어 *"이 방송 클립 만들어 줘, 내가 보스한테 죽은 장면은 꼭 넣고, 자막은 크고 노랗게"* 라고 쓰면, 영상을 대기열에 넣고, 클립 선택기에 무엇을 찾아야 하는지 알려 주고, 말한 옵션을 설정합니다. **Gemma 4 모델이 필요합니다**. [하단 텍스트 상자에는 Gemma 4가 필요합니다](#the-text-box-at-the-bottom-needs-gemma-4)를 참고하세요.
+- **Ask SpikeClip**: 대시보드 맨 아래에 있는 텍스트 상자입니다. 원하는 것을 한 문장으로 말하면 됩니다. 예를 들어 *"이 방송 클립 만들어 줘, 내가 보스한테 죽은 장면은 꼭 넣고, 자막은 크고 노랗게"* 라고 쓰면, 영상을 대기열에 넣고, 클립 선택기에 무엇을 찾아야 하는지 알려 주고, 말한 옵션을 설정합니다. **Gemma 4 모델이 필요합니다**. [하단 텍스트 상자에는 Gemma 4가 필요합니다](#the-text-box-at-the-bottom-needs-gemma-4)를 참고하세요.
 - **AI 제목, 설명, 해시태그**, 모두 내보내기 전에 편집할 수 있습니다.
 - **크리에이터 프로필**: 앱이 시간이 지나면서 크리에이터 한 명 한 명을 학습해 클립을 더 잘 고르고 제목도 더 잘 붙입니다. 모든 정보는 내 컴퓨터에 남고, 직접 확인하고 고치거나 지울 수 있습니다.
 - **다국어 게시**: 19개 언어를 지원하며, 영상에 입히기 전에 검토할 수 있습니다.
@@ -220,7 +218,7 @@ flowchart TD
 - **16 GB RAM은 권장 사항이 아닙니다.** 8 GB에서는 영상 전체를 분석한 뒤 아무것도 렌더링하지 못하는데, 이것이 메모리 한계가 아니라 충돌처럼 보입니다.
 - **GPU는 선택 사항이며 필수가 아닙니다.** GPU가 없으면 모든 것이 CPU에서 돌아가며, 느리지만 끝까지 완료됩니다. GPU 경로가 작동하기 시작하는 선이 RTX 2060입니다. [GPU 가속](#gpu-acceleration)을 참고하세요.
 
-앱은 **Windows 전용**입니다. Python 엔진은 Linux/macOS에서도 돌아갈 것이지만, Mac 빌드는 없고 관리자에게는 테스트할 Mac도 없습니다. Mac이 있고 돕고 싶다면 [#62](https://github.com/ColinGPT9/clips-studio/issues/62)를 봐 주세요.
+앱은 **Windows 전용**입니다. Python 엔진은 Linux/macOS에서도 돌아갈 것이지만, Mac 빌드는 없고 관리자에게는 테스트할 Mac도 없습니다. Mac이 있고 돕고 싶다면 [#62](https://github.com/ColinGPT9/spikeclip/issues/62)를 봐 주세요.
 
 소스에서 실행하려면, 원래 설치 프로그램이 함께 묶어 주는 것들이 필요합니다.
 
@@ -232,11 +230,11 @@ flowchart TD
 
 ## 설치 및 실행
 
-**가장 쉬운 방법은 [Microsoft Store](https://apps.microsoft.com/detail/9NB6XT7DSQZZ)입니다.** 클릭 한 번이면 되고, 자동으로 업데이트되며, Windows 보안 경고도 뜨지 않습니다. Microsoft가 패키지를 인증하고 서명했기 때문에 아래에서 설명하는 SmartScreen 경고가 아예 나타나지 않습니다. Store는 자기 일정에 맞춰 새 버전을 설치합니다. 바로 받고 싶다면 Microsoft Store에서 Clips Kitty 페이지를 열고 **Update**(업데이트)를 누르세요.
+**가장 쉬운 방법은 [Microsoft Store](https://apps.microsoft.com/detail/9NB6XT7DSQZZ)입니다.** 클릭 한 번이면 되고, 자동으로 업데이트되며, Windows 보안 경고도 뜨지 않습니다. Microsoft가 패키지를 인증하고 서명했기 때문에 아래에서 설명하는 SmartScreen 경고가 아예 나타나지 않습니다. Store는 자기 일정에 맞춰 새 버전을 설치합니다. 바로 받고 싶다면 Microsoft Store에서 SpikeClip 페이지를 열고 **Update**(업데이트)를 누르세요.
 
-**또는 설치 프로그램을 받으세요.** [Releases](https://github.com/ColinGPT9/clips-studio/releases)에서 최신 **Web Setup**을 받아 실행합니다. 앱, Python 엔진, 모든 라이브러리, FFmpeg, AI 런타임, 감지 및 받아쓰기 가중치가 모두 들어 있습니다. Python도, PATH 설정도, 터미널도, 따로 설치할 두 번째 프로그램도 필요 없습니다.
+**또는 설치 프로그램을 받으세요.** [Releases](https://github.com/ColinGPT9/spikeclip/releases)에서 최신 **Web Setup**을 받아 실행합니다. 앱, Python 엔진, 모든 라이브러리, FFmpeg, AI 런타임, 감지 및 받아쓰기 가중치가 모두 들어 있습니다. Python도, PATH 설정도, 터미널도, 따로 설치할 두 번째 프로그램도 필요 없습니다.
 
-**또는 winget을 쓰세요.** `winget install ColinGPT9.ClipsKitty`로 터미널에서 같은 Web Setup을 설치합니다.
+**또는 winget을 쓰세요.** `winget install ColinGPT9.SpikeClip`로 터미널에서 같은 Web Setup을 설치합니다.
 
 설치 프로그램에 들어 있지 않은 단 하나는 언어 모델 자체입니다. 언어 모델은 다운로드하는 사람이 직접 동의해야 하는 라이선스로 배포되며, 남이 대신 동의해 줄 수 있는 것이 아니기 때문입니다. 설정 마법사가 알아서 그 다운로드를 시작하고, 그래픽 카드에 맞는 크기를 고르고, 진행 막대를 보여 줍니다. 즉 다운로드 한 번, 더블클릭 한 번, 진행 막대 하나입니다. 그 뒤로는 오프라인으로 돌아갑니다.
 
@@ -247,13 +245,13 @@ flowchart TD
 ### 소스에서 설치
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 pip install -r requirements.txt
 
-cd ui
+cd frontend
 npm install
-npm run dev        # opens the Clips Kitty desktop app
+npm run dev        # opens the SpikeClip desktop app
 ```
 
 앱이 자체 Python 엔진을 자동으로 시작합니다. **Clip Editor**(클립 편집기)에 링크를 붙여 넣고 *Generate clips*(클립 생성)를 누른 뒤 진행 상황을 실시간으로 지켜보세요.
@@ -267,8 +265,8 @@ npm run dev        # opens the Clips Kitty desktop app
 기여자를 위한 방법입니다. [Docker Desktop](https://docs.docker.com/get-started/get-docker/)만 있으면 됩니다. Python도, Node도, FFmpeg도, PyTorch도 필요 없습니다.
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 docker compose up
 ```
 
@@ -299,7 +297,7 @@ docker compose run --rm ui npm run typecheck
 
 **Models**(모델) 페이지를 열면 설치된 모델과 내 GPU가 감당할 수 있는 모델을 볼 수 있습니다.
 
-기준은 하나뿐입니다. VRAM이 얼마나 있느냐입니다. 아래 행은 앱에 표시되는 것과 같으며, [`llm/manager.py`](../../llm/manager.py)의 `RECOMMENDATIONS`에서 가져왔습니다. 마법사와 Models 페이지가 이 표 하나를 읽기 때문에, 둘이 서로 다르거나 이 문서와 다를 수 없습니다.
+기준은 하나뿐입니다. VRAM이 얼마나 있느냐입니다. 아래 행은 앱에 표시되는 것과 같으며, [`llm/manager.py`](../../backend/llm/manager.py)의 `RECOMMENDATIONS`에서 가져왔습니다. 마법사와 Models 페이지가 이 표 하나를 읽기 때문에, 둘이 서로 다르거나 이 문서와 다를 수 없습니다.
 
 | 내 하드웨어 | 권장 모델 | |
 |---|---|---|
@@ -317,7 +315,7 @@ VRAM 말고 다른 이유로 고를 만한 모델들도 있습니다.
 | 번역 / 다국어 | `qwen3:8b` 또는 `qwen3:14b` |
 | 허용적인 라이선스 | `mistral-nemo:12b` (Apache-2.0) · `phi4:14b` (MIT) |
 
-**"테스트됨"으로 표시된 세 개만 실제 방송으로 돌려 봤으며**, 그중 가장 오래 써 본 것이 `gemma:7b`입니다. `config/settings.yaml`에 기본으로 들어 있는 것도 이 모델입니다. 나머지는 적당한 크기이고 상업적으로 무료로 쓸 수 있어서 목록에 넣었을 뿐, 클립 품질을 측정해 보고 넣은 것은 아닙니다. 앱이 Ollama를 통해 모든 모델과 똑같은 방식으로 통신하므로 전부 작동은 하지만, 더 좋은 순간을 고르는지는 아무도 확인하지 않았습니다. 이 빈틈을 메우는 작업이 [#38](https://github.com/ColinGPT9/clips-studio/issues/38)입니다.
+**"테스트됨"으로 표시된 세 개만 실제 방송으로 돌려 봤으며**, 그중 가장 오래 써 본 것이 `gemma:7b`입니다. `config/settings.yaml`에 기본으로 들어 있는 것도 이 모델입니다. 나머지는 적당한 크기이고 상업적으로 무료로 쓸 수 있어서 목록에 넣었을 뿐, 클립 품질을 측정해 보고 넣은 것은 아닙니다. 앱이 Ollama를 통해 모든 모델과 똑같은 방식으로 통신하므로 전부 작동은 하지만, 더 좋은 순간을 고르는지는 아무도 확인하지 않았습니다. 이 빈틈을 메우는 작업이 [#38](https://github.com/ColinGPT9/spikeclip/issues/38)입니다.
 
 Ollama가 제공하는 모델이라면 무엇이든 작동하며, 전환은 클릭 한 번이면 됩니다. 번역에는 클리핑과 *다른* 모델을 쓸 수 있습니다. `llm.translation_model`을 설정하세요.
 
@@ -325,7 +323,7 @@ Ollama가 제공하는 모델이라면 무엇이든 작동하며, 전환은 클�
 
 ### 하단 텍스트 상자에는 Gemma 4가 필요합니다
 
-대시보드 맨 아래의 텍스트 상자인 **Ask Clips Kitty**는 앱의 도구를 사용할 수 있는 모델에서만 작동합니다. Gemma 4는 됩니다. `gemma:7b`와 Gemma 3 모델들은 안 되는데, 그래픽 카드가 없거나 VRAM이 8 GB 이상인 PC에서는 설정 과정에서 이 중 하나가 설치됩니다. 그런 PC에서는 Gemma 4 모델을 추가하기 전까지 상자가 작동하지 않습니다. 버전 2.0에서는 *"No installed model can use tools"*(도구를 사용할 수 있는 설치된 모델이 없습니다)라고 표시되고, 이후 버전에서는 상자 안에서 바로 다운로드를 제안합니다.
+대시보드 맨 아래의 텍스트 상자인 **Ask SpikeClip**는 앱의 도구를 사용할 수 있는 모델에서만 작동합니다. Gemma 4는 됩니다. `gemma:7b`와 Gemma 3 모델들은 안 되는데, 그래픽 카드가 없거나 VRAM이 8 GB 이상인 PC에서는 설정 과정에서 이 중 하나가 설치됩니다. 그런 PC에서는 Gemma 4 모델을 추가하기 전까지 상자가 작동하지 않습니다. 버전 2.0에서는 *"No installed model can use tools"*(도구를 사용할 수 있는 설치된 모델이 없습니다)라고 표시되고, 이후 버전에서는 상자 안에서 바로 다운로드를 제안합니다.
 
 어떤 모델이 클립을 고르든, **Models** 페이지에서 Gemma 4 모델을 함께 설치해 두세요. 그래픽 카드 메모리가 6 GB 이상이면 `gemma4:e4b`, 그보다 적으면 `gemma4:e2b`입니다. 그 모델로 전환할 필요는 없습니다. 상자가 알아서 찾아 쓰고, 클립은 여전히 내가 고른 모델이 선택합니다. AI를 OpenRouter로 실행한다면 상자는 그 모델을 사용하며 따로 설치할 것이 없습니다.
 
@@ -333,7 +331,7 @@ Ollama가 제공하는 모델이라면 무엇이든 작동하며, 전환은 클�
 
 ## 테스트한 하드웨어와 성능
 
-Clips Kitty는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 결과와 비교할 때 유용한 기준점이 됩니다.
+SpikeClip는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 결과와 비교할 때 유용한 기준점이 됩니다.
 
 | | |
 |---|---|
@@ -346,7 +344,7 @@ Clips Kitty는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 �
 
 이 저장소의 모든 것(기본 설정, `parallel_renders: 3`, 5분 단위 분석 청크 크기)은 대략 이 정도 사양의 컴퓨터에 맞춰져 있습니다. 더 큰 GPU라면 `llm.num_ctx`와 `analysis.chunk_seconds`를 함께 올리고 모델 크기를 한 단계 키우세요. 더 작은 GPU라면 `gemma3:4b`로 낮추세요.
 
-다른 하드웨어에서 Clips Kitty 벤치마크를 해 보셨다면 [Discussions](https://github.com/ColinGPT9/clips-studio/discussions)에 올려 주세요. 실제 컴퓨터에서 나온 실제 수치는 모두가 자기 환경을 가늠하는 데 도움이 됩니다.
+다른 하드웨어에서 SpikeClip 벤치마크를 해 보셨다면 [Discussions](https://github.com/ColinGPT9/spikeclip/discussions)에 올려 주세요. 실제 컴퓨터에서 나온 실제 수치는 모두가 자기 환경을 가늠하는 데 도움이 됩니다.
 
 <a id="supported-platforms"></a>
 
@@ -368,7 +366,7 @@ Clips Kitty는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 �
 
 영어 · 스페인어 · 포르투갈어(브라질) · 프랑스어 · 독일어 · 힌디어 · 인도네시아어 · 일본어 · 러시아어 · 아랍어 · 중국어(간체) · 베트남어 · 필리핀어 · 튀르키예어 · 우르두어 · 벵골어 · 태국어 · 한국어 · 이탈리아어
 
-언어를 추가하려면 `multilingual/languages.py`에 한 줄, `ui/src/renderer/src/locales/`에 로케일 파일 하나만 넣으면 됩니다. 번역기와 자막 작성기는 언어에 상관없이 작동합니다.
+언어를 추가하려면 `multilingual/languages.py`에 한 줄, `frontend/src/renderer/src/locales/`에 로케일 파일 하나만 넣으면 됩니다. 번역기와 자막 작성기는 언어에 상관없이 작동합니다.
 
 <a id="help-wanted-the-maintainer-only-speaks-english"></a>
 
@@ -376,17 +374,17 @@ Clips Kitty는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 �
 
 19개 인터페이스 번역 중 18개는 그 언어를 쓰는 사람이 한 번도 읽어 본 적이 없습니다. 그중 절반은 아직 완성되지 않았습니다. 언어마다 영어와 해당 언어로 작성된 이슈가 따로 있으며, **어색한 단어 하나를 알려 주는 것만으로도 완전한 기여입니다**. 풀 리퀘스트는 필요 없습니다. [참여 방법](../../docs/TRANSLATING.md).
 
-**마무리 필요**(약 68개 문자열이 아직 영어): [বাংলা (벵골어)](https://github.com/ColinGPT9/clips-studio/issues/43) · [Italiano (이탈리아어)](https://github.com/ColinGPT9/clips-studio/issues/44) · [한국어](https://github.com/ColinGPT9/clips-studio/issues/45) · [ไทย (태국어)](https://github.com/ColinGPT9/clips-studio/issues/46) · [Tagalog (필리핀어)](https://github.com/ColinGPT9/clips-studio/issues/47) · [Türkçe (튀르키예어)](https://github.com/ColinGPT9/clips-studio/issues/48) · [اردو (우르두어)](https://github.com/ColinGPT9/clips-studio/issues/49) · [Tiếng Việt (베트남어)](https://github.com/ColinGPT9/clips-studio/issues/50) · [中文 (중국어)](https://github.com/ColinGPT9/clips-studio/issues/51)
+**마무리 필요**(약 68개 문자열이 아직 영어): [বাংলা (벵골어)](https://github.com/ColinGPT9/spikeclip/issues/43) · [Italiano (이탈리아어)](https://github.com/ColinGPT9/spikeclip/issues/44) · [한국어](https://github.com/ColinGPT9/spikeclip/issues/45) · [ไทย (태국어)](https://github.com/ColinGPT9/spikeclip/issues/46) · [Tagalog (필리핀어)](https://github.com/ColinGPT9/spikeclip/issues/47) · [Türkçe (튀르키예어)](https://github.com/ColinGPT9/spikeclip/issues/48) · [اردو (우르두어)](https://github.com/ColinGPT9/spikeclip/issues/49) · [Tiếng Việt (베트남어)](https://github.com/ColinGPT9/spikeclip/issues/50) · [中文 (중국어)](https://github.com/ColinGPT9/spikeclip/issues/51)
 
-**확인 필요**(완성되었지만, 자연스럽게 읽히는지 아무도 확인하지 않음): [العربية (아랍어)](https://github.com/ColinGPT9/clips-studio/issues/52) · [Deutsch (독일어)](https://github.com/ColinGPT9/clips-studio/issues/53) · [Español (스페인어)](https://github.com/ColinGPT9/clips-studio/issues/54) · [Français (프랑스어)](https://github.com/ColinGPT9/clips-studio/issues/55) · [हिन्दी (힌디어)](https://github.com/ColinGPT9/clips-studio/issues/56) · [Bahasa Indonesia (인도네시아어)](https://github.com/ColinGPT9/clips-studio/issues/57) · [日本語 (일본어)](https://github.com/ColinGPT9/clips-studio/issues/58) · [Português (포르투갈어)](https://github.com/ColinGPT9/clips-studio/issues/59) · [Русский (러시아어)](https://github.com/ColinGPT9/clips-studio/issues/60)
+**확인 필요**(완성되었지만, 자연스럽게 읽히는지 아무도 확인하지 않음): [العربية (아랍어)](https://github.com/ColinGPT9/spikeclip/issues/52) · [Deutsch (독일어)](https://github.com/ColinGPT9/spikeclip/issues/53) · [Español (스페인어)](https://github.com/ColinGPT9/spikeclip/issues/54) · [Français (프랑스어)](https://github.com/ColinGPT9/spikeclip/issues/55) · [हिन्दी (힌디어)](https://github.com/ColinGPT9/spikeclip/issues/56) · [Bahasa Indonesia (인도네시아어)](https://github.com/ColinGPT9/spikeclip/issues/57) · [日本語 (일본어)](https://github.com/ColinGPT9/spikeclip/issues/58) · [Português (포르투갈어)](https://github.com/ColinGPT9/spikeclip/issues/59) · [Русский (러시아어)](https://github.com/ColinGPT9/spikeclip/issues/60)
 
-여기 없는 언어가 필요하신가요? [#61](https://github.com/ColinGPT9/clips-studio/issues/61).
+여기 없는 언어가 필요하신가요? [#61](https://github.com/ColinGPT9/spikeclip/issues/61).
 
 <a id="publish-to-youtube"></a>
 
 ## YouTube에 게시하기
 
-기본적으로 꺼져 있습니다. **Settings → Publish to YouTube**(설정 → YouTube에 게시)에서 켜면 편집기에 **YouTube** 탭이 나타납니다. 제목, 설명, 태그, 썸네일, 재생목록, 시청자층, 공개 범위를 채운 뒤 **Upload now**(지금 업로드)를 누르세요. 저장하지 않은 편집이 있으면 Clips Kitty가 클립을 렌더링한 뒤 내 채널에 바로 업로드합니다. 내보내기 단계도, 별도의 게시 페이지도 없습니다. 편집기를 떠날 일이 없습니다.
+기본적으로 꺼져 있습니다. **Settings → Publish to YouTube**(설정 → YouTube에 게시)에서 켜면 편집기에 **YouTube** 탭이 나타납니다. 제목, 설명, 태그, 썸네일, 재생목록, 시청자층, 공개 범위를 채운 뒤 **Upload now**(지금 업로드)를 누르세요. 저장하지 않은 편집이 있으면 SpikeClip가 클립을 렌더링한 뒤 내 채널에 바로 업로드합니다. 내보내기 단계도, 별도의 게시 페이지도 없습니다. 편집기를 떠날 일이 없습니다.
 
 꺼 둔 채로 두면 앱 어디에서도 달라지는 것이 없습니다.
 
@@ -396,13 +394,13 @@ Clips Kitty는 매일 이 컴퓨터에서 개발하고 테스트하므로, 내 �
 
 **Schedule on YouTube**(YouTube에서 예약)를 선택하면 영상을 *즉시* 업로드하고 비공개로 표시한 뒤, YouTube에 게시 시간을 넘깁니다. 그날이 되면 YouTube가 게시합니다.
 
-**Clips Kitty를 닫고 컴퓨터를 꺼도 됩니다.** 이 앱에는 타이머도, 백그라운드 서비스도, 켜 둬야 할 것도 없습니다. YouTube가 영상을 받아들이면 Clips Kitty의 일은 끝납니다.
+**SpikeClip를 닫고 컴퓨터를 꺼도 됩니다.** 이 앱에는 타이머도, 백그라운드 서비스도, 켜 둬야 할 것도 없습니다. YouTube가 영상을 받아들이면 SpikeClip의 일은 끝납니다.
 
 <a id="you-need-your-own-google-api-key"></a>
 
 ### 내 Google API 키가 필요합니다
 
-Clips Kitty는 공용 키를 제공하지 않으며, 이건 단순히 조심하려는 이유만이 아닙니다. Google의 업로드 할당량은 **Cloud 프로젝트 단위**입니다. 공용 키 하나를 쓰면 전 세계 모든 사용자가 하루 100개 업로드라는 같은 한도를 나눠 쓰게 됩니다. 내 프로젝트를 만들면 나만의 한도가 생기고, 내 인증 정보는 컴퓨터 밖으로 나가지 않습니다. 중간에 Clips Kitty 서버는 없습니다.
+SpikeClip는 공용 키를 제공하지 않으며, 이건 단순히 조심하려는 이유만이 아닙니다. Google의 업로드 할당량은 **Cloud 프로젝트 단위**입니다. 공용 키 하나를 쓰면 전 세계 모든 사용자가 하루 100개 업로드라는 같은 한도를 나눠 쓰게 됩니다. 내 프로젝트를 만들면 나만의 한도가 생기고, 내 인증 정보는 컴퓨터 밖으로 나가지 않습니다. 중간에 SpikeClip 서버는 없습니다.
 
 설정은 무료이며 10분 정도 걸립니다. Settings의 마법사가 단계별로 안내합니다.
 
@@ -422,7 +420,7 @@ Clips Kitty는 공용 키를 제공하지 않으며, 이건 단순히 조심하�
 
 > **Google Cloud 프로젝트가 YouTube의 무료 API 감사를 통과하기 전까지는, 그 프로젝트로 업로드한 모든 영상을 YouTube가 비공개로 잠급니다.** 이 잠금은 영구적입니다. 나중에 Studio에서 공개로 바꿀 수도 없고, 이의 제기도 할 수 없습니다. 유일한 해결책은 감사를 통과한 프로젝트에서 다시 업로드하는 것입니다.
 
-Clips Kitty는 업로드할 때마다 확인하고, 이런 일이 생기면 아무도 볼 수 없는 영상을 성공이라고 보고하는 대신 그 사실을 분명하게 알려 줍니다. 공개로 게시할 계획이라면 먼저 [YouTube API 서비스 감사 양식](https://support.google.com/youtube/contact/yt_api_form)을 제출하세요. **일부 공개(unlisted)** 또는 **비공개(private)** 업로드는 영향을 받지 않습니다.
+SpikeClip는 업로드할 때마다 확인하고, 이런 일이 생기면 아무도 볼 수 없는 영상을 성공이라고 보고하는 대신 그 사실을 분명하게 알려 줍니다. 공개로 게시할 계획이라면 먼저 [YouTube API 서비스 감사 양식](https://support.google.com/youtube/contact/yt_api_form)을 제출하세요. **일부 공개(unlisted)** 또는 **비공개(private)** 업로드는 영향을 받지 않습니다.
 
 <a id="what-it-can-and-cannot-set"></a>
 
@@ -440,13 +438,13 @@ Shorts에는 특별한 것이 필요 없습니다. 별도 모드도, `#Shorts` �
 
 이것도 기본적으로 꺼져 있습니다. **Settings → Publish through WoopSocial**(설정 → WoopSocial로 게시)에서 켜면 편집기에 **Publish**(게시) 탭이 나타납니다. 플랫폼을 고르거나 **Everywhere**(모든 곳)를 누르고, 제목과 설명을 한 번만 쓰면, 업로드 한 번으로 YouTube, TikTok, Instagram, Facebook, X, Threads, LinkedIn, Pinterest, Bluesky에 함께 올라갑니다. Clip Editor의 **Publish all**(모두 게시)은 한 묶음 전체를 처리하며, 클립 열두 개가 같은 순간에 올라가지 않도록 간격을 둡니다.
 
-이 기능은 **로컬이 아닙니다**. 클립과 세부 정보는 게시 서비스로 전송되고, 그 서비스가 클립을 전달하며 내 소셜 계정과의 연결을 보관합니다. 그래서 Clips Kitty는 소셜 계정 비밀번호를 절대 묻지 않습니다. 앱의 나머지 기능은 여전히 내 PC에서 실행됩니다.
+이 기능은 **로컬이 아닙니다**. 클립과 세부 정보는 게시 서비스로 전송되고, 그 서비스가 클립을 전달하며 내 소셜 계정과의 연결을 보관합니다. 그래서 SpikeClip는 소셜 계정 비밀번호를 절대 묻지 않습니다. 앱의 나머지 기능은 여전히 내 PC에서 실행됩니다.
 
 지원하는 서비스는 두 가지입니다. **[WoopSocial](https://woopsocial.com/?via=clipskitty)**: 무료 플랜은 계정 두 개를 연결할 수 있고 YouTube 게시물을 하루 약 5개까지 올릴 수 있으며, 유료 플랜에서는 둘 다 늘어납니다. **[Upload-Post](https://www.upload-post.com/)**: 더 많은 곳에 게시할 수 있고 썸네일, 첫 댓글, 게시 대기열을 추가로 제공합니다. 둘 중 하나만 켜도 되고, 둘 다 켜도 됩니다.
 
-<sub>제휴 링크입니다. 이 링크로 가입하시면 Clips Kitty가 수수료를 받을 수 있으며, 여러분에게 추가 비용은 없습니다.</sub>
+<sub>제휴 링크입니다. 이 링크로 가입하시면 SpikeClip가 수수료를 받을 수 있으며, 여러분에게 추가 비용은 없습니다.</sub>
 
-**내 키를 직접 쓰세요.** 계정은 내가 만들고, 내 소셜 계정을 연결하고, 내 한도를 씁니다. Clips Kitty는 요금을 받지 않고, 공용 키를 갖고 있지 않으며, 아무것도 대신 결제하지 않습니다. YouTube 연동과 같은 방식이고, 이유도 같습니다.
+**내 키를 직접 쓰세요.** 계정은 내가 만들고, 내 소셜 계정을 연결하고, 내 한도를 씁니다. SpikeClip는 요금을 받지 않고, 공용 키를 갖고 있지 않으며, 아무것도 대신 결제하지 않습니다. YouTube 연동과 같은 방식이고, 이유도 같습니다.
 
 전체 안내, 플랫폼별 지원 범위와 제한: **[docs/UPLOAD-POST.md](../../docs/UPLOAD-POST.md)**.
 
@@ -490,20 +488,20 @@ python main.py status                                               # processing
 python main.py serve                                                # just the API engine
 ```
 
-설정은 [config/settings.yaml](../../config/settings.yaml)에 있습니다. 파일 맨 위에는 짧은 빠른 설정 블록이 있고, 고급 설정은 모두 그 아래에 있습니다. 모든 LLM 프롬프트는 [config/prompts/](../../config/prompts/)의 일반 텍스트 파일이므로, Python을 건드리지 않고도 클립 점수를 매기는 방식을 조정할 수 있습니다.
+설정은 [config/settings.yaml](../../backend/config/settings.yaml)에 있습니다. 파일 맨 위에는 짧은 빠른 설정 블록이 있고, 고급 설정은 모두 그 아래에 있습니다. 모든 LLM 프롬프트는 [config/prompts/](../../backend/config/prompts/)의 일반 텍스트 파일이므로, Python을 건드리지 않고도 클립 점수를 매기는 방식을 조정할 수 있습니다.
 
 <a id="write-a-plugin"></a>
 
 ## 플러그인 만들기
 
-범용 감지기보다 어떤 게임, 스포츠, 프로그램 장르를 더 잘 아시나요? 영상 속 순간을 찾거나, 이해하거나, 평가하는 작은 Python 플러그인을 작성하면 나머지는 Clips Kitty가 처리합니다. SDK는 MIT 라이선스라서 플러그인에는 어떤 라이선스든 쓸 수 있고, 아무것도 포크할 필요가 없습니다.
+범용 감지기보다 어떤 게임, 스포츠, 프로그램 장르를 더 잘 아시나요? 영상 속 순간을 찾거나, 이해하거나, 평가하는 작은 Python 플러그인을 작성하면 나머지는 SpikeClip가 처리합니다. SDK는 MIT 라이선스라서 플러그인에는 어떤 라이선스든 쓸 수 있고, 아무것도 포크할 필요가 없습니다.
 
 ```text
-Clips Kitty SDK
+SpikeClip SDK
 
 Input                      a link or a video file
   ↓
-Video                      Clips Kitty downloads it and writes down what is said
+Video                      SpikeClip downloads it and writes down what is said
   ↓
 Your plugin                every step is optional
   ├── find                 picks the moments                  built
@@ -511,45 +509,45 @@ Your plugin                every step is optional
   ├── rate                 scores each moment                 built
   └── edit                 suggests edits for the creator     built
   ↓
-Clips Kitty                does every step no plugin does, then cuts, frames and captions the clips
+SpikeClip                does every step no plugin does, then cuts, frames and captions the clips
   ↓
 Creator / Social Platform  posts when the creator clicks Publish, or on a schedule or automatic posting the creator switched on
 ```
 
-- 하나의 플러그인이 영상의 순간을 찾을 수 있으며, 이 경우 Clips Kitty의 자체 찾기 기능을 대신합니다.
+- 하나의 플러그인이 영상의 순간을 찾을 수 있으며, 이 경우 SpikeClip의 자체 찾기 기능을 대신합니다.
 - 찾기 단계 뒤에 최대 3개의 플러그인이 이해를, 최대 3개가 평가를 맡을 수 있습니다.
 - 플러그인의 역할은 매니페스트의 `inputs`와 `outputs`로 정해집니다([단계](../../docs/developers/steps.md)).
 - 최대 3개의 플러그인이 만들어질 클립에 대한 편집을 제안할 수 있습니다.
 - 편집 플러그인이 제안한 편집은 편집기에서 크리에이터의 확인을 기다립니다([단계](../../docs/developers/steps.md#suggest-edits-the-edit-step)).
-- 게시는 플러그인 단계가 아닙니다. Clips Kitty가 직접 클립을 게시하며, WoopSocial을 통해 크리에이터 본인의 계정으로 여러 사이트에 한 번에 게시할 수 있습니다([모든 플랫폼에 한 번에 게시하기](#publish-to-every-platform-at-once)). `kind: publisher`는 거부됩니다. 플러그인은 게시하지 않습니다.
+- 게시는 플러그인 단계가 아닙니다. SpikeClip가 직접 클립을 게시하며, WoopSocial을 통해 크리에이터 본인의 계정으로 여러 사이트에 한 번에 게시할 수 있습니다([모든 플랫폼에 한 번에 게시하기](#publish-to-every-platform-at-once)). `kind: publisher`는 거부됩니다. 플러그인은 게시하지 않습니다.
 
 명령 세 개로 SDK를 설치하고, `game-events` 템플릿(가상의 게임인 Quarkbloom Arena용)으로 플러그인을 만들고, SDK가 만들어 주는 테스트 영상에서 실행해 볼 수 있습니다. Python 3.11, FFmpeg, Git이 필요합니다.
 
 PowerShell (Windows):
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash (macOS, Linux):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
-Clips Kitty 2.1.0은 플러그인을 실행하는 첫 릴리스이며, SDK 1.3.0이 함께 제공됩니다.
+SpikeClip 2.1.0은 플러그인을 실행하는 첫 릴리스이며, SDK 1.3.0이 함께 제공됩니다.
 
-그다음은 **[첫 게임 파이프라인 만들기](../../docs/developers/first-game-pipeline.md)** 가이드가 단계별로 이어서, Clips Kitty에 설치되고 Marketplace에 등록되는 플러그인까지 안내합니다. [Signals 쿡북](../../docs/developers/signals-cookbook.md)에는 게임 영상을 읽는 레시피가, [SDK 레퍼런스](../../docs/developers/sdk.md)에는 모든 명령과 호출이, [개발자 문서](../../docs/developers/README.md)에는 그 밖의 모든 것이 있습니다. 웹사이트의 [Clips Kitty SDK](https://colingpt9.github.io/clips-studio/developers.html) 페이지는 짧은 요약판입니다.
+그다음은 **[첫 게임 파이프라인 만들기](../../docs/developers/first-game-pipeline.md)** 가이드가 단계별로 이어서, SpikeClip에 설치되고 Marketplace에 등록되는 플러그인까지 안내합니다. [Signals 쿡북](../../docs/developers/signals-cookbook.md)에는 게임 영상을 읽는 레시피가, [SDK 레퍼런스](../../docs/developers/sdk.md)에는 모든 명령과 호출이, [개발자 문서](../../docs/developers/README.md)에는 그 밖의 모든 것이 있습니다. 웹사이트의 [SpikeClip SDK](https://colingpt9.github.io/spikeclip/developers.html) 페이지는 짧은 요약판입니다.
 
 <a id="build-on-it"></a>
 
 ## 이 위에 무언가 만들기
 
-데스크톱 앱은 Clips Kitty가 열려 있을 때 항상 실행되는 **로컬 HTTP API**를 들여다보는 창입니다. Discord 봇, 일괄 처리기, 웹 프런트엔드, OBS 연동이 같은 파이프라인을 구동할 수 있으며, 그러기 위해 앱에 먼저 무언가를 추가할 필요가 없습니다.
+데스크톱 앱은 SpikeClip가 열려 있을 때 항상 실행되는 **로컬 HTTP API**를 들여다보는 창입니다. Discord 봇, 일괄 처리기, 웹 프런트엔드, OBS 연동이 같은 파이프라인을 구동할 수 있으며, 그러기 위해 앱에 먼저 무언가를 추가할 필요가 없습니다.
 
 ```bash
 python main.py serve --port 8765          # the engine on its own, no window
@@ -575,9 +573,9 @@ curl -s http://127.0.0.1:8765/videos/VIDEO_ID/clips \
 
 ### 또는 나만의 모델 가져오기
 
-여기까지는 앱 *바깥에서* 만드는 방법입니다. 앱 *안에서* 만들 수도 있으며, 그 출발점은 플러그인입니다([플러그인 만들기](#write-a-plugin)). 관심 있는 영상이 이 앱이 맞춰진 종류가 아니라면, 그게 스포츠든 게임이든 리액션이든 강의든 아직 아무도 시도하지 않은 무언가든, 플러그인으로 포크 없이 그 순간을 찾거나, 이해하거나, 평가할 수 있습니다. 플러그인은 Clips Kitty 자체의 Python에서 표준 라이브러리(앱이 빼 둔 몇몇 모듈 제외)와 SDK로 실행됩니다. Clips Kitty는 아직 플러그인용으로 다른 Python 패키지를 설치할 수 없습니다.
+여기까지는 앱 *바깥에서* 만드는 방법입니다. 앱 *안에서* 만들 수도 있으며, 그 출발점은 플러그인입니다([플러그인 만들기](#write-a-plugin)). 관심 있는 영상이 이 앱이 맞춰진 종류가 아니라면, 그게 스포츠든 게임이든 리액션이든 강의든 아직 아무도 시도하지 않은 무언가든, 플러그인으로 포크 없이 그 순간을 찾거나, 이해하거나, 평가할 수 있습니다. 플러그인은 SpikeClip 자체의 Python에서 표준 라이브러리(앱이 빼 둔 몇몇 모듈 제외)와 SDK로 실행됩니다. SpikeClip는 아직 플러그인용으로 다른 Python 패키지를 설치할 수 없습니다.
 
-앱 자체를 바꾸고 싶다면: 파이프라인은 **YOLOv8 (ultralytics), OpenCV, TalkNet-ASD**를 로컬에서 실행하며, 어떤 순간이 클립이 될지는 무엇이 재미있는지에 대한 하드코딩된 생각이 아니라 초 단위 신호들의 묶음이 결정합니다. 타임라인 전체에 걸쳐 신뢰도를 내보내는 감지기는 신호 하나로 추가할 수 있고, 그 정점들이 클립 후보가 됩니다. 감지에 Clips Kitty가 아직 플러그인용으로 설치할 수 없는 Python 패키지가 필요하다면, 포크해서 직접 만든 감지를 연결하세요. **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model) 문서**에 지켜야 할 계약, 복사할 파일, 시작하기 전에 알아 둘 성능 함정이 정리되어 있습니다.
+앱 자체를 바꾸고 싶다면: 파이프라인은 **YOLOv8 (ultralytics), OpenCV, TalkNet-ASD**를 로컬에서 실행하며, 어떤 순간이 클립이 될지는 무엇이 재미있는지에 대한 하드코딩된 생각이 아니라 초 단위 신호들의 묶음이 결정합니다. 타임라인 전체에 걸쳐 신뢰도를 내보내는 감지기는 신호 하나로 추가할 수 있고, 그 정점들이 클립 후보가 됩니다. 감지에 SpikeClip가 아직 플러그인용으로 설치할 수 없는 Python 패키지가 필요하다면, 포크해서 직접 만든 감지를 연결하세요. **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model) 문서**에 지켜야 할 계약, 복사할 파일, 시작하기 전에 알아 둘 성능 함정이 정리되어 있습니다.
 
 **폴링할 필요가 없습니다.** `webhook_url`과 함께 작업을 제출하면 작업이 끝났을 때 엔진이 한 번 POST를 보내며, 내 비밀 값을 넘기면 그 값으로 서명합니다. 그래서 독(dock)이나 n8n 플로우가 몇 초마다 물어보는 대신, 방송 하나에 걸리는 40분 동안 조용히 기다릴 수 있습니다. 자세한 내용은 [docs/API.md](../../docs/API.md#webhooks-being-told-instead-of-asking)에 있습니다.
 
@@ -585,21 +583,21 @@ curl -s http://127.0.0.1:8765/videos/VIDEO_ID/clips \
 
 ### AI 에이전트에게 맡기기
 
-Clips Kitty에는 **MCP 서버**가 포함되어 있어서, Claude, Cursor 또는 어떤 MCP 클라이언트든 평소 말로 같은 파이프라인을 구동할 수 있습니다. 방송을 대기열에 넣고, 작업을 따라가고, 앱이 고른 클립을 읽고, 하나를 내보내는 식입니다.
+SpikeClip에는 **MCP 서버**가 포함되어 있어서, Claude, Cursor 또는 어떤 MCP 클라이언트든 평소 말로 같은 파이프라인을 구동할 수 있습니다. 방송을 대기열에 넣고, 작업을 따라가고, 앱이 고른 클립을 읽고, 하나를 내보내는 식입니다.
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 설치된 빌드에서는 엔진 실행 파일이 `api.exe`(앱의 `resources\backend` 폴더 안)이므로, 거기서는 명령이 `api.exe mcp`입니다.
 
-이 서버는 `127.0.0.1:8765`로 실행 중인 엔진과 통신하므로 Clips Kitty가 열려 있어야 하며, 어떤 종류의 API 키도 필요 없습니다. 클리핑을 하는 모델은 내 컴퓨터에 있는 모델입니다(또는 Settings → AI에서 골랐다면 내 키로 쓰는 클라우드 모델이며, MCP 클라이언트는 그 키를 볼 수 없습니다). 에이전트 스킬을 지원하는 클라이언트용 스킬은 [skills/clips-kitty/](../../skills/clips-kitty/)에 있습니다.
+이 서버는 `127.0.0.1:8765`로 실행 중인 엔진과 통신하므로 SpikeClip가 열려 있어야 하며, 어떤 종류의 API 키도 필요 없습니다. 클리핑을 하는 모델은 내 컴퓨터에 있는 모델입니다(또는 Settings → AI에서 골랐다면 내 키로 쓰는 클라우드 모델이며, MCP 클라이언트는 그 키를 볼 수 없습니다). 에이전트 스킬을 지원하는 클라이언트용 스킬은 [skills/spikeclip/](../../skills/spikeclip/)에 있습니다.
 
-<a id="built-with-clips-kitty"></a>
+<a id="built-with-spikeclip"></a>
 
-### Clips Kitty로 만든 것들
+### SpikeClip로 만든 것들
 
-이 API로 돌아가는 프로젝트들은 **[Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty) 목록**에 올라 있습니다. Clips Kitty로 만든 파이프라인, 플러그인, 연동, 앱, 도구를 모은 목록입니다. 첫 번째 항목은 방송이 끝나면 그 방송을 Clips Kitty에 넘겨주는 OBS Studio 독인 [Clips Kitty OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin)입니다. 직접 만들어 보셨나요? 풀 리퀘스트로 추가하고([방법](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)), 저장소에 `clips-kitty` 토픽을 달아 주세요.
+이 API로 돌아가는 프로젝트들은 **[Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty) 목록**에 올라 있습니다. SpikeClip로 만든 파이프라인, 플러그인, 연동, 앱, 도구를 모은 목록입니다. 첫 번째 항목은 방송이 끝나면 그 방송을 SpikeClip에 넘겨주는 OBS Studio 독인 [SpikeClip OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin)입니다. 직접 만들어 보셨나요? 풀 리퀘스트로 추가하고([방법](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)), 저장소에 `spikeclip` 토픽을 달아 주세요.
 
 <a id="architecture"></a>
 
@@ -611,7 +609,7 @@ claude mcp add clips-kitty -- python main.py mcp
 
 ## 기여하기
 
-기여를 환영합니다. 개발 환경 설정과 풀 리퀘스트에 기대하는 사항은 **[CONTRIBUTING.md](../../CONTRIBUTING.md) 문서**를, 취약점 신고는 **[SECURITY.md](../../SECURITY.md) 문서**를 참고하세요. 어디서부터 시작할지 찾고 있다면, [`good-first-issue`](https://github.com/ColinGPT9/clips-studio/labels/good-first-issue) 라벨이 붙은 이슈들은 작고 범위가 명확합니다.
+기여를 환영합니다. 개발 환경 설정과 풀 리퀘스트에 기대하는 사항은 **[CONTRIBUTING.md](../../CONTRIBUTING.md) 문서**를, 취약점 신고는 **[SECURITY.md](../../SECURITY.md) 문서**를 참고하세요. 어디서부터 시작할지 찾고 있다면, [`good-first-issue`](https://github.com/ColinGPT9/spikeclip/labels/good-first-issue) 라벨이 붙은 이슈들은 작고 범위가 명확합니다.
 
 웹사이트는 [site/](../../site/)에 있으며 GitHub Pages와 Hugging Face Space에 게시됩니다. [docs/MIRRORS.md](../../docs/MIRRORS.md)를 참고하세요. **작업은 GitHub에서 이루어지며**, 웹사이트 미러는 한 방향으로 강제 푸시되므로 미러에서 만든 커밋은 덮어써집니다.
 
@@ -619,10 +617,10 @@ claude mcp add clips-kitty -- python main.py mcp
 
 - **[docs/RELEASING.md](../../docs/RELEASING.md)**: 주 배포 채널인 Windows 설치 프로그램을 빌드하고 게시하는 방법
 - **[docs/MSSTORE.md](../../docs/MSSTORE.md)**: 개발자 계정 만들기부터 인증까지, Microsoft Store 패키지
-- **[packaging/winget/](../../packaging/winget/)**: 위 설치 프로그램을 가리키는 winget 매니페스트
-- **[whop-app/](../../whop-app/)**: 클리핑 커뮤니티 회원들에게 Clips Kitty를 알리는 Whop 앱. 마케팅 페이지일 뿐이며, 영상을 처리하거나, 무언가를 저장하거나, 데스크톱 앱과 통신하지 않습니다
+- **[packaging/winget/](../../backend/packaging/winget/)**: 위 설치 프로그램을 가리키는 winget 매니페스트
+- **[whop-app/](../../whop-app/)**: 클리핑 커뮤니티 회원들에게 SpikeClip를 알리는 Whop 앱. 마케팅 페이지일 뿐이며, 영상을 처리하거나, 무언가를 저장하거나, 데스크톱 앱과 통신하지 않습니다
 - **[docs/DOCKER.md](../../docs/DOCKER.md)**: Python, FFmpeg, PyTorch를 직접 설치하지 않고 엔진 실행하기
-- **[PRIVACY](https://colingpt9.github.io/clips-studio/privacy.html)**: 앱이 저장하는 것과 내 컴퓨터 밖으로 나갈 수 있는 것(짧게 답하면: 버그 신고를 제출하지 않는 한 아무것도 없습니다)
+- **[PRIVACY](https://colingpt9.github.io/spikeclip/privacy.html)**: 앱이 저장하는 것과 내 컴퓨터 밖으로 나갈 수 있는 것(짧게 답하면: 버그 신고를 제출하지 않는 한 아무것도 없습니다)
 
 <a id="changelog-known-issues-roadmap"></a>
 
@@ -659,14 +657,14 @@ claude mcp add clips-kitty -- python main.py mcp
 
 농구의 공, 골대, 선수 감지에는 [E-BARD](https://github.com/GabrieleGiudic/E-BARD) 감지 모델(YOLOv8n)을 수정 없이 CC BY 4.0에 따라 사용합니다. 공개적으로 배포해 주셔서 감사합니다. 그 밖에 포함된 모든 구성 요소와 각각의 라이선스는 [NOTICE](../../NOTICE)에 있습니다.
 
-Clips Kitty 위에 무언가를 만들기 쉽도록, 세 부분은 따로 라이선스가 적용됩니다.
+SpikeClip 위에 무언가를 만들기 쉽도록, 세 부분은 따로 라이선스가 적용됩니다.
 
 | 구성 요소 | 라이선스 |
 |---|---|
-| Clips Kitty (앱, 엔진, 이 저장소) | AGPL-3.0-or-later |
-| 플러그인 SDK, [`sdk/python/`](../../sdk/python/) | MIT ([sdk/python/LICENSE](../../sdk/python/LICENSE)) |
-| 예제 플러그인, [`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) 및 [`examples/pipelines/keyword-rater/`](../../examples/pipelines/keyword-rater/) | MIT |
-| 앱에 포함된 Awesome Clips Kitty 목록 사본, `plugins/catalog_index.json` (목록 자체는 [별도 저장소](https://github.com/ColinGPT9/awesome-clips-kitty)에 있음) | CC0-1.0 |
+| SpikeClip (앱, 엔진, 이 저장소) | AGPL-3.0-or-later |
+| 플러그인 SDK, [`sdk/python/`](../../backend/sdk/python/) | MIT ([sdk/python/LICENSE](../../backend/sdk/python/LICENSE)) |
+| 예제 플러그인, [`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) 및 [`examples/pipelines/keyword-rater/`](../../backend/examples/pipelines/keyword-rater/) | MIT |
+| 앱에 포함된 Awesome SpikeClip 목록 사본, `plugins/catalog_index.json` (목록 자체는 [별도 저장소](https://github.com/ColinGPT9/awesome-clips-kitty)에 있음) | CC0-1.0 |
 
 다른 사람이 만든 플러그인, 파이프라인, 앱은 작성자가 고른 라이선스를 그대로 따르며, Marketplace의 모든 항목에 그 라이선스가 표시됩니다. SDK를 사용한다고 해서 플러그인이 AGPL 적용을 받게 되지는 않습니다.
 
@@ -680,12 +678,12 @@ Clips Kitty 위에 무언가를 만들기 쉽도록, 세 부분은 따로 라이
 
 ## 스타 기록
 
-Clips Kitty에 스타를 주고, 공유하고, 버그를 알려 주고, 번역해 주신 모든 분께 감사드립니다.
+SpikeClip에 스타를 주고, 공유하고, 버그를 알려 주고, 번역해 주신 모든 분께 감사드립니다.
 
-<a href="https://www.star-history.com/#ColinGPT9/clips-studio&amp;Date">
+<a href="https://www.star-history.com/#ColinGPT9/spikeclip&amp;Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;legend=top-left" />
-    <img alt="Clips Kitty GitHub 스타 기록" src="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;legend=top-left" />
+    <img alt="SpikeClip GitHub 스타 기록" src="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date" />
   </picture>
 </a>

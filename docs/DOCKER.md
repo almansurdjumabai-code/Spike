@@ -17,7 +17,7 @@ time.
 amd64 and runs under emulation, which is fine for editing code and running
 tests. A local build produces an arm64 image, and one dependency has no arm64
 wheel and has to compile, which fails because the base image ships no C
-compiler. [#62](https://github.com/ColinGPT9/clips-studio/issues/62) tracks
+compiler. [#62](https://github.com/ColinGPT9/spikeclip/issues/62) tracks
 that. Do not reach for `--platform=linux/amd64` on a local build either. That
 emulates the whole ten-minute build, not just the run.
 
@@ -51,7 +51,7 @@ docker compose exec ollama ollama pull gemma3:4b
 ```
 
 Generate a test video to actually run something against. See
-[`../tests/assets/`](../tests/assets/):
+[`../tests/assets/`](../backend/tests/assets/):
 
 ```
 docker compose run --rm engine python tests/assets/make_sample_video.py
@@ -61,11 +61,11 @@ docker compose run --rm engine python tests/assets/make_sample_video.py
 
 ## What this is for
 
-Working on Clips Kitty without installing Python, FFmpeg, PyTorch, OpenCV,
+Working on SpikeClip without installing Python, FFmpeg, PyTorch, OpenCV,
 Node and the rest on your own machine, and letting someone on Linux or
 macOS contribute to a project whose app only ships for Windows.
 
-**It is not how anyone installs Clips Kitty.** Creators use the Windows
+**It is not how anyone installs SpikeClip.** Creators use the Windows
 installer. Nothing here replaces that.
 
 ## The one piece that is not in the container: Electron
@@ -79,13 +79,13 @@ In a browser everything that talks to the engine works normally, because that
 is all HTTP to `:8765`. What is missing is the handful of things that live in
 Electron's preload: native file pickers, the donate window, opening external
 links. Rather than crashing on those, the renderer installs a stand-in
-(`ui/src/renderer/src/lib/browserShim.ts`) that logs what it cannot do. Open
+(`frontend/src/renderer/src/lib/browserShim.ts`) that logs what it cannot do. Open
 the console and you will see exactly which call it was.
 
 Without Docker, the same thing is:
 
 ```
-cd ui && npm run dev:web
+cd frontend && npm run dev:web
 ```
 
 That covers most interface work. When you need the real thing: anything
@@ -94,7 +94,7 @@ app. Run Electron on your host against the containerised engine:
 
 ```
 docker compose up -d engine ollama      # engine on :8765
-cd ui && BACKEND_EXTERNAL=1 npm run dev
+cd frontend && BACKEND_EXTERNAL=1 npm run dev
 ```
 
 `BACKEND_EXTERNAL=1` stops Electron spawning its own backend, so it talks to
@@ -115,7 +115,7 @@ parts, each of which can fail quietly.
 **Clip quality still cannot be judged here.** Same limit as CI: no GPU, and
 the generated test video has no faces and no speech, so it exercises the
 plumbing and nothing about the judgment. See
-[`../tests/assets/README.md`](../tests/assets/README.md).
+[`../tests/assets/README.md`](../backend/tests/assets/README.md).
 
 ## How it is wired
 
@@ -126,7 +126,7 @@ plumbing and nothing about the judgment. See
 | `CHOKIDAR_USEPOLLING` on `ui` | inotify does not cross a bind mount from a Windows or macOS host, so hot reload needs polling |
 | `clips-data` volume at `/data` | Downloads and clips survive a rebuild, and never bloat the image |
 | `ollama-models` volume | Models are gigabytes; losing them on every rebuild would be miserable |
-| `CLIPS_STUDIO_OLLAMA_HOST` | Inside compose, Ollama is a service name, not localhost |
+| `SPIKECLIP_OLLAMA_HOST` | Inside compose, Ollama is a service name, not localhost |
 | Ports bound to `127.0.0.1` | The API has no authentication and can read and write video files. It must not be reachable from the network. |
 
 The engine binds `0.0.0.0` **inside** the container, because there

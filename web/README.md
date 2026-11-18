@@ -1,6 +1,6 @@
-# Clips Kitty Web
+# SpikeClip Web
 
-A browser-only taster for [Clips Kitty](https://github.com/ColinGPT9/clips-studio).
+A browser-only taster for [SpikeClip](https://github.com/ColinGPT9/spikeclip).
 Point it at a recording, it finds the moments worth clipping and cuts them out
 as landscape MP4s.
 

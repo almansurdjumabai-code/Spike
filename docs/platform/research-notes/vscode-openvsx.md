@@ -1,7 +1,7 @@
 # VS Code + Open VSX — research notes
 
 - Platform: Visual Studio Code extensions, distributed through the Visual Studio Marketplace (Microsoft) and the Open VSX Registry (Eclipse Foundation)
-- Tier: 2 (Track C: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?)
+- Tier: 2 (Track C: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?)
 - Date read: 2026-10-06
 - Question for this platform: how a mature, central-registry ecosystem handles manifests, runtime security, verification, signing, kill switches, version pinning and pre-releases, and what the 2025 Open VSX incidents teach about registries that run CI over third-party code.
 
@@ -106,14 +106,14 @@ Both. Extensions run locally in the extension host; in remote setups `extensionK
 
 ## 11. Borrow
 
-- `publisher/name` identifiers with a required, non-wildcard host compatibility range (`engines.vscode`-style `engines.clipskitty`), SemVer versions, `extensionDependencies` and `extensionPack` semantics (a pack is metadata only; dependents must stay independently manageable). Supports H8.
+- `publisher/name` identifiers with a required, non-wildcard host compatibility range (`engines.vscode`-style `engines.spikeclip`), SemVer versions, `extensionDependencies` and `extensionPack` semantics (a pack is metadata only; dependents must stay independently manageable). Supports H8.
 - A manifest-declared `sponsor.url` (VS Code) and `pricing: Free|Trial` as labels: donations and labels without a payment rail, which matches the $0 / no-payments decision.
 - The user-facing version controls: "Install Another Version", per-plugin auto-update toggle, an update delay, and a pre-release channel with a documented numbering convention.
 - The honesty of the security page: say "plugins run with the app's own access" in the first paragraph, offer the real mitigation, and name what scanning does and does not catch.
 - Post-publication kill switch: a block list the client consults and acts on (auto-disable or uninstall, with a notice). Cheap to add to a static index (a `blocklist.json` with ids and version ranges) and the single most useful response tool both registries rely on.
 - Package signing with a registry key and a published `sha256`: a static index can still publish the hash of the pinned ref's archive at index-build time.
 - Verification that states exactly what it proves (domain or repository ownership, time in good standing) and nothing more; Open VSX's public ownership claim via a GitHub issue is a zero-cost, auditable process a Git index can copy.
-- Trusted publishing: if Clips Kitty ever accepts uploads rather than Git refs, prefer OIDC from the developer's CI over long-lived tokens.
+- Trusted publishing: if SpikeClip ever accepts uploads rather than Git refs, prefer OIDC from the developer's CI over long-lived tokens.
 
 ## 12. Avoid
 
@@ -121,7 +121,7 @@ Both. Extensions run locally in the extension host; in remote setups `extensionK
 - Long-lived publish tokens without prefix, expiry or easy revocation (Open VSX, October 2025).
 - Claiming a "sandbox" or "permissions" the runtime does not enforce; VS Code's own docs avoid that, and `capabilities.untrustedWorkspaces: 'limited'` shows how a half-enforced declaration reads: the host enforces what it can and the rest is the extension's promise. Label such fields "declared", not "enforced" (H5).
 - Treating download counts as trust signals: Eclipse itself says bots inflated GlassWorm's counts (H10 caution).
-- Trusting a pack's publisher transitively for its dependencies without saying so; VS Code states it, Clips Kitty should show it in the install dialog.
+- Trusting a pack's publisher transitively for its dependencies without saying so; VS Code states it, SpikeClip should show it in the install dialog.
 - Relying on a 6-month-plus verification waiting period as the only trust tier: it is honest but leaves new, legitimate developers unverified for half a year; pair it with a cheaper "repository ownership proven" tier.
 
 ## 13. Sources (all read 2026-10-06)
@@ -153,7 +153,7 @@ Both. Extensions run locally in the extension host; in remote setups `extensionK
 
 ## Matrix row
 
-`| VS Code + Open VSX | Extension (Node/web package, .vsix, publisher.name) | None (labels only) | None (contributes: commands/views/tasks; no pipeline concept) | Central services: VS Marketplace (Microsoft) and Open VSX (Eclipse; Spring Boot + PostgreSQL + Elasticsearch + blob storage) | Partly: Open VSX publish-extensions is a Git index with CI auto-publish (source of CVE-2025-6705) | Yes (extension host) | Yes (extensionKind ui/workspace; registry remote) | SemVer; engines.vscode range; Install Another Version; per-ext auto-update; pre-release channel (odd minor); deprecate/unpublish/remove | No sandbox; publisher-trust dialog (1.97); verified publisher = domain + 6 months; AV + dynamic scan + secret scan at publish; signed packages; block list auto-uninstall; Workspace Trust declarations partly enforced | Free; sponsor.url; pricing Free/Trial labels; Open VSX $0 and no fees | Copy the manifest/id/compat/pack model and the version controls; add a client-side block list and hashes; never run plugin code or hold publish secrets in the index CI; call declared capabilities "declared" |`
+`| VS Code + Open VSX | Extension (Node/web package, .vsix, publisher.name) | None (labels only) | None (contributes: commands/views/tasks; no pipeline concept) | Central services: VS Marketplace (Microsoft) and Open VSX (Eclipse; Spring Boot + PostgreSQL + Elasticsearch + blob storage) | Partly: Open VSX publish-extensions is a Git index with CI auto-publish (source of CVE-2025-6705) | Yes (extension host) | Yes (extensionKind frontend/workspace; registry remote) | SemVer; engines.vscode range; Install Another Version; per-ext auto-update; pre-release channel (odd minor); deprecate/unpublish/remove | No sandbox; publisher-trust dialog (1.97); verified publisher = domain + 6 months; AV + dynamic scan + secret scan at publish; signed packages; block list auto-uninstall; Workspace Trust declarations partly enforced | Free; sponsor.url; pricing Free/Trial labels; Open VSX $0 and no fees | Copy the manifest/id/compat/pack model and the version controls; add a client-side block list and hashes; never run plugin code or hold publish secrets in the index CI; call declared capabilities "declared" |`
 
 ## Hypotheses
 

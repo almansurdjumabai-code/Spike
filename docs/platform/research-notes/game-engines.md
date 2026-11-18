@@ -3,7 +3,7 @@
 - Platforms: Godot Asset Store + editor plugins; Unity Package Manager (UPM) + Asset Store; Unreal Engine plugins + Fab
 - Tier: 3 (one short section per platform)
 - Date read: 2026-10-06
-- Track C question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
+- Track C question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
 
 Verdict: All three engines use a tiny declarative descriptor (plugin.cfg, package.json, .uplugin) plus a folder convention, and all three run plugin code with the editor's full privileges; none has a permission model. Their stores differ mainly in money and review: Godot is free and human-reviewed in beta, Unity sells through a reviewed store beside an open npm-style registry layer, and Fab is a paid, reviewed marketplace with an 88/12 split.
 
@@ -31,13 +31,13 @@ Verdict: All three engines use a tiny declarative descriptor (plugin.cfg, packag
 9. Local (in editor). Remote: n/a.
 10. Incidents/limits: "beta", "various pain points, bugs, and usability issues"; "While paid assets can't be uploaded yet" (donation links allowed); migration from Asset Library is manual: "Assets have not been moved over to the new Asset Store automatically." No incidents on the pages read (not confirmed).
 11. Borrow: per-version compatibility range entered at publish time (min required, max optional) and shown per download; multiple live versions with changelogs; the one-folder-per-plugin rule that makes conflicts obvious.
-12. Avoid: shipping a store with no dependency field and no machine-checkable manifest beyond name/version; relying on a closed-source backend when a static index would do (Clips Kitty has no Foundation to host one); forcing a manual migration by changing the hosting model after launch.
+12. Avoid: shipping a store with no dependency field and no machine-checkable manifest beyond name/version; relying on a closed-source backend when a static index would do (SpikeClip has no Foundation to host one); forcing a manual migration by changing the hosting model after launch.
 13. Sources (read 2026-10-06): https://godotengine.org/article/introducing-the-godot-asset-store/ (post date 2026-05-22); https://docs.godotengine.org/en/stable/tutorials/plugins/editor/making_plugins.html ; https://docs.godotengine.org/en/stable/community/asset_store/submitting_to_asset_store.html ; https://docs.godotengine.org/en/stable/community/asset_store/what_is_asset_store.html ; https://store.godotengine.org/guidelines/ .
 
 Matrix row:
 `| Godot Asset Store | Editor plugin folder addons/<name>/ with plugin.cfg + EditorPlugin script; GDExtension; templates | None | None | Central store run by Godot Foundation (closed source, beta), replaced the Git-link Asset Library in May 2026 | No (uploaded files, 1 GB per version; old Asset Library linked Git repos) | Yes | n/a | Many versions per asset, each with min/max Godot version; plugin.cfg version free-form | No permission model; human review of each submission ("must work", licence file, no executables) | Free only today; paid "on the roadmap" | Per-version engine range at publish time; one folder per plugin |`
 
-Lesson for Clips Kitty: Godot proves a store can launch without a manifest richer than name/version because the store form carries compatibility — but that makes compatibility unverifiable offline. Put `min/max host version` in the manifest, not the form.
+Lesson for SpikeClip: Godot proves a store can launch without a manifest richer than name/version because the store form carries compatibility — but that makes compatibility unverifiable offline. Put `min/max host version` in the manifest, not the form.
 
 ---
 
@@ -53,14 +53,14 @@ Lesson for Clips Kitty: Godot proves a store can launch without a manifest riche
 8. Models: none.
 9. Local. Remote: n/a.
 10. Incidents/limits: none on the pages read (not confirmed). Revenue share: a 70/30 publisher split appears only in search snippets and a 2012 Unity blog that now returns 404; not confirmed on a current official page. Payouts are documented (monthly PayPal or quarterly bank transfer, USD only, 2FA mandatory).
-11. Borrow: reverse-DNS package names with scope-prefix routing to registries; SemVer + lock file + explicit `pinnedPackages`; Git URL with `#tag` as a first-class install source (this is Clips Kitty's "GitHub at a pinned ref" already); the explicit trust warning on third-party registries; a `unity` minimum-host-version field with an optional finer `unityRelease`.
-12. Avoid: a single project-wide dependency graph where two plugins fight over one package version (Clips Kitty's frozen runtime cannot even do this; per-plugin isolation is the only option); a review queue measured in weeks for a free registry; no upper compatibility bound in the manifest (Unity has only a minimum).
+11. Borrow: reverse-DNS package names with scope-prefix routing to registries; SemVer + lock file + explicit `pinnedPackages`; Git URL with `#tag` as a first-class install source (this is SpikeClip's "GitHub at a pinned ref" already); the explicit trust warning on third-party registries; a `unity` minimum-host-version field with an optional finer `unityRelease`.
+12. Avoid: a single project-wide dependency graph where two plugins fight over one package version (SpikeClip's frozen runtime cannot even do this; per-plugin isolation is the only option); a review queue measured in weeks for a free registry; no upper compatibility bound in the manifest (Unity has only a minimum).
 13. Sources (read 2026-10-06): https://docs.unity3d.com/Manual/upm-scoped.html ; https://docs.unity3d.com/Manual/upm-manifestPkg.html ; https://docs.unity3d.com/Manual/upm-manifestPrj.html ; https://docs.unity3d.com/Manual/upm-scoped-use.html ; https://docs.unity3d.com/Manual/upm-config-scoped.html (authentication only); https://docs.unity.com/en-us/asset-store/llms.txt ; https://docs.unity.com/en-us/asset-store/publishing/asset-packages/submit.md ; https://docs.unity.com/en-us/asset-store/publishing/upm-packages/submit.md ; https://docs.unity.com/en-us/asset-store/publishing/asset-packages/revenue/payouts.md ; https://assetstore.unity.com/publishing/submission-guidelines (last updated 2026-05-20); https://unity.com/blog/en/2012/04/07/tutorial-how-to-publish-and-make-money-on-the-asset-store/ — 404, not confirmed.
 
 Matrix row:
 `| Unity UPM + Asset Store | UPM package folder/tarball with package.json; .unitypackage | None | None | Default registry + self-hosted npm-compatible scoped registries (no review) beside a curated paid Asset Store (human review, >=5 business days) | Yes for install (Git URL with #tag in manifest.json); registries are npm servers | Yes | n/a | SemVer required; lock file; pinnedPackages; resolutionStrategy; unity min version only | No runtime permissions; official warning that registry packages "can contain executable code"; store review is quality, not security | Asset Store paid (70/30 not confirmed on a current page) | Reverse-DNS ids + scope routing; Git-URL pinning; lock file |`
 
-Lesson for Clips Kitty: keep the open, uncurated layer (scoped registries, Git URLs) and the curated layer (store) separate and say plainly which one you are in; Unity's "can contain executable code" warning is the honest default for any non-reviewed source.
+Lesson for SpikeClip: keep the open, uncurated layer (scoped registries, Git URLs) and the curated layer (store) separate and say plainly which one you are in; Unity's "can contain executable code" warning is the honest default for any non-reviewed source.
 
 ---
 
@@ -77,13 +77,13 @@ Lesson for Clips Kitty: keep the open, uncurated layer (scoped registries, Git U
 9. Local. Remote: n/a.
 10. Incidents/limits: none on the pages read (not confirmed). Limits: per-engine-version rebuilds for code plugins; zip hosted on third-party drives during review.
 11. Borrow: dependency references as data (`Plugins[]` with `Name`, `Enabled`, `Optional`, `RequestedVersion`) so a missing optional dependency fails soft; `EnabledByDefault` and explicit enable per project; `IsBetaVersion`/`IsExperimentalVersion` flags surfaced in the UI; re-moderating edits to a live listing while keeping the old one live.
-12. Avoid: build hooks (`PreBuildSteps`) that let a plugin run arbitrary commands at install/build time; binary compatibility that forces every plugin to be rebuilt per host release (Clips Kitty's frozen runtime makes this a real risk for native wheels; prefer pure-Python plugins over the local API); reviewing by hand before every publish for a free registry — Fab can afford it on 12%.
+12. Avoid: build hooks (`PreBuildSteps`) that let a plugin run arbitrary commands at install/build time; binary compatibility that forces every plugin to be rebuilt per host release (SpikeClip's frozen runtime makes this a real risk for native wheels; prefer pure-Python plugins over the local API); reviewing by hand before every publish for a free registry — Fab can afford it on 12%.
 13. Sources (read 2026-10-06): https://dev.epicgames.com/documentation/en-us/unreal-engine/plugins-in-unreal-engine ; https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Projects/FPluginDescriptor ; https://dev.epicgames.com/documentation/en-us/unreal-engine/API/Runtime/Projects/FPluginReferenceDescriptor ; https://dev.epicgames.com/documentation/en-us/fab/publishing-assets-for-sale-or-free-download-in-fab ; https://dev.epicgames.com/documentation/en-us/fab/asset-file-format-and-structure-requirements-in-fab ; https://dev.epicgames.com/documentation/en-us/fab/publisher-get-started-in-fab ; https://dev.epicgames.com/documentation/en-us/fab/fab-documentation (documentation with marketing wording); https://dev.epicgames.com/documentation/en-us/fab/content-you-can-sell-on-fab — loaded empty, not confirmed; https://www.fab.com/sellers and https://www.fab.com/about — HTTP 403, not read (marketing); https://www.unrealengine.com/blog/fab-content-marketplace-launches-in-october-publishing-portal-opens-today — HTTP 403, not read; press: https://cgpress.org/archives/epic-games-to-launch-fab-unifying-its-digital-content-marketplaces-in-october.html (2024-09-17).
 
 Matrix row:
 `| Unreal plugins + Fab | Plugin folder with .uplugin JSON (C++ modules and/or content) | None | None | Fab, Epic-run central marketplace (replaced UE Marketplace, Sketchfab, ArtStation Marketplace, Quixel in Oct 2024 per press) | No (zip via a Drive/Dropbox "Project File Link"; delivered via launcher) | Yes | n/a | Version int + VersionName; EngineVersion; per-file engine-version tags; code plugins must resubmit per engine release | No runtime permissions; native code; Fab human review of every listing and of every edit to a live listing | Paid; 88/12 | Plugins[] dependency references with Optional + RequestedVersion; beta/experimental flags; re-moderate edits without taking the old listing down |`
 
-Lesson for Clips Kitty: Fab shows what full human review costs — it is paid for by a 12% cut and a seller-verification pipeline. A $0, 0% registry cannot fund that; it must get the same assurance from automated checks, pinned refs and an honest "not reviewed" label.
+Lesson for SpikeClip: Fab shows what full human review costs — it is paid for by a 12% cut and a seller-verification pipeline. A $0, 0% registry cannot fund that; it must get the same assurance from automated checks, pinned refs and an honest "not reviewed" label.
 
 ---
 
@@ -95,5 +95,5 @@ Lesson for Clips Kitty: Fab shows what full human review costs — it is paid fo
 - H5: no engine has declared permissions at all, so nothing to enforce; the honest pattern is Unity's blanket warning. Consistent with H5.
 - H6: Unity resolves one shared graph with lock file + pinning; Unreal rebuilds per engine version; Godot has no dependency model. Supports "one shared env invites conflicts" (Unity has to ship resolutionStrategy and pinnedPackages to manage it).
 - H8: Unity's reverse-DNS names with scope routing is a working namespacing precedent; Unreal's `Plugins[]` references with `Optional` show dependency-as-data. Supports H8's namespacing half; no typed capabilities anywhere.
-- H9: Fab's 88/12 and Unity's (unconfirmed) 70/30 bracket the "stated share" market; Clips Kitty's 0% is outside this market by decision.
+- H9: Fab's 88/12 and Unity's (unconfirmed) 70/30 bracket the "stated share" market; SpikeClip's 0% is outside this market by decision.
 - H10: Godot's store offers "Analytics for publishers" (hosted downloads make counts free); Unity and Fab count sales server-side. Supports H10: counts come from the host, which a static Git registry does not have.

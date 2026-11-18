@@ -1,13 +1,13 @@
 # Roadmap
 
-Where Clips Kitty is going, and what is already done. Anything marked shipped
+Where SpikeClip is going, and what is already done. Anything marked shipped
 is in a release you can install today, not a plan.
 
 ---
 
 ## Now: stable releases
 
-Clips Kitty is a stable release. Below is what has shipped and what is still
+SpikeClip is a stable release. Below is what has shipped and what is still
 outstanding.
 
 **Shipped**
@@ -68,7 +68,7 @@ None of this holds up a release.
 
 ## Long-term
 
-Clips Kitty is a **local-first** creator platform. That word carries the whole
+SpikeClip is a **local-first** creator platform. That word carries the whole
 design: your footage, your workflows and your data stay on your machine, and
 the app gets better as your hardware does rather than as someone's subscription
 tier does.

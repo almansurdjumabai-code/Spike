@@ -1,7 +1,7 @@
 # Obsidian community plugins — research notes
 
 - Platform: Obsidian (Electron note-taking app) community plugins
-- Tier: 2 (Track C: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?)
+- Tier: 2 (Track C: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?)
 - Date read: 2026-10-06
 - Question for this platform: a GitHub-first, zero-payment plugin ecosystem that for years ran on one JSON file submitted by pull request and hand review, and in May 2026 replaced hand review with automated per-version checks. What exactly changed, what the manifest looks like, how installs and updates come straight from GitHub releases, and what the docs tell users about plugin security.
 
@@ -113,21 +113,21 @@ Local execution inside the app (desktop and mobile; `isDesktopOnly` gates Node/E
 ## 11. Borrow
 
 - The install contract: artefacts are release assets on the developer's own GitHub repo, the release tag must equal the manifest version, the manifest at HEAD is only used to find the latest version, and a `versions.json` map resolves the newest version compatible with the running host. This is H3's "pinned tag" model in production use for years, and BRAT shows the same mechanics work for any repo, any release, including a frozen version and pre-releases.
-- A 5-field index entry (`id`, `name`, `author`, `description`, `repo`) is enough for search; everything else is read from the repo at display time. Clips Kitty's index can stay that small and let CI add stars/last-updated/hash.
+- A 5-field index entry (`id`, `name`, `author`, `description`, `repo`) is enough for search; everything else is read from the repo at display time. SpikeClip's index can stay that small and let CI add stars/last-updated/hash.
 - A mirror-style index with a retention floor (reject a new index that lost >5 % of entries) is a cheap guard against a broken build wiping the catalogue.
 - The `fundingUrl` object (several labelled links) plus three honest labels (Free / Optional payments / Paid, with the rule that any paid API means "Optional payments" even if it has a free tier).
 - Developer policies that review can actually check: no obfuscation, no client-side telemetry, no self-update, disclose network use and out-of-vault file access in the README, and a fork policy that protects original authors (6 months unreachable + 30-day notice).
 - Plain-language security page: list what plugins *can* do, say what review does and does not cover, recommend an audit for sensitive data, and give a one-click report path.
 - Scan every version, not just the first submission; publish the result as a per-plugin scorecard; show results to developers within minutes; keep human review for popular/featured/flagged.
-- `isDesktopOnly`-style capability flags that the host does enforce (the app and BRAT refuse to install a desktop-only plugin on mobile) are a model for Clips Kitty's "requires GPU / requires remote" flags.
+- `isDesktopOnly`-style capability flags that the host does enforce (the app and BRAT refuse to install a desktop-only plugin on mobile) are a model for SpikeClip's "requires GPU / requires remote" flags.
 
 ## 12. Avoid
 
 - Hand review as the gate: Obsidian's own numbers (2,300+ queued, later versions unreviewed) are the H4 evidence. If a human gate exists, make it the exception (featured/popular/flagged), not the path.
 - Flat, global ids with no namespace: Obsidian needs uniqueness rules and bans words in ids; `publisher/name` ids avoid the squatting problem from day one (H8).
-- Calling a scorecard "Review" without a legend; users on 2026-10-06 see "Review: Caution" on the most popular Git plugin with no explanation. Every status Clips Kitty shows must link to what was checked.
-- Announcing "Verified authors" before the process exists; Clips Kitty's fixed decision says "Verified" only when a real process exists.
-- A binary Restricted mode as the only control: Clips Kitty's out-of-process plugins over the local API (H1) can do better (per-plugin enable/disable, host-enforced flags), but must not claim more than the runtime enforces (H5).
+- Calling a scorecard "Review" without a legend; users on 2026-10-06 see "Review: Caution" on the most popular Git plugin with no explanation. Every status SpikeClip shows must link to what was checked.
+- Announcing "Verified authors" before the process exists; SpikeClip's fixed decision says "Verified" only when a real process exists.
+- A binary Restricted mode as the only control: SpikeClip's out-of-process plugins over the local API (H1) can do better (per-plugin enable/disable, host-enforced flags), but must not claim more than the runtime enforces (H5).
 - Letting the index be the only source of install counts without saying where they come from (section on H10).
 
 ## 13. Sources (all read 2026-10-06)
@@ -155,7 +155,7 @@ Local execution inside the app (desktop and mobile; `isDesktopOnly` gates Node/E
 
 ## Hypotheses
 
-- **H3 (static Git registry, PR-submitted, CI index, pinned tag, no backend):** Supported for install and discovery, with a caveat on review. Obsidian ran for years on one JSON file in a Git repo, PRs with a template and a bot, and installs from GitHub releases at `tag == manifest.version`; the app still reads that JSON and BRAT installs from any repo without a registry. Hosting cost nothing. What failed was the review step, not the index, and Obsidian's 2026 answer was a hosted directory plus automated scanning; the Git file survives as a mirror with a retention guard. Clips Kitty can keep the static index if the review/scan step is automated in CI.
+- **H3 (static Git registry, PR-submitted, CI index, pinned tag, no backend):** Supported for install and discovery, with a caveat on review. Obsidian ran for years on one JSON file in a Git repo, PRs with a template and a bot, and installs from GitHub releases at `tag == manifest.version`; the app still reads that JSON and BRAT installs from any repo without a registry. Hosting cost nothing. What failed was the review step, not the index, and Obsidian's 2026 answer was a hosted directory plus automated scanning; the Git file survives as a mirror with a retention guard. SpikeClip can keep the static index if the review/scan step is automated in CI.
 - **H4 (hand review does not scale):** Confirmed by the vendor: "we struggled to keep pace with submissions, and subsequent versions were not reviewed"; "over 2,300 queued submissions" cleared only after automation; manual review now reserved for popular, featured and flagged plugins.
 - **H5 (declared is not enforced):** Confirmed: "Obsidian cannot reliably restrict plugins to specific permissions or access levels." The only enforced flags are Restricted mode (all or nothing) and `isDesktopOnly` (platform gate). Disclosures (network, files outside the vault, telemetry) are README text checked by review, not by the runtime.
 - **H8 (namespaced ids):** Counter-example. Obsidian ids are flat and global, which forces word bans and uniqueness checks; the fork policy exists partly because competing copies collide in one namespace (inferred).

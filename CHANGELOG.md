@@ -1,9 +1,9 @@
 # Changelog
 
-What changed, written for people who use Clips Studio rather than people who
+What changed, written for people who use SpikeClip rather than people who
 read the commits. Dates are release dates.
 
-Clips Kitty is a stable release, and new versions come often. Things listed as
+SpikeClip is a stable release, and new versions come often. Things listed as
 fixed were often broken in a way that only showed up on somebody else's machine.
 
 ---
@@ -19,7 +19,7 @@ fixed were often broken in a way that only showed up on somebody else's machine.
 - **Connect your Twitch account** (new).
   In Settings → Connected accounts you register a free Twitch application once (the card
   lists the steps), paste its Client ID, then sign in on Twitch's own page with a code.
-  No Clips Kitty account is needed, and the sign-in is kept encrypted on this PC. Twitch is
+  No SpikeClip account is needed, and the sign-in is kept encrypted on this PC. Twitch is
   asked only for the permissions you tick, and none is ticked to start with. An account
   that needs signing in again shows Reconnect, which asks for the same permissions.
 - **Watch my channel.** Adds your connected channel to Watched channels with the same
@@ -28,17 +28,17 @@ fixed were often broken in a way that only showed up on somebody else's machine.
   through the public video list, as before, whenever the connection needs reconnecting or
   Twitch doesn't answer, so the watch keeps going.
   If you disable or uninstall a Gaming detector while the Watch form is open, it
-  returns to **All games (Clips Kitty)** so adding a channel still works.
+  returns to **All games (SpikeClip)** so adding a channel still works.
 - **Viewer nominations.** With the chat permission ticked you can start and stop
   collecting !clip, !chaos and !funny from your channel or a channel you watch, with command
-  counts and a timeline for each stream. After a broadcast ends, Clips Kitty looks
+  counts and a timeline for each stream. After a broadcast ends, SpikeClip looks
   for its matching Twitch recording and keeps checking for up to six hours, including
   across restarts. In Connected accounts, use **Bind recording** to check the recording
   against your stream clock and confirm the offset. The complete downloaded recording
   can then use those mapped nominations. These workflows still need live-account verification.
 - **For people who make pipelines:** a pipeline you allow can read your channel's Twitch
   details, link to a moment of the Twitch VOD it is clipping, and make a Twitch clip of
-  that moment, all through Clips Kitty and never with your Twitch sign-in. Links and clips
+  that moment, all through SpikeClip and never with your Twitch sign-in. Links and clips
   work when the video is the whole Twitch broadcast, as Watched channels downloads it. A
   pipeline can't clip your live stream.
 
@@ -52,9 +52,9 @@ fixed were often broken in a way that only showed up on somebody else's machine.
   optional review before it expires. Unavailable cache storage does not stop a run.
 
 Clips are framed and chosen in two new ways, on for everyone. Either can be turned off
-with one line in your settings file: `%LOCALAPPDATA%\Clips Studio\settings.yaml` in the
-installed app (`config/settings.yaml` if you run Clips Kitty from its code). Restart Clips
-Kitty after you change it.
+with one line in your settings file: `%LOCALAPPDATA%\SpikeClip\settings.yaml` in the
+installed app (`config/settings.yaml` if you run SpikeClip from its code). Restart
+SpikeClip after you change it.
 
 - **Framing follows the cut, and a clip opens on the person's face.** In an edited video,
   a new shot could open framed on where the last shot's person stood, and move to the new
@@ -112,7 +112,7 @@ Kitty after you change it.
 ## 2.1.0: Basketball, and a Marketplace for new pipelines
 
 Basketball joins Soccer under Sports, and the new Marketplace installs pipelines and
-plugins that other people build for Clips Kitty. This release also fixes model downloads
+plugins that other people build for SpikeClip. This release also fixes model downloads
 that stopped at 100%, new Kick VODs that read as deleted, and caption corrections in
 other languages.
 
@@ -121,20 +121,20 @@ other languages.
 - **YouTube cookies, for when YouTube keeps saying "confirm you're not a bot".** Under
   **Settings → Advanced settings**, choose **From Firefox** (signed in to YouTube there)
   or a cookies.txt file exported from a browser signed in to YouTube. The file is copied
-  into Clips Kitty's data folder, so moving the original doesn't break it, and turning the
-  setting off deletes that copy. Clips Kitty uses it only when YouTube has refused a
+  into SpikeClip's data folder, so moving the original doesn't break it, and turning the
+  setting off deletes that copy. SpikeClip uses it only when YouTube has refused a
   download both the ordinary way and over IPv4; every other download stays signed out. Signed in, YouTube's player needs its JavaScript run,
   so the app now carries QuickJS (2 MB) for that one request. Chrome and Edge lock their
   cookies on Windows, so they are not offered. (#136)
 
-- **A Marketplace, and Awesome Clips Kitty.** Other developers can now write their own
+- **A Marketplace, and Awesome SpikeClip.** Other developers can now write their own
   "find the best moments" step (a pipeline) and list it; you install one from the new
   **Marketplace** screen and switch it on for a video with the **Pipeline** option. Every
   listing says what it may do, where it runs, what it needs and its licence, and asks you
   to confirm before anything is installed. Nothing changes until you install something.
-  The Marketplace also shows **Awesome Clips Kitty**, the list of integrations, apps and
-  tools that other people have built with Clips Kitty. It lists only what runs in Clips
-  Kitty or uses it: a link to another project is not an entry. The list is its own
+  The Marketplace also shows **Awesome SpikeClip**, the list of integrations, apps and
+  tools that other people have built with SpikeClip. It lists only what runs in
+  SpikeClip or uses it: a link to another project is not an entry. The list is its own
   repository, github.com/ColinGPT9/awesome-clips-kitty, where a developer adds a pipeline
   with a pull request of one file. Labels: ✓ Official (made by this project), ✓ Compatible (passed
   automated checks; not a security review), ★ Featured and Community. Installs from the
@@ -145,13 +145,13 @@ other languages.
   the install screen as `text`.) (#129)
 
 - **New pipelines without waiting for an update, and nothing else to install.** The
-  Marketplace checks Clips Kitty's online list when it opens, at most once a day, so a
+  Marketplace checks SpikeClip's online list when it opens, at most once a day, so a
   newly listed pipeline or a new version shows up without a new version of the app;
   **Check for new pipelines** checks at once. With a pipeline installed, the app also
   checks when it starts, so a warning about a harmful version arrives without opening
   the Marketplace. Until a release includes it, what the list adds shows as Community. The check fetches one file from GitHub and sends nothing about you or what
   you browse; a switch at the bottom of Browse turns it off. Pipelines also run on the
-  Python inside Clips Kitty now, so a creator never installs Python for one.
+  Python inside SpikeClip now, so a creator never installs Python for one.
   (Experimental routes: `/marketplace/online`; `/marketplace/refresh` now needs the
   desktop app.)
 
@@ -160,27 +160,27 @@ other languages.
   at the bottom of Browse. The Marketplace and the install screen say what a pipeline is,
   where it comes from and what it may do in everyday words, and keep the exact details
   one click away under **Technical details**. What you tick before installing, the warning
-  that a pipeline can do anything you can do on your PC, and what "Clips Kitty hands this
+  that a pipeline can do anything you can do on your PC, and what "SpikeClip hands this
   over" and "the developer says so" mean are in all 18 of the app's other languages. A download
   that fails says why in one sentence (no connection, files no longer there, a full disk or
   a damaged download) and keeps the details in the log. Apps, tools
-  and the other entries of Awesome Clips Kitty each get one button, to their download
+  and the other entries of Awesome SpikeClip each get one button, to their download
   page or website where the list has one, which opens your browser after showing you
   the address; entries that need the command line or Python say so and come last.
 
 - **Rate & understand: Marketplace plugins that look at your moments.** Once you have
   installed a Marketplace plugin that can rate or understand moments, adding a video shows
-  a new switch, **Rate & understand**. Clips Kitty (or Sports, Gaming scoring or a
+  a new switch, **Rate & understand**. SpikeClip (or Sports, Gaming scoring or a
   pipeline) still finds the moments. Then up to three plugins can say what happens in
   each one, and up to three can give each one a new score, in the order you choose. What
   a plugin says happens in a moment goes to the AI that writes the clip's title,
   description and hashtags. A plugin's score decides which clips are made and their
   order: the last plugin's score counts, and a moment it scores under your minimum score
-  is set aside (a must-have never is). Clips Kitty does any step you leave to it, and a
+  is set aside (a must-have never is). SpikeClip does any step you leave to it, and a
   video without the switch is made exactly as before. Not with Longform. The clip editor
   shows each plugin's score and notes, and the video page says what each plugin did, or
-  why Clips Kitty made the clips without it. The Marketplace marks what each plugin does
-  (Finds moments, Understands moments, Rates moments), how long Clips Kitty lets it work
+  why SpikeClip made the clips without it. The Marketplace marks what each plugin does
+  (Finds moments, Understands moments, Rates moments), how long SpikeClip lets it work
   on your moments (10 minutes unless the plugin says otherwise), and when an update
   starts doing something new.
 
@@ -190,7 +190,7 @@ other languages.
   settings and the Marketplace say so.
 
   **A channel that posts by itself waits for you when a chosen plugin didn't run.** If a
-  plugin chosen for a video couldn't run, Clips Kitty still makes the clips, without it.
+  plugin chosen for a video couldn't run, SpikeClip still makes the clips, without it.
   A watched channel that posts automatically then holds that video's clips for you to
   check and publish, and a channel that asks first says why. A job told to publish its
   clips when it finishes waits too. The command-line daily upload isn't held. In a
@@ -208,13 +208,13 @@ other languages.
   with a sentence saying why. The clips are made exactly as they would be without the
   switch. Open a clip in the editor to see each suggestion, with the plugin's name, and
   **Use** it, **Hide** it, or **Take it back** after using it; Take it back removes only
-  what the suggestion added, never your own edits. Clips Kitty doesn’t put a suggestion into a clip until you use it in the editor and apply your edits (Apply edits, or Apply edits & upload).
+  what the suggestion added, never your own edits. SpikeClip doesn’t put a suggestion into a clip until you use it in the editor and apply your edits (Apply edits, or Apply edits & upload).
   A plugin that couldn't suggest anything never holds a channel's automatic posting, and
   the video page says what each plugin suggested. Not with Longform. A suggestion you used
   is marked if its clip ever comes out without your edits, so you can apply them
   again. For developers: the plugin kit (SDK 1.3.0) adds `job.suggest_edit()`
   and an `editor` template, and [docs/developers/steps.md](docs/developers/steps.md)
-  explains the edit step. Plugins don't post: Clips Kitty posts clips itself.
+  explains the edit step. Plugins don't post: SpikeClip posts clips itself.
   (New job option: `edit`. New fields: `suggestions` on `render_first` when publishing,
   `suggestion` on `PATCH /clips/{id}`, and `plugin_edits` in a clip's `scores`.)
 
@@ -306,7 +306,7 @@ other languages.
   between. A clip you trimmed in the editor since is still one of them. Nothing already
   sent is ever sent twice, as before.
 
-- **The box at the bottom offers to install Gemma 4.** Ask Clips Kitty only runs on a
+- **The box at the bottom offers to install Gemma 4.** Ask SpikeClip only runs on a
   Gemma 4 model, and setup installs a different one on most PCs. The box used to say so
   in a line of small grey text. It now says "Install Gemma 4 to use this box" and has an
   **Install Gemma 4** button, with the build already chosen for your graphics card and
@@ -318,13 +318,13 @@ other languages.
 
 - **Model downloads no longer reach 100% and then do nothing.** The bar stays below
   100% until the model is really installed, and while Ollama checks a big download,
-  which can take minutes, it says **Checking the download… keep Clips Kitty open**.
+  which can take minutes, it says **Checking the download… keep SpikeClip open**.
   Quitting during a download asks first. A download that stopped short now says so, with
   **Try again**, which carries on where it stopped instead of starting over; before, it
   could be called done, and even chosen as your AI model, with nothing there. The Models
   page and setup also catch up on how a download ended if they missed it. A download
   nobody has carried on with for a week is cleared from disk when the app starts. Ollama's
-  own log is kept in `%LOCALAPPDATA%\Clips Studio\data\logs\ollama.log`. (#148, #150)
+  own log is kept in `%LOCALAPPDATA%\SpikeClip\data\logs\ollama.log`. (#148, #150)
 - **A job on an AI model that isn't downloaded stops at once and says so.** It used to
   download and transcribe the video first and then fail with "404 Client Error: Not Found
   for url: http://127.0.0.1:11435/api/generate". It now ends before anything is
@@ -340,7 +340,7 @@ other languages.
   it. Escape in the word box now cancels that word only, not the whole editor. (#147)
 - **New Kick VODs download again.** Kick has started giving new VODs ids that the
   downloader's Kick support doesn't know, so a public VOD that played fine on Kick was
-  reported as "That Kick VOD no longer exists". Clips Kitty now looks the VOD up the way
+  reported as "That Kick VOD no longer exists". SpikeClip now looks the VOD up the way
   Kick's own site does and downloads its recording, at up to 1080p60. Paste the link from
   the channel's Videos tab (kick.com/channel/videos/…); that message now only shows for a
   VOD Kick has really deleted. (#161)
@@ -398,7 +398,7 @@ other languages.
   re-rendered (#120).
 - **"Sign in to confirm you're not a bot" on a YouTube link.** YouTube decides that by
   the address a request comes from, and a PC on both IPv4 and IPv6 has two: refused over
-  one, the same video is served over the other. Clips Kitty asked only the first way, so
+  one, the same video is served over the other. SpikeClip asked only the first way, so
   the video failed with advice about cookies. It now asks once more over IPv4, and goes
   on that way for the rest of the session. If both are refused, it says so in plain
   words: wait an hour, switch off a VPN, or try another network. Nothing signs in and no
@@ -435,7 +435,7 @@ post on their own, and the option to use your own AI key.
   - Club and phone footage, recognised by itself when no score box shows. Club footage is
     framed on the ball like a broadcast, but with no score box or commentary nothing marks its goals, so none
     are claimed: a choice like All goals keeps the best moments instead, and the clip page says so.
-  - **Match events**: tell Ask Clips Kitty the match's goals as you have them (from your club app, the match
+  - **Match events**: tell Ask SpikeClip the match's goals as you have them (from your club app, the match
     report or the video's description: "18:16 Goal Player A", "45+2' yellow card") and each becomes a clip,
     with the player or team on it. Match minutes are placed by the clock on screen or the list's kick-off
     times; a club app's tag gets a clip long enough to hold the attack, the goal and the celebration.
@@ -480,7 +480,7 @@ post on their own, and the option to use your own AI key.
     see-through over the gameplay stays: it's part of the stream.
   - The editor opens with the webcam and game boxes already on the frame to drag, as in
     StreamLadder: **Draw it** is the default, and the webcam box moves onto the webcam
-    when Clips Kitty finds one.
+    when SpikeClip finds one.
   - On the preview, as in StreamLadder: drag the small or round facecam to move it and any
     of its eight handles to resize it, and the same for the Game UI layer. Dual facecam is
     two round webcams, always the same size. The Game UI is cut to its space, with no blur
@@ -547,7 +547,7 @@ post on their own, and the option to use your own AI key.
 - **Vertical Live, for streams that were vertical all along.** A YouTube vertical live,
   the vertical feed of a Twitch Dual Format or Streamlabs Dual Output stream, or a
   downloaded Instagram or TikTok live is already a finished 9:16 video. Tick **Vertical
-  Live** and Clips Kitty keeps its layout: no face tracking or reframing, one encode of
+  Live** and SpikeClip keeps its layout: no face tracking or reframing, one encode of
   the whole frame at 1080x1920. The moments are found exactly as before, with your chosen
   AI, and clips caption, brand, publish and schedule as usual.
   - YouTube vertical lives now download at 1080x1920 in this mode (standard processing
@@ -557,11 +557,11 @@ post on their own, and the option to use your own AI key.
     A 9:16 file you add gets "Is it a vertical live?", and can carry its original link.
   - Watched channels have the same switch. Videos with no vertical version are skipped,
     so a Streamlabs dual-output channel isn't clipped twice.
-  - In Clips Kitty Web too: a Twitch or Kick VOD is cut from its vertical version.
+  - In SpikeClip Web too: a Twitch or Kick VOD is cut from its vertical version.
   - Twitch's vertical VODs couldn't be downloaded by link when this was built: download
     the vertical recording and add it as a file.
 
-- **Watch a channel and let Clips Kitty do the rest.** Add a YouTube, Twitch or Kick
+- **Watch a channel and let SpikeClip do the rest.** Add a YouTube, Twitch or Kick
   channel on the new **Watched channels** page. When it posts, the new video joins the
   queue by itself, and once the clips are made they are published through WoopSocial,
   either straight away or after you press Publish, which is the default. Set it up
@@ -573,23 +573,23 @@ post on their own, and the option to use your own AI key.
     once, even after a crash or a restart.
   - Live streams, premieres and Shorts are waited for or skipped rather than grabbed
     half-finished.
-  - Videos posted while Clips Kitty was closed are found when it opens. You choose
+  - Videos posted while SpikeClip was closed are found when it opens. You choose
     whether to clip only the newest, all of them, the last day's, or none.
   - To keep watching on a spare PC, turn on **Keep watching when the window is
-    closed**. Clips Kitty then stays in the system tray until you quit it from there.
+    closed**. SpikeClip then stays in the system tray until you quit it from there.
     It is off unless you turn it on.
   - **See it working.** A live panel at the top of Watched channels shows that
-    Clips Kitty is watching and what it is doing right now: checking a channel,
+    SpikeClip is watching and what it is doing right now: checking a channel,
     a new video found, clips being made with a progress bar, clips scheduled, a
     post going live. A green dot beside Watched channels in the sidebar shows it
     from every page, and each channel carries a Watching badge.
   - Kick has no official way to list a channel's videos, so Kick watching uses the
     same unofficial one Kick downloads already rely on, and says so if it stops
     working.
-  - Opening Clips Kitty a second time now brings the running window forward instead
+  - Opening SpikeClip a second time now brings the running window forward instead
     of starting a second copy that cannot work.
   - **Hands-off, for an always-on PC.** Choose "Clip and publish automatically" when
-    you add a channel, tick where the clips go, and leave Clips Kitty running. Every
+    you add a channel, tick where the clips go, and leave SpikeClip running. Every
     new video is then queued, clipped and published with nobody at the PC. It keeps
     going through the usual hiccups: a failed download is tried again, a publish that
     cannot reach WoopSocial waits and tries again, and posts a platform turned down
@@ -612,7 +612,7 @@ post on their own, and the option to use your own AI key.
     far, with a button that opens the profile, and the live panel says what each
     new video taught it.
 
-- **PC too old to run the AI? Bring your own API key.** Clips Kitty still runs
+- **PC too old to run the AI? Bring your own API key.** SpikeClip still runs
   everything on your PC by default, free and private. For a laptop with a small
   graphics card, or a low-spec mini PC watching channels, **Settings → AI** can
   now hand the work to a cloud provider on your own account instead. Ollama stays
@@ -620,7 +620,7 @@ post on their own, and the option to use your own AI key.
   you can switch between, shown with each model's price; OpenAI, Google Gemini,
   Anthropic Claude, xAI Grok, Meta's Muse Spark, DeepSeek and Qwen are there
   too, as direct providers under Advanced (a Qwen key's Alibaba Cloud region is
-  found for you). The provider bills you directly; Clips Kitty has no key, credits or
+  found for you). The provider bills you directly; SpikeClip has no key, credits or
   server of its own. Where local AI struggles (setup on a PC with no graphics
   card or a small one, a model too big for the card, a job that failed in the
   local AI, Watched channels on a small PC) the app points to OpenRouter. With a cloud model chosen, everything the local model did uses it: clip
@@ -631,7 +631,7 @@ post on their own, and the option to use your own AI key.
     catalogue, each showing OpenRouter's current prices (and when they were
     fetched), with a refresh. A voice model not yet known to give word timings
     is checked with a three-second test clip before it is used.
-  - **Sign in with OpenRouter**: approve Clips Kitty in your browser and it gets a key of
+  - **Sign in with OpenRouter**: approve SpikeClip in your browser and it gets a key of
     your own, on your OpenRouter credits, with nothing to copy or paste (OAuth with PKCE).
     Pasting your own key is still there, under Advanced. **Copy sign-in link** connects a
     different OpenRouter account from a private window.
@@ -661,18 +661,18 @@ post on their own, and the option to use your own AI key.
     model, without you choosing it.
   - How it works, what it sends and what it costs: `docs/AI-BACKENDS.md`.
 
-- **Ask an AI assistant to do it.** Clips Kitty now speaks MCP, so Claude, Cursor
+- **Ask an AI assistant to do it.** SpikeClip now speaks MCP, so Claude, Cursor
   or any MCP client can queue a stream, follow the job, read back the clips it
   chose and export one, in plain language. It needs no API key of any kind,
   because the model doing the work is the one already on your PC.
 
 - **Integrations can be told when a job finishes.** Send a webhook address with a
-  video and Clips Kitty posts to it once, the moment that video is done, so a
+  video and SpikeClip posts to it once, the moment that video is done, so a
   dock or an automation can sit quiet instead of asking every few seconds. Add a
   secret and the message is signed, so your listener knows it is really us.
 
 - **Thumbnails made from the clip, on your PC.** Press **Make thumbnails** in the
-  YouTube panel and Clips Kitty looks through the clip for frames where someone
+  YouTube panel and SpikeClip looks through the clip for frames where someone
   is facing the camera, crops each to 16:9 around them and puts the clip's hook
   across the bottom. Pick one like any other thumbnail. It costs nothing and
   sends nothing anywhere: the faces, the frames and the type all come from what
@@ -685,7 +685,7 @@ post on their own, and the option to use your own AI key.
   that breaks them is ignored completely, and a list that silently does nothing
   is worse than none.
 
-- **Tell Clips Kitty what to do, in a sentence.** There is a box on the dashboard
+- **Tell SpikeClip what to do, in a sentence.** There is a box on the dashboard
   now. Write something like "clip the newest stream and schedule the clips an
   hour apart from tomorrow morning" and a Gemma model running on your PC works
   out which steps to take and takes them, showing you each one as it goes.
@@ -769,7 +769,7 @@ post on their own, and the option to use your own AI key.
   changed in the settings file.
 
 - **Closing the window closes the app when nothing is being watched.** With "Keep
-  watching when the window is closed" ticked, Clips Kitty went to the system tray
+  watching when the window is closed" ticked, SpikeClip went to the system tray
   even with watching switched off or no channels on. It now stays in the tray only
   while it's actually watching a channel.
 
@@ -838,14 +838,14 @@ post on their own, and the option to use your own AI key.
   reach the posts too; the confirm button used to drop them.
 
 - **WoopSocial posts now show what really happened to them.** Every post sent
-  through WoopSocial stayed at "processing" for good, because Clips Kitty was
+  through WoopSocial stayed at "processing" for good, because SpikeClip was
   reading the wrong field of WoopSocial's reply. Posts that went out now show as
   published with their link, and ones that did not show as failed with the
   reason in plain words, such as WoopSocial's five-a-day YouTube allowance or
   TikTok's posting limit. Posts you already sent correct themselves the next
-  time Clips Kitty checks, within a few minutes of opening it.
+  time SpikeClip checks, within a few minutes of opening it.
 
-- **Hashtags now actually appear under your videos.** Clips Kitty has always
+- **Hashtags now actually appear under your videos.** SpikeClip has always
   chosen hashtags for a clip, but they were being sent to YouTube's keyword
   field, which nobody sees, and the description went up without them. They are
   now written into the description, where they show above the title and are
@@ -858,7 +858,7 @@ post on their own, and the option to use your own AI key.
   cut it off.
 
 - **An age-restricted video says so.** YouTube will not hand these over to
-  anyone who is not signed in, and Clips Kitty downloads without an account. It
+  anyone who is not signed in, and SpikeClip downloads without an account. It
   used to fail with a wall of yt-dlp text about exporting cookies, which read
   like a crash. It now says what happened and what will work instead. The same
   plain wording now covers failures during the first check of a link, which is
@@ -871,12 +871,12 @@ post on their own, and the option to use your own AI key.
 
 ---
 
-## 1.2.0: every clip now ends with a Clips Kitty end card
+## 1.2.0: every clip now ends with a SpikeClip end card
 
 ### Added
 
-- **Every clip ends with a short Clips Kitty end card.** A 2.9-second card with
-  the Clips Kitty mascot is added to the end of each clip you make, so people
+- **Every clip ends with a short SpikeClip end card.** A 2.9-second card with
+  the SpikeClip mascot is added to the end of each clip you make, so people
   who watch your clips can find the app that made them. It is joined on without
   re-encoding, so the clip itself is untouched.
 
@@ -886,17 +886,17 @@ post on their own, and the option to use your own AI key.
   English. All of them are translated now, and the existing wording was reviewed
   by a native speaker, so clips are called "하이라이트 영상" (highlight videos)
   where that is what Korean creators say. If something still reads oddly,
-  [#45](https://github.com/ColinGPT9/clips-studio/issues/45) is the place to say
+  [#45](https://github.com/ColinGPT9/spikeclip/issues/45) is the place to say
   so.
 
 - **Publish to YouTube from the editor.** Finish a clip, press **YouTube**, fill
   in the title, description, tags, thumbnail, playlist, audience and visibility,
-  and press Upload. Clips Kitty renders your unsaved edits and uploads straight
+  and press Upload. SpikeClip renders your unsaved edits and uploads straight
   to your channel. No exporting the file first, no hunting for it on disk, no
   separate publishing screen. You never leave the editor.
 
   **Scheduling uploads the video now** and asks YouTube to publish it later, so
-  you can close Clips Kitty and switch your computer off. There is no timer in
+  you can close SpikeClip and switch your computer off. There is no timer in
   this app and nothing to leave running.
 
   It is **off until you turn it on** in Settings, and it uses your own free
@@ -907,7 +907,7 @@ post on their own, and the option to use your own AI key.
   One thing worth knowing before you rely on it: until your Google Cloud project
   passes YouTube's free audit, **YouTube locks every video uploaded through an
   API to private, permanently**, and it cannot be undone in Studio. That is
-  YouTube's policy, not a bug, and no software can work around it. Clips Kitty
+  YouTube's policy, not a bug, and no software can work around it. SpikeClip
   checks after every upload and tells you if it happened instead of claiming
   success. Uploading as unlisted or private is unaffected. See
   [README "Posting publicly"](README.md#posting-publicly).
@@ -945,7 +945,7 @@ post on their own, and the option to use your own AI key.
   sent what it needs, and all three are listed on the Models page. The models
   setup installs are sent exactly what they were before.
 
-- **Streamer tools can hand a finished stream to Clips Kitty.** A new supported
+- **Streamer tools can hand a finished stream to SpikeClip.** A new supported
   API, `/integrations/streams`, takes a stream's platform, channel and start and
   end times.
   - **Finds the VOD:** looks up the one Twitch or YouTube publishes afterwards,
@@ -956,7 +956,7 @@ post on their own, and the option to use your own AI key.
   - **Reports progress and time left** in the same terms the app shows.
 
   The OBS plugin is the first thing built on it. `/health` now also reports
-  `app_version` and `api_version`, so a tool can tell when Clips Kitty needs
+  `app_version` and `api_version`, so a tool can tell when SpikeClip needs
   updating.
 
 ### Fixed
@@ -1037,20 +1037,20 @@ post on their own, and the option to use your own AI key.
   local files keep working while it does. The app now explains that in plain
   English instead of printing the error.
 
-  **What the app cannot do is prevent it.** Nothing in Clips Kitty can persuade
+  **What the app cannot do is prevent it.** Nothing in SpikeClip can persuade
   Google to serve a connection it has decided to throttle. If it keeps
   happening, switching off a VPN or moving to a different network is what
   actually fixes it. Reported by a user through the in-app feedback hub
-  ([#81](https://github.com/ColinGPT9/clips-studio/issues/81)).
+  ([#81](https://github.com/ColinGPT9/spikeclip/issues/81)).
 
 - **RTX 50-series cards no longer crash every job.** On a GeForce RTX 50 card
   processing failed part-way through with `CUDA error: no kernel image is
-  available for execution on the device`, every single time. Clips Kitty was
+  available for execution on the device`, every single time. SpikeClip was
   built against a version of CUDA that predates those cards, so it could see
   the GPU, report it as working, and then have no code it could actually run on
   it. It now ships CUDA 13, which supports them properly. Reported by a user
   through the in-app feedback hub
-  ([#83](https://github.com/ColinGPT9/clips-studio/issues/83)).
+  ([#83](https://github.com/ColinGPT9/spikeclip/issues/83)).
 
 - **A GPU that cannot be used falls back to the CPU instead of failing.**
   Whichever version of CUDA the app ships, some graphics card sits outside it.
@@ -1085,7 +1085,7 @@ post on their own, and the option to use your own AI key.
 
 ---
 
-## 1.1.3: the app is now called Clips Kitty
+## 1.1.3: the app is now called SpikeClip
 
 > **Same app, same data, nothing to do.** Your clips, settings and creator
 > profiles stay exactly where they are and open as normal. Only the name
@@ -1131,12 +1131,12 @@ still alpha software; the leading 1 is a Store requirement, not a claim.
 ### Added
 
 - **Russian is now fully translated**, thanks to [@4nmus](https://github.com/4nmus),
-  the first contribution to Clips Studio from outside. Russian was listed as a
+  the first contribution to SpikeClip from outside. Russian was listed as a
   finished language and was not: 92 of the app's 208 phrases were quietly
   falling back to English. All 92 are translated now, and 56 of the existing
   ones were rewritten by someone who actually speaks Russian rather than by a
   machine. If you use the app in Russian and something still reads oddly,
-  [#60](https://github.com/ColinGPT9/clips-studio/issues/60) is the place to say so.
+  [#60](https://github.com/ColinGPT9/spikeclip/issues/60) is the place to say so.
 - **Brazilian Portuguese is now fully translated**, thanks to
   [@espinafr](https://github.com/espinafr), the second contribution from
   outside. Portuguese was listed as finished and was not: 133 of the app's 208
@@ -1144,9 +1144,9 @@ still alpha software; the leading 1 is a Store requirement, not a claim.
   of the existing ones were rewritten by someone who speaks the language. The
   most visible change is that clips are "cortes" rather than "clipes", which is
   what Brazilian editors actually call them. If something still reads oddly,
-  [#59](https://github.com/ColinGPT9/clips-studio/issues/59) is the place to
+  [#59](https://github.com/ColinGPT9/spikeclip/issues/59) is the place to
   say so: two phrases are already known to need a second opinion.
-- **Clips Studio is coming to the Microsoft Store.** Same application, same
+- **SpikeClip is coming to the Microsoft Store.** Same application, same
   local processing; the Store version is updated by the Store rather than by
   the in-app updater, and its donate button opens your browser. The standalone
   installer is unchanged and stays the main way to get it.

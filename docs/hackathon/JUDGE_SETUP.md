@@ -5,13 +5,13 @@ local model setup are documented in the app repository README. Twitch metadata
 and EventSub do not require a paid model provider or GPU.
 
 ```powershell
-git clone --branch feature/twitch-vod-binding https://github.com/ColinGPT9/clips-studio.git
+git clone --branch feature/twitch-vod-binding https://github.com/ColinGPT9/spikeclip.git
 git clone --branch improve/gta-concise-moments https://github.com/ColinGPT9/Grand-Theft-Auto-6-Clips-Kitty-Plugin.git
-cd clips-studio
+cd spikeclip
 python -m venv .venv
 .\.venv\Scripts\Activate.ps1
 python -m pip install -r requirements.txt
-cd ui
+cd frontend
 npm.cmd ci
 npm.cmd run build
 npm.cmd run dev
@@ -25,7 +25,7 @@ Public Twitch Client ID:
 0ihqn762rozi77qg12ofr7s7azjgj2
 ```
 
-This identifies the same **Clips Kitty** application shown in
+This identifies the same **SpikeClip** application shown in
 the demo; it is not a client secret or an account credential. Connect your own
 Twitch account with **Read Twitch chat**, enter a channel name or URL in Viewer
 highlight nominations, and explicitly start collection. Reading the selected

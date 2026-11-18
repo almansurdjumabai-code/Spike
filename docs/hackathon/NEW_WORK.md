@@ -1,7 +1,7 @@
-# New work submitted: Clips Kitty Twitch Highlights
+# New work submitted: SpikeClip Twitch Highlights
 
 This entry is the Twitch community-to-highlight workflow built during the
-hackathon submission period. It enhances the existing open-source Clips Kitty
+hackathon submission period. It enhances the existing open-source SpikeClip
 engine. It does not claim that the entire desktop application, editor,
 Marketplace, SDK or publishing infrastructure was created for this event.
 
@@ -12,12 +12,12 @@ the actual changes; these records are evidence, not an organizer eligibility dec
 
 | Contribution | Date (author offset preserved) | Commit |
 |---|---|---|
-| Twitch connected accounts, the plugin account gateway and stream workflows (#182) | 2026-10-25T13:45:42-04:00 | [c93ca98](https://github.com/ColinGPT9/clips-studio/commit/c93ca98b9c597260e38a907e401b5f003f4b3e3f) |
-| Bind Twitch recordings to viewer nominations in desktop | 2026-10-26T17:06:49-04:00 | [9c4543f](https://github.com/ColinGPT9/clips-studio/commit/9c4543fe5be3c1a526dabfd716f72a49a9c4545b) |
-| Allow viewer-authorized EventSub on selected public channels | 2026-10-27T12:20:40-04:00 | [c613304](https://github.com/ColinGPT9/clips-studio/commit/c6133044942eca07eef60aa1fa483e454cfe0275) |
-| Collect Twitch nominations from a viewer-selected channel | 2026-10-27T15:40:26-04:00 | [d766dc9](https://github.com/ColinGPT9/clips-studio/commit/d766dc9288da970ad82ee7e0ac6534c8760c0251) |
-| Allow selected public channels in desktop VOD timestamp links | 2026-10-27T16:14:40-04:00 | [99ab168](https://github.com/ColinGPT9/clips-studio/commit/99ab1680ab9bdcc344fe72a958d71e36b7c71a9e) |
-| Show live Twitch activity and add optional local host narration | 2026-10-27T23:27:35-04:00 | [4583758](https://github.com/ColinGPT9/clips-studio/commit/4583758fb6b68df24d9feae57222116446cbf5fe) |
+| Twitch connected accounts, the plugin account gateway and stream workflows (#182) | 2026-10-25T13:45:42-04:00 | [c93ca98](https://github.com/ColinGPT9/spikeclip/commit/c93ca98b9c597260e38a907e401b5f003f4b3e3f) |
+| Bind Twitch recordings to viewer nominations in desktop | 2026-10-26T17:06:49-04:00 | [9c4543f](https://github.com/ColinGPT9/spikeclip/commit/9c4543fe5be3c1a526dabfd716f72a49a9c4545b) |
+| Allow viewer-authorized EventSub on selected public channels | 2026-10-27T12:20:40-04:00 | [c613304](https://github.com/ColinGPT9/spikeclip/commit/c6133044942eca07eef60aa1fa483e454cfe0275) |
+| Collect Twitch nominations from a viewer-selected channel | 2026-10-27T15:40:26-04:00 | [d766dc9](https://github.com/ColinGPT9/spikeclip/commit/d766dc9288da970ad82ee7e0ac6534c8760c0251) |
+| Allow selected public channels in desktop VOD timestamp links | 2026-10-27T16:14:40-04:00 | [99ab168](https://github.com/ColinGPT9/spikeclip/commit/99ab1680ab9bdcc344fe72a958d71e36b7c71a9e) |
+| Show live Twitch activity and add optional local host narration | 2026-10-27T23:27:35-04:00 | [4583758](https://github.com/ColinGPT9/spikeclip/commit/4583758fb6b68df24d9feae57222116446cbf5fe) |
 
 The new workflow lets a viewer select a broadcaster, receive community
 nominations through EventSub, discover the corresponding recording, check its

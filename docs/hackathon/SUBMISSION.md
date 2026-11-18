@@ -1,14 +1,14 @@
-# Clips Kitty: Twitch Highlights
+# SpikeClip: Twitch Highlights
 
 **Tagline:** Connect Twitch community signals to concise, editable local clips.
 
-**Main code URL:** https://github.com/ColinGPT9/clips-studio/tree/feature/twitch-vod-binding
+**Main code URL:** https://github.com/ColinGPT9/spikeclip/tree/feature/twitch-vod-binding
 
 **Detector code URL:** https://github.com/ColinGPT9/Grand-Theft-Auto-6-Clips-Kitty-Plugin/tree/improve/gta-concise-moments
 
 **Codex session ID:** `01a179b9-a6c3-7760-bbdf-dabc10d0b1d3`
 
-**Final demo:** `Clips-Kitty-Demo.mp4`, under three minutes. The current
+**Final demo:** `SpikeClip-Demo.mp4`, under three minutes. The current
 packet is maintained separately from the earlier 2:17 synthetic test recording.
 The entrant will upload the final video publicly to YouTube and paste its real URL.
 
@@ -20,7 +20,7 @@ existing AGPL-3.0 engine. The rules do not require a fresh Git repository.
 
 ## Description
 
-Clips Kitty is a Windows desktop clipping workflow for Twitch streamers and
+SpikeClip is a Windows desktop clipping workflow for Twitch streamers and
 their communities. This submission focuses on the new viewer-channel Twitch
 workflow and GTA detector improvements, built on the existing open-source
 desktop engine.
@@ -68,7 +68,7 @@ Twitch clips or social posts were sent by the demonstration.
 ## Built with
 
 OpenAI Codex, Python, FastAPI, React, TypeScript, Electron, Twitch OAuth and
-EventSub, FFmpeg, the Clips Kitty SDK, local transcription, Ollama and the shared
+EventSub, FFmpeg, the SpikeClip SDK, local transcription, Ollama and the shared
 Gaming renderer.
 
 ## Next improvements

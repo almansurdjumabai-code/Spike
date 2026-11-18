@@ -1,11 +1,11 @@
-# The Clips Kitty Whop app
+# The SpikeClip Whop app
 
-A marketing surface that puts Clips Kitty in front of the people who would
+A marketing surface that puts SpikeClip in front of the people who would
 use it: members of clipping communities on [Whop](https://whop.com), who cut
 streamer VODs into vertical shorts and get paid per view.
 
 **It is a set of pages, nothing more.** It does not process video, store
-anything, talk to a member's PC, or connect to the Clips Kitty engine. The
+anything, talk to a member's PC, or connect to the SpikeClip engine. The
 desktop app has no idea this exists and works exactly the same without it.
 
 ## What it is
@@ -14,7 +14,7 @@ Whop embeds the app in an iframe and routes to three surfaces:
 
 | Route | Who sees it | What it says |
 |---|---|---|
-| `/experiences/[experienceId]` | **members**, in the community sidebar | what Clips Kitty does, what their PC needs, the download, how it works, what it does not do |
+| `/experiences/[experienceId]` | **members**, in the community sidebar | what SpikeClip does, what their PC needs, the download, how it works, what it does not do |
 | `/dashboard/[companyId]` | the **community owner**, in their dashboard | why it is worth recommending, what members need, and a message they can paste into their community |
 | `/discover` | anyone browsing the **App Store** | the listing pitch |
 
@@ -46,8 +46,8 @@ NEXT_PUBLIC_WHOP_APP_ID=app_xxxxx
 WHOP_API_KEY=xxxxx
 ```
 
-There is **no webhook secret**, because there is no webhook route — Clips
-Kitty is free, so there are no payments to be notified about. The
+There is **no webhook secret**, because there is no webhook route —
+SpikeClip is free, so there are no payments to be notified about. The
 template's `/api/webhooks` handler was deleted rather than left as dead code
 that fails the build without a key nobody needs.
 
@@ -77,7 +77,7 @@ and this does not change that.
 download link is built from it. **It is pinned on purpose.**
 
 The Web Setup on GitHub is ~800 KB and fetches
-`clips-studio-<version>-x64.nsis.7z` **by name** from the Hugging Face
+`spikeclip-<version>-x64.nsis.7z` **by name** from the Hugging Face
 release repo, because a GitHub release asset is capped at 2 GiB and the
 payload is 5.88 GiB. Setup and payload are a matched pair. Bump `VERSION`
 only once the new payload is live on Hugging Face, or everyone who clicks
@@ -90,7 +90,7 @@ Something has to serve the page, and that is Vercel's free tier here.
 
 ### Recommended: connect the GitHub repo
 
-On vercel.com, **Add New → Project**, import `ColinGPT9/clips-studio`, and
+On vercel.com, **Add New → Project**, import `ColinGPT9/spikeclip`, and
 set:
 
 | Setting | Value |

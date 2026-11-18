@@ -1,5 +1,5 @@
 /**
- * Clips Kitty feedback relay — a tiny Cloudflare Worker that lets app
+ * SpikeClip feedback relay — a tiny Cloudflare Worker that lets app
  * users file bug reports / feature requests WITHOUT a GitHub account.
  *
  * The app POSTs a report here; this worker validates it, applies anti-spam
@@ -7,7 +7,7 @@
  * lives in this worker's secrets (never in the open-source app).
  *
  * Anti-spam layers:
- *  1. Custom header (x-clips-studio): its absence 403s everything, and its
+ *  1. Custom header (x-spikeclip): its absence 403s everything, and its
  *     presence on cross-origin browser requests forces a CORS preflight we
  *     never answer — web pages can't draft visitors into spamming.
  *  2. Proof-of-work challenge: the client must fetch GET /challenge and
@@ -28,7 +28,7 @@
  *   GITHUB_TOKEN  — fine-grained PAT, Issues: Read+Write on the repo only
  *   HMAC_KEY      — any long random string (signs challenges)
  * Vars (wrangler.toml):
- *   REPO          — "owner/name", e.g. "ColinGPT9/clips-studio"
+ *   REPO          — "owner/name", e.g. "ColinGPT9/spikeclip"
  * KV binding: FEEDBACK_KV
  */
 
@@ -47,7 +47,7 @@ const TYPES = {
 };
 
 const AREA_LABELS = new Set([
-  "ui", "ai", "performance", "accessibility", "video-editor", "clips-studio",
+  "ui", "ai", "performance", "accessibility", "video-editor", "spikeclip",
   "windows", "youtube", "twitch", "kick", "ffmpeg", "whisper", "gemma", "ollama",
 ]);
 
@@ -61,7 +61,7 @@ export default {
       // worker never answers — so web pages can't draft their visitors'
       // browsers (and fresh IPs) into spamming the relay. The desktop app
       // sets it trivially; only browsers are locked out.
-      if (request.headers.get("x-clips-studio") !== "1") {
+      if (request.headers.get("x-spikeclip") !== "1") {
         return json({ error: "bad client" }, 403);
       }
       if (request.method === "GET" && url.pathname === "/challenge") {
@@ -211,7 +211,7 @@ async function handleSubmit(request, env, ip) {
   // that (see README). It does make every issue say plainly, in its own first
   // line, that a user wrote it. The duplicate-comment path below has always
   // said "Another user reported..." - new issues never got the same courtesy.
-  const ATTRIBUTION = `> **Submitted by a Clips Kitty user** through the in-app feedback hub, and filed here automatically. Not written by the maintainer.
+  const ATTRIBUTION = `> **Submitted by a SpikeClip user** through the in-app feedback hub, and filed here automatically. Not written by the maintainer.
 
 `;
 
@@ -330,7 +330,7 @@ async function ghApi(env, path, method, payload) {
     headers: {
       authorization: `Bearer ${env.GITHUB_TOKEN}`,
       accept: "application/vnd.github+json",
-      "user-agent": "clips-studio-feedback-relay",
+      "user-agent": "spikeclip-feedback-relay",
       "x-github-api-version": "2022-11-28",
     },
     body: payload === undefined ? undefined : JSON.stringify(payload),

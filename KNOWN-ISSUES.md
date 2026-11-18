@@ -6,7 +6,7 @@ been fixed is still listed as broken.
 
 Hit something that is not here? The **💬 button on the Dashboard** files a
 report without needing a GitHub account, or open an
-[issue](https://github.com/ColinGPT9/clips-studio/issues).
+[issue](https://github.com/ColinGPT9/spikeclip/issues).
 
 ---
 
@@ -14,14 +14,14 @@ report without needing a GitHub account, or open an
 
 If you publish from the editor and the video arrives on your channel as
 **private** when you asked for public, this is why, and it is not something
-Clips Kitty can fix.
+SpikeClip can fix.
 
 YouTube restricts uploads made through the API by any Google Cloud project that
 has not passed its free compliance audit. The lock is **permanent**: you cannot
 change the video to public in YouTube Studio afterwards, and there is no appeal.
 The only remedy is uploading the video again from an audited project.
 
-Clips Kitty reads the privacy back after every upload and tells you when this
+SpikeClip reads the privacy back after every upload and tells you when this
 has happened, rather than reporting success for a video nobody can watch.
 
 **What to do:** submit the
@@ -32,7 +32,7 @@ not affected, so it is a usable workflow in the meantime.
 ## Your YouTube sign-in expires weekly if the consent screen is on "Testing"
 
 Google expires the sign-in for an OAuth app in *Testing* after 7 days, so
-Clips Kitty asks you to reconnect every week.
+SpikeClip asks you to reconnect every week.
 
 **Fix:** in the Google Cloud Console, open the OAuth consent screen and press
 **Publish app**. "In production" does not mean verified and costs nothing. You
@@ -44,7 +44,7 @@ yourself.
 
 ## Only three AI models have actually been tested
 
-Clips Kitty can run any model Ollama serves, and the Models page lists several.
+SpikeClip can run any model Ollama serves, and the Models page lists several.
 **Only these three have been run against real streams:**
 
 - `gemma:7b`
@@ -114,15 +114,15 @@ interviews.
 
 Downloading is handled by yt-dlp, which is bundled inside the app. Twitch, Kick
 and YouTube change things regularly; yt-dlp fixes them within days, but the
-copy inside Clips Kitty is fixed at build time.
+copy inside SpikeClip is fixed at build time.
 
-So there is a window, from a site changing to the next Clips Kitty release,
+So there is a window, from a site changing to the next SpikeClip release,
 where downloads from that one site fail even though the fix already exists.
 Other sites keep working, which is the tell: **if Twitch works and Kick does
 not, it is this, not your setup.**
 
 Being worked on in
-[#39](https://github.com/ColinGPT9/clips-studio/issues/39). If you hit it,
+[#39](https://github.com/ColinGPT9/spikeclip/issues/39). If you hit it,
 report it with the site and the error. It helps establish how often this
 actually bites.
 
@@ -163,7 +163,7 @@ Leave it running. A **Restart & install** button appears when it finishes.
 
 If an update fails, the banner vanishes rather than saying so, and no log is
 kept. If an update seems to go nowhere, download the installer from the
-[releases page](https://github.com/ColinGPT9/clips-studio/releases) instead,
+[releases page](https://github.com/ColinGPT9/spikeclip/releases) instead,
 installing over the top works fine and keeps your settings and models.
 
 ## Low-memory machines may fail to render

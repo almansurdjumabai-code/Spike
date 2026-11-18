@@ -2,21 +2,21 @@
 
 Small recipes for reading a game's video: what is on one part of the screen, how bright or loud it is, where the scenes cut, what is said, and what the creator's local model sees. Each recipe is a whole `src/main.py` that runs as written, and each says what it found on the SDK's sample video, how long that took, and how it fails.
 
-> Clips Kitty 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0.
+> SpikeClip 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0.
 
-Every recipe here **needs SDK 1.2.0**, which added `media`, `signals`, `text` and `local_model` ([changelog](../../sdk/python/CHANGELOG.md)).
+Every recipe here **needs SDK 1.2.0**, which added `media`, `signals`, `text` and `local_model` ([changelog](../../backend/sdk/python/CHANGELOG.md)).
 
-**To try one:** make a plugin with `py -m clipskitty_sdk new my-recipe --template blank` (bash: `python -m clipskitty_sdk new my-recipe --template blank`), put the recipe in its `src/main.py`, set the `inputs`, `outputs` and `permissions` lines in its `clipskitty.yaml` to the recipe's, and run it with `run my-recipe --sample`. [Your first game pipeline](first-game-pipeline.md) walks through a whole plugin.
+**To try one:** make a plugin with `py -m spikeclip_sdk new my-recipe --template blank` (bash: `python -m spikeclip_sdk new my-recipe --template blank`), put the recipe in its `src/main.py`, set the `inputs`, `outputs` and `permissions` lines in its `spikeclip.yaml` to the recipe's, and run it with `run my-recipe --sample`. [Your first game pipeline](first-game-pipeline.md) walks through a whole plugin.
 
-**The sample video** is 40 seconds of 640x360: a red banner at the top (the region `0.30,0.10,0.40,0.10`) and a white square in the top right corner from 22 to 27 s, a loud sound from 22 to 27 s, scene cuts at 10, 20 and 30 s, and a transcript that says "quark burst" from 21 to 26 s. `python -m clipskitty_sdk sample sample.mp4` writes it.
+**The sample video** is 40 seconds of 640x360: a red banner at the top (the region `0.30,0.10,0.40,0.10`) and a white square in the top right corner from 22 to 27 s, a loud sound from 22 to 27 s, scene cuts at 10, 20 and 30 s, and a transcript that says "quark burst" from 21 to 26 s. `python -m spikeclip_sdk sample sample.mp4` writes it.
 
 **The costs** were measured on the sample, on the Linux PC these pages were checked on, with FFmpeg 6.1.1. They grow with the length of the video.
 
-**The rules every recipe keeps.** It imports only the standard library and `clipskitty_sdk`, at the top of the file. Clips Kitty runs plugins on its own Python, which has nothing else. From SDK 1.2.0 on, a plugin that imports a module the SDK of the Clips Kitty running it doesn't have stops as soon as it starts, with "This pipeline needs a newer version of Clips Kitty. Update Clips Kitty, or ask the pipeline's developer which version it needs." Its error lines are plain sentences, because creators see them.
+**The rules every recipe keeps.** It imports only the standard library and `spikeclip_sdk`, at the top of the file. SpikeClip runs plugins on its own Python, which has nothing else. From SDK 1.2.0 on, a plugin that imports a module the SDK of the SpikeClip running it doesn't have stops as soon as it starts, with "This pipeline needs a newer version of SpikeClip. Update SpikeClip, or ask the pipeline's developer which version it needs." Its error lines are plain sentences, because creators see them.
 
 ## A region's frames
 
-`media.frames` reads one part of the screen, a few times a second, each frame shrunk to a few pixels, which keeps it quick. A region is four numbers from 0 to 1: left, top, width and height, as parts of the frame, so it fits a recording of any size. `python -m clipskitty_sdk frame VIDEO --at SECONDS --region "..."` draws one on a frame, to measure your own.
+`media.frames` reads one part of the screen, a few times a second, each frame shrunk to a few pixels, which keeps it quick. A region is four numbers from 0 to 1: left, top, width and height, as parts of the frame, so it fits a recording of any size. `python -m spikeclip_sdk frame VIDEO --at SECONDS --region "..."` draws one on a frame, to measure your own.
 
 ```yaml
 inputs: [video]
@@ -25,7 +25,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run
+from spikeclip_sdk import media, run
 
 BANNER = media.Region.parse("0.30,0.10,0.40,0.10")  # left, top, width, height, as fractions of the frame
 
@@ -46,7 +46,7 @@ if __name__ == "__main__":
 - **Needs:** SDK 1.2.0; `video` in `inputs`, and `video.read` and `ffmpeg` in `permissions`.
 - **On the sample:** "The middle of the banner's part of the screen is red in 20 frames." (22.0 to 26.75 s, 4 a second.)
 - **Cost:** 0.35 s.
-- **How it fails:** a stream that moves the game (a webcam over it, the game shown smaller) puts something else in the region. Without `ffmpeg` or `video.read` in the permissions, the run stops with "This pipeline needs FFmpeg: add ffmpeg to permissions in clipskitty.yaml" or "This pipeline needs the video: add video.read to permissions in clipskitty.yaml". A video FFmpeg can't read stops it with FFmpeg's last line.
+- **How it fails:** a stream that moves the game (a webcam over it, the game shown smaller) puts something else in the region. Without `ffmpeg` or `video.read` in the permissions, the run stops with "This pipeline needs FFmpeg: add ffmpeg to permissions in spikeclip.yaml" or "This pipeline needs the video: add video.read to permissions in spikeclip.yaml". A video FFmpeg can't read stops it with FFmpeg's last line.
 - Each `Frame` has `t` (seconds), `width`, `height`, `rgb` (3 bytes a pixel, row by row) and `pixel(x, y)`. `size=None` keeps the full size, which is much slower.
 
 ## A colour share
@@ -60,7 +60,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run, signals
+from spikeclip_sdk import media, run, signals
 
 BANNER = media.Region.parse("0.30,0.10,0.40,0.10")
 
@@ -93,7 +93,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run, signals
+from spikeclip_sdk import media, run, signals
 
 
 def main(job):
@@ -126,7 +126,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run, signals
+from spikeclip_sdk import media, run, signals
 
 ICON = media.Region.parse("0.92,0.05,0.05,0.09")  # the top right corner
 
@@ -159,7 +159,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run, signals
+from spikeclip_sdk import media, run, signals
 
 
 def main(job):
@@ -190,7 +190,7 @@ permissions: [video.read, ffmpeg]
 ```
 
 ```python
-from clipskitty_sdk import media, run, signals
+from spikeclip_sdk import media, run, signals
 
 
 def main(job):
@@ -214,7 +214,7 @@ if __name__ == "__main__":
 
 ## Words said
 
-`text.said` says when each word or phrase is said in the transcript Clips Kitty made, as whole words in any case or spacing. It needs no FFmpeg.
+`text.said` says when each word or phrase is said in the transcript SpikeClip made, as whole words in any case or spacing. It needs no FFmpeg.
 
 ```yaml
 inputs: [transcript]
@@ -223,7 +223,7 @@ permissions: [transcript.read]
 ```
 
 ```python
-from clipskitty_sdk import run, signals, text
+from spikeclip_sdk import run, signals, text
 
 WORDS = text.words_of("quark burst, triple bloom")  # or a setting: text.words_of(job.settings["words"])
 
@@ -245,7 +245,7 @@ if __name__ == "__main__":
 
 ## Asking the local model about a frame
 
-`local_model.ask` asks the creator's local model, the one they chose in Clips Kitty, with pictures when `local_model.can_see` says it can look at them. This recipe understands moments others found: it says what happens on screen in each one, and the notes reach the AI that writes the clips' titles ([Steps](steps.md)).
+`local_model.ask` asks the creator's local model, the one they chose in SpikeClip, with pictures when `local_model.can_see` says it can look at them. This recipe understands moments others found: it says what happens on screen in each one, and the notes reach the AI that writes the clips' titles ([Steps](steps.md)).
 
 ```yaml
 inputs: [moments, video]
@@ -254,7 +254,7 @@ permissions: [video.read, ffmpeg, ollama]
 ```
 
 ```python
-from clipskitty_sdk import local_model, media, run
+from spikeclip_sdk import local_model, media, run
 
 QUESTION = "In one short sentence, what happens on screen?"
 
@@ -272,11 +272,11 @@ if __name__ == "__main__":
     run(main)
 ```
 
-- **Needs:** SDK 1.2.0; `moments` and `video` in `inputs`, `context` in `outputs`, and `video.read`, `ffmpeg` and `ollama` in `permissions`; and a local model in the creator's Clips Kitty.
-- **To try it:** `run my-recipe --sample` alone names no local model, as Clips Kitty does when its AI runs at a cloud provider, so it stops with the sentence below. With Ollama running on this PC, add `--ollama-model` and the name of a model you have in it that can look at pictures: `py -m clipskitty_sdk run my-recipe --sample --ollama-model <the model's name>` (bash: `python -m clipskitty_sdk run …`). `--ollama-host` changes the address, which is `http://localhost:11434` unless you pass it. In a test, `testing.run_plugin` takes `ollama_model=` and `ollama_host=` ([SDK reference](sdk.md)).
-- **It needs the creator to use a local model in Clips Kitty.** When Clips Kitty's AI runs at a cloud provider, the job names no local model and this refuses: "No local model is set in Clips Kitty (its AI may run at a cloud provider), and this helper only uses a model on this PC". It talks only to a model on this PC (127.0.0.1, localhost or ::1), refuses an address anywhere else, never falls back to another address and never calls a cloud service. Its requests ignore proxy settings on purpose, so the frames never leave the PC. The model is always the one Clips Kitty names; a plugin can't choose another here.
+- **Needs:** SDK 1.2.0; `moments` and `video` in `inputs`, `context` in `outputs`, and `video.read`, `ffmpeg` and `ollama` in `permissions`; and a local model in the creator's SpikeClip.
+- **To try it:** `run my-recipe --sample` alone names no local model, as SpikeClip does when its AI runs at a cloud provider, so it stops with the sentence below. With Ollama running on this PC, add `--ollama-model` and the name of a model you have in it that can look at pictures: `py -m spikeclip_sdk run my-recipe --sample --ollama-model <the model's name>` (bash: `python -m spikeclip_sdk run …`). `--ollama-host` changes the address, which is `http://localhost:11434` unless you pass it. In a test, `testing.run_plugin` takes `ollama_model=` and `ollama_host=` ([SDK reference](sdk.md)).
+- **It needs the creator to use a local model in SpikeClip.** When SpikeClip's AI runs at a cloud provider, the job names no local model and this refuses: "No local model is set in SpikeClip (its AI may run at a cloud provider), and this helper only uses a model on this PC". It talks only to a model on this PC (127.0.0.1, localhost or ::1), refuses an address anywhere else, never falls back to another address and never calls a cloud service. Its requests ignore proxy settings on purpose, so the frames never leave the PC. The model is always the one SpikeClip names; a plugin can't choose another here.
 - **On the sample,** with a stand-in for the model that answers every question with one sentence: each of the 5 sample moments gets that sentence as its note. No real model was run for this page.
 - **Cost:** 0.45 s for the 5 frames and the stand-in's answers. A real model's own time comes on top, for each moment, and depends on the model and the PC; it wasn't measured.
-- **How it fails:** without `ollama` in the permissions it stops with "This pipeline doesn't ask for the local model: add ollama to permissions in clipskitty.yaml"; when Ollama isn't running, with "The local model didn't answer at …: is Ollama running?", naming the address. A model that can't look at pictures gets no question here. A model's answer can be wrong, and a note is cut to 160 characters. With `json=True`, `ask` asks for JSON only (read it with `json.loads`).
+- **How it fails:** without `ollama` in the permissions it stops with "This pipeline doesn't ask for the local model: add ollama to permissions in spikeclip.yaml"; when Ollama isn't running, with "The local model didn't answer at …: is Ollama running?", naming the address. A model that can't look at pictures gets no question here. A model's answer can be wrong, and a note is cut to 160 characters. With `json=True`, `ask` asks for JSON only (read it with `json.loads`).
 
-There is no recipe for reading text on screen (OCR): it needs packages Clips Kitty can't install for a plugin yet ([Pipeline development](pipeline-development.md)).
+There is no recipe for reading text on screen (OCR): it needs packages SpikeClip can't install for a plugin yet ([Pipeline development](pipeline-development.md)).

@@ -1,70 +1,70 @@
 # Your first game pipeline
 
-This page builds a pipeline plugin for one game, from nothing to a plugin Clips Kitty runs. The game is **Quarkbloom Arena, a made-up game**: when a player makes a big play, a red "quark burst" banner shows at the top of the screen and the crowd gets loud. The plugin finds those moments in a recording, and Clips Kitty turns them into clips. Your game will show something else; the steps are the same.
+This page builds a pipeline plugin for one game, from nothing to a plugin SpikeClip runs. The game is **Quarkbloom Arena, a made-up game**: when a player makes a big play, a red "quark burst" banner shows at the top of the screen and the crowd gets loud. The plugin finds those moments in a recording, and SpikeClip turns them into clips. Your game will show something else; the steps are the same.
 
-> **Which Clips Kitty runs it.** Clips Kitty 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0. Steps 1 to 6 don't need Clips Kitty: only Python, FFmpeg and Git (for step 1's install). Step 7 needs Clips Kitty 2.1.0 or later, or one run from source ([From source](../../README.md#from-source)).
+> **Which SpikeClip runs it.** SpikeClip 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0. Steps 1 to 6 don't need SpikeClip: only Python, FFmpeg and Git (for step 1's install). Step 7 needs SpikeClip 2.1.0 or later, or one run from source ([From source](../../README.md#from-source)).
 
 You need:
-- **Python 3.11**, the Python Clips Kitty runs plugins on. The SDK works on 3.10 or newer, but test on 3.11: newer Python code fails there.
+- **Python 3.11**, the Python SpikeClip runs plugins on. The SDK works on 3.10 or newer, but test on 3.11: newer Python code fails there.
 - **FFmpeg** on `PATH`, for the sample video and for reading your recordings.
 - **Git**, to install the SDK until it is on PyPI, and to share your plugin.
 
-Every command is shown twice: for PowerShell on Windows (`py -m clipskitty_sdk`), then for bash on macOS or Linux (`python -m clipskitty_sdk`). Run them all from one folder of your own, the folder that will **hold** your plugin's folder.
+Every command is shown twice: for PowerShell on Windows (`py -m spikeclip_sdk`), then for bash on macOS or Linux (`python -m spikeclip_sdk`). Run them all from one folder of your own, the folder that will **hold** your plugin's folder.
 
 ## 1. Install the SDK
 
 PowerShell:
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
 ```
 
 bash:
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
 ```
 
-`yaml` adds PyYAML, which reads `clipskitty.yaml`; `test` adds pytest, for your plugin's tests. Check it with `py -m clipskitty_sdk --version` (bash: `python -m clipskitty_sdk --version`), which prints `clipskitty-sdk 1.2.0 (plugin contract 1)`.
+`yaml` adds PyYAML, which reads `spikeclip.yaml`; `test` adds pytest, for your plugin's tests. Check it with `py -m spikeclip_sdk --version` (bash: `python -m spikeclip_sdk --version`), which prints `spikeclip-sdk 1.2.0 (plugin contract 1)`.
 
-If you use a virtual environment, make it in the folder that will hold your plugin's folder, never inside the plugin's folder: Clips Kitty copies everything in the plugin's folder when it installs it, and `install` (step 7) refuses a folder with `.venv`, `venv` or `node_modules` in it.
+If you use a virtual environment, make it in the folder that will hold your plugin's folder, never inside the plugin's folder: SpikeClip copies everything in the plugin's folder when it installs it, and `install` (step 7) refuses a folder with `.venv`, `venv` or `node_modules` in it.
 
 ## 2. Make the plugin
 
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
 ```
 
 bash:
 
 ```bash
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
 ```
 
 ```text
 Made quarkbloom-bursts from the game-events template.
-Next: python -m clipskitty_sdk run quarkbloom-bursts --sample
-Then change clipskitty.yaml, src/main.py and README.md for your game:
-https://github.com/ColinGPT9/clips-studio/blob/main/docs/developers/first-game-pipeline.md
+Next: python -m spikeclip_sdk run quarkbloom-bursts --sample
+Then change spikeclip.yaml, src/main.py and README.md for your game:
+https://github.com/ColinGPT9/spikeclip/blob/main/docs/developers/first-game-pipeline.md
 ```
 
-Put your own GitHub name, in lower case, in place of `your-github-name`: it becomes the publisher in the plugin's id, `your-github-name/quarkbloom-bursts`. On Windows the Next line may say `py -m clipskitty_sdk`: it names the Python that ran `new`. `new --list` shows the other templates: `blank`, `transcript`, `rater`, `understander` and `editor`.
+Put your own GitHub name, in lower case, in place of `your-github-name`: it becomes the publisher in the plugin's id, `your-github-name/quarkbloom-bursts`. On Windows the Next line may say `py -m spikeclip_sdk`: it names the Python that ran `new`. `new --list` shows the other templates: `blank`, `transcript`, `rater`, `understander` and `editor`.
 
 `new` wrote these files:
 
 ```text
 quarkbloom-bursts/
-  clipskitty.yaml                         what Clips Kitty reads about the plugin: its id, inputs, outputs, permissions and settings
-  src/main.py                             the plugin: Clips Kitty starts it with a job folder
+  spikeclip.yaml                         what SpikeClip reads about the plugin: its id, inputs, outputs, permissions and settings
+  src/main.py                             the plugin: SpikeClip starts it with a job folder
   tests/test_main.py                      its tests, on the SDK's sample video
   README.md                               what it does and can't do, for the people who install it
   CHANGELOG.md
   LICENSE                                 MIT, your licence for the plugin (change it if you like)
   TEMPLATE-LICENSE.txt                    the MIT licence of the code that came from the template
   .gitignore
-  .github/workflows/clipskitty-check.yml  checks the plugin on GitHub, on Linux and Windows, with Python 3.11
+  .github/workflows/spikeclip-check.yml  checks the plugin on GitHub, on Linux and Windows, with Python 3.11
 ```
 
 ## 3. Run it on the sample
@@ -72,13 +72,13 @@ quarkbloom-bursts/
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash:
 
 ```bash
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 ```text
@@ -86,13 +86,13 @@ note: --sample: a 40-second test video with a red banner at the top and a loud s
 job folder: …
    10%  Looking for the banner
    70%  Listening for the sound getting louder
-1 moment(s), as Clips Kitty would take them:
+1 moment(s), as SpikeClip would take them:
       16.0s      29.8s  score   -  quark_burst
        why: the banner shows from 22 to 26.75 s, and the sound gets 25 dB louder
 notes: The banner shows 1 time(s), 1 of them as the sound gets louder.
 ```
 
-`--sample` makes a 40-second test video in a new job folder, kept so you can look inside it, and runs the plugin on it the way Clips Kitty would: the same `job.json`, the same checks of the answer. The video has the red banner from 22 to 27 seconds, with a loud sound at the same time. The plugin found one moment, from 6 seconds before the banner to 3 seconds after it (16.0 to 29.75 s, shown rounded), labelled `quark_burst`, with its reason. On a terminal the progress lines are rewritten in place.
+`--sample` makes a 40-second test video in a new job folder, kept so you can look inside it, and runs the plugin on it the way SpikeClip would: the same `job.json`, the same checks of the answer. The video has the red banner from 22 to 27 seconds, with a loud sound at the same time. The plugin found one moment, from 6 seconds before the banner to 3 seconds after it (16.0 to 29.75 s, shown rounded), labelled `quark_burst`, with its reason. On a terminal the progress lines are rewritten in place.
 
 How it works, in `src/main.py`:
 1. `media.frames` reads the banner's part of the screen 4 times a second, each frame shrunk to 32x8 pixels.
@@ -104,22 +104,22 @@ The [Signals cookbook](signals-cookbook.md) has these building blocks one at a t
 
 ## 4. Measure your screen with `frame`
 
-Your game's banner, kill feed or icon is somewhere else. `frame` writes one frame of a video as a PNG, with a box drawn around a region, and prints the region in pixels. Run it from the folder that holds the plugin: `frame` won't write inside a plugin's folder, because Clips Kitty copies everything there when it installs it.
+Your game's banner, kill feed or icon is somewhere else. `frame` writes one frame of a video as a PNG, with a box drawn around a region, and prints the region in pixels. Run it from the folder that holds the plugin: `frame` won't write inside a plugin's folder, because SpikeClip copies everything there when it installs it.
 
 First, on the sample (`sample` writes the test video and its transcript where you say):
 
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk sample sample.mp4
-py -m clipskitty_sdk frame sample.mp4 --at 24 --region "0.30,0.10,0.40,0.10" --out frame.png
+py -m spikeclip_sdk sample sample.mp4
+py -m spikeclip_sdk frame sample.mp4 --at 24 --region "0.30,0.10,0.40,0.10" --out frame.png
 ```
 
 bash:
 
 ```bash
-python -m clipskitty_sdk sample sample.mp4
-python -m clipskitty_sdk frame sample.mp4 --at 24 --region "0.30,0.10,0.40,0.10" --out frame.png
+python -m spikeclip_sdk sample sample.mp4
+python -m spikeclip_sdk frame sample.mp4 --at 24 --region "0.30,0.10,0.40,0.10" --out frame.png
 ```
 
 ```text
@@ -135,7 +135,7 @@ Then on a recording of your own game, at a second where your banner shows. Open 
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk frame "$env:USERPROFILE\Videos\match.mp4" --at 95 --region "0.30,0.10,0.40,0.10" --out frame.png
+py -m spikeclip_sdk frame "$env:USERPROFILE\Videos\match.mp4" --at 95 --region "0.30,0.10,0.40,0.10" --out frame.png
 ```
 
 <!-- not run by tests/test_plugin_docs.py: it needs your own recording -->
@@ -143,14 +143,14 @@ py -m clipskitty_sdk frame "$env:USERPROFILE\Videos\match.mp4" --at 95 --region 
 bash:
 
 ```bash
-python -m clipskitty_sdk frame ~/Videos/match.mp4 --at 95 --region "0.30,0.10,0.40,0.10" --out frame.png
+python -m spikeclip_sdk frame ~/Videos/match.mp4 --at 95 --region "0.30,0.10,0.40,0.10" --out frame.png
 ```
 
 Read the banner's colour from `frame.png` with any colour picker, as 6 hex digits (red, green, blue), such as `e0303a`.
 
 ## 5. Change it for your game
 
-The plugin's settings are in `clipskitty.yaml`. Their defaults are what a job gets unless the creator chooses otherwise:
+The plugin's settings are in `spikeclip.yaml`. Their defaults are what a job gets unless the creator chooses otherwise:
 
 ```yaml
 settings:
@@ -181,13 +181,13 @@ Try a value with `--set` before you change a default. A value holding commas goe
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk run quarkbloom-bursts --sample --set "banner_region=0.30,0.10,0.40,0.10" --set louder_by_db=30
+py -m spikeclip_sdk run quarkbloom-bursts --sample --set "banner_region=0.30,0.10,0.40,0.10" --set louder_by_db=30
 ```
 
 bash:
 
 ```bash
-python -m clipskitty_sdk run quarkbloom-bursts --sample --set "banner_region=0.30,0.10,0.40,0.10" --set louder_by_db=30
+python -m spikeclip_sdk run quarkbloom-bursts --sample --set "banner_region=0.30,0.10,0.40,0.10" --set louder_by_db=30
 ```
 
 ```text
@@ -195,7 +195,7 @@ note: --sample: a 40-second test video with a red banner at the top and a loud s
 job folder: …
    10%  Looking for the banner
    70%  Listening for the sound getting louder
-0 moment(s), as Clips Kitty would take them:
+0 moment(s), as SpikeClip would take them:
 notes: The banner shows 1 time(s), 0 of them as the sound gets louder.
 ```
 
@@ -203,7 +203,7 @@ Then put your region and colour in as the defaults of `banner_region` and `banne
 
 ```python
 # ---- your game: change these ------------------------------------------------------------
-LABEL = "quark_burst"     # the kind of moment; list it under events in clipskitty.yaml
+LABEL = "quark_burst"     # the kind of moment; list it under events in spikeclip.yaml
 SHARE = 0.5               # how much of the banner's part of the screen must be its colour (0 to 1)
 FRAMES_PER_SECOND = 4     # how often to look
 LEAD_SECONDS = 6.0        # seconds kept before the banner shows
@@ -211,16 +211,16 @@ TAIL_SECONDS = 3.0        # seconds kept after it goes
 # ------------------------------------------------------------------------------------------
 ```
 
-When you change `LABEL`, change `events` in `clipskitty.yaml` to match: the Marketplace lists only the labels there, and `run` warns about any other. Change `name`, `description` and `games` there too, and say honestly what the plugin finds and what it misses. Last, rewrite `README.md` for your game, without the "Quarkbloom Arena (a made-up game)" line, and change `tests/test_main.py` as you change the plugin.
+When you change `LABEL`, change `events` in `spikeclip.yaml` to match: the Marketplace lists only the labels there, and `run` warns about any other. Change `name`, `description` and `games` there too, and say honestly what the plugin finds and what it misses. Last, rewrite `README.md` for your game, without the "Quarkbloom Arena (a made-up game)" line, and change `tests/test_main.py` as you change the plugin.
 
-The plugin runs on Clips Kitty's own Python, which has the standard library and `clipskitty_sdk` and nothing else, so import only those, at the top of the file. `validate` and `run` warn about anything else, and about text files opened without `encoding="utf-8"`.
+The plugin runs on SpikeClip's own Python, which has the standard library and `spikeclip_sdk` and nothing else, so import only those, at the top of the file. `validate` and `run` warn about anything else, and about text files opened without `encoding="utf-8"`.
 
 ## 6. Run it on your own recording
 
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk run quarkbloom-bursts --video "$env:USERPROFILE\Videos\match.mp4"
+py -m spikeclip_sdk run quarkbloom-bursts --video "$env:USERPROFILE\Videos\match.mp4"
 ```
 
 <!-- not run by tests/test_plugin_docs.py: it needs your own recording -->
@@ -228,34 +228,34 @@ py -m clipskitty_sdk run quarkbloom-bursts --video "$env:USERPROFILE\Videos\matc
 bash:
 
 ```bash
-python -m clipskitty_sdk run quarkbloom-bursts --video ~/Videos/match.mp4
+python -m spikeclip_sdk run quarkbloom-bursts --video ~/Videos/match.mp4
 ```
 
-It prints the moments Clips Kitty would take, best first, each with its reason. Watch those seconds in the recording: is each one a moment worth a clip, and is a big play missing? Change the region, the colour, `louder_by_db` or the code, and run it again. Exit code 0 means Clips Kitty would accept the answer, 1 that the plugin failed or Clips Kitty would refuse its answer, 2 that the run couldn't start.
+It prints the moments SpikeClip would take, best first, each with its reason. Watch those seconds in the recording: is each one a moment worth a clip, and is a big play missing? Change the region, the colour, `louder_by_db` or the code, and run it again. Exit code 0 means SpikeClip would accept the answer, 1 that the plugin failed or SpikeClip would refuse its answer, 2 that the run couldn't start.
 
-## 7. Put it in Clips Kitty
+## 7. Put it in SpikeClip
 
-This needs a Clips Kitty that runs plugins: no release does yet (see the note at the top), so until one does, run Clips Kitty from source. With Clips Kitty open:
+This needs a SpikeClip that runs plugins: no release does yet (see the note at the top), so until one does, run SpikeClip from source. With SpikeClip open:
 
 PowerShell:
 
 ```powershell
-py -m clipskitty_sdk install quarkbloom-bursts --watch
+py -m spikeclip_sdk install quarkbloom-bursts --watch
 ```
 
-<!-- not run by tests/test_plugin_docs.py: it needs Clips Kitty running -->
+<!-- not run by tests/test_plugin_docs.py: it needs SpikeClip running -->
 
 bash:
 
 ```bash
-python -m clipskitty_sdk install quarkbloom-bursts --watch
+python -m spikeclip_sdk install quarkbloom-bursts --watch
 ```
 
-`install` checks the plugin, prints Clips Kitty's own install screen as text (what the plugin may do, and whether anything leaves the PC), and asks `Install it? [y/N]`. With `--watch` it then reinstalls the plugin each time you save a file, until a save adds something the install screen would show, such as a new permission; Ctrl+C stops it. It talks only to the Clips Kitty on this PC. [SDK › Installing it into Clips Kitty](sdk.md#installing-it-into-clips-kitty) has the details.
+`install` checks the plugin, prints SpikeClip's own install screen as text (what the plugin may do, and whether anything leaves the PC), and asks `Install it? [y/N]`. With `--watch` it then reinstalls the plugin each time you save a file, until a save adds something the install screen would show, such as a new permission; Ctrl+C stops it. It talks only to the SpikeClip on this PC. [SDK › Installing it into SpikeClip](sdk.md#installing-it-into-spikeclip) has the details.
 
-Or, in Clips Kitty, open **Marketplace › Browse** and choose **For developers: install a pipeline you're writing** at the bottom, then pick the plugin's folder.
+Or, in SpikeClip, open **Marketplace › Browse** and choose **For developers: install a pipeline you're writing** at the bottom, then pick the plugin's folder.
 
-Then add a video and choose **Quarkbloom Bursts** as its **Pipeline**. Clips Kitty cuts, frames and captions the moments it finds, as it does for every video.
+Then add a video and choose **Quarkbloom Bursts** as its **Pipeline**. SpikeClip cuts, frames and captions the moments it finds, as it does for every video.
 
 ## 8. Share it
 
@@ -310,7 +310,7 @@ git tag v0.1.0
 git push origin v0.1.0
 ```
 
-The workflow `new` wrote, `.github/workflows/clipskitty-check.yml`, then checks the plugin and runs its tests on every push, on Linux and Windows, with Python 3.11.
+The workflow `new` wrote, `.github/workflows/spikeclip-check.yml`, then checks the plugin and runs its tests on every push, on Linux and Windows, with Python 3.11.
 
 To list it in the Marketplace, make its listing file from the folder that holds the plugin:
 
@@ -318,7 +318,7 @@ PowerShell:
 
 ```powershell
 cd ..
-py -m clipskitty_sdk listing quarkbloom-bursts --section gaming/generic
+py -m spikeclip_sdk listing quarkbloom-bursts --section gaming/generic
 ```
 
 <!-- not run by tests/test_plugin_docs.py: it needs the plugin pushed to GitHub -->
@@ -327,19 +327,19 @@ bash:
 
 ```bash
 cd ..
-python -m clipskitty_sdk listing quarkbloom-bursts --section gaming/generic
+python -m spikeclip_sdk listing quarkbloom-bursts --section gaming/generic
 ```
 
-`listing` checks that everything is committed and pushed and that your GitHub name owns the repository, writes the listing file, and says what to do next: add it to [Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty), the catalog the Marketplace reads, in a pull request with that one file. Use your game's own section if the catalog's `registry/sections.yaml` has one. [Marketplace publishing](marketplace-publishing.md) has the rest.
+`listing` checks that everything is committed and pushed and that your GitHub name owns the repository, writes the listing file, and says what to do next: add it to [Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty), the catalog the Marketplace reads, in a pull request with that one file. Use your game's own section if the catalog's `registry/sections.yaml` has one. [Marketplace publishing](marketplace-publishing.md) has the rest.
 
 ## What it doesn't do
 
 - It sees only the banner's part of the screen and how loud the video is. It can't read the banner's words; anything else of that colour in that place fools it; a big play without the banner is missed.
 - A stream that moves the game (a webcam over it, or the game shown smaller) puts something else in the region. Such a stream needs its own `banner_region`.
 - Loud isn't the same as exciting: commentary or music at the same volume all along hides the crowd.
-- It finds moments only. Saying what happens in them (understand) and scoring moments others found (rate) are other plugins' steps, or other templates ([Steps](steps.md)). Edit plugins suggest edits for the clips ([Steps](steps.md)). Posting isn't a plugin step: Clips Kitty posts clips itself, and through [WoopSocial](https://woopsocial.com/?via=clipskitty) it can post to many sites at once on the creator's own account ([Publish to every platform at once](../../README.md#publish-to-every-platform-at-once)).
-  <sub>Affiliate link - Clips Kitty may earn a commission if you sign up through it, at no extra cost to you.</sub>
-- It runs on the creator's PC with the creator's rights, like any program; Clips Kitty doesn't sandbox it ([Security](security.md)).
+- It finds moments only. Saying what happens in them (understand) and scoring moments others found (rate) are other plugins' steps, or other templates ([Steps](steps.md)). Edit plugins suggest edits for the clips ([Steps](steps.md)). Posting isn't a plugin step: SpikeClip posts clips itself, and through [WoopSocial](https://woopsocial.com/?via=clipskitty) it can post to many sites at once on the creator's own account ([Publish to every platform at once](../../README.md#publish-to-every-platform-at-once)).
+  <sub>Affiliate link - SpikeClip may earn a commission if you sign up through it, at no extra cost to you.</sub>
+- It runs on the creator's PC with the creator's rights, like any program; SpikeClip doesn't sandbox it ([Security](security.md)).
 
 ## Where to go next
 

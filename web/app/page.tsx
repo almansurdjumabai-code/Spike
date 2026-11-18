@@ -557,7 +557,7 @@ function Header({
 					className="h-11 w-11 shrink-0 sm:h-13 sm:w-13"
 				/>
 				<div>
-					<h1 className="text-2xl font-bold sm:text-3xl">Clips Kitty Web</h1>
+					<h1 className="text-2xl font-bold sm:text-3xl">SpikeClip Web</h1>
 					<p className="mt-1 text-sm" style={{ color: "var(--cs-muted)" }}>
 						Find the moments worth clipping, in your browser.{" "}
 						{/* Said up here, not only in the footer. A good share of the
@@ -614,7 +614,7 @@ function SignIn() {
 			</button>
 
 			<p className="mt-4 text-xs" style={{ color: "var(--cs-muted)" }}>
-				You will be asked to authorise Clips Kitty Web on your own OpenRouter
+				You will be asked to authorise SpikeClip Web on your own OpenRouter
 				account. We never see your key. It is stored in this browser only.
 			</p>
 
@@ -1170,7 +1170,7 @@ function DesktopPitch() {
 
 			<div className="mt-6 flex flex-wrap gap-3">
 				<a href={LINKS.download} className="cs-btn px-5 py-2.5 text-sm">
-					Download Clips Kitty for free
+					Download SpikeClip for free
 				</a>
 				<a href={LINKS.msstore} className="cs-btn-quiet px-5 py-2.5 text-sm">
 					Get it from Microsoft Store

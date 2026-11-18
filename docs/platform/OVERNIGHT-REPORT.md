@@ -1,10 +1,10 @@
-# Overnight report: Clips Kitty open platform
+# Overnight report: SpikeClip open platform
 
 Branch `claude/open-platform-w4eh9g`, from `main` at 1d13723. Brief: [BRIEF.md](BRIEF.md). Every decision in full: [DECISIONS.md](DECISIONS.md). Phase by phase, with test counts: [PROGRESS.md](PROGRESS.md).
 
 ## Where things stand
 
-Every phase in the brief is done. Clips Kitty can now install community pipelines from a folder, a GitHub commit or a registry listing, run them as one step of its normal job, show and manage them in a Marketplace screen, and download the models they name into one folder every plugin shares. Nothing existing was replaced: the same API, engine, job queue and pipeline, with one new optional job field (`pipeline`) and new routes, all labelled experimental. The code for Soccer, Basketball, Gaming and the Highlights post style (since removed) was not changed; the one change in the shared pipeline (`core/pipeline.py`) is a branch taken only when a video has a pipeline chosen.
+Every phase in the brief is done. SpikeClip can now install community pipelines from a folder, a GitHub commit or a registry listing, run them as one step of its normal job, show and manage them in a Marketplace screen, and download the models they name into one folder every plugin shares. Nothing existing was replaced: the same API, engine, job queue and pipeline, with one new optional job field (`pipeline`) and new routes, all labelled experimental. The code for Soccer, Basketball, Gaming and the Highlights post style (since removed) was not changed; the one change in the shared pipeline (`core/pipeline.py`) is a branch taken only when a video has a pipeline chosen.
 
 Two things are not true yet and matter most:
 
@@ -21,7 +21,7 @@ Two things are not true yet and matter most:
 | §9 · Independent design review, all 26 findings applied | done | cc00115, 02611f3 |
 | 2 · Public API boundary: every route labelled stable, experimental or internal; stable ones pinned by tests | done | dc64ebd, 96929d6, fa6b570 |
 | 3 · Plugin contract, Python SDK, runner, `pipeline` job option | done | 4cab905, bac61a4 |
-| 4 · Manifest (`clipskitty.yaml`), validator, JSON Schema, built-in modes described | done | 2e5d109, a04fa67 |
+| 4 · Manifest (`spikeclip.yaml`), validator, JSON Schema, built-in modes described | done | 2e5d109, a04fa67 |
 | 5 · Example external pipeline (`examples/pipelines/scene-cut-highlights/`) | done | cdbcbfb, 283465a |
 | 6 · Plugin manager: install, update, roll back, turn off, pin, remove, keys | done | 10d5193, f230d31 |
 | 7 · GitHub registry: listings, index build, block list, offline search | done | 09e79c9, 66802d9, 2b881ee, 9bbc9b4 |
@@ -32,7 +32,7 @@ Two things are not true yet and matter most:
 
 ### The brief's success tests, in code
 
-1. **The niche developer: passes**, with two limits. A developer can write a pipeline with the SDK, name a Hugging Face model pinned to a commit, test it with `python -m clipskitty_sdk run`, publish it on GitHub, list it with a pull request to `registry/`, and users find it in the Marketplace, install it and pick it on a video, with no fork. Limits: a listing reaches users with the next app release (no public index yet), and a pipeline that needs Python packages of its own only works if the user's Python already has them (per-plugin environments are designed, not built).
+1. **The niche developer: passes**, with two limits. A developer can write a pipeline with the SDK, name a Hugging Face model pinned to a commit, test it with `python -m spikeclip_sdk run`, publish it on GitHub, list it with a pull request to `registry/`, and users find it in the Marketplace, install it and pick it on a video, with no fork. Limits: a listing reaches users with the next app release (no public index yet), and a pipeline that needs Python packages of its own only works if the user's Python already has them (per-plugin environments are designed, not built).
 2. **Open Shorts: passes in part.** It can be wrapped as a pipeline that runs locally or calls a hosted copy, with what it sends declared. Running it locally needs its Python packages, so the same limit applies.
 3. **A game-specific model: passes in part.** The model reference, the shared download and the hand-over to the plugin work; loading the model needs a runtime package such as ONNX Runtime, so the same limit applies. GPU use is the plugin's own code and was not run.
 4. **The gaming market: the infrastructure passes.** Search puts the specialised listing first for every query in the brief, over a test catalogue; aliases cover WoW, LoL, CS2 and football/soccer. There are no real listings yet.
@@ -62,7 +62,7 @@ All on Linux (Ubuntu 24.04, Python 3.13, Node 22, no GPU, no Ollama), in this sa
 
 Each is in DECISIONS.md with its alternatives; these are the ones that change what users or developers get.
 
-1. **A plugin runs as its own process with the user's rights; there is no sandbox** (D7, D9). Clips Kitty decides what it hands over (video, transcript, tools, models) and keeps credentials out of the plugin's environment, but the plugin's own code can read the user's files and use the network. Every screen and page says so, and only what Clips Kitty controls is called enforced. *Alternative:* load plugins into the engine (more access, and impossible in the frozen app) or build a sandbox (not possible tonight). *Undo:* none needed; a sandbox would be additive.
+1. **A plugin runs as its own process with the user's rights; there is no sandbox** (D7, D9). SpikeClip decides what it hands over (video, transcript, tools, models) and keeps credentials out of the plugin's environment, but the plugin's own code can read the user's files and use the network. Every screen and page says so, and only what SpikeClip controls is called enforced. *Alternative:* load plugins into the engine (more access, and impossible in the frozen app) or build a sandbox (not possible tonight). *Undo:* none needed; a sandbox would be additive.
 2. **Python plugins use a Python already on the PC** (D11). The installed app ships none, so a Python plugin needs the user to have Python, or `plugins.python` set; the Marketplace now says "It needs Python, and none was found on this PC" before installing. *Alternative:* bundle a Python with the app. *Undo:* additive.
 3. **The existing API stays without a password; only the plugin routes that fetch or change plugins need the app's session secret** (D5, D15). *Alternative:* a token on every route, which would break the OBS plugin, the MCP server and existing scripts. *Undo:* `plugins/session.py` and the route dependencies.
 4. **No "Verified" tier** (D5). Tiers are Official (built-in), Listed (automatic checks only, labelled "not reviewed by a person"), Installed from a link, and Blocked. *Alternative:* a Verified badge, which the brief forbids without a real process. *Undo:* add a tier once a process exists.

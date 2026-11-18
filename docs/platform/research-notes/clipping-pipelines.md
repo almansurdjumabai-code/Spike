@@ -2,8 +2,8 @@
 
 - Tier: OpusClip (Tier 2), Open Shorts (Tier 2), AI-Youtube-Shorts-Generator / ClipsAI / FunClip / ShortGPT (Tier 3)
 - Date read: 2026-10-06 (all URLs below were opened on this date unless marked "not confirmed")
-- Brief's question: what contract do existing clipping pipelines expose (video in, what out?), how is OpusClip's remote API shaped as a model for a remote clipping service, and what would an "Open Shorts for Clips Kitty" adapter (success test 2) have to do?
-- Verdict (two lines): every pipeline studied already works as "video in -> list of {start, end, title/score} in source seconds out", with rendering a separable second step, so H2 holds. OpusClip's REST API (submit URL, completion webhook, `timeRanges` per clip) is the cleanest model for a remote adapter; Open Shorts can be wrapped out of process over its unauthenticated local REST/MCP surface without forking it, but it duplicates Clips Kitty's own models and runs in Docker, not natively on Windows.
+- Brief's question: what contract do existing clipping pipelines expose (video in, what out?), how is OpusClip's remote API shaped as a model for a remote clipping service, and what would an "Open Shorts for SpikeClip" adapter (success test 2) have to do?
+- Verdict (two lines): every pipeline studied already works as "video in -> list of {start, end, title/score} in source seconds out", with rendering a separable second step, so H2 holds. OpusClip's REST API (submit URL, completion webhook, `timeRanges` per clip) is the cleanest model for a remote adapter; Open Shorts can be wrapped out of process over its unauthenticated local REST/MCP surface without forking it, but it duplicates SpikeClip's own models and runs in Docker, not natively on Windows.
 
 The 13-point template applies loosely to the products; for the open-source pipelines the points that apply are filled (unit, metadata, install, dependencies, versioning, models, local/remote, license, incidents) and the rest kept short.
 
@@ -64,14 +64,14 @@ Remote only. Agent surfaces: hosted MCP server at `https://mcp.opus.pro/mcp` wit
 See 6/7. Also: "Pro-tier API access is currently in Beta" (skill page).
 
 ### 11. Borrow
-- The remote-adapter shape: submit URL -> completion webhook (signed, salted, timestamped) -> fetch clips with `timeRanges` in source time plus a rendered-file URL. Clips Kitty's "remote pipeline" capability can standardise on exactly this: a `conclusionActions`-style callback plus a clips query.
-- `curationPref` as the typed input of a clipping capability: `clipDurations` pairs, `range`, `genre`, `topicKeywords`/`customPrompt`. These map one-to-one onto a Clips Kitty pipeline manifest's declared inputs.
-- `durationMs` + `timeRanges` as separate fields: a clip can be assembled from several source ranges (OpusClip and Open Shorts both allow multi-segment clips), so the Clips Kitty contract should allow a list of ranges per clip, not a single pair.
-- A per-organisation header (`x-opus-org-id`) and per-key rate limits are the right place to put multi-tenant concerns; Clips Kitty's local API has neither and does not need them, but a remote pipeline manifest should declare that the remote side does.
+- The remote-adapter shape: submit URL -> completion webhook (signed, salted, timestamped) -> fetch clips with `timeRanges` in source time plus a rendered-file URL. SpikeClip's "remote pipeline" capability can standardise on exactly this: a `conclusionActions`-style callback plus a clips query.
+- `curationPref` as the typed input of a clipping capability: `clipDurations` pairs, `range`, `genre`, `topicKeywords`/`customPrompt`. These map one-to-one onto a SpikeClip pipeline manifest's declared inputs.
+- `durationMs` + `timeRanges` as separate fields: a clip can be assembled from several source ranges (OpusClip and Open Shorts both allow multi-segment clips), so the SpikeClip contract should allow a list of ranges per clip, not a single pair.
+- A per-organisation header (`x-opus-org-id`) and per-key rate limits are the right place to put multi-tenant concerns; SpikeClip's local API has neither and does not need them, but a remote pipeline manifest should declare that the remote side does.
 
 ### 12. Avoid
-- Docs whose schema pages are empty stubs: Clips Kitty's SDK docs should ship the JSON schema of every I/O type next to the endpoint, generated from code.
-- An inconsistent unit (`timeRanges` "in seconds" with a millisecond-looking example). Clips Kitty should state the unit in the field name (`start_sec`/`end_sec` or `start_ms`).
+- Docs whose schema pages are empty stubs: SpikeClip's SDK docs should ship the JSON schema of every I/O type next to the endpoint, generated from code.
+- An inconsistent unit (`timeRanges` "in seconds" with a millisecond-looking example). SpikeClip should state the unit in the field name (`start_sec`/`end_sec` or `start_ms`).
 - Signing webhooks with the account's primary API secret ("the first key created"): rotating that key breaks signature verification. Use a per-webhook secret, as Open Shorts does (`webhook_secret`).
 
 ---
@@ -135,8 +135,8 @@ Both, same code: self-hosted (Docker, BYOK, no key) and hosted (`https://api.ope
 - Jobs auto-clean after 1 hour (README); `MAX_CONCURRENT_JOBS` default 5 must be sized by VRAM.
 
 ### 11. Borrow
-- The three-surface rule: REST is the only implementation; MCP tools and the CLI call the REST API ("nothing here can drift from what the app actually does"). Clips Kitty's SDK should likewise be a thin client over the existing local API, never a second code path.
-- One validated schema for every LLM provider (`llm_backend` + pydantic): the Clips Kitty scoring stage can accept community LLM backends only if they return the same typed shape.
+- The three-surface rule: REST is the only implementation; MCP tools and the CLI call the REST API ("nothing here can drift from what the app actually does"). SpikeClip's SDK should likewise be a thin client over the existing local API, never a second code path.
+- One validated schema for every LLM provider (`llm_backend` + pydantic): the SpikeClip scoring stage can accept community LLM backends only if they return the same typed shape.
 - Source-second `segments[]` as the editable recipe (`/edl`, `/rerender` with `snap_to_words`): the clip contract should carry a list of source ranges and let the renderer snap to words.
 - `acknowledged: true` rights attestation on submit, and refusing to retry a quality-gated job automatically.
 - Signed webhooks with a per-job secret; `webhook_url` validated against private addresses at submit and at delivery.
@@ -144,25 +144,25 @@ Both, same code: self-hosted (Docker, BYOK, no key) and hosted (`https://api.ope
 - Exact pins in one container per pipeline (fits H6's "one env per pipeline costs disk but avoids conflicts").
 
 ### 12. Avoid
-- An unauthenticated service published on all interfaces by the default compose file; Clips Kitty already binds 127.0.0.1 and should require community pipelines that spawn servers to do the same.
+- An unauthenticated service published on all interfaces by the default compose file; SpikeClip already binds 127.0.0.1 and should require community pipelines that spawn servers to do the same.
 - A 317 KB `app.py` with product, billing, SEO and pipeline concerns in one process; keep the pipeline contract small.
 - Webhook delivery that refuses localhost: for a local adapter, polling or a local IPC path must stay available.
-- Silent dependence on a remote multimodal model for "automatic" features (layout picker, silent video); a Clips Kitty manifest should declare which stages need a remote model and degrade visibly.
+- Silent dependence on a remote multimodal model for "automatic" features (layout picker, silent video); a SpikeClip manifest should declare which stages need a remote model and degrade visibly.
 
-### Adapter sketch: "Open Shorts for Clips Kitty" (success test 2)
-What it is: an out-of-process pipeline that treats a running Open Shorts instance (local Docker or hosted) as its engine and speaks Clips Kitty's local API on the other side. It copies no Open Shorts code.
+### Adapter sketch: "Open Shorts for SpikeClip" (success test 2)
+What it is: an out-of-process pipeline that treats a running Open Shorts instance (local Docker or hosted) as its engine and speaks SpikeClip's local API on the other side. It copies no Open Shorts code.
 
 | Direction | Mapping |
 |---|---|
-| Clips Kitty video path in | if the instance is local: `POST /api/uploads` + `PUT /api/uploads/{upload_id}` (or a multipart `file` part on `/api/process`); if hosted: the file must be reachable by URL, so the adapter either uploads to the user's own storage or declines local-only inputs (hosted mode is URL-in only). Then `POST /api/process` with `acknowledged: true`, `upload_id` or `url`, `target_clips`, `clip_min_seconds`, `clip_max_seconds`, `captions: false` (Clips Kitty burns its own captions), `auto_hook: false`, `layouts` empty or `["auto"]`, `output_format: "vertical"` |
-| Progress | poll `GET /api/status/{job_id}` every 10-30 s (the CLI polls every 10 s); the `logs[]` lines can be forwarded as Clips Kitty job log; `queue: {position, ahead, eta_seconds}` while queued. Webhooks are not usable for a localhost receiver (public-HTTPS check) |
-| Clips Kitty scored ranges out | for each `result.clips[i]`: `start`/`end` (source seconds) -> one range; label from `video_title_for_youtube_short`; hook from `viral_hook_text`; score from `predicted_score` if present in the result (not confirmed), else rank order; `GET /api/clip/{job}/{i}/edl` gives `segments[]` for multi-segment clips and `words[]` |
-| Rendered files out | `video_url` (relative to the API base; hosted `download_url` presigned 24 h) can be attached as a pre-rendered 9:16 variant, or ignored so Clips Kitty renders from its own ranges |
-| Models | Open Shorts brings its own faster-whisper (`small`/int8 CPU by default), YOLOv8n, MediaPipe, TransNetV2, Parakeet; they live inside the container and duplicate Clips Kitty's. The moment picker can be pointed at Clips Kitty's Ollama (`LLM_BASE_URL=http://host.docker.internal:11434/v1`, `LLM_MODEL=<ollama model>`) for an all-local run; frame-based stages still need a Gemini key or fall back to a plain face-tracking crop |
+| SpikeClip video path in | if the instance is local: `POST /api/uploads` + `PUT /api/uploads/{upload_id}` (or a multipart `file` part on `/api/process`); if hosted: the file must be reachable by URL, so the adapter either uploads to the user's own storage or declines local-only inputs (hosted mode is URL-in only). Then `POST /api/process` with `acknowledged: true`, `upload_id` or `url`, `target_clips`, `clip_min_seconds`, `clip_max_seconds`, `captions: false` (SpikeClip burns its own captions), `auto_hook: false`, `layouts` empty or `["auto"]`, `output_format: "vertical"` |
+| Progress | poll `GET /api/status/{job_id}` every 10-30 s (the CLI polls every 10 s); the `logs[]` lines can be forwarded as SpikeClip job log; `queue: {position, ahead, eta_seconds}` while queued. Webhooks are not usable for a localhost receiver (public-HTTPS check) |
+| SpikeClip scored ranges out | for each `result.clips[i]`: `start`/`end` (source seconds) -> one range; label from `video_title_for_youtube_short`; hook from `viral_hook_text`; score from `predicted_score` if present in the result (not confirmed), else rank order; `GET /api/clip/{job}/{i}/edl` gives `segments[]` for multi-segment clips and `words[]` |
+| Rendered files out | `video_url` (relative to the API base; hosted `download_url` presigned 24 h) can be attached as a pre-rendered 9:16 variant, or ignored so SpikeClip renders from its own ranges |
+| Models | Open Shorts brings its own faster-whisper (`small`/int8 CPU by default), YOLOv8n, MediaPipe, TransNetV2, Parakeet; they live inside the container and duplicate SpikeClip's. The moment picker can be pointed at SpikeClip's Ollama (`LLM_BASE_URL=http://host.docker.internal:11434/v1`, `LLM_MODEL=<ollama model>`) for an all-local run; frame-based stages still need a Gemini key or fall back to a plain face-tracking crop |
 | Remote option | same adapter, base URL `https://api.openshorts.app` + `Authorization: Bearer osk_...`; `GET /api/me` for minutes; 402 `quota_exceeded`, 429 running-job cap; hosted free tier is watermarked |
 | Install | the adapter's manifest must declare a hard dependency on Docker (WSL2 on Windows) or a reachable instance; it cannot ship Open Shorts inside the PyInstaller build |
 | License | adapter can be MIT; it uses only the MIT core (`LICENSE`, `NOTICE`); the `cloud/` directory is under the "OpenShorts Commercial License" (`cloud/LICENSE`: self-host for personal/internal use allowed, no hosted/paid offering to third parties) and is never needed because "the application runs fully without the Commercial Software when the `BILLING_ENABLED` flag is not set" |
-| Permissions to declare | network to the instance (localhost or internet), read of the job's video, write of clip files; no Clips Kitty-side secrets; the instance itself is unauthenticated when local |
+| Permissions to declare | network to the instance (localhost or internet), read of the job's video, write of clip files; no SpikeClip-side secrets; the instance itself is unauthenticated when local |
 
 ---
 
@@ -175,7 +175,7 @@ What it is: an out-of-process pipeline that treats a running Open Shorts instanc
 - Output shape (README, `highlights.py` line 61): `{"highlights":[{"title","start_time":float,"end_time":float,"score":int(0-100),"hook_sentence","virality_reason"}]}`; `--output-json` dumps `transcript`, all `highlights`, and `shorts[]` with `clip_url`.
 - Dependencies: floors only (`faster-whisper>=1.0.0`, `openai>=1.0.0`, `google-genai>=1.0.0`), no lock file; Whisper size by name (`LOCAL_WHISPER_MODEL=base`), no revision pin.
 - Incidents: none found (not confirmed). Note the README is largely vendor marketing for the hosted API.
-- Mapping: the local mode is already "video in -> scored ranges out"; a Clips Kitty wrapper would call `generate_shorts(path, mode="local")` in a subprocess with its own venv and read `highlights[]`.
+- Mapping: the local mode is already "video in -> scored ranges out"; a SpikeClip wrapper would call `generate_shorts(path, mode="local")` in a subprocess with its own venv and read `highlights[]`.
 
 ### C2. ClipsAI
 - Repo: https://github.com/ClipsAI/clipsai (GitHub page 2026-10-06: 544 stars, 100 forks, 68 commits; last commit 2024-01-17 "Fix resize report references"). Docs: https://clipsai.com/ (references: `/references/clip`, `/references/resize`, `/references/transcribe`). PyPI `clipsai` 0.2.1 (`setup.py`).
@@ -183,7 +183,7 @@ What it is: an out-of-process pipeline that treats a running Open Shorts instanc
 - Pipeline (source read via raw.githubusercontent.com, 2026-10-06): `Transcriber` = WhisperX, default `large-v2` on CUDA or `tiny` on CPU (`transcriber.py`); `ClipFinder` = TextTiling over sentence embeddings (`sentence-transformers`, `TextEmbedder`), `cutoff_policy` `high|average|low` (avg ± stdev of depth scores), `min_clip_duration=15`, `max_clip_duration=900` (`clipfinder.py`, `texttiler.py`); `Clip{start_time, end_time, start_char, end_char}` with **no score** (`clip.py`); `resize()` = pyannote.audio diarization (needs a Hugging Face token for the gated model) + `facenet-pytorch`/`mediapipe` to crop to the active speaker, returning `crops.segments`.
 - Install: `pip install clipsai` plus `pip install whisperx@git+https://github.com/m-bain/whisperx.git` (unpinned git), libmagic, ffmpeg.
 - Versioning/incidents: dormant since January 2024; dependency rot (git-installed WhisperX, gated pyannote) is the practical risk (inferred).
-- Mapping: unscored topical segments; a Clips Kitty wrapper would take `clips[]` as candidate ranges and let Clips Kitty's LLM stage score them. Audio-centric only ("podcasts, interviews, speeches, and sermons").
+- Mapping: unscored topical segments; a SpikeClip wrapper would take `clips[]` as candidate ranges and let SpikeClip's LLM stage score them. Audio-centric only ("podcasts, interviews, speeches, and sermons").
 
 ### C3. FunClip (Alibaba / modelscope)
 - Repo: https://github.com/modelscope/FunClip (GitHub page 2026-10-06: 6.4k stars, 755 forks, 288 commits; release v2.2.1 2026-09-01; last commit 2026-09-16). Releases ship source archives with `SHA256SUMS`; "Model weights are downloaded separately when FunClip starts".
@@ -196,13 +196,13 @@ What it is: an out-of-process pipeline that treats a running Open Shorts instanc
 - Repo: https://github.com/RayVentura/ShortGPT (GitHub page 2026-10-06: 8k stars, 1.2k forks, 298 commits on `stable`; last commit 2025-02-10 "add Gemini API key support as first priority API key"). PyPI `shortgpt` 0.1.31 (`setup.py`: `openai==1.37.2`, `moviepy==2.1.2`, `whisper-timestamped`). Docs https://docs.shortgpt.ai/ (title not readable from this session; not confirmed).
 - License: MIT ("Copyright (c) 2024 Ray Ventura").
 - Shape: a **generator**, not a clipper: `ContentShortEngine` (script -> TTS via ElevenLabs/EdgeTTS -> Pexels/Bing assets -> captions -> MoviePy render), `ContentVideoEngine`, `ContentTranslationEngine` (dub an existing video), an "Editing Markup Language" JSON for LLM-driven edits. Docker + Gradio on :31415, or Colab.
-- Mapping: does not fit "video in -> ranges out"; only its caption timing (`whisper-timestamped`) and JSON edit description are adjacent. Not a candidate for a Clips Kitty clipping pipeline; possibly a "publish/variant" idea source.
+- Mapping: does not fit "video in -> ranges out"; only its caption timing (`whisper-timestamped`) and JSON edit description are adjacent. Not a candidate for a SpikeClip clipping pipeline; possibly a "publish/variant" idea source.
 
 ---
 
 ## D. Track D matrix rows
 
-| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What Clips Kitty should learn |
+| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What SpikeClip should learn |
 |---|---|---|---|---|---|---|
 | OpusClip (API) | Hosted long-form -> shorts for talking-head/podcast; API on Pro(Beta)/Max/Business | Generic, with `curationPref.genre` and `ClipBasic`/`ClipAnything` model switch | Yes: project -> clips with `timeRanges`, `title`, `genre`/`subgenre`, rendered `uriForExport`; no score field documented | None beyond `genre`/`customPrompt` | REST + signed webhooks, hosted MCP (29 tools, OAuth), agent skill repo; no plugins | The remote-adapter shape (submit URL, signed callback, clips query), `clipDurations`/`range` as typed inputs, multi-range clips with `durationMs` |
 | Open Shorts (mutonby/openshorts) | Self-hosted or hosted clipper + UGC generator + YouTube tools; Docker | Generic (podcasts, webinars, streams); layouts picked per video | Yes: transcript windows scored by Gemini or any OpenAI-compatible LLM; `{start,end,predicted_score,title,hook}`; silent-video path via Gemini video | None (a public `/gta-5-clips` page documents silent-footage thresholds only) | REST (`/api/process`, `/api/status`, `/edl`, `/rerender`), MCP (8 tools, HTTP + stdio), zero-dep CLI, Agent Skill, n8n; no plugin system | One implementation behind REST with MCP/CLI as thin clients; one pydantic schema for all LLM providers; source-second `segments[]` + word snapping; `acknowledged` attestation; per-job webhook secret; MIT core with a clearly fenced commercial dir |
@@ -215,9 +215,9 @@ What it is: an out-of-process pipeline that treats a running Open Shorts instanc
 
 ## E. Hypotheses this track speaks to
 
-- **H1 (out-of-process over the local API is lowest risk): supported.** Open Shorts runs every job as a child process (`main.py`), and its MCP server, CLI and n8n examples all go through the REST API rather than importing the pipeline; the CLI is deliberately zero-dependency. A Clips Kitty adapter for it would be out of process by construction.
+- **H1 (out-of-process over the local API is lowest risk): supported.** Open Shorts runs every job as a child process (`main.py`), and its MCP server, CLI and n8n examples all go through the REST API rather than importing the pipeline; the CLI is deliberately zero-dependency. A SpikeClip adapter for it would be out of process by construction.
 - **H2 ("video in, scored and labelled time ranges out" is the smallest useful contract): supported with one amendment.** Open Shorts `{start, end, predicted_score, title, hook}`, AI-Youtube-Shorts-Generator `{start_time, end_time, score, title, hook_sentence}`, ClipsAI `{start_time, end_time}`, FunClip `[start-end] text`, OpusClip `timeRanges` + `title`/`genre`. Rendering is separable in all of them (Open Shorts `/rerender`, OpusClip `uriForExport`, ClipsAI `resize()`). Amendment: allow a list of source ranges per clip (OpusClip `timeRanges[]`, Open Shorts `segments[]`), and make the score optional (ClipsAI and FunClip have none).
-- **H5 (declared is not enforced): adjacent evidence.** Open Shorts self-host has no auth at all and the MCP endpoint is open; the only enforcement is per-IP rate limiting. Any pipeline that embeds a local server inherits this and Clips Kitty's manifest should say so.
+- **H5 (declared is not enforced): adjacent evidence.** Open Shorts self-host has no auth at all and the MCP endpoint is open; the only enforcement is per-IP rate limiting. Any pipeline that embeds a local server inherits this and SpikeClip's manifest should say so.
 - **H6 (dependency handling): supported.** Open Shorts pins every package exactly inside one container; AI-Youtube-Shorts-Generator uses floors with no lock; ClipsAI depends on an unpinned git install of WhisperX and has not moved since 2024-01. One environment per pipeline (a container or a venv) is what works in practice here; shared environments are not used by any of them.
 - **H7 (Hugging Face revision pins): partly supported.** FunClip pins `OpenMOSS-Team/MOSS-Transcribe-Diarize` at commit `e8681d68e7042738ffca8ac8212bc8fcb1131ab8` and checksums its release archives; Open Shorts, ClipsAI and AI-Youtube-Shorts-Generator reference models by name only (`small`, `large-v2`, `yolov8n.pt`, `nemo-parakeet-tdt-0.6b-v3`). Windows symlink behaviour of the HF cache was not examined here (Open Shorts runs in Linux containers).
 - **H8 (typed I/O lets implementations coexist): supported.** Open Shorts validates Gemini and any OpenAI-compatible server against one pydantic schema so the pipeline "sees one shape regardless of provider"; FunClip accepts several LLM gateways behind a model-name prefix (`orcarouter/`, `minimax/`, `atlascloud/`) with one output format.

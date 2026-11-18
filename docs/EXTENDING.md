@@ -1,7 +1,7 @@
-# Extending Clips Kitty
+# Extending SpikeClip
 
 > **Writing a plugin?** To find, understand or rate the moments in a video for a game,
-> a sport or a kind of show, you don't need to change Clips Kitty: write a plugin with
+> a sport or a kind of show, you don't need to change SpikeClip: write a plugin with
 > the SDK. Start with [Your first game pipeline](developers/first-game-pipeline.md) and
 > the [developer docs](developers/README.md). This page is for changing the app itself.
 
@@ -32,7 +32,7 @@ Translation, subtitles, dubbing and the interface all key off one table.
    is what a creator hears when auditioning a dub voice, and hearing English
    in a Polish voice tells them nothing about a Polish dub.
 
-3. **`ui/src/renderer/src/locales/pl.json`**: copy an existing locale and
+3. **`frontend/src/renderer/src/locales/pl.json`**: copy an existing locale and
    translate the values. Then import it in `lib/i18n.ts` and add it to
    `LOCALES`.
 
@@ -106,7 +106,7 @@ enforces this.
 
 ## Bring your own model
 
-Clips Kitty already runs YOLOv8 (ultralytics), OpenCV and TalkNet-ASD locally.
+SpikeClip already runs YOLOv8 (ultralytics), OpenCV and TalkNet-ASD locally.
 If you care about a kind of footage it does not understand, you do not need
 permission or a redesign. You need one array.
 
@@ -169,7 +169,7 @@ that reveals a picker for which sport, rather than a separate tick box per
 sport. Same for any other genre with variants. `longform` already works
 exactly this way and is the thing to copy end to end: a registry of modes in
 `longform/profiles.py`, one toggle in
-`ui/src/renderer/src/components/queue/AddVideos.tsx`, and a `<select>` that
+`frontend/src/renderer/src/components/queue/AddVideos.tsx`, and a `<select>` that
 appears only when the toggle is on, sent as `options.longform = {mode}`. Keep
 the list in the registry rather than hardcoded in the JSX, so adding the next
 sport is one entry and no UI work.
@@ -188,7 +188,7 @@ tested and what changed.
 ```
 pytest                 # deterministic logic
 ruff check .           # lint
-cd ui && npm run typecheck && npm run build
+cd frontend && npm run typecheck && npm run build
 ```
 
 CI runs all of that. It is fast, and it is narrow: a runner has no GPU, no

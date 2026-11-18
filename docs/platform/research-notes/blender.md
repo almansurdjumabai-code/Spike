@@ -3,9 +3,9 @@
 - Platform: Blender extensions system (Blender 4.2 LTS and later) and the Blender Extensions Platform at extensions.blender.org
 - Tier: 2
 - Date read: 2026-10-06
-- Track C question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
+- Track C question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
 
-Verdict: Blender shows the cheapest workable registry shape: one manifest file (`blender_manifest.toml`), one generated `index.json` that anyone can host statically, and a client that treats every repository the same, so the official site is just one remote among many. Its permissions are declared and displayed but not enforced (the project says so itself), its moderation is human and first-version-only, and its wheel handling is a shared `site-packages` with "newest wins" — three things Clips Kitty should not copy as-is.
+Verdict: Blender shows the cheapest workable registry shape: one manifest file (`blender_manifest.toml`), one generated `index.json` that anyone can host statically, and a client that treats every repository the same, so the official site is just one remote among many. Its permissions are declared and displayed but not enforced (the project says so itself), its moderation is human and first-version-only, and its wheel handling is a shared `site-packages` with "newest wins" — three things SpikeClip should not copy as-is.
 
 ## 1. The unit of extension
 
@@ -116,14 +116,14 @@ Local, in-process. Network use is allowed but must be declared, gated on the use
 
 ## 11. Borrow
 
-1. The repository contract: one manifest per extension, one generated `index.json` with `{version, blocklist, data[]}`, every entry carrying `archive_url` + `archive_hash` (sha256) + compatibility fields, and a client that treats the official index as just one remote. Clips Kitty's H3 registry can emit exactly this shape from CI and let anyone self-host a second index (including private ones with an access token).
+1. The repository contract: one manifest per extension, one generated `index.json` with `{version, blocklist, data[]}`, every entry carrying `archive_url` + `archive_hash` (sha256) + compatibility fields, and a client that treats the official index as just one remote. SpikeClip's H3 registry can emit exactly this shape from CI and let anyone self-host a second index (including private ones with an access token).
 2. `server-generate`-style tooling in the CLI: build, validate, generate index, all offline, so a developer can test a repository with a `file://` URL before publishing.
 3. Permission reason strings: each permission key carries a human sentence shown in the install UI. Keep the keys, add the reasons, and show them before install. But say "declared" in the UI, as Blender's docs do, unless the runtime enforces it.
 4. `blocklist` with a `reason`, honoured by the client: cannot install from that repository, loud warning if already installed, user may still override from a local repository. Cheap and already specified.
 5. Compatibility as a half-open range (`blender_version_min` required, `blender_version_max` exclusive and editable after publication) plus per-platform builds (`platforms` + `--split-platforms`).
 6. ToS rules that transfer directly: "No surprises" descriptions; no obfuscated code or bytecode; no remote code loading; no runtime pip installs; no auto-updaters inside the plugin; must respect the host's offline switch; do not write into the plugin's own directory, use a host-provided per-plugin user directory that survives upgrades and is deleted on uninstall.
 7. A public approval queue with status badges (Awaiting Review / Awaiting Changes / Approved / Declined) and comments: transparency about where a submission is stuck costs little.
-8. Namespacing by repository: Blender imports add-ons as `bl_ext.{repository_module_name}.{id}` so two repositories can ship the same id. Clips Kitty's `publisher/pipeline` ids serve the same purpose.
+8. Namespacing by repository: Blender imports add-ons as `bl_ext.{repository_module_name}.{id}` so two repositories can ship the same id. SpikeClip's `publisher/pipeline` ids serve the same purpose.
 
 ## 12. Avoid
 
@@ -131,7 +131,7 @@ Local, in-process. Network use is allowed but must be declared, gated on the use
 2. Do not share one `site-packages` across plugins with newest-version-wins; Blender's own source calls it "not fool-proof". Either one environment per plugin (disk cost) or a documented policy with a conflict report at install time.
 3. Do not rely on first-version-only human review as the trust story; Blender's queue shows review scales only because volunteers test in VMs and most items wait on authors. Pair review with automated checks (manifest validation, static grep for network/exec/obfuscation, hash pinning) and a blocklist.
 4. Do not make "latest on the repository" the only update target with no rollback and no warning when permissions grow on upgrade (Blender's open TODO).
-5. Do not couple the registry to a licence or business rule so tight that legitimate plugins must live elsewhere (GPL-only, no SaaS, no commercial extras). Clips Kitty's registry is free to publish and never processes payments, but should allow plugins that call paid APIs on the user's own account, as the brief already decides.
+5. Do not couple the registry to a licence or business rule so tight that legitimate plugins must live elsewhere (GPL-only, no SaaS, no commercial extras). SpikeClip's registry is free to publish and never processes payments, but should allow plugins that call paid APIs on the user's own account, as the brief already decides.
 6. Do not bundle models or weights in the plugin archive (Blender's self-contained rule forces this); use the shared model manager instead.
 
 ## 13. Sources (all read 2026-10-06)
@@ -174,7 +174,7 @@ Local, in-process. Network use is allowed but must be declared, gated on the use
 ## Hypotheses
 
 - H1 (out-of-process plugins are lowest risk): Blender is the counter-example — add-ons are in-process Python with full access, which is why the project disclaims permissions and relies on ToS and review. Supports H1 by contrast (inferred).
-- H3 (static Git registry, no backend): Supported in part. Blender proves a static `index.json` (+ optional `index.html`) is enough for discovery, install, hashes, update checks and blocklists, and the client already supports many remotes with access tokens. Difference: Blender generates the index from zips on disk (`server-generate`), not from PR-submitted metadata pointing at developer repos; Clips Kitty's CI would generate the same shape from manifests plus pinned refs. Costs static hosting only.
+- H3 (static Git registry, no backend): Supported in part. Blender proves a static `index.json` (+ optional `index.html`) is enough for discovery, install, hashes, update checks and blocklists, and the client already supports many remotes with access tokens. Difference: Blender generates the index from zips on disk (`server-generate`), not from PR-submitted metadata pointing at developer repos; SpikeClip's CI would generate the same shape from manifests plus pinned refs. Costs static hosting only.
 - H4 (hand review does not scale): Partly supported. Review is human and first-version-focused (2024 notes); the queue had 2,136 entries and relies on volunteers; the moderation checklist is grep-and-run. But the first-300-rows tally (25 awaiting review vs 275 awaiting changes) suggests the backlog is authors, not moderators (inferred, partial sample).
 - H5 (declared is not enforced): Confirmed with official text: "not a security-oriented feature" (Blender blog 2024-05-15); "Blender cannot prevent third-party add-ons from violating this rule" (manual). The only enforced switch is the host's own offline mode, applied to Blender's extension manager itself.
 - H6 (dependency handling): Supported. Policy bans runtime pip, obfuscation, bytecode, remote code; mechanism bundles wheels into one shared site-packages per repository with newest-wins de-duplication that the source calls "not fool-proof". One shared env does invite conflicts; Blender accepts the risk by policy.

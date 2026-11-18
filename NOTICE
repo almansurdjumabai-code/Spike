@@ -1,5 +1,9 @@
-Clips Studio
+SpikeClip
 Copyright (C) 2026 ColinGPT9
+
+SpikeClip is a modified version of Clips Kitty (formerly Clips Studio),
+https://github.com/ColinGPT9/clips-studio. It was renamed and restructured
+into separate frontend/ and backend/ deployables in November 2026.
 
 This program is free software: you can redistribute it and/or modify it
 under the terms of the GNU Affero General Public License as published by the
@@ -27,7 +31,7 @@ DISTRIBUTE the software or run a MODIFIED version as a network service — not
 on people who use it. Your videos and your clips are yours; the licence has
 nothing to say about them.
 
-If you modify Clips Studio and give that modified version to someone else, or
+If you modify SpikeClip and give that modified version to someone else, or
 run it as a service other people use over a network, you have to offer them
 the source of your modified version under this same licence.
 
@@ -36,11 +40,11 @@ the source of your modified version under this same licence.
 Parts under other licences
 -------------------------------------------------------------------------------
 
-The plugin SDK in sdk/python/ (clipskitty_sdk, which the installer also
+The plugin SDK in sdk/python/ (spikeclip_sdk, which the installer also
 bundles so plugins can import it) is MIT-licensed; its notice is in
 sdk/python/LICENSE and travels with it. The example plugins in
 examples/pipelines/scene-cut-highlights/ and examples/pipelines/keyword-rater/
-are MIT as well, and the copy of the Awesome Clips Kitty list in
+are MIT as well, and the copy of the Awesome SpikeClip list in
 plugins/catalog_index.json is CC0-1.0, as is the list itself
 (github.com/ColinGPT9/awesome-clips-kitty). Plugins, pipelines and apps made by other people keep their own
 licences; installing one does not change it, and nothing here changes theirs.
@@ -132,7 +136,7 @@ significant ones, with their licences:
 
 The E-BARD detection model (https://github.com/GabrieleGiudic/E-BARD) is licensed under
 Creative Commons Attribution 4.0 International (CC BY 4.0,
-https://creativecommons.org/licenses/by/4.0/). Clips Kitty uses its YOLOv8n
+https://creativecommons.org/licenses/by/4.0/). SpikeClip uses its YOLOv8n
 weights unmodified:
   model    https://huggingface.co/GabrieleGiudici/E-BARD-detection-models
   code     https://github.com/GabrieleGiudic/E-BARD

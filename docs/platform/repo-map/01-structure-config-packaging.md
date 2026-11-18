@@ -1,6 +1,6 @@
 # Repo map: structure, configuration, logging, packaging, distribution, updates
 
-Area notes for `docs/platform/repo-map.md`. Repository `/home/user/clips-studio`,
+Area notes for `docs/platform/repo-map.md`. Repository `/home/user/spikeclip`,
 branch `claude/open-platform-w4eh9g` at `1d13723` (684 tracked files, 50 commits, no
 git tags in the checkout). Every claim cites a repo-relative path; "(inferred)" marks
 anything not seen directly. Nothing in the repository was modified; the only commands
@@ -11,18 +11,18 @@ run against the code were read-only Python imports of `core.paths`, `core.binari
 
 ## 1. Identity in one paragraph
 
-Clips Kitty (called Clips Studio until 1.1.3; `README.md:31`) is a local-first AI
+SpikeClip is a local-first AI
 clipping app: an Electron + React + TypeScript desktop shell (`ui/`) that is only a
 client of a local FastAPI engine (`server/api.py:1-8`, `ARCHITECTURE.md:928-930`).
-Licence AGPL-3.0 (`LICENSE`, `NOTICE`, `ui/package.json` `"license": "AGPL-3.0-only"`).
+Licence AGPL-3.0 (`LICENSE`, `NOTICE`, `frontend/package.json` `"license": "AGPL-3.0-only"`).
 **The app ships for Windows 10/11 only** (`README.md` Requirements table, "Windows
 only for the app"; `ARCHITECTURE.md:1028` "Windows packaging"); the engine "should run on
 Linux/macOS" but no Mac build exists (`README.md`, issue #62 reference). A Docker image
 exists for contributors, not users (`Dockerfile:1-12`, `docker-compose.yml:1-7`).
-Three distribution channels, all built from one `ui/package.json` version: a Web Setup
+Three distribution channels, all built from one `frontend/package.json` version: a Web Setup
 NSIS installer (GitHub release + Hugging Face payload), a Microsoft Store MSIX, and a
 winget manifest pointing at the installer (`docs/RELEASING.md` "The other two
-channels"). Current app version **2.0.0** (`ui/package.json:3`), supported-API version
+channels"). Current app version **2.0.0** (`frontend/package.json:3`), supported-API version
 **1** (`server/api.py:34`).
 
 ---
@@ -54,23 +54,23 @@ totals). Purpose column cites the file that says so.
 | `third_party/` | vendored TalkNet-ASD (MIT) + icon notices; must never be edited | 9 / 522 | `third_party/talknet/README.md`, `.github/CODEOWNERS` |
 | `models/` | **absent in a checkout**; created by `scripts/fetch_asd_model.py`, `fetch_panns.py`, `fetch_voice_model.py` | — | `ls models` fails; `ARCHITECTURE.md:255` |
 | `vendor/` | **absent in a checkout, gitignored**; `ffmpeg/`, `ollama/`, `whisper/` written by `scripts/fetch_*.py` | — | `.gitignore` `/vendor/`; `scripts/fetch_ffmpeg.py:36` |
-| `scripts/` | build/fetch/sign/sitemap scripts (not packaged) | 14 / 2,019 | `clips-studio.spec` comment "scripts/, which is not packaged at all" |
+| `scripts/` | build/fetch/sign/sitemap scripts (not packaged) | 14 / 2,019 | `spikeclip.spec` comment "scripts/, which is not packaged at all" |
 | `tests/` | pytest, deterministic only | 105 / 26,427 | `tests/README.md` |
 | `examples/` | `drive_the_api.py`, `score_a_transcript.py`, `fake_backend.py` | 3 / 374 | `examples/README.md` |
 | `ui/` | Electron app: `src/main` (3 files), `src/preload`, `src/renderer` (90 TS/TSX files, 21,706 lines), `electron-builder.yml`, `build/` (icon, afterPack, appx tiles, release-notes.md) | — | `ui/` listing |
 | `packaging/winget/` | three winget manifests + README | — | `packaging/winget/README.md` |
 | `docs/` | API.md, EXTENDING.md, RELEASING.md, MSSTORE.md, DOCKER.md, AI-BACKENDS.md, SPORTS.md, GAMING.md, REMOTE-RENDERING.md, …; `docs/platform/BRIEF.md` (the open-platform brief) | — | `ls docs` |
-| `skills/clips-kitty/SKILL.md` | an agent skill for MCP clients | — | `README.md:738-739` |
+| `skills/spikeclip/SKILL.md` | an agent skill for MCP clients | — | `README.md:738-739` |
 | `site/` | static website (GitHub Pages + HF Space mirror) | — | `.github/workflows/mirror.yml` |
-| `web/` | "Clips Kitty Web": a browser-only Next.js taster, no server, OpenRouter + ffmpeg.wasm | — | `web/README.md` |
+| `web/` | "SpikeClip Web": a browser-only Next.js taster, no server, OpenRouter + ffmpeg.wasm | — | `web/README.md` |
 | `whop-app/` | marketing pages only; never talks to the engine | — | `whop-app/README.md` |
 | `feedback-relay/`, `twitch-proxy/` | Cloudflare Workers (bug-report relay; CORS proxy for the web version) | — | their `README.md` |
-| `assets/outro/` | 4 prebuilt end-card MP4s (build inputs, bundled) | — | `.gitignore` `!assets/outro/*.mp4`, `clips-studio.spec` |
+| `assets/outro/` | 4 prebuilt end-card MP4s (build inputs, bundled) | — | `.gitignore` `!assets/outro/*.mp4`, `spikeclip.spec` |
 | `data/` | runtime artefacts, gitignored | — | `.gitignore` `data/` |
 
 Vendored and generated code is excluded from lint and scanning: `pyproject.toml`
 `[tool.ruff] exclude = ["ui","vendor","third_party","build","dist","release","data","site"]`;
-`.github/codeql/codeql-config.yml` `paths-ignore: third_party, vendor, ui/node_modules,
+`.github/codeql/codeql-config.yml` `paths-ignore: third_party, vendor, frontend/node_modules,
 build, dist, release`; `.gitattributes` marks `third_party/**` and `vendor/**`
 `linguist-vendored`; CI job `vendored` fails a PR that touches `third_party/`
 (`.github/workflows/ci.yml` "Refuse silent edits to third_party/").
@@ -81,30 +81,30 @@ build, dist, release`; `.gitattributes` marks `third_party/**` and `vendor/**`
 
 | Process | Started by | Listens on | Cited |
 |---|---|---|---|
-| Python engine (`python main.py serve` / `api.exe serve --port 8765`) | Electron main `startBackend()`; or by hand | `127.0.0.1:8765` by default; `--host 0.0.0.0` only for containers | `main.py` `p_serve` args; `ui/src/main/index.ts` `API_PORT = 8765` |
-| Bundled Ollama (`_internal/ollama/ollama.exe serve`) | Electron `startOllama()` **only when packaged** | `127.0.0.1:11435` (`OLLAMA_HOST`), models in `%LOCALAPPDATA%\Clips Studio\data\models` (or legacy `Clips Kitty\data\models`) | `ui/src/main/index.ts` `OLLAMA_PORT = 11435`, `startOllama` |
+| Python engine (`python main.py serve` / `api.exe serve --port 8765`) | Electron main `startBackend()`; or by hand | `127.0.0.1:8765` by default; `--host 0.0.0.0` only for containers | `main.py` `p_serve` args; `frontend/src/main/index.ts` `API_PORT = 8765` |
+| Bundled Ollama (`_internal/ollama/ollama.exe serve`) | Electron `startOllama()` **only when packaged** | `127.0.0.1:11435` (`OLLAMA_HOST`), models in `%LOCALAPPDATA%\SpikeClip\data\models` | `frontend/src/main/index.ts` `OLLAMA_PORT = 11435`, `startOllama` |
 | Remote-render gateway | `remote_render/service.py` when enabled | port `8766` default, TLS, paired workers | `remote_render/settings.py` `DEFAULTS["port"] = 8766` |
 | Render worker child | `api.exe render-worker --run-job <dir>` / `python main.py render-worker` | — | `remote_render/worker.py:82-87`, `remote_render/service.py:56-62` |
-| MCP server (`api.exe mcp`) | an MCP client | stdio; talks to engine at `CLIPS_STUDIO_API` or `http://127.0.0.1:8765` | `server/mcp.py:52-55` |
-| Vite dev server (`npm run dev:web`) | contributors / Docker `ui` service | `5173` | `ui/vite.config.mts`, `docker-compose.yml` |
+| MCP server (`api.exe mcp`) | an MCP client | stdio; talks to engine at `SPIKECLIP_API` or `http://127.0.0.1:8765` | `server/mcp.py:52-55` |
+| Vite dev server (`npm run dev:web`) | contributors / Docker `ui` service | `5173` | `frontend/vite.config.mts`, `docker-compose.yml` |
 
 Electron detail that matters to anything spawning the engine: in packaged mode the
 backend is spawned with `stdio: 'ignore'`, `windowsHide: true`, env
-`PYTHONIOENCODING=utf-8`, `PYTHONUTF8=1`, `CLIPS_STUDIO_OLLAMA_HOST=http://127.0.0.1:11435`;
+`PYTHONIOENCODING=utf-8`, `PYTHONUTF8=1`, `SPIKECLIP_OLLAMA_HOST=http://127.0.0.1:11435`;
 in dev it runs `python main.py serve --port 8765` with `cwd` = repo root and
-`stdio: 'inherit'`, unless `BACKEND_EXTERNAL=1` (`ui/src/main/index.ts` `startBackend`).
+`stdio: 'inherit'`, unless `BACKEND_EXTERNAL=1` (`frontend/src/main/index.ts` `startBackend`).
 Electron takes down the whole process tree with `taskkill /T /F` on quit (`killTree`).
 Single-instance lock (`app.requestSingleInstanceLock()`); AppUserModelId
-`com.clipsstudio.app` must match `appId` (`ui/src/main/index.ts`, `ui/electron-builder.yml`).
+`com.spikeclip.app` must match `appId` (`frontend/src/main/index.ts`, `frontend/electron-builder.yml`).
 The renderer is sandboxed (`contextIsolation: true`, `nodeIntegration: false`) and
-reaches native features only through `window.studio` from `ui/src/preload/index.ts`
+reaches native features only through `window.studio` from `frontend/src/preload/index.ts`
 (file pickers, clipboard-key read, notify, allow-listed `openExternal`, tray, update
 IPC). Page CSP: `default-src 'self'; connect-src 'self' http://127.0.0.1:8765
 ws://127.0.0.1:8765; media-src http://127.0.0.1:8765; img-src 'self' data:
 http://127.0.0.1:8765; style-src 'self' 'unsafe-inline'`
-(`ui/src/renderer/index.html:7-8`). The renderer hardcodes `API_BASE =
-'http://127.0.0.1:8765'` (`ui/src/renderer/src/lib/api.ts:49`) and `WS_URL =
-'ws://127.0.0.1:8765/ws'` (`ui/src/renderer/src/lib/useEvents.ts:4`).
+(`frontend/src/renderer/index.html:7-8`). The renderer hardcodes `API_BASE =
+'http://127.0.0.1:8765'` (`frontend/src/renderer/src/lib/api.ts:49`) and `WS_URL =
+'ws://127.0.0.1:8765/ws'` (`frontend/src/renderer/src/lib/useEvents.ts:4`).
 
 ---
 
@@ -112,17 +112,17 @@ http://127.0.0.1:8765; style-src 'self' 'unsafe-inline'`
 
 | Number | Value now | Defined in | Read by |
 |---|---|---|---|
-| App version | `2.0.0` | `ui/package.json:3` — "Version lives in ui/package.json only" (`docs/RELEASING.md` "Version bump") | engine: `server/feedback.py:260-290` `_app_version()` reads `ui/package.json` in a checkout, `sys._MEIPASS/package.json` when frozen (bundled by `clips-studio.spec` datas `(ROOT/"ui"/"package.json", ".")`); exposed at `GET /health` as `app_version` (`server/api.py:716`); MCP `serverInfo` (`server/mcp.py:58-64`); remote render handshake (`remote_render/protocol.py` `app_version()`); electron-builder artefact names `${version}` |
+| App version | `2.0.0` | `frontend/package.json:3` — "Version lives in frontend/package.json only" (`docs/RELEASING.md` "Version bump") | engine: `server/feedback.py:260-290` `_app_version()` reads `frontend/package.json` in a checkout, `sys._MEIPASS/package.json` when frozen (bundled by `spikeclip.spec` datas `(ROOT/"ui"/"package.json", ".")`); exposed at `GET /health` as `app_version` (`server/api.py:716`); MCP `serverInfo` (`server/mcp.py:58-64`); remote render handshake (`remote_render/protocol.py` `app_version()`); electron-builder artefact names `${version}` |
 | Supported API version | `API_VERSION = 1` | `server/api.py:34` "Bumped only when a supported endpoint changes shape, never for additions" | `GET /health` → `api_version` (`server/api.py:716`); `docs/API.md:165-176`; `server/integrations.py:11`; MCP prints it (`server/mcp.py:444`) |
-| FastAPI app version string | `"0.1"` | `server/api.py:576` `FastAPI(title="Clips Kitty API", version="0.1")` (stale, informational only) | `/openapi.json` |
+| FastAPI app version string | `"0.1"` | `server/api.py:576` `FastAPI(title="SpikeClip API", version="0.1")` (stale, informational only) | `/openapi.json` |
 | MCP protocol | `PROTOCOL_VERSION = "2025-06-18"`, known `2025-03-26`, `2024-11-05` | `server/mcp.py:38-39` | MCP clients |
 | Remote-render protocol | `PROTOCOL = 1` | `remote_render/protocol.py:16` | job ids, worker compatibility |
 | Store package version | app version + `.0` (`2.0.0.0`); major may never be 0 again | `scripts/build_msix.py` `store_version()`; `docs/MSSTORE.md` "About the version number" | electron-builder via `-c.extraMetadata.version` |
-| winget | `PackageVersion: 2.0.0`, `PackageIdentifier: ColinGPT9.ClipsKitty` | `packaging/winget/*.yaml` | winget-pkgs PR |
+| winget | `PackageVersion: 2.0.0`, `PackageIdentifier: ColinGPT9.SpikeClip` | `packaging/winget/*.yaml` | winget-pkgs PR |
 | Pinned Ollama runtime | `OLLAMA_VERSION = "v0.32.6"` (`VERSION.txt` stamp in `vendor/ollama/`) | `scripts/fetch_ollama.py` | build only |
-| Electron / builder | `electron ^31.0.0`, `electron-builder ^24.13.3`, `electron-updater ^6.8.9`, `overrides.tar ^7.5.22` | `ui/package.json` | `docs/DEPENDENCY-SECURITY.md` explains the pins |
+| Electron / builder | `electron ^31.0.0`, `electron-builder ^24.13.3`, `electron-updater ^6.8.9`, `overrides.tar ^7.5.22` | `frontend/package.json` | `docs/DEPENDENCY-SECURITY.md` explains the pins |
 | Schema version | **none**: SQLite migrations are additive `ALTER TABLE … ADD COLUMN` guarded by `PRAGMA table_info` | `core/state.py:527-553` `_migrate()` | — |
-| Changelog | `## Unreleased`, `## 2.0.0`, `1.2.0`, `1.1.4`, `1.1.3`, `0.1.2 (2026-08-10)`, `0.1.1`, `0.1.0`; written for creators; Added/Changed/Fixed subsections; `(#NNN)` issue refs | `CHANGELOG.md:1-78,157,622,758,836,904-955` | release notes in-app (`ui/build/release-notes.md`) |
+| Changelog | `## Unreleased`, `## 2.0.0`, `1.2.0`, `1.1.4`, `1.1.3`, `0.1.2 (2026-08-10)`, `0.1.1`, `0.1.0`; written for creators; Added/Changed/Fixed subsections; `(#NNN)` issue refs | `CHANGELOG.md:1-78,157,622,758,836,904-955` | release notes in-app (`frontend/build/release-notes.md`) |
 
 The website download buttons and `whop-app/lib/content.ts` / `web/lib/content.ts`
 `VERSION` carry the version too and must be bumped by hand (`docs/RELEASING.md` "The
@@ -135,10 +135,10 @@ website's download buttons name the version").
 ### 5.1 The config file and its resolution
 
 * Bundled defaults: `config/settings.yaml` (`main.py` `BUNDLED_CONFIG`). Frozen build
-  bundles it as `_internal/config/settings.yaml` (`clips-studio.spec` datas).
+  bundles it as `_internal/config/settings.yaml` (`spikeclip.spec` datas).
 * The file an install **reads and writes**: `main.py` `CONFIG_PATH =
   user_config_path(BUNDLED_CONFIG)`. `core/paths.py:83-124` `user_config_path()`:
-  checkout → the repo file; frozen → `%LOCALAPPDATA%\Clips Studio\settings.yaml`,
+  checkout → the repo file; frozen → `%LOCALAPPDATA%\SpikeClip\settings.yaml`,
   seeded by copying the bundled file on first use (because a per-machine install or an
   MSIX package makes the bundle read-only, `core/paths.py:95-100`). Falls back to the
   bundled file if the copy cannot be written.
@@ -149,8 +149,8 @@ website's download buttons name the version").
     e.g. `openrouter/<model>`);
   * `channel` → prepended to `channels`;
   * `auto_upload` → `upload.enabled`; `privacy` → `upload.privacy`;
-  * env `CLIPS_STUDIO_OLLAMA_HOST` → `llm.ollama_host`;
-  * env `CLIPS_STUDIO_DATA_DIR` → `paths.data_dir`;
+  * env `SPIKECLIP_OLLAMA_HOST` → `llm.ollama_host`;
+  * env `SPIKECLIP_DATA_DIR` → `paths.data_dir`;
   * `paths.data_dir` ← `str(resolve_data_dir(config))` (always absolute afterwards);
   * `llm.data_dir` ← same path ("where a cloud backend finds the user's own API key").
   Verified by import on this box: top-level keys after load are `analysis, auto_upload,
@@ -210,32 +210,32 @@ the YAML text** to preserve the user's comments:
 | Store | Location | Contents | Cited |
 |---|---|---|---|
 | SQLite `state.db` | `<data_dir>/state.db` | videos, clips, jobs, uploads, creators, …, `app_state` key/value (`get_flag`/`set_flag`), `streams` | `core/state.py:252,527,1626-1630`; `ARCHITECTURE.md:959-977` |
-| Credential store | `<data_dir>/credentials/<name>.bin` (Windows DPAPI, entropy `clips-kitty/publish/v1`) or `<name>.secret.json` 0600 elsewhere | names seen: `youtube_token`, `youtube_client` (`server/youtube_*`), `ai_key_<provider>` (`llm/providers/keys.py:15` `PREFIX = "ai_key_"`), `remote_render` (`remote_render/settings.py` `NAME`), Upload-Post key via `server/uploadpost_service.py:84-97` (name not read), ChatGPT sign-in (`llm/signin/chatgpt.py`) | `core/secrets.py` `_DIR = "credentials"`, `backend_name()`, `save/load/wipe/has/migrate_plaintext` |
-| Electron userData | `%APPDATA%\clips-studio\` (derived from package.json `name`) | renderer localStorage (caption style, toggles, UI language), `update-prefs.json` (`channel`, `skipped`), `tray.json` (`keepInTray`) | `ui/electron-builder.yml:10-20` comment; `ui/src/main/updater.ts` `PREFS_FILE`; `ui/src/main/index.ts` `trayPrefsPath` |
+| Credential store | `<data_dir>/credentials/<name>.bin` (Windows DPAPI, entropy `spikeclip/publish/v1`) or `<name>.secret.json` 0600 elsewhere | names seen: `youtube_token`, `youtube_client` (`server/youtube_*`), `ai_key_<provider>` (`llm/providers/keys.py:15` `PREFIX = "ai_key_"`), `remote_render` (`remote_render/settings.py` `NAME`), Upload-Post key via `server/uploadpost_service.py:84-97` (name not read), ChatGPT sign-in (`llm/signin/chatgpt.py`) | `core/secrets.py` `_DIR = "credentials"`, `backend_name()`, `save/load/wipe/has/migrate_plaintext` |
+| Electron userData | `%APPDATA%\spikeclip\` (derived from package.json `name`) | renderer localStorage (caption style, toggles, UI language), `update-prefs.json` (`channel`, `skipped`), `tray.json` (`keepInTray`) | `frontend/electron-builder.yml:10-20` comment; `frontend/src/main/updater.ts` `PREFS_FILE`; `frontend/src/main/index.ts` `trayPrefsPath` |
 | Per-job options | `jobs.payload` JSON in SQLite | `JobIn`/`JobPatch` fields | `server/api.py:38-60`, `core/queue.py` |
-| Ollama models | `%LOCALAPPDATA%\Clips Studio\data\models` (packaged) via `OLLAMA_MODELS` env | GGUF weights | `ui/src/main/index.ts` `startOllama` |
+| Ollama models | `%LOCALAPPDATA%\SpikeClip\data\models` (packaged) via `OLLAMA_MODELS` env | GGUF weights | `frontend/src/main/index.ts` `startOllama` |
 | Piper voices | `data/voices/` downloaded on first dub | | `requirements.txt` piper comment; `docs/MSSTORE.md` "Known gaps" |
 
 ### 5.5 Environment variables the engine honours (complete list from grep)
 
-`CLIPS_STUDIO_DATA_DIR` (`main.py`, `Dockerfile`, `docker-compose.yml`),
-`CLIPS_STUDIO_OLLAMA_HOST` (`main.py`; set by Electron and compose),
-`CLIPS_STUDIO_FFMPEG` / `CLIPS_STUDIO_FFPROBE` / `CLIPS_STUDIO_OLLAMA` (binary overrides,
-`core/binaries.py:59-62` `_resolve` reads `CLIPS_STUDIO_{NAME}`),
-`CLIPS_STUDIO_API` (MCP client base URL, `server/mcp.py:52-55`),
+`SPIKECLIP_DATA_DIR` (`main.py`, `Dockerfile`, `docker-compose.yml`),
+`SPIKECLIP_OLLAMA_HOST` (`main.py`; set by Electron and compose),
+`SPIKECLIP_FFMPEG` / `SPIKECLIP_FFPROBE` / `SPIKECLIP_OLLAMA` (binary overrides,
+`core/binaries.py:59-62` `_resolve` reads `SPIKECLIP_{NAME}`),
+`SPIKECLIP_API` (MCP client base URL, `server/mcp.py:52-55`),
 `LOCALAPPDATA` (`core/paths.py`), `CUDA_PATH`, `PATH`, `WINDIR` (build/diagnostics),
 `PYTHONIOENCODING`/`PYTHONUTF8` set by Electron, `BACKEND_EXTERNAL=1` and
-`ELECTRON_RENDERER_URL` read by Electron main (`ui/src/main/index.ts`).
+`ELECTRON_RENDERER_URL` read by Electron main (`frontend/src/main/index.ts`).
 
 ---
 
 ## 6. `data_dir` and path safety
 
 `core/paths.py:19-50` `resolve_data_dir(config)`: absolute `paths.data_dir` is honoured
-as-is; a relative one resolves against `%LOCALAPPDATA%\Clips Studio\<raw>` when
+as-is; a relative one resolves against `%LOCALAPPDATA%\SpikeClip\<raw>` when
 `sys.frozen`, else `<repo root>/<raw>` (never the CWD, because Electron sets none).
-The folder keeps the pre-rename name "Clips Studio" on purpose (`core/paths.py:33-40`).
-Verified on this box (not frozen): default → `/home/user/clips-studio/data`;
+The folder keeps the pre-rename name "SpikeClip" on purpose (`core/paths.py:33-40`).
+Verified on this box (not frozen): default → `/home/user/spikeclip/data`;
 `/mnt/big` → `/mnt/big`. `docs/API.md:105-125` documents that an installed build and a
 checkout are therefore **separate libraries** that can fight over port 8765.
 
@@ -261,7 +261,7 @@ non-regular files, wrong suffix), `within(base, candidate)`, `cached_source()`,
 (`core/binaries.py:33-55`) returns, when frozen: `<exe dir>`, `<exe dir>/<folder>`,
 `<exe dir>/_internal/<folder>`, `sys._MEIPASS`, `sys._MEIPASS/<folder>`; always also
 `<repo>/vendor/<folder>`. `_resolve(name, folder)` (`:58-70`, `@cache`): env override
-`CLIPS_STUDIO_<NAME>` → those roots → `shutil.which` → bare name.
+`SPIKECLIP_<NAME>` → those roots → `shutil.which` → bare name.
 
 | Function | Folder / file | Fallback |
 |---|---|---|
@@ -280,7 +280,7 @@ voice models `pyannote_segmentation_3.onnx` / `wespeaker_resnet34_lm.onnx`
 cuBLAS 12 `nvidia/cublas/bin` (`transcription/transcriber.py:32-42`), the sport
 knowledge `config/sports.yaml` resolved relative to `sports/__init__.py`
 (`sports/__init__.py:22`), `gaming/layouts.json` beside `gaming/framing.py`
-(`clips-studio.spec` comment). Each has an `available()` gate so a missing file degrades
+(`spikeclip.spec` comment). Each has an `available()` gate so a missing file degrades
 the feature instead of crashing (`ARCHITECTURE.md:1049-1053`).
 `core/preflight.py` turns this into the seven checks served at `GET /health/preflight`
 (`ffmpeg`, `ffprobe`, `ollama`, `model`, `whisper`, `gpu`, `disk`;
@@ -308,9 +308,9 @@ the feature instead of crashing (`ARCHITECTURE.md:1049-1053`).
   50 (`server/jobs.py:31` `_KEEP_LOGS = 50`).
 * In a **packaged** build the engine's stdout is discarded by Electron (`stdio:
   'ignore'`), so the per-job files and the ring are the only persistent engine logs;
-  in dev it is inherited to the terminal (`ui/src/main/index.ts` `startBackend`). The
+  in dev it is inherited to the terminal (`frontend/src/main/index.ts` `startBackend`). The
   frozen exe is a console app precisely so `print()` has somewhere to go
-  (`clips-studio.spec` header; `CONTRIBUTING.md` "frozen as a console app on purpose").
+  (`spikeclip.spec` header; `CONTRIBUTING.md` "frozen as a console app on purpose").
   `main.py:_force_utf8_io()` replaces a `None` stdout with `os.devnull` and reconfigures
   to UTF-8 (`errors="replace"`).
 * **Rule for the MCP subcommand**: nothing may print; stdout carries the protocol
@@ -320,7 +320,7 @@ the feature instead of crashing (`ARCHITECTURE.md:1049-1053`).
   built from an allowlist (`server/feedback.py:293-312` `_SETTINGS_ALLOWLIST = ("clips",
   "scoring", "video", "tracking", "analysis")`). `core/secrets.py` never logs a value.
 * Electron main uses `console.error/warn` only; `autoUpdater.logger = null`
-  (`ui/src/main/updater.ts`). KNOWN-ISSUES: "A failed update disappears silently…no
+  (`frontend/src/main/updater.ts`). KNOWN-ISSUES: "A failed update disappears silently…no
   log is kept" (`KNOWN-ISSUES.md` "A failed update disappears silently").
 * **Structured progress is separate from logging**: `core/progress.py` `emit(**event)`
   with a single process-wide handler (`set_handler`) and per-thread tags; the server
@@ -333,7 +333,7 @@ the feature instead of crashing (`ARCHITECTURE.md:1049-1053`).
   `analyze .45`, `ranking .65`, `reactions .70`, `render .78/.22`).
 * **Webhooks**: `POST /jobs` with `webhook_url` (+ `webhook_secret`) → one POST with
   `{"event": "job.done"|"job.failed"|"job.cancelled", job_id, job_type, status,
-  video_id, title, clips, error}` signed `X-Clips-Kitty-Signature: sha256=<hmac>`;
+  video_id, title, clips, error}` signed `X-SpikeClip-Signature: sha256=<hmac>`;
   one attempt, 10 s timeout, never raises (`server/webhooks.py:1-49`).
 
 ---
@@ -343,7 +343,7 @@ the feature instead of crashing (`ARCHITECTURE.md:1049-1053`).
 Built by `python scripts/build_installer.py` (Windows build machine; `docs/RELEASING.md`
 "Build"), which runs: 1 check tools (PyInstaller, **CUDA** torch with `sm_120`, npm) →
 2 `ensure_vendored()` runs each `scripts/fetch_*.py` if its marker is missing →
-3 `python -m PyInstaller clips-studio.spec --distpath build/dist --workpath build/work` →
+3 `python -m PyInstaller spikeclip.spec --distpath build/dist --workpath build/work` →
 3b smoke test `build/dist/backend/api.exe status` → 4 `npm run build` in `ui/` →
 5 `npx electron-builder --win --config electron-builder.yml` → `release/`
 (`scripts/build_installer.py` `check_tools`, `ensure_vendored`, `freeze_backend`,
@@ -351,7 +351,7 @@ Built by `python scripts/build_installer.py` (Windows build machine; `docs/RELEA
 (`docs/RELEASING.md`). **Not built in CI**: a GitHub runner has 14 GB disk
 (`.github/workflows/msix.yml` header; `docs/MSSTORE.md` "Known gaps").
 
-### 9.1 PyInstaller spec (`clips-studio.spec`)
+### 9.1 PyInstaller spec (`spikeclip.spec`)
 
 * One-**dir** (`COLLECT(... name="backend")`), console app (`EXE(name="api",
   console=True, upx=False)`), entry `main.py`, `pathex=[ROOT]`.
@@ -366,7 +366,7 @@ Built by `python scripts/build_installer.py` (Windows build machine; `docs/RELEA
   `sources.preview_frames`.
 * `datas`: `config/settings.yaml`, `config/prompts/`, `config/gaming.yaml`,
   `config/sports.yaml`, `config/audioset_labels.txt`, `transcription/assets`,
-  `ui/package.json` (→ `.`), `assets/outro`, `gaming/layouts.json`, two Haar cascades
+  `frontend/package.json` (→ `.`), `assets/outro`, `gaming/layouts.json`, two Haar cascades
   (→ `cascades/`), `yolov8n-pose.pt` + `yolov8n.pt` (→ `.`), `models/pretrain_TalkSet.model`,
   `models/panns_mobilenetv1.pth`, the two `.onnx` voice models (→ `.`), `vendor/ffmpeg/*`
   (→ `ffmpeg/`), `vendor/ollama/**` (→ `ollama/...` recursively, layout preserved),
@@ -377,13 +377,13 @@ Built by `python scripts/build_installer.py` (Windows build machine; `docs/RELEA
   asserts the vendor folders, `nvidia.cublas`, `transcription/assets`, sports
   submodules, voice models and that `analysis/voice_turns.py` imports no `scipy`,
   `sklearn`, `torchaudio`, `librosa`, `torch`.
-* `scripts/` is not packaged at all (`clips-studio.spec` comment on `assets/outro`).
+* `scripts/` is not packaged at all (`spikeclip.spec` comment on `assets/outro`).
 
 ### 9.2 Installed layout (NSIS and MSIX share it; `docs/MSSTORE.md` "What the Store build does differently")
 
 ```
 <install dir>\                       per-user by default (nsis.perMachine: false)
-  Clips Kitty.exe                    Electron (productName), icon via build/afterPack.cjs + rcedit
+  SpikeClip.exe                    Electron (productName), icon via build/afterPack.cjs + rcedit
   resources\app.asar                 renderer/main/preload JS (files: out/**, package.json)   (inferred: electron-builder default)
   resources\backend\                 extraResources "from ../build/dist/backend to backend", not in asar
     api.exe                          the frozen engine (console app)
@@ -394,34 +394,34 @@ Built by `python scripts/build_installer.py` (Windows build machine; `docs/RELEA
       cascades\haarcascade_*.xml
       yolov8n-pose.pt, yolov8n.pt, pretrain_TalkSet.model, panns_mobilenetv1.pth, *.onnx
       ffmpeg\ffmpeg.exe, ffprobe.exe, README-FFMPEG.txt
-      ollama\ollama.exe, ollama\lib\..., README-OLLAMA.txt, VERSION.txt   (Electron spawns backend\_internal\ollama\ollama.exe, ui/src/main/index.ts)
+      ollama\ollama.exe, ollama\lib\..., README-OLLAMA.txt, VERSION.txt   (Electron spawns backend\_internal\ollama\ollama.exe, frontend/src/main/index.ts)
       whisper\small\model.bin…, whisper\large-v3-turbo\model.bin…, README-WHISPER.txt
       nvidia\cublas\bin\cublas64_12.dll
       torch\lib\ (CUDA build), cv2, ctranslate2, onnxruntime, piper (espeak-ng data), rapidocr models, yt_dlp extractors, …
-%LOCALAPPDATA%\Clips Studio\settings.yaml      the editable config (seeded from the bundle)
-%LOCALAPPDATA%\Clips Studio\data\              library: state.db, downloads, clips, logs, credentials, models (Ollama), voices
-%APPDATA%\clips-studio\                        Electron userData: localStorage, update-prefs.json, tray.json
+%LOCALAPPDATA%\SpikeClip\settings.yaml      the editable config (seeded from the bundle)
+%LOCALAPPDATA%\SpikeClip\data\              library: state.db, downloads, clips, logs, credentials, models (Ollama), voices
+%APPDATA%\spikeclip\                        Electron userData: localStorage, update-prefs.json, tray.json
 ```
 
 Sizes: unpacked ~10 GB (4 GB Ollama + Whisper, rest CUDA PyTorch); payload
-`clips-studio-<v>-x64.nsis.7z` 5.9 GiB; `ClipsKitty-<v>-x64.zip` 6.9 GiB; Web Setup
-~813 KB (`docs/RELEASING.md` "What comes out"; `ui/electron-builder.yml` publish comment;
+`spikeclip-<v>-x64.nsis.7z` 5.9 GiB; `SpikeClip-<v>-x64.zip` 6.9 GiB; Web Setup
+~813 KB (`docs/RELEASING.md` "What comes out"; `frontend/electron-builder.yml` publish comment;
 winget README says 6.7 GB at 2.0.0). Uninstall leaves `data/` (`nsis.deleteAppDataOnUninstall:
 false`, `docs/RELEASING.md`).
 
-### 9.3 electron-builder (`ui/electron-builder.yml`)
+### 9.3 electron-builder (`frontend/electron-builder.yml`)
 
-`appId: com.clipsstudio.app`, `productName: Clips Kitty`, output `../release`,
+`appId: com.spikeclip.app`, `productName: SpikeClip`, output `../release`,
 `files: out/**/*, package.json`, `extraResources: ../build/dist/backend → backend`
 (asar would corrupt native DLLs), `win.target: nsis-web + zip (x64)`,
-`artifactName: ClipsKitty-${version}-${arch}.${ext}`, `nsisWeb.artifactName:
-ClipsKitty-Web-Setup-${version}.${ext}`, `signAndEditExecutable: false` (unsigned;
+`artifactName: SpikeClip-${version}-${arch}.${ext}`, `nsisWeb.artifactName:
+SpikeClip-Web-Setup-${version}.${ext}`, `signAndEditExecutable: false` (unsigned;
 `afterPack: build/afterPack.cjs` embeds the icon with rcedit from the electron-builder
 cache), `nsis: oneClick false, perMachine false, allowToChangeInstallationDirectory`,
 `compression: maximum`, `publish: provider generic, url
-https://huggingface.co/ColinGPT9/clips-studio-releases/resolve/main, channel latest`.
-An `appx:` block (identity `ClipsStudio.ClipsStudio`, publisher
-`CN=82A1C822-…`, `applicationId: ClipsStudio`, `runFullTrust` only) is used only when
+https://huggingface.co/ColinGPT9/spikeclip-releases/resolve/main, channel latest`.
+An `appx:` block (identity `SpikeClip.SpikeClip`, publisher
+`CN=82A1C822-…`, `applicationId: SpikeClip`, `runFullTrust` only) is used only when
 `scripts/build_msix.py` passes `--win appx` explicitly. Plain `nsis` is impossible:
 32-bit `makensis` dies ~2 GB (`CONTRIBUTING.md`, `ARCHITECTURE.md:1038-1047`).
 
@@ -438,7 +438,7 @@ An `appx:` block (identity `ClipsStudio.ClipsStudio`, publisher
 
 Also: `scripts/build_msix.py` (Store appx; refuses placeholders, Developer Mode,
 stale-backend timestamp check), `scripts/sign_msix.py` (self-signed test install),
-`scripts/build_appx_assets.py` (Store tiles into `ui/build/appx/`), `scripts/test-install.wsb`
+`scripts/build_appx_assets.py` (Store tiles into `frontend/build/appx/`), `scripts/test-install.wsb`
 / `test-app.wsb` (Windows Sandbox), `scripts/build_sitemap.py`, `scripts/ping_indexnow.py`,
 `scripts/capture_*.ps1`, `scripts/gaming_detect_bench.py`, `scripts/make_mascot.py`.
 
@@ -457,35 +457,35 @@ Node 18+ / npm (CI uses Node 20, `.github/workflows/ci.yml`). Code signing: none
 
 | Channel | Artefact | Where it is hosted | How a user updates | Cited |
 |---|---|---|---|---|
-| Standalone installer (primary) | `ClipsKitty-Web-Setup-<v>.exe` (≈1 MB) downloads `clips-studio-<v>-x64.nsis.7z`; `ClipsKitty-<v>-x64.zip` offline | Setup .exe + notes on the GitHub release (2 GiB asset cap); payload, zip and feed files on Hugging Face model repo `ColinGPT9/clips-studio-releases` via `hf upload` | `electron-updater` generic provider reads `latest.yml` (stable), `beta.yml` or `alpha.yml` (fallback to `latest.yml`), SHA512-verified; **`autoDownload = false`, `autoInstallOnAppQuit = false`**, `allowDowngrade = false`; one silent check 8 s after launch; user presses Download then "Restart & install" → `quitAndInstall(false, true)`; a skipped version is remembered in `update-prefs.json` | `docs/RELEASING.md` "Publishing", "Updates come from the feed file"; `ui/src/main/updater.ts`; `ui/electron-builder.yml` publish |
-| Microsoft Store | `Clips Kitty-<v>-x64.appx` (~6 GB, under the 25 GB cap), unsigned (Microsoft re-signs) | Partner Center, Store ID `9NB6XT7DSQZZ`; "Start update" per release | the Store updates it; electron-updater is never wired (`process.windowsStore` check); donate opens system browser | `docs/MSSTORE.md`; `ui/src/main/distribution.ts`; `ui/src/main/updater.ts` `isMicrosoftStore()` branch |
-| winget | manifests for `ColinGPT9.ClipsKitty` pointing at the GitHub Web Setup URL + SHA256; `InstallerType: nullsoft`, `Scope: user`, `/S` silent | PR to `microsoft/winget-pkgs` (accepted at 2.0.0, PR #425676) | winget runs the same installer | `packaging/winget/*.yaml`, `packaging/winget/README.md` |
-| Docker (contributors) | `ghcr.io/colingpt9/clips-studio-engine:latest`, `python:3.11-slim`, CPU torch, `CMD serve --host 0.0.0.0` | GHCR, published manually or on `v*` tags | `docker compose pull` | `Dockerfile`, `docker-compose.yml`, `.github/workflows/docker-image.yml` |
+| Standalone installer (primary) | `SpikeClip-Web-Setup-<v>.exe` (≈1 MB) downloads `spikeclip-<v>-x64.nsis.7z`; `SpikeClip-<v>-x64.zip` offline | Setup .exe + notes on the GitHub release (2 GiB asset cap); payload, zip and feed files on Hugging Face model repo `ColinGPT9/spikeclip-releases` via `hf upload` | `electron-updater` generic provider reads `latest.yml` (stable), `beta.yml` or `alpha.yml` (fallback to `latest.yml`), SHA512-verified; **`autoDownload = false`, `autoInstallOnAppQuit = false`**, `allowDowngrade = false`; one silent check 8 s after launch; user presses Download then "Restart & install" → `quitAndInstall(false, true)`; a skipped version is remembered in `update-prefs.json` | `docs/RELEASING.md` "Publishing", "Updates come from the feed file"; `frontend/src/main/updater.ts`; `frontend/electron-builder.yml` publish |
+| Microsoft Store | `SpikeClip-<v>-x64.appx` (~6 GB, under the 25 GB cap), unsigned (Microsoft re-signs) | Partner Center, Store ID `9NB6XT7DSQZZ`; "Start update" per release | the Store updates it; electron-updater is never wired (`process.windowsStore` check); donate opens system browser | `docs/MSSTORE.md`; `frontend/src/main/distribution.ts`; `frontend/src/main/updater.ts` `isMicrosoftStore()` branch |
+| winget | manifests for `ColinGPT9.SpikeClip` pointing at the GitHub Web Setup URL + SHA256; `InstallerType: nullsoft`, `Scope: user`, `/S` silent | PR to `microsoft/winget-pkgs` (accepted at 2.0.0, PR #425676) | winget runs the same installer | `packaging/winget/*.yaml`, `packaging/winget/README.md` |
+| Docker (contributors) | `ghcr.io/colingpt9/spikeclip-engine:latest`, `python:3.11-slim`, CPU torch, `CMD serve --host 0.0.0.0` | GHCR, published manually or on `v*` tags | `docker compose pull` | `Dockerfile`, `docker-compose.yml`, `.github/workflows/docker-image.yml` |
 | Website / web taster | `site/` (Pages + HF Space), `web/` (Vercel, Next static) | | force-pushed mirror | `.github/workflows/mirror.yml`, `docs/MIRRORS.md`, `web/README.md` |
 
-Release checklist specifics: tag `v<version>` must match `ui/package.json`; upload the
+Release checklist specifics: tag `v<version>` must match `frontend/package.json`; upload the
 payload first and the feed file **last** (an update exists the moment `latest.yml`
 lands); bump the nine site download links and the two `VERSION` constants
 (`docs/RELEASING.md` checklist). Update UX gaps: no progress for the multi-GB package
-download beyond a 1-second size poll (`ui/src/main/updater.ts` `watchPackageDownload`;
+download beyond a 1-second size poll (`frontend/src/main/updater.ts` `watchPackageDownload`;
 `KNOWN-ISSUES.md` "Updating shows no progress"); a failed update vanishes silently.
 
 ### 10.1 What this implies for shipping third-party code separately
 
 * Every release is a **wholesale replacement** of one monolithic payload (NSIS install
   over the top; MSIX package swap). There is no partial update, no component feed, and
-  no in-app download of code (`ui/src/main/updater.ts` only knows one artefact; the
+  no in-app download of code (`frontend/src/main/updater.ts` only knows one artefact; the
   only runtime downloads are Ollama models via Ollama's pull API and Piper voices).
 * The install directory is per-user-writable for NSIS but **read-only for MSIX**
   (`core/paths.py:95-100`); the app already moved its own writable state to
-  `%LOCALAPPDATA%\Clips Studio\`. Third-party code would therefore have to live under
+  `%LOCALAPPDATA%\SpikeClip\`. Third-party code would therefore have to live under
   the data dir (or similar per-user path), never beside `api.exe`.
 * The engine is a **PyInstaller freeze**: no `pip`, no `site-packages`, and `api.exe`
   cannot run `-m module` (`requirements.txt` Piper comment: "sys.executable -m piper …
   is api.exe in a frozen build and cannot run -m module"). A Python plugin can only
   import what the bundle already contains, and anything imported lazily needs a
-  `hiddenimports` entry at build time (`clips-studio.spec`). Adding even a small
-  dependency "would also mean a new hidden import in clips-studio.spec and a re-frozen
+  `hiddenimports` entry at build time (`spikeclip.spec`). Adding even a small
+  dependency "would also mean a new hidden import in spikeclip.spec and a re-frozen
   backend" (`server/mcp.py:10-16`, which is why the MCP server is stdlib-only).
 * Precedents already in the tree for out-of-process work: the render worker is a
   separate `api.exe render-worker --run-job` child with a JSON job and an allow-listed
@@ -516,7 +516,7 @@ download beyond a 1-second size poll (`ui/src/main/updater.ts` `watchPackageDown
   `piper-tts` bundled since 1.1.3; comments give the reason for every line. `torch`
   is deliberately absent (CPU vs CUDA chosen by index URL). `requirements-build.txt`:
   `pyinstaller>=6.21.0`. `requirements-chatgpt.txt`: optional `openai-codex` (not in
-  the installer). `pyproject.toml` has **no build system** ("Clips Kitty ships as a
+  the installer). `pyproject.toml` has **no build system** ("SpikeClip ships as a
   frozen application, not a pip package").
 * Dependabot: weekly, grouped, **no major bumps** for pip, npm or actions
   (`.github/dependabot.yml`); `npm audit` posture in `docs/DEPENDENCY-SECURITY.md`
@@ -531,9 +531,9 @@ download beyond a 1-second size poll (`ui/src/main/updater.ts` `watchPackageDown
    (`requirements.txt` header).
 2. Check its licence; add it to `NOTICE` (`CONTRIBUTING.md`).
 3. If it loads modules/data at runtime by name, add it to the `collect_all` loop or
-   `hiddenimports`, and any data files to `datas`, in `clips-studio.spec`; if it is
+   `hiddenimports`, and any data files to `datas`, in `spikeclip.spec`; if it is
    imported lazily inside a function, it **must** be in `hiddenimports`
-   (`clips-studio.spec` "Imported lazily inside functions").
+   (`spikeclip.spec` "Imported lazily inside functions").
 4. If it must *not* be bundled, add to `excludes` — and add a guard in
    `tests/test_packaging.py` if its absence is load-bearing.
 5. Rebuild on the Windows build machine (`python scripts/build_installer.py`), which
@@ -577,9 +577,9 @@ in-process, all compiled into the freeze):
 | Integration presets | `server/integrations.py` `PRESETS = {"standard": …}`; `PLATFORMS = ("twitch","youtube","kick")` | | `server/integrations.py:27-40` |
 | Signals ("bring your own model") | a numpy array over the timeline appended to `peak_signals` in `analysis/fusion.py`; `hype.audience_curve(url, video_id, duration) -> np.ndarray | None` is the shape to copy | | `docs/EXTENDING.md` "Bring your own model" |
 | Prompts / knowledge as data | `config/prompts/*.txt`, `config/gaming.yaml`, `config/sports.yaml`, `gaming/layouts.json` | | `ARCHITECTURE.md:1021-1025` |
-| Agent skill | `skills/clips-kitty/SKILL.md` (YAML front matter `name`, `description`) describing the MCP tools `queue_video`, `queue_local_file`, `job_status`, `list_clips`, `export_clip`, `list_videos`, `queue_status` | | `skills/clips-kitty/SKILL.md` |
+| Agent skill | `skills/spikeclip/SKILL.md` (YAML front matter `name`, `description`) describing the MCP tools `queue_video`, `queue_local_file`, `job_status`, `list_clips`, `export_clip`, `list_videos`, `queue_status` | | `skills/spikeclip/SKILL.md` |
 | External integrations | OBS plugin over `POST /integrations/streams`; webhooks; MCP over stdio; `examples/drive_the_api.py` | | `docs/API.md:806-975`; `server/webhooks.py`; `server/mcp.py` |
-| Electron allow-list | `EXTERNAL_ALLOWED` host regexes: "A provider added there needs its hosts added here, or its 'Get a key' link does nothing" | a UI-visible link from any new provider/plugin needs an Electron change | `ui/src/main/index.ts` `EXTERNAL_ALLOWED` |
+| Electron allow-list | `EXTERNAL_ALLOWED` host regexes: "A provider added there needs its hosts added here, or its 'Get a key' link does nothing" | a UI-visible link from any new provider/plugin needs an Electron change | `frontend/src/main/index.ts` `EXTERNAL_ALLOWED` |
 
 ---
 
@@ -595,7 +595,7 @@ in-process, all compiled into the freeze):
 * Secrets never leave the credential store; keys never returned by any route
   (`server/ai_api.py:9-12`); outputs scrubbed (`core/scrub.py`).
 * Electron: renderer sandboxed; `openExternal` allow-listed; clipboard read gated to
-  key-shaped text; thumbnails passed as bytes not paths (`ui/src/main/index.ts`).
+  key-shaped text; thumbnails passed as bytes not paths (`frontend/src/main/index.ts`).
 * CodeQL dismissals are documented per line (`.github/codeql/codeql-config.yml`);
   CI secret check greps tracked files for `client_secret|token.*\.json`
   (`.github/workflows/ci.yml`).
@@ -614,8 +614,8 @@ in-process, all compiled into the freeze):
 | Results | `GET /videos`, `GET /videos/{id}/clips` (scores breakdown), `GET /media/{clip_id}`, captions/words endpoints, `POST /clips/{id}/export`, `POST /export/batch` | `server/api.py` | HTTP |
 | Readiness / environment | `GET /health` (`app_version`, `api_version`), `GET /health/preflight`, `GET /system/stats` (GPU, disk) | `server/api.py:711-740`, `core/preflight.py` | HTTP |
 | Job logs | `GET /jobs/{id}/log`, files `data/logs/job_N.log` | `server/api.py:1211`, `server/jobs.py:150` | HTTP / file |
-| FFmpeg / ffprobe | bundled binaries path | `core/binaries.py` `ffmpeg()`, `ffprobe()` | python import; `CLIPS_STUDIO_FFMPEG` env for overrides; **not** exposed over HTTP |
-| Ollama runtime | bundled `ollama.exe` on `127.0.0.1:11435` (packaged) / `11434` (dev); model list/pull/activate/delete over the API | `ui/src/main/index.ts`; `GET /models`, `POST /models/pull`, `POST /models/activate`, `DELETE /models/{tag}` | HTTP (model mgmt); Ollama's own HTTP API on the port (inferred: it is a plain Ollama server) |
+| FFmpeg / ffprobe | bundled binaries path | `core/binaries.py` `ffmpeg()`, `ffprobe()` | python import; `SPIKECLIP_FFMPEG` env for overrides; **not** exposed over HTTP |
+| Ollama runtime | bundled `ollama.exe` on `127.0.0.1:11435` (packaged) / `11434` (dev); model list/pull/activate/delete over the API | `frontend/src/main/index.ts`; `GET /models`, `POST /models/pull`, `POST /models/activate`, `DELETE /models/{tag}` | HTTP (model mgmt); Ollama's own HTTP API on the port (inferred: it is a plain Ollama server) |
 | LLM (local or cloud, user's key) | `create_backend(config["llm"])` → `generate/chat/look`; `/ai` routes for provider/key/model management | `llm/registry.py`, `llm/base.py`, `server/ai_api.py` | python import; HTTP for management only (no "run a prompt" endpoint seen; `POST /agent/chat` is the assistant, `server/agent.py`) |
 | Whisper transcription | `transcription.transcriber.transcribe`; bundled weights via `core.binaries.whisper_model(size)`; cloud STT via providers | `transcription/transcriber.py`, `transcription/cloud.py` | python import; no standalone HTTP endpoint seen (transcripts written to `data/transcripts/<id>.json`) |
 | YOLO / TalkNet / Haar / PANNs / voice models | weights resolved by module; `available()` gates | `core/binaries.py`, `video/asd.py`, `analysis/panns.py`, `analysis/voice_turns.py` | python import |
@@ -628,7 +628,7 @@ in-process, all compiled into the freeze):
 | Streams hand-over | `POST /integrations/streams` + presets | `server/integrations.py` | HTTP (supported) |
 | Watched channels | `/automation*` | `server/automation.py` | HTTP (supported) |
 | Remote render worker | pair + run as a separate process; `PROTOCOL = 1` | `remote_render/` | CLI (`api.exe render-worker`) |
-| MCP tools | stdio server over the HTTP API | `server/mcp.py`, `skills/clips-kitty/SKILL.md` | CLI |
+| MCP tools | stdio server over the HTTP API | `server/mcp.py`, `skills/spikeclip/SKILL.md` | CLI |
 | Housekeeping | `GET /storage`, `POST /storage/cleanup` | `core/housekeeping.py`, `server/api.py` | HTTP |
 
 ---
@@ -652,26 +652,26 @@ in-process, all compiled into the freeze):
 * Transcription and LLM calls exist only as Python functions, not as HTTP capabilities a separate-process plugin could call (`transcription/transcriber.py`; `llm/registry.py`).
 
 **Needs compat layer**
-* The frozen engine cannot `pip install` or run `-m`; a plugin needing extra Python deps needs its own interpreter/process and a bridge (`requirements.txt` Piper comment; `server/mcp.py:10-16`; `clips-studio.spec`).
-* Electron's `EXTERNAL_ALLOWED` host allow-list must be extended for any plugin UI link, so a declared-hosts mechanism is needed (`ui/src/main/index.ts` `EXTERNAL_ALLOWED`).
-* The renderer's CSP and hard-coded `API_BASE` pin everything to `127.0.0.1:8765`; plugin UI assets would need serving from that origin (`ui/src/renderer/index.html:7-8`; `ui/src/renderer/src/lib/api.ts:49`).
-* `app_version` is read from `ui/package.json` / `_MEIPASS/package.json` and there is no SDK/plugin-API version beside `API_VERSION = 1`; compatibility checking needs an added field (`server/feedback.py:260-290`; `server/api.py:34`).
+* The frozen engine cannot `pip install` or run `-m`; a plugin needing extra Python deps needs its own interpreter/process and a bridge (`requirements.txt` Piper comment; `server/mcp.py:10-16`; `spikeclip.spec`).
+* Electron's `EXTERNAL_ALLOWED` host allow-list must be extended for any plugin UI link, so a declared-hosts mechanism is needed (`frontend/src/main/index.ts` `EXTERNAL_ALLOWED`).
+* The renderer's CSP and hard-coded `API_BASE` pin everything to `127.0.0.1:8765`; plugin UI assets would need serving from that origin (`frontend/src/renderer/index.html:7-8`; `frontend/src/renderer/src/lib/api.ts:49`).
+* `app_version` is read from `frontend/package.json` / `_MEIPASS/package.json` and there is no SDK/plugin-API version beside `API_VERSION = 1`; compatibility checking needs an added field (`server/feedback.py:260-290`; `server/api.py:34`).
 
 **Suitable external** (lives outside the app repo / process)
-* The Hugging Face model repo already used for payloads is the proven large-file host; GitHub releases cap at 2 GiB (`docs/RELEASING.md`; `ui/electron-builder.yml` publish).
-* The OBS plugin, MCP clients and the agent skill show third-party code driving the engine over HTTP/stdio without being inside it (`PROJECTS.md`; `server/mcp.py`; `skills/clips-kitty/SKILL.md`).
+* The Hugging Face model repo already used for payloads is the proven large-file host; GitHub releases cap at 2 GiB (`docs/RELEASING.md`; `frontend/electron-builder.yml` publish).
+* The OBS plugin, MCP clients and the agent skill show third-party code driving the engine over HTTP/stdio without being inside it (`PROJECTS.md`; `server/mcp.py`; `skills/spikeclip/SKILL.md`).
 * Cloudflare Workers (`feedback-relay/`, `twitch-proxy/`) are the project's pattern for small hosted services with no app coupling (`feedback-relay/README.md`; `twitch-proxy/README.md`).
 * `web/` and `whop-app/` are separate deployables with their own `VERSION` constants (`docs/RELEASING.md`; `web/README.md`; `whop-app/README.md`).
 
 **Needs docs**
-* The frozen-build layout (`resources/backend/api.exe` + `_internal/...`) is only described across spec comments, `electron-builder.yml` and `ui/src/main/index.ts` (`clips-studio.spec`; `ui/electron-builder.yml`; `ui/src/main/index.ts` `startOllama`).
-* The full list of `CLIPS_STUDIO_*` env overrides is undocumented outside code comments (`core/binaries.py`; `main.py`; `server/mcp.py:52-55`).
-* The three writable locations (`%LOCALAPPDATA%\Clips Studio\settings.yaml`, `…\data`, `%APPDATA%\clips-studio`) and which store holds what (`core/paths.py`; `ui/electron-builder.yml:10-20`; `ui/src/main/updater.ts`).
+* The frozen-build layout (`resources/backend/api.exe` + `_internal/...`) is only described across spec comments, `electron-builder.yml` and `frontend/src/main/index.ts` (`spikeclip.spec`; `frontend/electron-builder.yml`; `frontend/src/main/index.ts` `startOllama`).
+* The full list of `SPIKECLIP_*` env overrides is undocumented outside code comments (`core/binaries.py`; `main.py`; `server/mcp.py:52-55`).
+* The three writable locations (`%LOCALAPPDATA%\SpikeClip\settings.yaml`, `…\data`, `%APPDATA%\spikeclip`) and which store holds what (`core/paths.py`; `frontend/electron-builder.yml:10-20`; `frontend/src/main/updater.ts`).
 * The print-based logging convention and the `_Tee` capture are undocumented for contributors (`server/feedback.py:31-82`).
-* The dependency-to-frozen-build procedure (requirements → NOTICE → spec → rebuild → sandbox) is spread across four files (`requirements.txt`; `CONTRIBUTING.md`; `clips-studio.spec`; `docs/RELEASING.md`).
+* The dependency-to-frozen-build procedure (requirements → NOTICE → spec → rebuild → sandbox) is spread across four files (`requirements.txt`; `CONTRIBUTING.md`; `spikeclip.spec`; `docs/RELEASING.md`).
 
 **Remain internal**
-* `clips-studio.spec`, `scripts/build_*.py`, `scripts/fetch_*.py`, `ui/electron-builder.yml`, `ui/build/afterPack.cjs` and the winget/Store manifests are release tooling, not platform surface (`scripts/`; `packaging/`).
+* `spikeclip.spec`, `scripts/build_*.py`, `scripts/fetch_*.py`, `frontend/electron-builder.yml`, `frontend/build/afterPack.cjs` and the winget/Store manifests are release tooling, not platform surface (`scripts/`; `packaging/`).
 * `core/state.py` schema and the data folder layout are explicitly not for third parties ("not by reading the database or the data folder directly, which change without notice", `PROJECTS.md`).
 * `third_party/talknet/` is verbatim vendored code that must never be modified or exposed (`third_party/talknet/README.md`; `.github/CODEOWNERS`).
 * `server/feedback.py` diagnostics, `server/agent.py`, branding/creator/caption-editing routes are "internal" per the API doc (`docs/API.md:131-134`).
@@ -682,14 +682,14 @@ in-process, all compiled into the freeze):
 ## 16. Open questions
 
 1. Which Python interpreter version froze the 2.0.0 release? Nothing pins it; CI/Docker use 3.11 and ruff targets 3.10 (`scripts/build_installer.py`; `pyproject.toml`; `.github/workflows/ci.yml`).
-2. Is `sys._MEIPASS` exactly `resources\backend\_internal` in the shipped build? Code tolerates both `exe_dir` and `_internal`; Electron hard-codes `_internal/ollama` (`core/binaries.py:47-52`; `ui/src/main/index.ts` `startOllama`). (inferred yes)
-3. Can an MSIX (Store) install execute code from `%LOCALAPPDATA%`, and does `runFullTrust` cover spawning a plugin interpreter? Only `runFullTrust` is declared (`ui/electron-builder.yml` appx comment).
+2. Is `sys._MEIPASS` exactly `resources\backend\_internal` in the shipped build? Code tolerates both `exe_dir` and `_internal`; Electron hard-codes `_internal/ollama` (`core/binaries.py:47-52`; `frontend/src/main/index.ts` `startOllama`). (inferred yes)
+3. Can an MSIX (Store) install execute code from `%LOCALAPPDATA%`, and does `runFullTrust` cover spawning a plugin interpreter? Only `runFullTrust` is declared (`frontend/electron-builder.yml` appx comment).
 4. Is there any endpoint to run transcription or an LLM prompt on its own over HTTP? None seen in the 86 + installed routes (`server/api.py` route list; `server/ai_api.py`); `POST /agent/chat` is the assistant, not a raw completion.
 5. The credential-store name used by `server/uploadpost_service.py:84-97` was not read; and `server/woopsocial_api.py` key storage was not opened.
-6. Which `hiddenimports`/`collect_all` entries are still necessary vs. historical (e.g. `polars` exclusion must be re-checked after an ultralytics upgrade, `clips-studio.spec` comment).
+6. Which `hiddenimports`/`collect_all` entries are still necessary vs. historical (e.g. `polars` exclusion must be re-checked after an ultralytics upgrade, `spikeclip.spec` comment).
 7. `docs/DOCKER.md`, `docs/AI-BACKENDS.md`, `docs/GAMING.md`, `docs/SPORTS.md` were not read in this pass (outside the area); they may hold more extension-point detail.
 8. `FastAPI(version="0.1")` in `server/api.py:576` disagrees with every other version number; decide whether `/openapi.json` should carry `API_VERSION`.
-9. `docs/brand/mascot.png`, `docs/brand/mascot-head.png` and `ui/build/icon.ico` show up as modified after
+9. `docs/brand/mascot.png`, `docs/brand/mascot-head.png` and `frontend/build/icon.ico` show up as modified after
    a full test run: the test suite regenerates them (`scripts/make_mascot.py` is exercised by the tests) and
    the bytes differ run to run. Anyone committing after `pytest` must `git checkout --` those three files first
    (observed in this session's baseline run; recorded in `docs/platform/PROGRESS.md`).

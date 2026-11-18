@@ -26,6 +26,9 @@ jobs:
   python:
     name: Python
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     steps:
       - uses: actions/checkout@v7
 
@@ -100,6 +103,9 @@ jobs:
   platform:
     name: Plugin platform
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
     # The plugin platform's tests import the engine's web layer and OpenCV (the
     # API contract, the pipeline job option, the process_video branch), which
     # the Python job above does not install, so they skip there. This job
@@ -131,8 +137,11 @@ jobs:
   sdk-windows:
     name: SDK (Windows)
     runs-on: windows-latest
-    # The SDK's own tests on Windows, where Clips Kitty runs, with Clips
-    # Kitty's Python (3.11) and nothing but pytest and PyYAML: the files
+    defaults:
+      run:
+        working-directory: backend
+    # The SDK's own tests on Windows, where SpikeClip runs, with
+    # SpikeClip's Python (3.11) and nothing but pytest and PyYAML: the files
     # named tests/test_plugin_sdk_*.py import nothing from the engine
     # (test_plugin_sdk_package.py checks). This runner has no FFmpeg, so the
     # tests that need it skip here and run in the Plugin platform job.
@@ -150,7 +159,7 @@ jobs:
         shell: bash
         run: |
           pip wheel --quiet --no-deps sdk/python -w dist
-          echo "CLIPSKITTY_SDK_WHEEL=$(ls dist/*.whl)" >> "$GITHUB_ENV"
+          echo "SPIKECLIP_SDK_WHEEL=$(ls dist/*.whl)" >> "$GITHUB_ENV"
 
       - name: SDK tests
         # bash, because PowerShell doesn't expand a glob for a program it starts.
@@ -162,7 +171,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: ui
+        working-directory: frontend
     steps:
       - uses: actions/checkout@v7
 
@@ -170,7 +179,7 @@ jobs:
         with:
           node-version: '20'
           cache: npm
-          cache-dependency-path: ui/package-lock.json
+          cache-dependency-path: frontend/package-lock.json
 
       - run: npm ci
 
@@ -188,6 +197,9 @@ jobs:
         # "this actually packages", and it is what the installer depends on.
         run: npm run build
 
+      - name: Web build (cloud frontend)
+        run: npm run build:web
+
   vendored:
     name: Vendored code unchanged
     runs-on: ubuntu-latest
@@ -201,7 +213,7 @@ jobs:
 
       - name: Refuse silent edits to third_party/
         run: |
-          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- third_party/ || true)
+          changed=$(git diff --name-only origin/${{ github.base_ref }}...HEAD -- backend/third_party/ || true)
           if [ -z "$changed" ]; then
             echo "third_party/ untouched."
             exit 0
@@ -277,4 +289,4 @@ jobs:
         # A page missing from the sitemap never gets crawled, and a lastmod
         # that never changes tells Google nothing has changed. Both fail
         # silently, so the generator is the source of truth.
-        run: python scripts/build_sitemap.py --check
+        run: python backend/scripts/build_sitemap.py --check

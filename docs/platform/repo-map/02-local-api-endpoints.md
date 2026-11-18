@@ -6,8 +6,8 @@ Branch `claude/open-platform-w4eh9g` (== main). Read-only survey. Every claim ci
 
 - The live route dump (`from server.api import create_app`) could **not** run here: `fastapi` is not installed in this environment (`ModuleNotFoundError: No module named 'fastapi'` at `server/api.py:20`). The route list below therefore comes from grepping every `@app.(get|post|put|patch|delete|websocket)(` decorator; there are no `APIRouter`s anywhere (grep for `@router.` returned nothing) — every sub-module registers directly on the one `FastAPI` instance through an `install(app, ...)` function.
 - Route decorator counts: `server/api.py` 86 (85 HTTP + 1 WebSocket), `server/youtube_api.py` 20, `server/ai_api.py` 17, `server/uploadpost_api.py` 13, `server/woopsocial_api.py` 13, `server/automation.py` 13, `remote_render/service.py` 9, `server/integrations.py` 5 → **176 routes on one app** (175 HTTP + `/ws`). `docs/API.md:11` says "86 HTTP endpoints and a WebSocket", which only counts `server/api.py` and is stale.
-- `remote_render/gateway.py:50` builds a **second, separate** FastAPI app (`Clips Kitty render gateway`, `docs_url=None`, HTTPS, bearer-authenticated, 10 `/v1/...` routes at `remote_render/gateway.py:72-192`). It is not part of the local API and is listed only in section 8.9.
-- FastAPI's auto docs are on: `create_app` passes only `title`/`version` (`server/api.py:576`), so `/docs`, `/redoc`, `/openapi.json` are served (documented at `docs/API.md:60-67`). The UI links to `/docs` from `ui/src/renderer/src/components/AICard.tsx:683`, `RemoteRenderCard.tsx:6`, `ui/src/main/index.ts:507-508`.
+- `remote_render/gateway.py:50` builds a **second, separate** FastAPI app (`SpikeClip render gateway`, `docs_url=None`, HTTPS, bearer-authenticated, 10 `/v1/...` routes at `remote_render/gateway.py:72-192`). It is not part of the local API and is listed only in section 8.9.
+- FastAPI's auto docs are on: `create_app` passes only `title`/`version` (`server/api.py:576`), so `/docs`, `/redoc`, `/openapi.json` are served (documented at `docs/API.md:60-67`). The UI links to `/docs` from `frontend/src/renderer/src/components/AICard.tsx:683`, `RemoteRenderCard.tsx:6`, `frontend/src/main/index.ts:507-508`.
 
 ## 1. How the app is created (`create_app`)
 
@@ -16,11 +16,11 @@ Branch `claude/open-platform-w4eh9g` (== main). Read-only survey. Every claim ci
 | Step | What | Where |
 |---|---|---|
 | Log capture | `feedback_mod.install_log_capture()` redirects pipeline `print`s into the bug-report ring + per-job log | `server/api.py:575`, `server/feedback.py:75` |
-| App | `FastAPI(title="Clips Kitty API", version="0.1")` | `server/api.py:576` |
+| App | `FastAPI(title="SpikeClip API", version="0.1")` | `server/api.py:576` |
 | CORS | `CORSMiddleware(allow_origins=["http://localhost:5173","http://127.0.0.1:5173"], allow_methods=["*"], allow_headers=["*"])` — Vite dev server only | `server/api.py:577-582` |
 | Host check | `TrustedHostMiddleware(allowed_hosts=["127.0.0.1","localhost"])` — any other `Host:` header → 400; the comment says this is the DNS-rebinding guard and "there is no auth" | `server/api.py:583-589` |
 | Auth | **None.** No token, no origin check beyond Host. Stated in `server/api.py:583-586`, `main.py:164-167`, `docs/API.md:70-95` |
-| Version | `app_version = feedback_mod._app_version().get("app","?")` read once from `ui/package.json` (or `_MEIPASS/package.json` when frozen) | `server/api.py:593`, `server/feedback.py:260-297` |
+| Version | `app_version = feedback_mod._app_version().get("app","?")` read once from `frontend/package.json` (or `_MEIPASS/package.json` when frozen) | `server/api.py:593`, `server/feedback.py:260-297` |
 | Data dir / DB | `data_dir = Path(config["paths"]["data_dir"]).resolve()`; `db_path = data_dir/"state.db"`; `def db() -> StateDB` makes a per-request sqlite connection | `server/api.py:595-602` |
 | Worker | `worker = Worker(config)` (pipeline thread, `server/jobs.py:49`) | `server/api.py:597` |
 | Publish worker | `publish_worker = PublishWorker(config, db_path, data_dir)` (YouTube uploads thread) | `server/api.py:609`, `server/publisher.py` |
@@ -36,16 +36,16 @@ Pattern worth copying for an SDK/plugin host: every optional feature is a module
 ## 2. Serving: host, port, process
 
 - `python main.py serve --port 8765 --host 127.0.0.1` — `main.py:162-172`. Default host is loopback "by DEFAULT and on purpose: this API has no authentication"; a non-loopback host prints `WARNING: binding {host} — this API has no authentication.` (`main.py:275-276`).
-- Electron spawns `api.exe serve --port 8765` (packaged) or `python main.py serve --port 8765` (dev) — `ui/src/main/index.ts:19,228,235`. Renderer base URL: `export const API_BASE = 'http://127.0.0.1:8765'` (`ui/src/renderer/src/lib/api.ts:49`); WebSocket `ws://127.0.0.1:8765/ws` (`ui/src/renderer/src/lib/useEvents.ts:4`).
+- Electron spawns `api.exe serve --port 8765` (packaged) or `python main.py serve --port 8765` (dev) — `frontend/src/main/index.ts:19,228,235`. Renderer base URL: `export const API_BASE = 'http://127.0.0.1:8765'` (`frontend/src/renderer/src/lib/api.ts:49`); WebSocket `ws://127.0.0.1:8765/ws` (`frontend/src/renderer/src/lib/useEvents.ts:4`).
 - Docker: `CMD ["python","main.py","serve","--port","8765","--host","0.0.0.0"]` (`Dockerfile:52`), compose publishes `127.0.0.1:8765:8765` only (`docker-compose.yml:20`).
-- Env overrides read by `load_config`: `CLIPS_STUDIO_OLLAMA_HOST`, `CLIPS_STUDIO_DATA_DIR` (`main.py:102-108`). The MCP client reads `CLIPS_STUDIO_API` (`server/mcp.py:52-55`).
+- Env overrides read by `load_config`: `SPIKECLIP_OLLAMA_HOST`, `SPIKECLIP_DATA_DIR` (`main.py:102-108`). The MCP client reads `SPIKECLIP_API` (`server/mcp.py:52-55`).
 - `python main.py mcp` runs the MCP stdio server, which talks to the running engine over HTTP, not the DB (`main.py:280-288`).
 - Other CLI commands that bypass the API entirely and call the pipeline in-process: `process <url> [--force]` → `core.pipeline.process_video` (`main.py:203-209`), `run` → `core.scheduler.run_daemon` (`main.py:211`), `status`, `outro-backfill`, `auth`, `upload`, `render-worker`, `channels`, `models` (`main.py:149-196`).
 
 ## 3. API version and app version
 
 - `API_VERSION = 1` — `server/api.py:34`, comment: "Bumped only when a supported endpoint changes shape, never for additions." Returned by `GET /health` (`server/api.py:716`). `server/integrations.py:10-11` repeats the rule ("an incompatible change bumps API_VERSION in server/api.py"). `CHANGELOG.md:707` records when `app_version`/`api_version` were added. The MCP `engine_status` tool prints it (`server/mcp.py:444`). No test asserts the value (grep over `tests/` found no `API_VERSION`).
-- `app_version` comes from `ui/package.json` `version` (`server/feedback.py:260-297`).
+- `app_version` comes from `frontend/package.json` `version` (`server/feedback.py:260-297`).
 - The FastAPI `version="0.1"` string (`server/api.py:576`) is independent of both and appears only in `/openapi.json` (inferred).
 
 ## 4. Request models in `server/api.py` (the SDK-relevant shapes)
@@ -124,7 +124,7 @@ Everything the pipeline needs is passed as `config` dict + `StateDB`; the pipeli
 3. `server/events.py:11-41`: `Broadcaster.publish(event)` from any thread via `loop.call_soon_threadsafe`; each `/ws` client has an `asyncio.Queue(maxsize=200)`; a full queue **drops** events (`server/events.py:25-30`, pinned by `tests/test_event_delivery.py:307-331`).
 4. `@app.websocket("/ws")` (`server/api.py:1447-1459`): accept, `broadcaster.subscribe()`, `send_json` forever; the server never reads from the client.
 
-Stage weights used both by the worker's `progress_snapshot(job_id) -> {"stage","label","percent","eta_seconds","elapsed_seconds"} | None` (`server/jobs.py:339-359`, `_STAGES` at `37-46`) and by the UI (`ui/src/renderer/src/lib/jobProgress.ts:17-28`): `download 0–0.15, downloaded, transcribe 0.15–0.40, signals 0.40–0.45, analyze 0.45–0.65, ranking 0.65–0.70, reactions 0.70–0.78, render 0.78–1.0`. `tests/test_job_progress.py` checks these.
+Stage weights used both by the worker's `progress_snapshot(job_id) -> {"stage","label","percent","eta_seconds","elapsed_seconds"} | None` (`server/jobs.py:339-359`, `_STAGES` at `37-46`) and by the UI (`frontend/src/renderer/src/lib/jobProgress.ts:17-28`): `download 0–0.15, downloaded, transcribe 0.15–0.40, signals 0.40–0.45, analyze 0.45–0.65, ranking 0.65–0.70, reactions 0.70–0.78, render 0.78–1.0`. `tests/test_job_progress.py` checks these.
 
 ### 6.2 Event catalogue (the `type` field)
 
@@ -137,7 +137,7 @@ Stage weights used both by the worker's `progress_snapshot(job_id) -> {"stage","
 | `publish` | `{"type":"publish","publish_job":int,"clip_id":int,"stage":"publish", "phase": prepare\|upload\|metadata\|done\|failed\|cancelled\|checked, "fraction"?, "message"?, "terminal"?, "youtube_id"?, "url"?, "warnings"?, "state"?}` | `server/publisher.py:519-537` (`_emit`) |
 | `automation` | `{"type":"automation"}` or `{"type":"automation","activity":{...}}` / `{"doing": str}` | `server/automation.py:438,445,451,538,652,708,831,1041,1151,1184,1195,1261,1276` |
 
-The UI's `StudioEvent` type mirrors this union (`ui/src/renderer/src/lib/types.ts:642-680`). `docs/API.md:1218-1262` documents six types. Note `examples/drive_the_api.py:131-137` claims "events carry no job id" and "there is no failure event" — both are out of date versus `server/jobs.py:121` and `_announce` (`server/jobs.py:361-383`), which do carry `job_id` and do emit `status:"failed"`.
+The UI's `StudioEvent` type mirrors this union (`frontend/src/renderer/src/lib/types.ts:642-680`). `docs/API.md:1218-1262` documents six types. Note `examples/drive_the_api.py:131-137` claims "events carry no job id" and "there is no failure event" — both are out of date versus `server/jobs.py:121` and `_announce` (`server/jobs.py:361-383`), which do carry `job_id` and do emit `status:"failed"`.
 
 ### 6.3 Cancellation
 
@@ -147,12 +147,12 @@ The UI's `StudioEvent` type mirrors this union (`ui/src/renderer/src/lib/types.t
 
 - Opt-in per job via `webhook_url` (+ `webhook_secret`) in the payload; validated at submission (`server/api.py:519-528`, `is_deliverable` at `server/webhooks.py:82-93`).
 - Fired exactly once from `Worker._announce` on every terminal state (`server/jobs.py:385-397`): `deliver(url, body_for(event), secret)`.
-- Body (`server/webhooks.py:104-122`): `{"event":"job.done|job.failed|job.cancelled","job_id","job_type","status","video_id","title","clips","error"}`; header `X-Clips-Kitty-Signature: sha256=<hmac over the exact bytes>` (`server/webhooks.py:79,96-101`); `TIMEOUT=10.0`, `User-Agent: clips-kitty`, one attempt, never raises (`server/webhooks.py:125-145`). Tests: `tests/test_webhooks.py`.
+- Body (`server/webhooks.py:104-122`): `{"event":"job.done|job.failed|job.cancelled","job_id","job_type","status","video_id","title","clips","error"}`; header `X-SpikeClip-Signature: sha256=<hmac over the exact bytes>` (`server/webhooks.py:79,96-101`); `TIMEOUT=10.0`, `User-Agent: spikeclip`, one attempt, never raises (`server/webhooks.py:125-145`). Tests: `tests/test_webhooks.py`.
 - A webhook listener is today the **only push channel to an outside process** other than `/ws`; it carries no clip data, only counts.
 
 ## 8. Route tables
 
-Legend — **API.md**: `S` = listed in `docs/API.md` as something to build on; `D-int` = documented in API.md but explicitly called internal/may change (`docs/API.md:106-120`, `654-668`); `I` = not in API.md ("everything else is internal", `docs/API.md:111-114`); `ref` = only mentioned in passing. **Deps**: `UI` = `ui/src/renderer/src/lib/api.ts` (all 135 distinct UI path literals live in that one file, plus `/system/stats` in `lib/modelSpeed.ts` and `/ws` in `lib/useEvents.ts`); `MCP:n` = `server/mcp.py` line; `EX` = `examples/drive_the_api.py`; `AGENT` = `POST /agent/chat` calls MCP tool handlers in-process which call the API over loopback (`server/api.py:2705-2819`, `server/mcp.py:67-78`); `WH` = webhook; `SKILL` = `skills/clips-kitty/SKILL.md` (names MCP tools only, never HTTP paths). `d` = per-request `StateDB`.
+Legend — **API.md**: `S` = listed in `docs/API.md` as something to build on; `D-int` = documented in API.md but explicitly called internal/may change (`docs/API.md:106-120`, `654-668`); `I` = not in API.md ("everything else is internal", `docs/API.md:111-114`); `ref` = only mentioned in passing. **Deps**: `UI` = `frontend/src/renderer/src/lib/api.ts` (all 135 distinct UI path literals live in that one file, plus `/system/stats` in `lib/modelSpeed.ts` and `/ws` in `lib/useEvents.ts`); `MCP:n` = `server/mcp.py` line; `EX` = `examples/drive_the_api.py`; `AGENT` = `POST /agent/chat` calls MCP tool handlers in-process which call the API over loopback (`server/api.py:2705-2819`, `server/mcp.py:67-78`); `WH` = webhook; `SKILL` = `skills/spikeclip/SKILL.md` (names MCP tools only, never HTTP paths). `d` = per-request `StateDB`.
 
 ### 8.1 `server/api.py` — health, system, feedback
 
@@ -398,11 +398,11 @@ The **render gateway** (`remote_render/gateway.py:50`, separate app on a separat
 
 | Consumer | How | Paths used |
 |---|---|---|
-| Electron renderer | `fetch(API_BASE + path)` wrapper `request<T>` (`ui/src/renderer/src/lib/api.ts:64-74`); all 135 distinct path literals in `lib/api.ts`; WS in `lib/useEvents.ts` | essentially every route except `/integrations/*`, `/woopsocial/in-flight`, `/remote-render/jobs/{id}/retry`, `/ai/providers/{id}/callback/{state}` |
-| MCP server `server/mcp.py` (19 tools in `TOOLS` :722-1212; `docs/API.md:1181` says "Thirteen tools" — stale) | stdlib `urllib` to `CLIPS_STUDIO_API` or `http://127.0.0.1:8765` (`:52-78`) | `/branding`, `/jobs`, `/videos/local`, `/jobs/{id}`, `/queue`, `/videos`, `/videos/{id}/clips`, `/clips/{id}/captions`, `/clips/{id}/export`, `/health`, `/youtube/status`, `/uploadpost/status`, `/uploadpost/clips/{id}/publish`, `/uploadpost/clips/{id}`, `/woopsocial/status`, `/woopsocial/batch/plan`, `/woopsocial/batch`, `/publish/plan`, `/publish/plan/execute`, `/clips/{id}/publish`, `/youtube/uploads` |
+| Electron renderer | `fetch(API_BASE + path)` wrapper `request<T>` (`frontend/src/renderer/src/lib/api.ts:64-74`); all 135 distinct path literals in `lib/api.ts`; WS in `lib/useEvents.ts` | essentially every route except `/integrations/*`, `/woopsocial/in-flight`, `/remote-render/jobs/{id}/retry`, `/ai/providers/{id}/callback/{state}` |
+| MCP server `server/mcp.py` (19 tools in `TOOLS` :722-1212; `docs/API.md:1181` says "Thirteen tools" — stale) | stdlib `urllib` to `SPIKECLIP_API` or `http://127.0.0.1:8765` (`:52-78`) | `/branding`, `/jobs`, `/videos/local`, `/jobs/{id}`, `/queue`, `/videos`, `/videos/{id}/clips`, `/clips/{id}/captions`, `/clips/{id}/export`, `/health`, `/youtube/status`, `/uploadpost/status`, `/uploadpost/clips/{id}/publish`, `/uploadpost/clips/{id}`, `/woopsocial/status`, `/woopsocial/batch/plan`, `/woopsocial/batch`, `/publish/plan`, `/publish/plan/execute`, `/clips/{id}/publish`, `/youtube/uploads` |
 | In-app assistant `POST /agent/chat` | runs the same MCP tool handlers in-process → loopback HTTP (`server/api.py:2705-2819`) | as MCP |
 | `examples/drive_the_api.py` | `requests` + `websockets` | `/health`, `/health/preflight`, `/jobs`, `/videos/local`, `/jobs/{id}`, `/videos`, `/videos/{id}/clips`, `/media/{id}` (printed), `ws://…/ws` |
-| `skills/clips-kitty/SKILL.md` | names MCP tools only (`queue_video`, `queue_local_file`, `job_status`, `list_clips`, `list_videos`, `queue_status`, `export_clip`) | — |
+| `skills/spikeclip/SKILL.md` | names MCP tools only (`queue_video`, `queue_local_file`, `job_status`, `list_clips`, `list_videos`, `queue_status`, `export_clip`) | — |
 | Webhook listeners | pushed by `server/webhooks.py` | n/a (outbound) |
 | OBS plugin (external repo) | `/integrations/*` per `docs/API.md:706-800`, `server/integrations.py:3-9` | — |
 

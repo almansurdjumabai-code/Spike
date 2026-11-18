@@ -70,12 +70,13 @@
 # a `query-filters: - exclude: id: py/path-injection` here would end it
 # permanently, at the cost of hiding the rule repo-wide.
 
-name: Clips Kitty
+name: SpikeClip
 
 paths-ignore:
-  - third_party
-  - vendor
-  - ui/node_modules
-  - build
-  - dist
+  - backend/third_party
+  - backend/vendor
+  - frontend/node_modules
+  - frontend/dist-web
+  - backend/build
+  - backend/dist
   - release

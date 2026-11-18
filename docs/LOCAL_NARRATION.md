@@ -1,4 +1,4 @@
-# Optional local narration in Clips Studio
+# Optional local narration in SpikeClip
 
 This host utility renders a text file or narrated scene list to WAV files with
 Kokoro-82M on the CPU. It does not run inside a game plugin, use a provider key,

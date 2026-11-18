@@ -91,23 +91,23 @@ Remote execution is the product. Local use is limited to the publisher's own `co
 - Anthropic-style and OpenAI-style compatibility are not part of Replicate's API (not relevant here; noted for completeness).
 - Security incidents: not searched within the Tier 2 budget; "not confirmed".
 
-## 11. Borrow (for Clips Kitty)
+## 11. Borrow (for SpikeClip)
 
-1. **Typed, self-describing contract per version.** Generate an Input/Output JSON Schema (OpenAPI Schema Objects) from the pipeline's declared inputs (Cog derives it from typed function arguments with `description`, `default`, `ge`, `le`, `choices`). Clips Kitty's manifest can carry the same schema for `highlight_detection` inputs and the "scored, labelled time ranges" output (H2).
-2. **Hash-addressed versions, `owner/name:version`.** A remote pipeline implementation is pinned by content hash; `owner/name` without a version is allowed only for a maintained, stable-API tier (Replicate's "official models" rule). Map to Clips Kitty: pinned tag/commit per registry entry (H3), and "latest" only for first-party pipelines.
-3. **Prediction lifecycle as the remote job model.** `starting / processing / succeeded / failed / canceled`, `urls.get` / `urls.cancel`, `metrics.predict_time`, `Prefer: wait` for short jobs, webhooks with `webhook_events_filter` (`start`, `output`, `logs`, `completed`) for long ones. Clips Kitty already has a job queue and a completion webhook; adopt the status vocabulary and the "same body as GET" webhook rule.
-4. **Signed, replay-resistant webhooks** (`webhook-id`, `webhook-timestamp`, HMAC-SHA256 over `id.timestamp.body`): apply to Clips Kitty's own job-completion webhook and to any remote implementation calling back into the local engine.
+1. **Typed, self-describing contract per version.** Generate an Input/Output JSON Schema (OpenAPI Schema Objects) from the pipeline's declared inputs (Cog derives it from typed function arguments with `description`, `default`, `ge`, `le`, `choices`). SpikeClip's manifest can carry the same schema for `highlight_detection` inputs and the "scored, labelled time ranges" output (H2).
+2. **Hash-addressed versions, `owner/name:version`.** A remote pipeline implementation is pinned by content hash; `owner/name` without a version is allowed only for a maintained, stable-API tier (Replicate's "official models" rule). Map to SpikeClip: pinned tag/commit per registry entry (H3), and "latest" only for first-party pipelines.
+3. **Prediction lifecycle as the remote job model.** `starting / processing / succeeded / failed / canceled`, `urls.get` / `urls.cancel`, `metrics.predict_time`, `Prefer: wait` for short jobs, webhooks with `webhook_events_filter` (`start`, `output`, `logs`, `completed`) for long ones. SpikeClip already has a job queue and a completion webhook; adopt the status vocabulary and the "same body as GET" webhook rule.
+4. **Signed, replay-resistant webhooks** (`webhook-id`, `webhook-timestamp`, HMAC-SHA256 over `id.timestamp.body`): apply to SpikeClip's own job-completion webhook and to any remote implementation calling back into the local engine.
 5. **Publish-time hygiene rules that are mechanical, not editorial**: at least one version, at least one example run, public visibility, a README/model card with limitations. Cheap to check in a CI index build.
 6. **Honest deletion rules**: a version others have used cannot be deleted; make the same promise for registry entries at a pinned ref (the ref stays resolvable; the entry can be marked deprecated).
-7. **Caller pays on their own account** for remote execution; the publisher hosts at $0 marginal cost. This fits "no payment processing" if remote implementations bill through the user's own provider account, as Clips Kitty already does with OpenRouter.
+7. **Caller pays on their own account** for remote execution; the publisher hosts at $0 marginal cost. This fits "no payment processing" if remote implementations bill through the user's own provider account, as SpikeClip already does with OpenRouter.
 
 ## 12. Avoid
 
-1. Requiring Docker on the user's machine or in the plugin workflow; Clips Kitty is a frozen PyInstaller build on Windows.
-2. Treating "public" as the only trust signal; Replicate has no verification tier and no review, so a Clips Kitty "Verified" label must come from a real process or not exist.
+1. Requiring Docker on the user's machine or in the plugin workflow; SpikeClip is a frozen PyInstaller build on Windows.
+2. Treating "public" as the only trust signal; Replicate has no verification tier and no review, so a SpikeClip "Verified" label must come from a real process or not exist.
 3. Unversioned identifiers for community implementations (Replicate allows them only for its own maintained models).
 4. One-hour data expiry semantics without telling the user; if a remote implementation returns file URLs that expire, the local engine must fetch and store them immediately.
-5. Copying the hosted-registry/billing design; Clips Kitty's registry is static and free (H3). What transfers is the contract and lifecycle, not the backend.
+5. Copying the hosted-registry/billing design; SpikeClip's registry is static and free (H3). What transfers is the contract and lifecycle, not the backend.
 
 ## 13. Sources (all read 2026-10-06)
 
@@ -136,7 +136,7 @@ Remote execution is the product. Local use is limited to the publisher's own `co
 ## Hypotheses
 
 - **H1 (out-of-process over the local API is lowest risk): supported for the remote variant.** The implementation never runs in the caller's process; the contract is HTTP + JSON Schema; the only trust decision the caller makes is which `owner/name:version` to call and what data to send.
-- **H9 (remote/hybrid execution is a legitimate path; nearest precedents): supported.** Replicate shows a working "publish once, anyone calls, caller pays on their own account" model with per-version schemas; combined with Clips Kitty's existing OpenRouter path this is the precedent for a remote `highlight_detection` implementation.
+- **H9 (remote/hybrid execution is a legitimate path; nearest precedents): supported.** Replicate shows a working "publish once, anyone calls, caller pays on their own account" model with per-version schemas; combined with SpikeClip's existing OpenRouter path this is the precedent for a remote `highlight_detection` implementation.
 - **H2 (smallest contract is video in, scored ranges out): compatible.** Cog's typed `Input()`/`Path` and the generated Output schema express exactly such a contract; file inputs are URLs or data URLs.
 - **H3 (static Git registry): not addressed by Replicate** (central service), but the "displayworthy" criteria are a good mechanical checklist for a CI-built index.
 - **H5 (declared ≠ enforced): consistent.** Replicate declares nothing about permissions; isolation is real but on the server side.

@@ -9,11 +9,12 @@ exports/
 *.webm
 
 # ...except the prebuilt end cards, which are build inputs, not user content.
-# clips-studio.spec bundles this folder so the common clip formats never spend
+# spikeclip.spec bundles this folder so the common clip formats never spend
 # ~20s rendering a card the app could have shipped. Without this exception they
 # are ignored by the *.mp4 rule above: present on the machine that generated
 # them, absent from every clone and from the release build.
 !assets/outro/*.mp4
+!backend/assets/outro/*.mp4
 
 # Secrets — never commit these (each user creates their own)
 config/client_secret.json
@@ -23,9 +24,9 @@ config/client_secret.json
 *.pt
 
 # Desktop app build artifacts
-ui/node_modules/
-ui/out/
-ui/dist/
+frontend/node_modules/
+frontend/out/
+frontend/dist/
 
 # Installer build inputs and outputs. The bundled FFmpeg binaries are
 # fetched by scripts/fetch_ffmpeg.py on the machine that builds the
@@ -33,8 +34,11 @@ ui/dist/
 # Anchored with a leading slash: an unanchored "build/" also matches
 # ui/build/, which holds the app icon and DOES belong in the repo.
 /vendor/
+/backend/vendor/
 /build/
+/backend/build/
 /dist/
+/backend/dist/
 /release/
 *.spec.bak
 
@@ -51,13 +55,17 @@ __pycache__/
 # match ui/build/, which holds the app icon and belongs in the repo.
 .Python
 /build/
+/backend/build/
 develop-eggs/
 /dist/
+/backend/dist/
 downloads/
 eggs/
 .eggs/
 /lib/
+/backend/lib/
 /lib64/
+/backend/lib64/
 parts/
 sdist/
 var/
@@ -73,11 +81,12 @@ MANIFEST
 #   before PyInstaller builds the exe, so as to inject date/other infos into it.
 *.manifest
 *.spec
-#   Ours is not generated. clips-studio.spec is hand-written and is the only
+#   Ours is not generated. spikeclip.spec is hand-written and is the only
 #   place that says what goes inside the installer — which bundled binaries,
 #   which model weights, which packages to leave out. Without it a clean clone
 #   cannot build a release at all, so the blanket rule above must not eat it.
-!clips-studio.spec
+!spikeclip.spec
+!backend/spikeclip.spec
 
 # Installer logs
 pip-log.txt
@@ -274,16 +283,28 @@ _test_*.py
 # Generated test footage. Rebuild with tests/assets/make_sample_video.py.
 # Anchored: an unanchored *.mp4 would also swallow assets we do want.
 /tests/assets/sample_video.mp4
+/backend/tests/assets/sample_video.mp4
 
 # Model weights: speaker detection (scripts/fetch_asd_model.py, 63 MB), game
 # sounds (scripts/fetch_panns.py, 24 MB) and voices
 # (scripts/fetch_voice_model.py, 33 MB), bundled into the installer, not
 # committed.
 /models/
+/backend/models/
 
 # Scratch files from probing the Twitch proxy by hand. m3u8 dumps and .ts
 # segments are test output, not source — one of these was a 320 KB video.
 /master.txt
+/backend/master.txt
 /media.txt
+/backend/media.txt
 /seg.ts
+/backend/seg.ts
 *.ts.tmp
+
+
+# Split layout (frontend/ + backend/)
+frontend/dist-web/
+.env
+*.env.local
+!.env.example

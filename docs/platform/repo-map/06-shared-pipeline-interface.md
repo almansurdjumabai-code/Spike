@@ -1,6 +1,6 @@
 # Shared pipeline interface: Standard vs Gaming vs Sports (vs Longform / Podcast / Vertical Live)
 
-Repo: /home/user/clips-studio, branch claude/open-platform-w4eh9g. All paths repo-relative. Read-only survey.
+Repo: /home/user/spikeclip, branch claude/open-platform-w4eh9g. All paths repo-relative. Read-only survey.
 Everything not marked "(inferred)" is read directly from the cited line.
 
 ## 0. Orientation: there is no mode enum, there are flag predicates

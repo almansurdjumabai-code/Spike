@@ -2,7 +2,7 @@
 
 Platform: Eklipse (eklipse.gg, app.eklipse.gg). Tier 1, Track D (market reference, not a template). Date read: 2026-10-06 (all URLs below were opened on that date unless marked "not confirmed").
 
-**Brief's question.** Study Eklipse's gaming clip/highlight workflow (connect Twitch/YouTube/Kick, upload VODs, AI highlights, edit, vertical, post), supported games and use cases ("3,000+ games"; what differs between per-game pages), automation (auto-clipping, scheduling), game-specific functionality (what "Gameplay Intelligence" detects; genres named; any per-game detection), how it separates generic from game-specific processing, how users select gaming functionality, pricing (Free vs Premium; Plus→Premium; current prices/limits), which parts could be specialised Clips Kitty pipelines, and whether it publishes any API/SDK/plugin system (H9).
+**Brief's question.** Study Eklipse's gaming clip/highlight workflow (connect Twitch/YouTube/Kick, upload VODs, AI highlights, edit, vertical, post), supported games and use cases ("3,000+ games"; what differs between per-game pages), automation (auto-clipping, scheduling), game-specific functionality (what "Gameplay Intelligence" detects; genres named; any per-game detection), how it separates generic from game-specific processing, how users select gaming functionality, pricing (Free vs Premium; Plus→Premium; current prices/limits), which parts could be specialised SpikeClip pipelines, and whether it publishes any API/SDK/plugin system (H9).
 
 **Verdict (two lines).** Eklipse is a closed, cloud-only SaaS with three detection layers: per-game "detection models" with a per-game event taxonomy (Valorant: KILL/ACE/CLUTCH/TEAM ACE/VICTORY; Fortnite: DOUBLE/TRIPLE/MEGA/EPIC ELIMINATION…), per-genre tuning in the June-2026 "Gameplay Intelligence" engine (five buckets: FPS, battle royale, MOBA, tactical shooter, strategy/non-action), and a generic audio/reaction fallback for the rest of the "3,000+" games; the game is chosen automatically from the stream's category metadata (one game per VOD), with a manual "Resubmit → select game" override.
 No API, SDK, plugin system or developer program is published (home, features, terms, help-centre search): H9 confirmed, with the nuance that detection is per game *and* per genre, not per genre only. Useful as a feature checklist for a specialised gaming pipeline, not as an extensibility model.
@@ -117,13 +117,13 @@ Earlier published figures, for the trend (company blog, modified 2024-12-11): Fr
 - B2B: /esport/ is "Send us the broadcast. We return the highlights." with "Custom model on request"; no API, white-label or self-serve integration.
 - Verdict: **H9 confirmed** — no published API, SDK, plugin system or developer program. Nuance for the second half of H9: tuning is per genre (five configurations) in Gameplay Intelligence, but the help centre also documents per-game "dedicated AI detection models" with per-game event lists, so "per genre" is only the routing layer.
 
-## H. Which Eklipse capabilities map to specialised Clips Kitty pipelines
+## H. Which Eklipse capabilities map to specialised SpikeClip pipelines
 
-| Eklipse capability | Clips Kitty pipeline shape (inferred) |
+| Eklipse capability | SpikeClip pipeline shape (inferred) |
 |---|---|
 | Per-game detection model with event taxonomy (Valorant ACE/CLUTCH, Fortnite ELIMINATION tiers, Marvel Rivals kill-feed scan) | One pipeline per game (e.g. publisher/valorant-highlights) that declares its event labels and uses OCR/YOLO on the kill feed and HUD |
 | Per-genre tuning (FPS, BR, MOBA, tactical, strategy) | Genre pipelines as a middle tier (publisher/fps-generic) that specific game pipelines can extend or that run when no game pipeline matches |
-| Generic audio/reaction fallback; Just Chatting/IRL/podcast scoring | The existing generic Clips Kitty pipeline (PANNs + transcript + LLM score) as the always-available baseline |
+| Generic audio/reaction fallback; Just Chatting/IRL/podcast scoring | The existing generic SpikeClip pipeline (PANNs + transcript + LLM score) as the always-available baseline |
 | Scene-aware clip boundaries and length-by-moment-type | A post-scoring "boundary" stage any pipeline can implement; a 5–40 s length table as a declared default |
 | Score / Platform Fit / "Why This Clip" | Required output fields on the "scored and labelled time ranges" contract: score, label (event type), reason, suggested platform |
 | Game identification from platform category + manual Resubmit | Pipeline auto-select by game id/genre from metadata with a user override and a "re-run with another pipeline" action |
@@ -138,7 +138,7 @@ Earlier published figures, for the trend (company blog, modified 2024-12-11): Fr
 - Stated limitations: one game per VOD; wrong platform category → wrong model; 6 h VOD cap on Twitch/Kick; muted VODs (copyright) can yield no clips; English-tuned audio layer; loud music; overlays over kill feed/minimap; 1080p source recommended for OCR; Twitch link imports capped at 3 for life; paywalled games on Free; pure narrative content gets fewer clips; "Manual selection inside a VOD is on the roadmap."
 - Pricing instability: Free clipping tier removed June 2026; Plus merged into Premium; a documented 2023 price increase; mobile price higher than web; figures differ between help, blog and third-party listings.
 
-## 11. Borrow (for Clips Kitty)
+## 11. Borrow (for SpikeClip)
 
 1. A typed event taxonomy per pipeline, split into game events (KILL, ACE, CLUTCH, VICTORY…) and generic signals (HIGH VIEWER, HIGH COMMENT, FUNNY MOMENTS, VOICE COMMAND). Let the manifest declare the labels a pipeline can emit (supports H2 and H8).
 2. Three-tier routing: game pipeline → genre pipeline → generic baseline, selected from metadata (game id/category) with a visible manual override, because "wrong game" is Eklipse's most documented failure.
@@ -150,7 +150,7 @@ Earlier published figures, for the trend (company blog, modified 2024-12-11): Fr
 
 ## 12. Avoid
 
-1. Opaque engine swaps: Eklipse replaced its detection layer wholesale on one date with no way to pin or compare; Clips Kitty pipelines should be versioned and pinnable.
+1. Opaque engine swaps: Eklipse replaced its detection layer wholesale on one date with no way to pin or compare; SpikeClip pipelines should be versioned and pinnable.
 2. Silent fallback: when the game pipeline does not apply, say so in the output (Eklipse only tells users in a help article that quality "is lower").
 3. One-game-per-VOD lock-in; design segment-level pipeline selection from the start.
 4. Paywalling detection per game and credit-counting imports; irrelevant for a free registry but a reminder that per-game models are costly to build and run — the registry should expect few, specialised, community-maintained game pipelines rather than "3,000+".
@@ -196,12 +196,12 @@ Third-party: capterra.com/p/10015243/Eklipse/pricing/ (review-site listing, unda
 
 Standard template row:
 
-| Platform | Extension type | Model support | Workflow support | Registry | Git-based | Local | Remote | Versioning | Security | Marketplace | What Clips Kitty should learn |
+| Platform | Extension type | Model support | Workflow support | Registry | Git-based | Local | Remote | Versioning | Security | Marketplace | What SpikeClip should learn |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | Eklipse.gg | n/a (closed SaaS; internal per-game models + per-genre configs) | internal only (OCR, object detection, audio separation; nothing exposed) | fixed: import → detect → library → Studio → Publisher/Content Agent | n/a (games directory, requests via Discord) | no | no | yes (cloud only) | engine replaced wholesale 2026-06-01; no pinning | OAuth to platforms; approve-before-post | n/a (subscription, $24.99/mo, $179.99/yr) | typed per-game event labels + genre routing + generic fallback; scored, explained time ranges |
 
 Track D row:
 
-| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What Clips Kitty should learn |
+| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What SpikeClip should learn |
 |---|---|---|---|---|---|---|
 | Eklipse.gg | Cloud auto-clipping of Twitch/Kick/YouTube/Facebook streams into 9:16 clips, scheduled to TikTok/Shorts/Reels; Premium $24.99/mo or $179.99/yr, no free clipping tier since 2026-06-01 | Three tiers: per-game detection models (Premium-gated for popular titles) → five genre configurations (FPS, BR, MOBA, tactical, strategy) → generic audio/reaction fallback for the rest of the "3,000+" games and Just Chatting; game chosen from platform category metadata, one game per VOD, manual Resubmit override | Yes: auto-process on stream end, ranked clips with Score / Platform Fit / "Why This Clip", variable clip lengths 5–40 s by moment type, Content Agent hunt→edit→schedule with approval, 180 s voice-command marker | Kill-feed parsing, eliminations/knockdowns, objective/round/victory states, score changes via OCR + object detection; per-game event taxonomies (Valorant ACE/CLUTCH/TEAM ACE; Fortnite DOUBLE/TRIPLE/MEGA/EPIC ELIMINATION); genre-weighted scoring; audio split into voice/game/background | None published: no API, SDK, plugin system or developer program (H9 confirmed); internal api.eklipse.gg /v1 seen only in app bundle strings; game requests via Discord; esports "custom model on request" | Declare typed event labels per pipeline; route game → genre → generic from metadata with a user override; score on several signals and emit a reason per clip; size clips by moment type; state limits (resolution, overlays, language, one game per VOD) up front |

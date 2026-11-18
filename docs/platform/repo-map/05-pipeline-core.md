@@ -1,6 +1,6 @@
 # Pipeline core, job system, progress, cancellation, errors, state and storage
 
-Repository: /home/user/clips-studio (branch claude/open-platform-w4eh9g). All paths repo-relative; `path:line` cites the line a claim rests on. "(inferred)" marks a conclusion the code does not state literally. Read-only survey; nothing in the repo was changed.
+Repository: /home/user/spikeclip (branch claude/open-platform-w4eh9g). All paths repo-relative; `path:line` cites the line a claim rests on. "(inferred)" marks a conclusion the code does not state literally. Read-only survey; nothing in the repo was changed.
 
 ---
 
@@ -140,7 +140,7 @@ Invariants (`core/queue.py:23-32`): one video at a time; a payload is a snapshot
 Longform emits the same stage names (`longform/process.py:57-216`).
 
 ### 5.3 Percentage folding (server/jobs.py)
-`_STAGES = {stage: (base, weight, label)}` (`server/jobs.py:30-39`): download 0.00/0.15 "Downloading video"; downloaded 0.15/0; transcribe 0.15/0.25 "Transcribing speech"; signals 0.40/0.05; analyze 0.45/0.20 "Finding the best moments"; ranking 0.65/0.05; reactions 0.70/0.08; render 0.78/0.22 "Rendering clips". Stated as "kept identical to the UI's STAGES in ui/src/renderer/src/lib/jobProgress.ts" (`:25-27`). Within-stage fraction: `event["fraction"]`, else `(clip-1)/total`, else `(current-1)/total`, else 0.5 (`:323-336`). Never moves backwards; capped at 0.99; a `span=(lo,hi)` scales both-format jobs (`:338-345`, `:746-754`). Unknown stages (`done`, `publish`) do not move the figure (`:325-326`).
+`_STAGES = {stage: (base, weight, label)}` (`server/jobs.py:30-39`): download 0.00/0.15 "Downloading video"; downloaded 0.15/0; transcribe 0.15/0.25 "Transcribing speech"; signals 0.40/0.05; analyze 0.45/0.20 "Finding the best moments"; ranking 0.65/0.05; reactions 0.70/0.08; render 0.78/0.22 "Rendering clips". Stated as "kept identical to the UI's STAGES in frontend/src/renderer/src/lib/jobProgress.ts" (`:25-27`). Within-stage fraction: `event["fraction"]`, else `(clip-1)/total`, else `(current-1)/total`, else 0.5 (`:323-336`). Never moves backwards; capped at 0.99; a `span=(lo,hi)` scales both-format jobs (`:338-345`, `:746-754`). Unknown stages (`done`, `publish`) do not move the figure (`:325-326`).
 
 `Worker.progress_snapshot(job_id) -> {stage, label, percent, eta_seconds, elapsed_seconds} | None` (`:347-366`); ETA only above 6 %.
 
@@ -217,7 +217,7 @@ Both-formats job: `Worker._both_formats` runs `process_video` then `process_long
 
 ## 9. State and storage
 
-### 9.1 Files on disk (under `paths.data_dir`, resolved by `core/paths.py:resolve_data_dir`: absolute as given; relative -> repo root in a checkout, `%LOCALAPPDATA%/Clips Studio/<raw>` when frozen; `core/paths.py:17-50`)
+### 9.1 Files on disk (under `paths.data_dir`, resolved by `core/paths.py:resolve_data_dir`: absolute as given; relative -> repo root in a checkout, `%LOCALAPPDATA%/SpikeClip/<raw>` when frozen; `core/paths.py:17-50`)
 
 | Path | Written by | Notes |
 |---|---|---|
@@ -259,7 +259,7 @@ In the DB: the `clips` row written by `_register_clip` (`core/pipeline.py:1582-1
 
 ## 10. Settings: how configuration reaches the pipeline
 
-- `main.py:load_config(path)` (`main.py:68-121`) reads `config/settings.yaml` (or the per-user copy when frozen, `core/paths.py:user_config_path`), normalises the flat quick-setup keys: `model` -> `llm.backend = "ollama/<tag>"` or `provider/model` (`:72-77`), `channel` -> `channels[]`, `auto_upload` -> `upload.enabled`, `privacy` -> `upload.privacy`; env overrides `CLIPS_STUDIO_OLLAMA_HOST` -> `llm.ollama_host`, `CLIPS_STUDIO_DATA_DIR` -> `paths.data_dir` (`:102-108`); then `paths.data_dir = str(resolve_data_dir(config))` and `llm.data_dir = paths.data_dir` (`:110-115`).
+- `main.py:load_config(path)` (`main.py:68-121`) reads `config/settings.yaml` (or the per-user copy when frozen, `core/paths.py:user_config_path`), normalises the flat quick-setup keys: `model` -> `llm.backend = "ollama/<tag>"` or `provider/model` (`:72-77`), `channel` -> `channels[]`, `auto_upload` -> `upload.enabled`, `privacy` -> `upload.privacy`; env overrides `SPIKECLIP_OLLAMA_HOST` -> `llm.ollama_host`, `SPIKECLIP_DATA_DIR` -> `paths.data_dir` (`:102-108`); then `paths.data_dir = str(resolve_data_dir(config))` and `llm.data_dir = paths.data_dir` (`:110-115`).
 - Keys the pipeline reads directly (from `config/settings.yaml:35-150`): `llm.{backend, ollama_host, temperature, num_ctx, translation_model, data_dir}`; `whisper.{model, device}`; `transcription.{backend, model}`; `content_language`; `clips.{min_score, max_clips_per_video, min_duration, max_duration, vertical, captions, outro}` plus job-injected `clips.{podcast, vertical_live, gaming, gaming_layout, gaming_remember, gaming_scoring, sport, focus, filter, required_hashtags, caption_style, watermark}`; `scoring.{weights, signal_peak_percentile, creator_context_max, action_bonus, audience_bonus, rerank_pool, reaction_top_k, look_at_game}`; `analysis.{max_overlap, max_text_similarity, max_segment_reuse, chunk_seconds, chunk_overlap_seconds, long_video_threshold_seconds}`; `video.{encoder, parallel_renders}`; `tracking.{detector, sample_fps}`; `paths.data_dir`.
 - Per-job merge (`server/jobs.py:189-269`): `cfg = copy.deepcopy(self.config)` then payload keys mapped onto `cfg["clips"]` (and `cfg["scoring"]["rerank_pool"]`): `podcast`, `vertical_live`, `gaming_scoring`, `gaming` (+`gaming_layout`, `gaming_remember`), `captions`, `min_score`, `sport`, `focus` (+ sports direction), `long_clips` -> `min_duration=61, max_duration=180`, `filter`, `hashtags` -> `required_hashtags`, `max_clips` -> `max_clips_per_video` and `rerank_pool`, `caption_style`, `watermark_profile_id` -> `clips.watermark` (branding row). `JobIn` (`server/api.py:39-64`) and `_process_options` (`:441-`) define the HTTP side; `max_clips` is clamped to 1..10 (`:450`).
 - Remote rendering ships only `CONFIG_SECTIONS = ("clips", "tracking", "video")` to a render worker (`remote_render/protocol.py:19-24`), which is the allowlist of config a render needs.

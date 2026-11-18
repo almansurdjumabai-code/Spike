@@ -1,10 +1,10 @@
-# Partner Center paste sheet: Clips Kitty 0.1.2
+# Partner Center paste sheet: SpikeClip 0.1.2
 
 Every field, in the order Partner Center asks for it. Open this beside the
 dashboard and work down. [MSSTORE.md](MSSTORE.md) explains *why* for anything
 that looks odd; this file is just the values.
 
-**Start:** Partner Center → Apps and games → Clips Kitty → **Start submission**
+**Start:** Partner Center → Apps and games → SpikeClip → **Start submission**
 
 ---
 
@@ -27,9 +27,9 @@ anyone can install it.
 |---|---|
 | Category | **Multimedia design** |
 | Subcategory | Video editing |
-| Privacy policy URL | `https://colingpt9.github.io/clips-studio/privacy.html` |
-| Website | `https://colingpt9.github.io/clips-studio/` |
-| Support contact | `https://github.com/ColinGPT9/clips-studio/issues` |
+| Privacy policy URL | `https://colingpt9.github.io/spikeclip/privacy.html` |
+| Website | `https://colingpt9.github.io/spikeclip/` |
+| Support contact | `https://github.com/ColinGPT9/spikeclip/issues` |
 
 **Product declarations. The two that are easy to miss:**
 
@@ -61,14 +61,14 @@ honest version of that claim.
 
 ## 3. Age ratings
 
-Complete the IARC questionnaire. Every answer is **No** for Clips Kitty. The
+Complete the IARC questionnaire. Every answer is **No** for SpikeClip. The
 two that need thought rather than reflex:
 
 - **Does the app allow users to share content?** No. This question is about
   users sharing with *each other* and being exposed to other users' content,
   and nothing here does that. The optional YouTube publishing feature uploads
   the user's own clip to their own channel using their own Google API key; no
-  user is ever exposed to another user's content through Clips Kitty.
+  user is ever exposed to another user's content through SpikeClip.
 - **Does it display user-generated or uncurated content?** The user's own
   video, to themselves. Nothing from other users.
 
@@ -76,7 +76,7 @@ Expect PEGI 3 / ESRB Everyone.
 
 ## 4. Packages
 
-Upload: **`release\ClipsStudio-1.1.2-x64.appx`** (7.60 GB)
+Upload: **`release\SpikeClip-1.1.2-x64.appx`** (7.60 GB)
 
 The unsigned one in `release/`, not the signed copy in `build/msix-signing/`.
 Microsoft re-signs after certification; the local signature exists only so the
@@ -85,7 +85,7 @@ package could be installed for testing.
 Verified before upload:
 
 ```
-Identity Name   ClipsStudio.ClipsStudio
+Identity Name   SpikeClip.SpikeClip
 Publisher       CN=82A1C822-C6B7-41D5-889B-160627060939
 Version         1.1.2.0
 Architecture    x64
@@ -148,7 +148,7 @@ needed. It is the only capability the package declares.
 fits. Paste exactly:
 
 ```
-Clips Kitty is a Win32 desktop app packaged with the Desktop Bridge, so runFullTrust is required and is the only capability declared.
+SpikeClip is a Win32 desktop app packaged with the Desktop Bridge, so runFullTrust is required and is the only capability declared.
 
 It launches three child processes bundled in the package: a frozen Python engine for analysis, FFmpeg for encoding, and Ollama hosting the AI model on the user's own hardware. AppContainer cannot launch these.
 
@@ -158,7 +158,7 @@ It reads and writes only video files the user picks. No telemetry. Optional YouT
 If even that is rejected as too long, this says the same in 384:
 
 ```
-Clips Kitty is a Win32 desktop app packaged with the Desktop Bridge, so runFullTrust is required for it to run, and it is the only capability declared.
+SpikeClip is a Win32 desktop app packaged with the Desktop Bridge, so runFullTrust is required for it to run, and it is the only capability declared.
 
 It launches three child processes bundled in the package: a frozen Python engine for analysis, FFmpeg for encoding, and Ollama hosting the AI model locally. AppContainer cannot do this.
 
@@ -167,7 +167,7 @@ No telemetry. Optional YouTube publishing is off by default and uses the user's 
 
 Every claim there is verifiable in the package: `resources/backend/api.exe`,
 `_internal/ffmpeg/ffmpeg.exe` and `_internal/ollama/ollama.exe` are all
-spawned by `ui/src/main/index.ts`, and `runFullTrust` is the only entry under
+spawned by `frontend/src/main/index.ts`, and `runFullTrust` is the only entry under
 `<Capabilities>` in the manifest.
 
 ### Notes for certification
@@ -175,7 +175,7 @@ spawned by `ui/src/main/index.ts`, and `runFullTrust` is the only entry under
 Paste into **Notes for certification**:
 
 ```
-Clips Kitty processes video locally using an AI model that is downloaded on
+SpikeClip processes video locally using an AI model that is downloaded on
 first run, so the first launch shows a model download of roughly 3-5 GB with a
 progress bar. This is model weights (data), not executable code. Nothing is
 uploaded; all processing happens on the device.
@@ -185,7 +185,7 @@ download a model first if none is present. A machine with 16 GB of RAM is
 required - on less, clips are analysed but rendering fails with an
 out-of-memory error.
 
-No account or login is needed to use the app. There is no Clips Kitty
+No account or login is needed to use the app. There is no SpikeClip
 account or server at any point.
 
 The app can optionally publish a finished clip to the user's own YouTube
@@ -220,7 +220,7 @@ manual. Read the report, then publish.
 - Store link for the README and website:
   `https://apps.microsoft.com/detail/9NB6XT7DSQZZ` (404s until it publishes)
 - Note in `CHANGELOG.md` that 0.1.2 is on the Store
-- Consider submitting the [winget manifest](../packaging/winget/): it needs no
+- Consider submitting the [winget manifest](../backend/packaging/winget/): it needs no
   account, no certificate and no certification, and reaches a different crowd
 
 **Next release:** Partner Center → **Start update**, never a new product. A new

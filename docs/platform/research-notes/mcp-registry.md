@@ -3,8 +3,8 @@
 - Platform: the official MCP Registry (`registry.modelcontextprotocol.io`) and the `server.json` format
 - Tier: Track C, Tier 2 (registry-design precedent; point 6 matters most)
 - Date read: 2026-10-06
-- Brief's question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
-- Verdict (two lines): a metadata-only "metaregistry": it hosts no code, points at npm/PyPI/NuGet/crates.io/OCI/MCPB packages or at remote URLs, authenticates publishers by namespace (GitHub login or DNS/HTTP proof), makes every published version immutable, and by design does no curation, ranking, scanning or more than reactive moderation ("consumers should assume minimal-to-no moderation"). It runs as a Go REST service with PostgreSQL on GKE deployed by Pulumi — far more infrastructure than a free Clips Kitty registry needs. Borrow the `server.json` shape (reverse-DNS names, exact package versions, `fileSha256`, `remotes`, `_meta`), the package-ownership marker, immutable versions with a `status` field and `updated_since` sync; do not borrow the service footprint, and do not pair "minimal moderation" with any "Verified" wording.
+- Brief's question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
+- Verdict (two lines): a metadata-only "metaregistry": it hosts no code, points at npm/PyPI/NuGet/crates.io/OCI/MCPB packages or at remote URLs, authenticates publishers by namespace (GitHub login or DNS/HTTP proof), makes every published version immutable, and by design does no curation, ranking, scanning or more than reactive moderation ("consumers should assume minimal-to-no moderation"). It runs as a Go REST service with PostgreSQL on GKE deployed by Pulumi — far more infrastructure than a free SpikeClip registry needs. Borrow the `server.json` shape (reverse-DNS names, exact package versions, `fileSha256`, `remotes`, `_meta`), the package-ownership marker, immutable versions with a `status` field and `updated_since` sync; do not borrow the service footprint, and do not pair "minimal moderation" with any "Verified" wording.
 
 Every claim carries a URL and the read date 2026-10-06 unless stated. The registry repository was read from a shallow clone at commit c384c4b (dated 2026-10-06).
 
@@ -77,7 +77,7 @@ Not applicable.
 
 ## 9. Local, remote or both
 
-Both are first-class: `packages` (local, `stdio` transport, run by the client) and `remotes` (`streamable-http` or `sse`), and a server may list both (the filesystem example lists npm and OCI packages). This matches Clips Kitty's "local, remote and hybrid are all legitimate" decision.
+Both are first-class: `packages` (local, `stdio` transport, run by the client) and `remotes` (`streamable-http` or `sse`), and a server may list both (the filesystem example lists npm and OCI packages). This matches SpikeClip's "local, remote and hybrid are all legitimate" decision.
 
 ## 10. Known incidents and stated limitations
 
@@ -89,20 +89,20 @@ Both are first-class: `packages` (local, `stdio` transport, run by the client) a
 ## 11. Borrow
 
 1. Identifier design: reverse-DNS namespace tied to a login the registry can verify (`io.github.<user>/<pipeline>`), one slash, immutable after first publish. This is the cleanest answer to H8's "publisher/pipeline" naming and to impersonation.
-2. Ownership marker inside the thing being pointed at: Clips Kitty's plugin manifest in the developer's repository should carry the registry name (as `mcpName` does), and the index build should refuse an entry whose repo manifest name does not match.
+2. Ownership marker inside the thing being pointed at: SpikeClip's plugin manifest in the developer's repository should carry the registry name (as `mcpName` does), and the index build should refuse an entry whose repo manifest name does not match.
 3. Exact versions only, ranges rejected; `fileSha256` for downloaded archives; `repository.url` + `subfolder` for monorepos.
 4. Immutable per-version records plus a mutable `status` (`active` / `deprecated` / `deleted`) with `statusMessage`, and an `updated_since` query so clients and mirrors sync incrementally instead of re-reading everything.
-5. `environmentVariables` with `isRequired`/`isSecret`/`default` as the declared way to ask for API keys (Clips Kitty's OpenRouter-style "on the user's own account" settings).
-6. The subregistry idea in reverse: Clips Kitty's static index can be the upstream, and anyone may build a curated view with their own `_meta`.
+5. `environmentVariables` with `isRequired`/`isSecret`/`default` as the declared way to ask for API keys (SpikeClip's OpenRouter-style "on the user's own account" settings).
+6. The subregistry idea in reverse: SpikeClip's static index can be the upstream, and anyone may build a curated view with their own `_meta`.
 7. Design principles worth adopting verbatim: minimal operational burden, vendor neutrality, interface reuse "not infrastructure".
 
 ## 12. Avoid
 
-1. A database-backed service with OAuth, JWT keys, Kubernetes, backups and two environments — the registry needs it for self-service publishing at ecosystem scale; a free, PR-driven Clips Kitty index does not.
+1. A database-backed service with OAuth, JWT keys, Kubernetes, backups and two environments — the registry needs it for self-service publishing at ecosystem scale; a free, PR-driven SpikeClip index does not.
 2. "Any version string is accepted" plus "unparsable means latest": validate semver (or CalVer) at index build and reject the rest.
 3. Listing before any functional check: the registry accepts entries and only later removes "Non-functioning servers"; a Git-index CI can at least fetch the pinned ref and validate the manifest first.
-4. Shipping without a host-compatibility field; Clips Kitty's manifest should state the minimum engine/API version.
-5. Any wording near "Verified" while the stated policy is "assume minimal-to-no moderation" — the two cannot coexist under Clips Kitty's fixed decisions.
+4. Shipping without a host-compatibility field; SpikeClip's manifest should state the minimum engine/API version.
+5. Any wording near "Verified" while the stated policy is "assume minimal-to-no moderation" — the two cannot coexist under SpikeClip's fixed decisions.
 
 ## 13. Sources, with dates
 

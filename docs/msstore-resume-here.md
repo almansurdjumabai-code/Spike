@@ -5,7 +5,7 @@ Written 2026-08-14, updated 2026-08-15. Delete this file once the app is live.
 ## Ready to submit
 
 ```
-release\ClipsStudio-1.1.2-x64.appx      7.60 GB
+release\SpikeClip-1.1.2-x64.appx      7.60 GB
 ```
 
 Unsigned, which is correct: Microsoft re-signs after certification.
@@ -20,7 +20,7 @@ Unsigned, which is correct: Microsoft re-signs after certification.
 | YOLO detection from the bundled weights | runs, no download attempt |
 | Model scoring through the packaged Ollama | runs |
 | Rendering | **8 clips, 8 files, 30.8 MB on disk** |
-| Settings written outside the read-only package | `%LOCALAPPDATA%\Clips Studio\settings.yaml` |
+| Settings written outside the read-only package | `%LOCALAPPDATA%\SpikeClip\settings.yaml` |
 
 Nothing about the pipeline is unverified any more.
 
@@ -49,7 +49,7 @@ metadata recovery and the Models table fix; the GitHub installer of 0.1.2 does
 not have them.
 
 **So the first question on any bug report is where they installed from.**
-"Clips Kitty 0.1.2" is not one thing until the next release lines them up
+"SpikeClip 0.1.2" is not one thing until the next release lines them up
 again. The next GitHub release should be 0.1.3 and should include everything in
 the CHANGELOG's Unreleased section.
 

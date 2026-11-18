@@ -1,6 +1,6 @@
-# Architecture: Clips Kitty
+# Architecture: SpikeClip
 
-Clips Kitty is a local-first AI clipping engine with a desktop front end. It ingests a
+SpikeClip is a local-first AI clipping engine with a desktop front end. It ingests a
 long video, finds the moments worth posting using an LLM plus multimodal signal
 analysis, renders speaker-tracked captioned vertical clips, and hands them to a review
 and editing studio. By default nothing is sent to a cloud AI service and there is no
@@ -36,7 +36,7 @@ document: design notes that used to live separately have been folded in here.
 ```
 ┌──────────────────────────┐  ┌──────────────────────────┐  ┌──────────────────────────┐
 │ Desktop app              │  │ Watched channels,        │  │ Assistants               │
-│ Electron + React + Vite  │  │ streamer-tool hand-offs  │  │ Ask Clips Kitty · MCP    │
+│ Electron + React + Vite  │  │ streamer-tool hand-offs  │  │ Ask SpikeClip · MCP    │
 └────────────┬─────────────┘  └────────────┬─────────────┘  └────────────┬─────────────┘
              └─────────────────────────────┼─────────────────────────────┘
                                            │  HTTP + WebSocket (127.0.0.1:8765)
@@ -82,7 +82,7 @@ Three things add network paths, and each is off until the user turns it on: **cl
 (the transcript, or the audio for cloud transcription, goes to the provider the user
 signed in to), **publishing** (finished clips go to the platforms, directly or through a
 publishing service) and **remote rendering** (one clip's stretch of video goes to the
-user's own render PC, [10.3](#103-remote-rendering)). Two plain file fetches run on their own, carry nothing about the user, and can each be switched off: the desktop app's update check and Clips Kitty's online list of pipelines (`plugins/registry.py` `ONLINE_URL`, once a day when the Marketplace opens or the app starts with a pipeline installed; `docs/platform/DECISIONS.md` D29).
+user's own render PC, [10.3](#103-remote-rendering)). Two plain file fetches run on their own, carry nothing about the user, and can each be switched off: the desktop app's update check and SpikeClip's online list of pipelines (`plugins/registry.py` `ONLINE_URL`, once a day when the Marketplace opens or the app starts with a pipeline installed; `docs/platform/DECISIONS.md` D29).
 
 ### End to end
 
@@ -143,8 +143,12 @@ default and the first choice.
 
 ## 2. Repository structure
 
+The repository is split into two deployables. Everything in the tree below except
+`frontend/` (the former `ui/`) lives under **`backend/`**; docs, the website and the
+side projects stay at the root. [DEPLOY.md](DEPLOY.md) covers running each part in the cloud.
+
 ```
-clips-studio/
+spikeclip/
 ├── main.py                     # CLI entry: process, serve, models, status, channels
 ├── config/
 │   ├── settings.yaml           # quick setup at the top, advanced below
@@ -259,7 +263,7 @@ clips-studio/
 │   ├── feedback.py             # in-app bug reports + diagnostics
 │   ├── ai_api.py               # Settings → AI: local or cloud, which model
 │   ├── automation.py           # watched channels: new video → clips → publish
-│   ├── agent.py                # the Ask Clips Kitty assistant
+│   ├── agent.py                # the Ask SpikeClip assistant
 │   ├── mcp.py                  # the same tools over MCP (stdio)
 │   ├── integrations.py         # streamer tools hand over a finished livestream
 │   ├── webhooks.py             # tell another program a job finished
@@ -268,7 +272,7 @@ clips-studio/
 ├── remote_render/              # a second PC renders clips: service, TLS gateway, worker, protocol
 ├── third_party/talknet/        # vendored TalkNet-ASD — do not edit
 ├── models/                     # TalkNet weights (pretrain_TalkSet.model), PANNs game sounds, the two voice models
-├── ui/                         # ── desktop app ──
+├── frontend/                   # ── web app + desktop shell (repo root) ──
 │   ├── src/main/               # Electron main process
 │   └── src/renderer/           # React + TypeScript + Tailwind
 ├── feedback-relay/             # Cloudflare Worker → GitHub Issues
@@ -645,7 +649,7 @@ captioned like any other turns; `speaker_turns` stays what was heard, so the edi
 always go back to it. A clip whose caption text was saved keeps its lines, and
 `tag_lines` colours each one whole by who says the words in it, so there a fix switches
 a whole caption. The editor works out the same thing for its instant preview in
-`ui/src/renderer/src/lib/speakerTurns.ts`, on the same numbers (`clip_words`, which is
+`frontend/src/renderer/src/lib/speakerTurns.ts`, on the same numbers (`clip_words`, which is
 also what `GET /clips/{id}/words` returns). What a click, a shift-click and Swap add to
 the list is worked out there too (`fixSpeakers`), and `tests/test_ui_speaker_turns_sync.py`
 runs that file under Node: against the Python, and clicked through word after word.
@@ -916,11 +920,11 @@ Rules worth knowing before changing this:
 
 ### 10.2 The assistant and MCP
 
-The **Ask Clips Kitty** box at the bottom of the app talks to `server/agent.py`
+The **Ask SpikeClip** box at the bottom of the app talks to `server/agent.py`
 (`/agent/chat`): the same LLM as the clips, given the app's tools (queue videos with
 their settings, a clip direction, sport options and match events, and more).
 `server/mcp.py` offers the same tools over MCP on stdio, so Claude, Cursor and other
-assistants can drive Clips Kitty too.
+assistants can drive SpikeClip too.
 
 ### 10.3 Remote rendering
 

@@ -79,7 +79,7 @@ Pending evidence stays explicitly pending.
 
 ## Already existed; not this entry's new work
 
-Clips Kitty editor and pipeline; Watched Channels and tray polling; SQLite
+SpikeClip editor and pipeline; Watched Channels and tray polling; SQLite
 dedupe, queue recovery and retries; WoopSocial integration, daily scheduling,
 publish-once ledger, WatchLive and Clip Studio Schedule; Connected Accounts,
 public desktop Twitch OAuth and service-owned tokens; Gaming layouts, webcam

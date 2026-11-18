@@ -1,21 +1,21 @@
-# Clips Kitty Open Platform: overnight plan
+# SpikeClip Open Platform: overnight plan
 
 **Scope for this run: FULL** (research, architecture, then implementation in phase order).
 To stop after the architecture document instead, change `FULL` to `DOCS ONLY` before starting.
 
-You are working in the Clips Kitty repository in a long unattended session. Nobody will answer questions until morning. This document is the whole brief: what the project is for, how to work tonight, the research plan, the design work, the build order, and what to hand back.
+You are working in the SpikeClip repository in a long unattended session. Nobody will answer questions until morning. This document is the whole brief: what the project is for, how to work tonight, the research plan, the design work, the build order, and what to hand back.
 
 ---
 
 ## 1. The job
 
-Clips Kitty is a local-first AI video application. It is already modular and already has a local API, and its Gaming and Sports pipelines are built on that structure. The job is to turn what exists into an open platform for AI-video pipelines, plugins, models, workflows and integrations that independent developers can build on. Three pieces:
+SpikeClip is a local-first AI video application. It is already modular and already has a local API, and its Gaming and Sports pipelines are built on that structure. The job is to turn what exists into an open platform for AI-video pipelines, plugins, models, workflows and integrations that independent developers can build on. Three pieces:
 
-1. **Plugins and an SDK.** A developer builds an extension through a supported contract, without forking or editing the Clips Kitty source.
+1. **Plugins and an SDK.** A developer builds an extension through a supported contract, without forking or editing the SpikeClip source.
 2. **The existing local API becomes the public developer API.** Inspect it, understand it, find its stable boundaries, document it, formalize it where needed, and add developer-facing abstractions around it. A separate API is justified only if the existing one cannot support the ecosystem, and that case is a stop condition (section 2.6).
 3. **A free Marketplace / Registry.** Users discover and install pipelines, plugins, models, workflows, integrations and providers. It is a discovery, compatibility and installation layer, and never a payment system.
 
-The principle that outranks everything else here: **the existing architecture is an asset. Extend it; do not replace it.** This is not "add a plugin button to Clips Kitty". It is "Clips Kitty already has a modular pipeline system and a local API; turn that existing system into a supported platform that independent developers can build specialized AI-video pipelines for." The application stays useful on its own, and the existing Gaming and Sports pipelines stay useful.
+The principle that outranks everything else here: **the existing architecture is an asset. Extend it; do not replace it.** This is not "add a plugin button to SpikeClip". It is "SpikeClip already has a modular pipeline system and a local API; turn that existing system into a supported platform that independent developers can build specialized AI-video pipelines for." The application stays useful on its own, and the existing Gaming and Sports pipelines stay useful.
 
 Order of work tonight:
 
@@ -84,13 +84,13 @@ The research and architecture documents are always worth finishing, even if ever
 
 ### 2.7 Say what was checked
 
-In every document and report, separate what you ran and saw pass from what you wrote but could not run here (GPU inference, real model downloads, the desktop UI, other operating systems). Anything touching file paths, symbolic links, process spawning or GPU access must be designed for the operating systems Clips Kitty ships on, and marked untested where this environment differs.
+In every document and report, separate what you ran and saw pass from what you wrote but could not run here (GPU inference, real model downloads, the desktop UI, other operating systems). Anything touching file paths, symbolic links, process spawning or GPU access must be designed for the operating systems SpikeClip ships on, and marked untested where this environment differs.
 
 ---
 
 ## 3. What the platform is for
 
-The aim is larger than "Clips Kitty has plugins". **Developers should be able to build extremely specialized AI-video pipelines for niches that Clips Kitty could never realistically implement by itself.** Specialization is the point. A pipeline does not have to be generic.
+The aim is larger than "SpikeClip has plugins". **Developers should be able to build extremely specialized AI-video pipelines for niches that SpikeClip could never realistically implement by itself.** Specialization is the point. A pipeline does not have to be generic.
 
 Examples of what a third party should be able to ship: Marvel Rivals Highlights, World of Warcraft PvP Highlights, World of Warcraft Mythic+ Highlights, Minecraft Highlights, Valorant Highlights, League of Legends Highlights, Rocket League Highlights, Soccer Highlights, Podcast Clips, VTuber Clips, Twitch Highlights, specialized captioning, game-specific OCR, scoreboard detection, sports event detection, meme detection, streamer reaction detection.
 
@@ -105,7 +105,7 @@ WoW VOD → encounter detection → boss mechanics → major cooldowns → death
 → large damage events → Mythic+ events → PvP events → highlight ranking → clip extraction
 ```
 
-Clips Kitty provides the platform. The third-party developer provides the domain-specific intelligence, so they can focus on their pipeline instead of rebuilding the whole video-AI infrastructure.
+SpikeClip provides the platform. The third-party developer provides the domain-specific intelligence, so they can focus on their pipeline instead of rebuilding the whole video-AI infrastructure.
 
 **The developer chooses how narrow to go.** Nothing may assume that a gaming pipeline works across every game, or a sports pipeline across every sport. The ecosystem should be able to grow into this, far faster than the core team could build each niche:
 
@@ -116,10 +116,10 @@ Sports:   Generic Sports · Soccer · NHL · NBA · F1 · specialized league or 
 Creators: Podcast · Twitch · VTuber · Music · Education
 ```
 
-**Competing pipelines are welcome.** Do not design around the assumption that Clips Kitty must always have the best model for every task. If another developer's pipeline (for example Open Shorts) is better for some users, that is fine: they should be able to ship "Open Shorts for Clips Kitty" so users do not have to leave Clips Kitty. Official, complementary and competing pipelines coexist:
+**Competing pipelines are welcome.** Do not design around the assumption that SpikeClip must always have the best model for every task. If another developer's pipeline (for example Open Shorts) is better for some users, that is fine: they should be able to ship "Open Shorts for SpikeClip" so users do not have to leave SpikeClip. Official, complementary and competing pipelines coexist:
 
 ```text
-Clips Kitty
+SpikeClip
   ├── Official Shorts Pipeline
   ├── Open Shorts
   ├── Community Soccer Pipeline
@@ -129,18 +129,18 @@ Clips Kitty
   └── Other specialized pipelines
 ```
 
-The more useful pipelines exist inside Clips Kitty, the more valuable Clips Kitty becomes. Clips Kitty becomes the platform where AI-video pipelines plug in. Do not treat a third-party developer as a competitor because they ship an alternative clipping pipeline.
+The more useful pipelines exist inside SpikeClip, the more valuable SpikeClip becomes. SpikeClip becomes the platform where AI-video pipelines plug in. Do not treat a third-party developer as a competitor because they ship an alternative clipping pipeline.
 
-**Eklipse.gg is a market reference, not a template.** It shows there is demand for specialized automated gaming highlights. The question it raises: what happens if Clips Kitty becomes the platform on which many small developers each build a game-specific pipeline (Marvel Rivals AI Highlights, WoW Mythic+ Highlights, Minecraft Survival Highlights, Valorant Clutch Detector, Rocket League Goal/Saves Pipeline), all running on one shared local runtime with one Marketplace, and together covering thousands of games and niches? Do not clone Eklipse.
+**Eklipse.gg is a market reference, not a template.** It shows there is demand for specialized automated gaming highlights. The question it raises: what happens if SpikeClip becomes the platform on which many small developers each build a game-specific pipeline (Marvel Rivals AI Highlights, WoW Mythic+ Highlights, Minecraft Survival Highlights, Valorant Clutch Detector, Rocket League Goal/Saves Pipeline), all running on one shared local runtime with one Marketplace, and together covering thousands of games and niches? Do not clone Eklipse.
 
 **Who gets what.**
 
-- Developers: *Build the AI for your niche. Clips Kitty provides the platform.* They focus on game-specific vision, event detection, highlight scoring, model development and game-specific logic. They do not build a complete video editor, video project management, FFmpeg infrastructure, model caching, user installation, distribution or Marketplace discovery.
+- Developers: *Build the AI for your niche. SpikeClip provides the platform.* They focus on game-specific vision, event detection, highlight scoring, model development and game-specific logic. They do not build a complete video editor, video project management, FFmpeg infrastructure, model caching, user installation, distribution or Marketplace discovery.
 - Users: *Find the best pipeline for what you actually do.*
-- The platform: *Every useful pipeline makes Clips Kitty more valuable.*
-- Developers keep ownership of their work. A listing references their GitHub repository, model repository, documentation, website and external service. Nothing forces a project into Clips Kitty ownership.
+- The platform: *Every useful pipeline makes SpikeClip more valuable.*
+- Developers keep ownership of their work. A listing references their GitHub repository, model repository, documentation, website and external service. Nothing forces a project into SpikeClip ownership.
 
-**Product definition.** Clips Kitty is an open, local-first platform where developers can build specialized AI-video pipelines and plugins, users can discover and install them through a free Marketplace, and those pipelines can use Clips Kitty's existing API and local video-AI infrastructure.
+**Product definition.** SpikeClip is an open, local-first platform where developers can build specialized AI-video pipelines and plugins, users can discover and install them through a free Marketplace, and those pipelines can use SpikeClip's existing API and local video-AI infrastructure.
 
 ---
 
@@ -150,7 +150,7 @@ These are settled. Research may refine how they are met, not whether.
 
 **Architecture**
 
-1. Do not rewrite Clips Kitty from scratch.
+1. Do not rewrite SpikeClip from scratch.
 2. Do not replace the existing API.
 3. Do not replace the existing pipeline architecture.
 4. Do not create a redundant pipeline engine.
@@ -160,15 +160,15 @@ These are settled. Research may refine how they are met, not whether.
 
 **Developers**
 
-8. Developers never have to fork Clips Kitty.
+8. Developers never have to fork SpikeClip.
 9. The Marketplace is free for developers: $0 to publish, $0 to list, $0 to update, $0 for plugin submissions, $0 SDK access.
-10. 0% revenue share. Clips Kitty takes no percentage of developer revenue.
+10. 0% revenue share. SpikeClip takes no percentage of developer revenue.
 11. No payment processing for third-party developers: no Stripe or PayPal marketplace payments, seller accounts, payout systems, commissions, marketplace subscriptions, listing fees or revenue-sharing infrastructure. Developers monetize independently through their own website, their own API, SaaS, GitHub Sponsors, Patreon, donations, licensing, subscriptions, commercial support or any other model they choose. A listing may display links to those. The Marketplace is discovery + distribution + compatibility + installation, not financial infrastructure.
 12. Pipelines can be as specialized as the developer wants. Nothing forces them to be generic.
 
 **Models and execution**
 
-13. Models do not have to be hosted by Clips Kitty, and Clips Kitty must not depend on one provider.
+13. Models do not have to be hosted by SpikeClip, and SpikeClip must not depend on one provider.
 14. Pipelines are not forced to run locally and not forced to run remotely. Local, remote and hybrid are all legitimate.
 15. Do not copy or redistribute models where licensing does not permit it. Prefer downloading from the original source.
 
@@ -187,7 +187,7 @@ These are settled. Research may refine how they are met, not whether.
 
 ## 5. Phase 0A: map the repository
 
-Do this before the web research, because the precedents only matter in relation to what Clips Kitty already is. Assume nothing about the stack; open the code. Write the result to `docs/platform/repo-map.md` and cite a file path for every claim.
+Do this before the web research, because the precedents only matter in relation to what SpikeClip already is. Assume nothing about the stack; open the code. Write the result to `docs/platform/repo-map.md` and cite a file path for every claim.
 
 **Inspect:** repository structure · frontend · backend · the local API · IPC, if applicable · pipeline architecture · the Gaming pipeline · the Sports pipeline · other pipelines · model loading · model cache · Ollama integration · Gemma integration · Whisper integration · YOLO / computer vision · FFmpeg · project and file storage · job processing · background workers · progress reporting · error handling · configuration · logging · update mechanism · packaging and distribution.
 
@@ -216,7 +216,7 @@ Do this before the web research, because the precedents only matter in relation 
 
 ### 6.1 Method
 
-- **Purpose.** Every finding should end in a decision for Clips Kitty. Research that changes no design choice is not needed.
+- **Purpose.** Every finding should end in a decision for SpikeClip. Research that changes no design choice is not needed.
 - **Sources.** Use current official documentation, source repositories and vendor security advisories first. Use press and blogs only for incidents and market facts, and say when you do. Several of these projects changed in 2025 and 2026 (ownership, registries, security policy), so do not rely on memory. Open the page.
 - **Citations.** Every factual claim in the research document carries a link and the date you read it. If something could not be confirmed, write "not confirmed" and leave it at that.
 - **Notes.** Keep raw notes per platform in `docs/platform/research-notes/<platform>.md` using the template in 6.2, so the synthesis can be checked later.
@@ -236,8 +236,8 @@ Do this before the web research, because the precedents only matter in relation 
 8. Models: how they are referenced, downloaded, cached and shared.
 9. Local, remote or both.
 10. Known incidents and stated limitations.
-11. Borrow: what Clips Kitty should take.
-12. Avoid: what Clips Kitty should not repeat.
+11. Borrow: what SpikeClip should take.
+12. Avoid: what SpikeClip should not repeat.
 13. Sources, with dates.
 
 ### 6.3 Tracks
@@ -247,7 +247,7 @@ Do this before the web research, because the precedents only matter in relation 
 | Platform | Tier | Study | Question to answer |
 |---|---|---|---|
 | ComfyUI | 1 | ComfyUI architecture, custom nodes, workflows, ComfyUI Manager, Comfy Registry, node packaging, versioning, installation, dependency handling, security | How does an AI application become an ecosystem of community-built extensions? This is probably the most important architectural precedent. |
-| Open WebUI | 1 | Functions, Pipes, extension architecture, custom model-like integrations, providers, plugins, security | Third-party code may have access to the local machine. What trust and permission model does that demand, and which security mistakes should Clips Kitty avoid? |
+| Open WebUI | 1 | Functions, Pipes, extension architecture, custom model-like integrations, providers, plugins, security | Third-party code may have access to the local machine. What trust and permission model does that demand, and which security mistakes should SpikeClip avoid? |
 | Kilo Code | 1 | Marketplace, plugins, Git-hosted extensions, registry distribution, extension metadata, install / remove / update flows, developer publishing, permissions, plugin trust and security | What should the Marketplace and extension ecosystem look like? |
 | Stability Matrix | 2 | Package management, multiple AI applications, shared model storage, local models, dependency handling, model reuse, environment isolation | How should a local-first shared model store work? |
 | Pinokio | 2 | GitHub-based app distribution, installable scripts, discovery, local applications, developer distribution, trust and verification | How does community distribution of local AI applications work, and what does "verified" mean there? |
@@ -257,8 +257,8 @@ Do this before the web research, because the precedents only matter in relation 
 
 | Platform | Tier | Study | Question to answer |
 |---|---|---|---|
-| Hugging Face | 1 | Model Hub, model repositories, model cards, model versions and revisions, model metadata, model licensing, downloading models, local caching, inference providers, community publishing, file-format safety | How can Clips Kitty use Hugging Face as an external model source without becoming Hugging Face? |
-| OpenRouter | 2 | Unified API, model identifiers, model discovery, provider abstraction, multiple implementations of capabilities, model catalogs, fallbacks and routing, API design | Can Clips Kitty have a common interface for multiple implementations of the same video-AI capability? For example the capability `highlight_detection` implemented by Clips Kitty, Open Shorts, Community Developer A, Community Developer B and a remote API. |
+| Hugging Face | 1 | Model Hub, model repositories, model cards, model versions and revisions, model metadata, model licensing, downloading models, local caching, inference providers, community publishing, file-format safety | How can SpikeClip use Hugging Face as an external model source without becoming Hugging Face? |
+| OpenRouter | 2 | Unified API, model identifiers, model discovery, provider abstraction, multiple implementations of capabilities, model catalogs, fallbacks and routing, API design | Can SpikeClip have a common interface for multiple implementations of the same video-AI capability? For example the capability `highlight_detection` implemented by SpikeClip, Open Shorts, Community Developer A, Community Developer B and a remote API. |
 | Replicate | 2 | Public models, community-published models, model versions, model APIs, model discovery, public and private publishing, examples, remote execution | How can a developer expose a specialized AI capability through a remote API so that users do not have to install the entire model locally? |
 | Ollama | 3 | Model naming, Modelfile, local API | Can Ollama models fit the same model abstraction as Hugging Face models? |
 
@@ -266,15 +266,15 @@ Do this before the web research, because the precedents only matter in relation 
 
 Do not limit the research to Tracks A and B. Study open-source platforms that combine plugins, extensions, registries, marketplaces, models, workflows, community packages, Git repositories and local execution: Node-RED, Home Assistant (with HACS), VS Code (with Open VSX), Blender, Godot, Obsidian, the Unreal and Unity ecosystems, and other open-source AI application ecosystems. The Model Context Protocol registry, Zed extensions and the AUTOMATIC1111 extensions index are worth adding as registry designs. Tier 2 for VS Code, Obsidian, Blender, Home Assistant, the MCP registry and Zed. Tier 3 for the rest.
 
-Answer two questions: **what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?**
+Answer two questions: **what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?**
 
 **Track D: gaming and video clipping products**
 
-Tier 1 for Eklipse.gg. Study its gaming clip and highlight workflow, supported games and use cases, automation, game-specific functionality, how it differentiates between generic and game-specific processing, how users discover or select gaming functionality, and which parts of its product could be represented as specialized Clips Kitty pipelines. The goal is understanding, not copying.
+Tier 1 for Eklipse.gg. Study its gaming clip and highlight workflow, supported games and use cases, automation, game-specific functionality, how it differentiates between generic and game-specific processing, how users discover or select gaming functionality, and which parts of its product could be represented as specialized SpikeClip pipelines. The goal is understanding, not copying.
 
 Tier 2 or 3 for other products that give a useful architectural or market comparison: Overwolf and Outplayed, Medal, Allstar, Sizzle, SteelSeries Moments, NVIDIA Highlights, OpusClip, and open-source clipping pipelines including Open Shorts.
 
-Answer: **what does a specialized gaming clipping platform need to provide, and could Clips Kitty let independent developers create even more specialized game-specific pipelines that run within a shared platform?**
+Answer: **what does a specialized gaming clipping platform need to provide, and could SpikeClip let independent developers create even more specialized game-specific pipelines that run within a shared platform?**
 
 **Track E: security of third-party code (cuts across A to C)**
 
@@ -285,7 +285,7 @@ Cover ComfyUI extension security, Kilo plugin permissions, Open WebUI arbitrary 
 These come from a first pass over the sources on 6 October 2026. They are leads, not conclusions. Confirm or reject each one against the repository and the sources, and record the verdict in the research document.
 
 - **H1. Out-of-process plugins.** Because a local API already exists, the lowest-risk plugin model may be a separate process that speaks that API, not code imported into the app. That would give crash isolation, a free choice of language, and one shape for local, remote and hybrid pipelines. It holds only if a separate process can reach the API.
-- **H2. A narrow pipeline contract.** The smallest useful contract may be "video in, scored and labeled time ranges out", with cutting, captions and formatting done by Clips Kitty. Check whether the existing pipelines already separate detection from rendering. Returning finished clips should stay possible.
+- **H2. A narrow pipeline contract.** The smallest useful contract may be "video in, scored and labeled time ranges out", with cutting, captions and formatting done by SpikeClip. Check whether the existing pipelines already separate detection from rendering. Returning finished clips should stay possible.
 - **H3. A static Git registry.** The registry can be a static JSON index built by CI from one small metadata file per extension, submitted by pull request, pointing at the developer's own repository at a pinned tag and commit. It costs nothing to run and needs no backend. The AUTOMATIC1111 index, Zed, HACS and Kilo's marketplace repository work roughly this way. The MCP registry shows a metadata-only design with namespace verification.
 - **H4. Hand review does not scale.** Obsidian reported a queue of more than 2,300 plugins under manual pull-request review and moved to automated per-version checks in 2026. Plan for automated validation from the start.
 - **H5. A declared permission is not an enforced one.** VS Code, Obsidian and Open WebUI each document that an installed extension runs with the application's own access. Host-mediated designs such as Zed's capabilities can enforce. If plugins reach video, projects and models only through the API, API-scoped permissions can be enforced at that boundary, while filesystem, network and GPU access stay declared-only unless the process is sandboxed. Label each permission accordingly.
@@ -303,25 +303,25 @@ Open with a one-page summary: the ten or so findings that most change the design
 
 **7.1 Extension ecosystems matrix.** One row per platform from Tracks A, B and C.
 
-| Platform | Extension type | Model support | Workflow support | Registry | Git-based | Local | Remote | Versioning | Security | Marketplace | What Clips Kitty should learn |
+| Platform | Extension type | Model support | Workflow support | Registry | Git-based | Local | Remote | Versioning | Security | Marketplace | What SpikeClip should learn |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 
 **7.2 Gaming and video platforms matrix.** Eklipse.gg and the other Track D products.
 
-| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What Clips Kitty should learn |
+| Platform | Main use case | Generic vs game-specific | Automated highlights | Game-specific logic | Extensibility | What SpikeClip should learn |
 |---|---|---|---|---|---|---|
 
 **7.3 What to borrow.** One short section each:
 
-- **ComfyUI:** what should Clips Kitty borrow from its extension ecosystem?
-- **Hugging Face:** what should Clips Kitty borrow from model discovery and model metadata?
-- **OpenRouter:** what should Clips Kitty borrow from the idea of a common interface over many implementations?
-- **Kilo:** what should Clips Kitty borrow from its marketplace?
-- **Replicate:** what should Clips Kitty borrow from model publishing and remote execution?
-- **Open WebUI:** what should Clips Kitty borrow, and what security mistakes should it avoid?
-- **Stability Matrix:** what should Clips Kitty borrow regarding model management?
-- **Pinokio:** what should Clips Kitty borrow regarding community application distribution?
-- **Eklipse.gg:** what should Clips Kitty learn about gaming-specific clipping and the gaming creator market?
+- **ComfyUI:** what should SpikeClip borrow from its extension ecosystem?
+- **Hugging Face:** what should SpikeClip borrow from model discovery and model metadata?
+- **OpenRouter:** what should SpikeClip borrow from the idea of a common interface over many implementations?
+- **Kilo:** what should SpikeClip borrow from its marketplace?
+- **Replicate:** what should SpikeClip borrow from model publishing and remote execution?
+- **Open WebUI:** what should SpikeClip borrow, and what security mistakes should it avoid?
+- **Stability Matrix:** what should SpikeClip borrow regarding model management?
+- **Pinokio:** what should SpikeClip borrow regarding community application distribution?
+- **Eklipse.gg:** what should SpikeClip learn about gaming-specific clipping and the gaming creator market?
 
 **7.4 Cross-cutting lessons.** What makes an extension ecosystem successful, the mistakes to avoid, and the verdict on each hypothesis H1 to H10.
 
@@ -337,10 +337,10 @@ Open with a one-page summary: the ten or so findings that most change the design
 
 ## 8. Phase 1: write `docs/platform-architecture.md`
 
-Explain exactly how the proposed platform fits into the existing Clips Kitty architecture, naming real files, modules and endpoints. State what is reused and what has to be created. Include these two diagrams, redrawn to match the real code:
+Explain exactly how the proposed platform fits into the existing SpikeClip architecture, naming real files, modules and endpoints. State what is reused and what has to be created. Include these two diagrams, redrawn to match the real code:
 
 ```text
-Clips Kitty → existing local API → public SDK → plugin / pipeline contract → Marketplace
+SpikeClip → existing local API → public SDK → plugin / pipeline contract → Marketplace
 ```
 
 ```text
@@ -351,7 +351,7 @@ Clips Kitty → existing local API → public SDK → plugin / pipeline contract
        └──────────────┼──────────────┘
                 Public SDK/API
                       │
-                Clips Kitty Core
+                SpikeClip Core
                       │
           ┌───────────┼───────────┐
        FFmpeg      Whisper     Ollama/Gemma
@@ -375,28 +375,28 @@ Design clear types, keep them few, and make each map cleanly onto something in t
 
 ### 8.2 The SDK
 
-The implementation language and shape follow the current Clips Kitty architecture. Do not introduce TypeScript, Python, REST, gRPC, WebSockets or containers just because they are common; introduce one only where the way the application works calls for it.
+The implementation language and shape follow the current SpikeClip architecture. Do not introduce TypeScript, Python, REST, gRPC, WebSockets or containers just because they are common; introduce one only where the way the application works calls for it.
 
-The SDK gives developers a stable way to define a plugin, define a pipeline, declare inputs, declare outputs, declare dependencies, declare capabilities, use the Clips Kitty API, report progress, return outputs, handle errors, log, and reference models. The developer should not need to understand Clips Kitty's internal source tree.
+The SDK gives developers a stable way to define a plugin, define a pipeline, declare inputs, declare outputs, declare dependencies, declare capabilities, use the SpikeClip API, report progress, return outputs, handle errors, log, and reference models. The developer should not need to understand SpikeClip's internal source tree.
 
-Developer tooling might eventually look like `clips-kitty plugin init | dev | validate | package | install | update | remove` and `clips-kitty model search | install`. Those names are conceptual. Do not build CLI infrastructure for its own sake; base the developer experience on the architecture you find. The requirement is that a developer can build a plugin without understanding the whole codebase.
+Developer tooling might eventually look like `spikeclip plugin init | dev | validate | package | install | update | remove` and `spikeclip model search | install`. Those names are conceptual. Do not build CLI infrastructure for its own sake; base the developer experience on the architecture you find. The requirement is that a developer can build a plugin without understanding the whole codebase.
 
 ### 8.3 The developer experience to aim for
 
-A developer creates a repository such as `clips-kitty-marvel-rivals` containing `plugin.yaml`, `README.md`, `src/`, `models.yaml` and `examples/`. The plugin declares roughly: inputs, video; outputs, clips; needs, GPU and FFmpeg; model, a Hugging Face `developer/model`. Then:
+A developer creates a repository such as `spikeclip-marvel-rivals` containing `plugin.yaml`, `README.md`, `src/`, `models.yaml` and `examples/`. The plugin declares roughly: inputs, video; outputs, clips; needs, GPU and FFmpeg; model, a Hugging Face `developer/model`. Then:
 
 ```text
 developer tests locally → plugin passes validation → developer publishes GitHub repository
-→ Marketplace references repository → Clips Kitty user installs it
+→ Marketplace references repository → SpikeClip user installs it
 ```
 
 ### 8.4 The manifest
 
-Design a versioned manifest. Appendix C holds a conceptual example; it is only a starting point, and the final schema comes from the existing Clips Kitty API and the research. It needs to carry: identity and type · version · author and repository · description · runtime compatibility (minimum Clips Kitty version, SDK version) · inputs and outputs · capabilities · models · permissions · resource requirements (GPU required, VRAM, RAM, disk, CPU, network) · execution mode (local, remote or hybrid) · for remote and hybrid, the hosts contacted and what kind of data is sent · license · tags and categories · links to documentation, website and any paid or funding pages.
+Design a versioned manifest. Appendix C holds a conceptual example; it is only a starting point, and the final schema comes from the existing SpikeClip API and the research. It needs to carry: identity and type · version · author and repository · description · runtime compatibility (minimum SpikeClip version, SDK version) · inputs and outputs · capabilities · models · permissions · resource requirements (GPU required, VRAM, RAM, disk, CPU, network) · execution mode (local, remote or hybrid) · for remote and hybrid, the hosts contacted and what kind of data is sent · license · tags and categories · links to documentation, website and any paid or funding pages.
 
 ### 8.5 Execution models
 
-The architecture allows four: **native/local** (the plugin runs locally), **isolated local worker** (the plugin runs in a separate process or environment), **remote** (the plugin calls a developer-hosted API), and **hybrid** (local Clips Kitty services plus remote inference). Remote matters because not every developer will want to distribute huge local models. A hybrid example:
+The architecture allows four: **native/local** (the plugin runs locally), **isolated local worker** (the plugin runs in a separate process or environment), **remote** (the plugin calls a developer-hosted API), and **hybrid** (local SpikeClip services plus remote inference). Remote matters because not every developer will want to distribute huge local models. A hybrid example:
 
 ```text
 Local video → Local Whisper → Developer-hosted model API → Local FFmpeg → Local clips
@@ -407,12 +407,12 @@ Do not implement every mode immediately. Design the SDK so the architecture can 
 ### 8.6 Models
 
 - **Sources:** Hugging Face, Ollama, local files, developer-hosted inference, OpenRouter, Replicate, other compatible APIs.
-- **Hugging Face as a model source.** A plugin references something like `huggingface: owner/model`. Clips Kitty should eventually be able to discover the model, download it, cache it, track the revision, detect whether it is already installed, avoid duplicate downloads, and display license information, hardware requirements and model size.
-- **Shared model manager.** A major benefit of Clips Kitty should be a shared model and cache layer. If Plugin A, Plugin B and Plugin C all need Whisper, they use one compatible installation. If two plugins need Gemma, it is not downloaded twice. Design a shared model-management architecture where possible.
+- **Hugging Face as a model source.** A plugin references something like `huggingface: owner/model`. SpikeClip should eventually be able to discover the model, download it, cache it, track the revision, detect whether it is already installed, avoid duplicate downloads, and display license information, hardware requirements and model size.
+- **Shared model manager.** A major benefit of SpikeClip should be a shared model and cache layer. If Plugin A, Plugin B and Plugin C all need Whisper, they use one compatible installation. If two plugins need Gemma, it is not downloaded twice. Design a shared model-management architecture where possible.
 
 ### 8.7 Capabilities and permissions
 
-A third-party pipeline should be able to use shared Clips Kitty infrastructure where appropriate. Base the capability list on what `repo-map.md` found, not on a wish list.
+A third-party pipeline should be able to use shared SpikeClip infrastructure where appropriate. Base the capability list on what `repo-map.md` found, not on a wish list.
 
 Third-party extensions declare permissions. Candidates: `video.read`, `video.write`, `project.read`, `project.write`, `filesystem.read`, `filesystem.write`, `network`, `gpu`, `ffmpeg`, `ollama`, `model.download`, `model.cache`. No plugin gets every permission by default. Important permissions are shown to the user before installation. For each permission, state whether the runtime enforces it or whether it is declared and displayed only.
 
@@ -420,7 +420,7 @@ Third-party extensions declare permissions. Candidates: `video.read`, `video.wri
 
 Design a trust model such as Official · Verified Community · Community · Experimental · Remote API. Consider separate attributes as well: Source visible · Signed · Verified publisher · Official · Unverified.
 
-- Existing Clips Kitty pipelines are Official.
+- Existing SpikeClip pipelines are Official.
 - New developer pipelines start as Community unless an actual verification process exists.
 - Define exactly what "Verified" means and who does the verifying. If no process exists yet, the tier is defined but unused.
 - Describe the removal path: how a harmful listing is delisted and how copies already installed are flagged.
@@ -428,14 +428,14 @@ Design a trust model such as Official · Verified Community · Community · Expe
 
 ### 8.9 Versioning
 
-Define compatibility between Clips Kitty version, plugin version, SDK version, pipeline version and model version. A Clips Kitty update should not casually break third-party pipelines. Use stable contracts and compatibility checking. Cover pinning, updates and rollback.
+Define compatibility between SpikeClip version, plugin version, SDK version, pipeline version and model version. A SpikeClip update should not casually break third-party pipelines. Use stable contracts and compatibility checking. Cover pinning, updates and rollback.
 
 ### 8.10 Marketplace and registry
 
-- **GitHub-first distribution** for the first implementation: GitHub repository → manifest → Clips Kitty registry → Marketplace listing → user installation. Developers are not required to migrate their source code onto Clips Kitty infrastructure, and Clips Kitty is not required to host every plugin. Decide whether the registry is centralized, decentralized or hybrid.
+- **GitHub-first distribution** for the first implementation: GitHub repository → manifest → SpikeClip registry → Marketplace listing → user installation. Developers are not required to migrate their source code onto SpikeClip infrastructure, and SpikeClip is not required to host every plugin. Decide whether the registry is centralized, decentralized or hybrid.
 - **Browse** by type (Pipelines, Plugins, Models, Workflows, Providers, Integrations) and by category (Gaming, Sports, Creators, Streaming, Podcasting, Captions, Detection, Analytics, Audio, Utilities).
 - **Search is important** and must handle very specific queries: "Marvel Rivals", "WoW", "World of Warcraft PvP", "Minecraft", "Rocket League", "soccer", "Soccer goals", "NHL", "podcast", "Podcast shorts", "Twitch", "captions", "highlights". Tags and categories help users find specialized pipelines and must not push developers into broad categories.
-- **A listing eventually contains:** Name, Description, Developer, Version, License, GitHub repository, Model sources, Clips Kitty compatibility, Requirements, GPU requirements, VRAM requirements, Disk requirements, Permissions, Screenshots, Example outputs, Install count, Usage, Stars/favorites, Last updated.
+- **A listing eventually contains:** Name, Description, Developer, Version, License, GitHub repository, Model sources, SpikeClip compatibility, Requirements, GPU requirements, VRAM requirements, Disk requirements, Permissions, Screenshots, Example outputs, Install count, Usage, Stars/favorites, Last updated.
 - **A listing answers at a glance:** What does this pipeline do? What does it need? Is it local or remote? Where does the code come from? What models does it use? What permissions does it need?
 - **More than a list.** Each listing should communicate why the extension is valuable. Appendix C has an example card.
 - **Hardware fit.** Pipelines declare resource requirements, and the Marketplace eventually makes it easy to tell: Runs on my PC · CPU compatible · Low VRAM · High VRAM · Cloud required.
@@ -443,25 +443,25 @@ Define compatibility between Clips Kitty version, plugin version, SDK version, p
 
 ### 8.11 First-party dogfooding
 
-Use the existing Clips Kitty pipelines as proof that the architecture works. Preserve them, identify their public interface, create adapters if appropriate, and use them to demonstrate the SDK design. First-party and third-party pipelines share the same public contract where practical.
+Use the existing SpikeClip pipelines as proof that the architecture works. Preserve them, identify their public interface, create adapters if appropriate, and use them to demonstrate the SDK design. First-party and third-party pipelines share the same public contract where practical.
 
 ### 8.12 Designed now, built later
 
 Make sure the manifest and contract do not block these. Do not build them tonight.
 
-- **Capability market.** Several implementations of the same capability coexist, for example Highlight Detection from Official Clips Kitty, Open Shorts, Community Model A, Community Model B, a soccer-specific model, a game-specific model and a remote API. This is inspired by OpenRouter's provider and model abstraction, adapted to video pipelines. No complicated routing marketplace in the first version.
+- **Capability market.** Several implementations of the same capability coexist, for example Highlight Detection from Official SpikeClip, Open Shorts, Community Model A, Community Model B, a soccer-specific model, a game-specific model and a remote API. This is inspired by OpenRouter's provider and model abstraction, adapted to video pipelines. No complicated routing marketplace in the first version.
 - **Pipeline composition.** Pipelines use other reusable components, and the developer chooses whether to build their own or reuse existing ones:
 
 ```text
 Marvel Rivals → Game Detector → Event Detector → Highlight Ranker → Whisper → Clip Generator
-Soccer → Goal Detector → Scoreboard OCR → Player/Event Detection → Highlight Ranker → Clips Kitty Output
+Soccer → Goal Detector → Scoreboard OCR → Player/Event Detection → Highlight Ranker → SpikeClip Output
 ```
 
 ### 8.13 Worked examples
 
 Walk through both on paper, giving for each the manifest, the API calls made, the permissions, and what the user sees at install.
 
-- **Open Shorts for Clips Kitty.** An independent developer has a GitHub repository, a Hugging Face model and an optional cloud API. Their plugin registers the pipeline, accepts Clips Kitty video input, invokes the Open Shorts implementation, optionally uses Hugging Face, optionally uses remote inference, optionally uses Clips Kitty Whisper, optionally uses Ollama/Gemma, uses Clips Kitty FFmpeg, and returns clips in a compatible format. The developer does not fork Clips Kitty, and Clips Kitty does not own Open Shorts.
+- **Open Shorts for SpikeClip.** An independent developer has a GitHub repository, a Hugging Face model and an optional cloud API. Their plugin registers the pipeline, accepts SpikeClip video input, invokes the Open Shorts implementation, optionally uses Hugging Face, optionally uses remote inference, optionally uses SpikeClip Whisper, optionally uses Ollama/Gemma, uses SpikeClip FFmpeg, and returns clips in a compatible format. The developer does not fork SpikeClip, and SpikeClip does not own Open Shorts.
 - **Marvel Rivals Highlights** with a specialized Hugging Face model.
 
 ### 8.14 Build plan
@@ -512,7 +512,7 @@ Tonight, go as far through the phases below as you can finish properly. Phase 0 
 | 8. Marketplace UI | Browsing, search, categories, tags and listing details, in the app's existing UI conventions and wired to the plugin manager. Trust tier, local or remote, requirements and permissions are visible on every listing. | It builds and its tests pass. If it could not be viewed here, say so. |
 | 9. Model management | Hugging Face and other model references (pinned revision, Ollama, local file, remote provider), installed-model detection, and shared model caching. Surface license, size and hardware needs. | Reference parsing, duplicate detection and cache reuse pass in tests with mocked network. No large downloads. |
 
-**About the example pipeline.** Its purpose is to prove that an independent developer can build something that is not hard-wired into Clips Kitty. It could be shaped like "Marvel Rivals Highlights" or "Soccer Highlights", but it must not claim detection it does not perform, since no game-specific model can be trained tonight. Use a simple real technique, name and describe it truthfully as a demo, and reference a real model only if a small, permissively licensed one fits.
+**About the example pipeline.** Its purpose is to prove that an independent developer can build something that is not hard-wired into SpikeClip. It could be shaped like "Marvel Rivals Highlights" or "Soccer Highlights", but it must not claim detection it does not perform, since no game-specific model can be trained tonight. Use a simple real technique, name and describe it truthfully as a demo, and reference a real model only if a small, permissively licensed one fits.
 
 ---
 
@@ -522,7 +522,7 @@ Tonight, go as far through the phases below as you can finish properly. Phase 0 
 
 **Developer documentation**, under `docs/developers/` or the repository's existing docs convention: Platform Overview · Getting Started · Plugin Development · Pipeline Development · Plugin Manifest · SDK · API · Model References · Hugging Face · Remote APIs · Local APIs · Permissions · Security · Versioning · Marketplace Publishing · Example Pipeline · Troubleshooting.
 
-Write each page in the phase that makes it true. Where something is designed but not built, label it "planned". The standard: a developer using Claude Code, Cursor, Codex or another coding assistant could realistically create a compatible plugin from these pages, without reading the Clips Kitty source.
+Write each page in the phase that makes it true. Where something is designed but not built, label it "planned". The standard: a developer using Claude Code, Cursor, Codex or another coding assistant could realistically create a compatible plugin from these pages, without reading the SpikeClip source.
 
 ---
 
@@ -530,10 +530,10 @@ Write each page in the phase that makes it true. Where something is designed but
 
 The architecture document shows how each one passes. The morning report says which ones now pass in code.
 
-1. **The niche developer.** An independent developer says: "I understand a specific game extremely well. I built an AI pipeline that detects highlights for that game. I don't want to build an entire video application." They can build a specialized pipeline → use the Clips Kitty SDK/API → use Clips Kitty infrastructure → reference a model on Hugging Face → test locally → publish source to GitHub → submit or list it in the Marketplace → Clips Kitty users discover it → users install it → the pipeline appears in Clips Kitty. All without forking the Clips Kitty application. This is the most important test.
-2. **Open Shorts.** A developer who thinks the Open Shorts pipeline is better for certain users can integrate it into Clips Kitty, so the user does not have to abandon Clips Kitty, and Clips Kitty does not need to own Open Shorts.
-3. **Marvel Rivals Highlights.** A developer ships an extension with a specialized Hugging Face model that understands the specific game and makes better decisions than a generic gaming pipeline. Clips Kitty provides video input and output, common processing infrastructure, shared models where appropriate, the GPU and local runtime, project integration, installation, discovery and Marketplace distribution. The developer provides the game-specific intelligence, game-specific models, game-specific logic and their own pipeline.
-4. **The existing gaming market.** A user who relies on a gaming clipping platform such as Eklipse because it understands gaming content gets a different possibility: Clips Kitty as the gaming platform and runtime, a generic Gaming pipeline, plus game-specific community pipelines, specialized models and a Marketplace. They install Marvel Rivals Highlights, World of Warcraft PvP, Minecraft Highlights, Valorant Clutches or Rocket League Goals instead of relying on one generic gaming algorithm. The point is not to reproduce Eklipse. It is to let a community build a much broader ecosystem of game-specific intelligence on a common runtime.
+1. **The niche developer.** An independent developer says: "I understand a specific game extremely well. I built an AI pipeline that detects highlights for that game. I don't want to build an entire video application." They can build a specialized pipeline → use the SpikeClip SDK/API → use SpikeClip infrastructure → reference a model on Hugging Face → test locally → publish source to GitHub → submit or list it in the Marketplace → SpikeClip users discover it → users install it → the pipeline appears in SpikeClip. All without forking the SpikeClip application. This is the most important test.
+2. **Open Shorts.** A developer who thinks the Open Shorts pipeline is better for certain users can integrate it into SpikeClip, so the user does not have to abandon SpikeClip, and SpikeClip does not need to own Open Shorts.
+3. **Marvel Rivals Highlights.** A developer ships an extension with a specialized Hugging Face model that understands the specific game and makes better decisions than a generic gaming pipeline. SpikeClip provides video input and output, common processing infrastructure, shared models where appropriate, the GPU and local runtime, project integration, installation, discovery and Marketplace distribution. The developer provides the game-specific intelligence, game-specific models, game-specific logic and their own pipeline.
+4. **The existing gaming market.** A user who relies on a gaming clipping platform such as Eklipse because it understands gaming content gets a different possibility: SpikeClip as the gaming platform and runtime, a generic Gaming pipeline, plus game-specific community pipelines, specialized models and a Marketplace. They install Marvel Rivals Highlights, World of Warcraft PvP, Minecraft Highlights, Valorant Clutches or Rocket League Goals instead of relying on one generic gaming algorithm. The point is not to reproduce Eklipse. It is to let a community build a much broader ecosystem of game-specific intelligence on a common runtime.
 
 ---
 
@@ -687,7 +687,7 @@ Answer every one in `docs/platform-research.md` before implementation.
 
 **Architecture**
 
-1. What should a Clips Kitty plugin be?
+1. What should a SpikeClip plugin be?
 2. What should a pipeline be?
 3. What should a model be?
 4. What should a workflow be?
@@ -749,20 +749,20 @@ Answer every one in `docs/platform-research.md` before implementation.
 39. Can developers use Python?
 40. Can developers use TypeScript/JavaScript?
 41. Can they create a remote-only pipeline?
-42. How much of Clips Kitty should they need to understand?
+42. How much of SpikeClip should they need to understand?
 
 **Economics**
 
 43. How do we keep the Marketplace free?
 44. How do developers link to paid services?
 45. How do we avoid processing their payments?
-46. How can Clips Kitty benefit from ecosystem growth without taking developer revenue?
+46. How can SpikeClip benefit from ecosystem growth without taking developer revenue?
 
 ---
 
 ## Appendix C: conceptual examples
 
-These show intent only. The final formats come from the existing Clips Kitty API and the research.
+These show intent only. The final formats come from the existing SpikeClip API and the research.
 
 **Manifest**
 
@@ -781,7 +781,7 @@ description: >
   Game-specific highlight detection for Marvel Rivals VODs.
 
 runtime:
-  min_clips_kitty_version: 1.0.0
+  min_spikeclip_version: 1.0.0
   sdk_version: 1
 
 inputs:

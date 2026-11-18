@@ -8,7 +8,7 @@ Two rules this copy follows deliberately:
 - **No comparative claims.** Not "an OpusClip alternative", not "better than".
   Store policy 11.2 covers third-party names, and a listing that leans on
   someone else's product reads as derivative even where it is permitted. The
-  positioning is what Clips Kitty *is* (local, open source, yours) which is
+  positioning is what SpikeClip *is* (local, open source, yours) which is
   the genuine difference anyway.
 - **No unmeasured performance numbers.** Nothing about speed appears here that
   is not in the README's tested-hardware table.
@@ -25,7 +25,7 @@ Two rules this copy follows deliberately:
 ## Product name
 
 ```
-Clips Kitty
+SpikeClip
 ```
 
 ## Short description
@@ -35,7 +35,7 @@ this is what shows at the top of the listing before anyone expands it. Kept
 under that:
 
 ```
-Turn long videos into vertical clips using AI that runs on your own PC. Paste a stream or video link and Clips Kitty finds the moments worth clipping, keeps the speaker in frame and adds subtitles. Your footage stays on your PC. Free and open source.
+Turn long videos into vertical clips using AI that runs on your own PC. Paste a stream or video link and SpikeClip finds the moments worth clipping, keeps the speaker in frame and adds subtitles. Your footage stays on your PC. Free and open source.
 ```
 
 ## What's new in this version (1,500 max)
@@ -50,7 +50,7 @@ Videos no longer get stuck at "Transcribing" when your graphics card does the tr
 New:
 • Sports, starting with soccer: tick Sports for a match and get its goals, saves and cards as clips, with a match recap and team or player reels if you want them.
 • Game streams and reaction videos: the streamer's webcam and the game together, in eleven layouts.
-• Watched channels: Clips Kitty clips a channel's new videos by itself, and can post them for you.
+• Watched channels: SpikeClip clips a channel's new videos by itself, and can post them for you.
 • Cloud AI when your PC is too old for a model of its own: sign in with your own account at a cloud AI service.
 • 16:9 and 9:16 clips of the same video in one go.
 • Tell it what the clips should be about, in a sentence.
@@ -65,11 +65,11 @@ Fixed:
 ## Description (10,000 max)
 
 ```
-Clips Kitty finds the best moments in a long video and cuts them into vertical clips ready to post anywhere short-form video goes. Give it a stream link, a video link, or a file from your own disk, and it does the rest. The supported sites are listed on the project page.
+SpikeClip finds the best moments in a long video and cuts them into vertical clips ready to post anywhere short-form video goes. Give it a stream link, a video link, or a file from your own disk, and it does the rest. The supported sites are listed on the project page.
 
 Everything runs on your computer.
 
-That is the part that makes it different. Most AI clipping tools upload your video to a server, charge a monthly fee, and cap how many clips you get. Clips Kitty does the transcription, the scoring, the speaker tracking, the subtitles and the rendering locally, on your own hardware. Your footage never leaves your computer unless you tell it to publish, or choose cloud AI. There is no subscription, no clip limit, and no account to create.
+That is the part that makes it different. Most AI clipping tools upload your video to a server, charge a monthly fee, and cap how many clips you get. SpikeClip does the transcription, the scoring, the speaker tracking, the subtitles and the rendering locally, on your own hardware. Your footage never leaves your computer unless you tell it to publish, or choose cloud AI. There is no subscription, no clip limit, and no account to create.
 
 WHAT IT DOES
 
@@ -102,7 +102,7 @@ WHAT YOU NEED
 
 ABOUT THIS RELEASE
 
-Clips Kitty is a stable release, version 2. The known issues are listed openly in the repository, and there is a feedback button in the app that files a report for you without needing a GitHub account.
+SpikeClip is a stable release, version 2. The known issues are listed openly in the repository, and there is a feedback button in the app that files a report for you without needing a GitHub account.
 
 It was built for IRL, just-chatting and talking-head content, which is what it is tested on most. It also clips game streams and reaction videos, and soccer matches. VTubers are not supported.
 ```

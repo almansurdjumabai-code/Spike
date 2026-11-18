@@ -1,4 +1,4 @@
-# Contributor environment: the Clips Kitty engine plus Ollama.
+# Contributor environment: the SpikeClip engine plus Ollama.
 #
 #   docker compose up --build        engine on http://localhost:8765
 #   docker compose run --rm engine pytest
@@ -12,8 +12,8 @@ services:
     # (~2 min) instead of building it (~10). `build:` stays as the fallback:
     # with no image present locally, `up` builds rather than failing, so a
     # fork with nothing published still works.
-    image: ghcr.io/colingpt9/clips-studio-engine:latest
-    build: .
+    image: ghcr.io/colingpt9/spikeclip-engine:latest
+    build: ./backend
     ports:
       # Host-only. Publishing to 0.0.0.0 would put an unauthenticated API
       # that reads and writes video files onto the local network.
@@ -21,14 +21,18 @@ services:
     volumes:
       # Source is mounted so edits are live without rebuilding. The image
       # already contains a copy, so it still runs standalone.
-      - .:/app
+      - ./backend:/app
       # Downloads, clips and the database persist in a named volume rather
       # than the container, which is thrown away on every rebuild.
       - clips-data:/data
     environment:
       # Inside the compose network Ollama is a service name, not localhost.
-      CLIPS_STUDIO_OLLAMA_HOST: http://ollama:11434
-      CLIPS_STUDIO_DATA_DIR: /data
+      SPIKECLIP_OLLAMA_HOST: http://ollama:11434
+      SPIKECLIP_DATA_DIR: /data
+      SPIKECLIP_HOST: 0.0.0.0
+      # Local only: the port above is bound to 127.0.0.1. A cloud deployment
+      # sets SPIKECLIP_API_TOKEN instead (backend/.env.example, DEPLOY.md).
+      SPIKECLIP_INSECURE_NO_AUTH: '1'
       # Windows-locale encoding is not a container problem, but the engine
       # prints titles containing emoji and the default here is ASCII.
       PYTHONIOENCODING: utf-8
@@ -47,7 +51,7 @@ services:
   # because those live in Electron's preload.
   ui:
     image: node:20-slim
-    working_dir: /app/ui
+    working_dir: /app/frontend
     ports:
       - '127.0.0.1:5173:5173'
     volumes:
@@ -57,8 +61,8 @@ services:
       # platform-specific binaries — Windows ones do not run on Linux, and
       # the failure is a confusing "cannot find module" for a package that
       # is plainly installed.
-      - ui-node-modules:/app/ui/node_modules
-    # dev:web serves the renderer alone, via ui/vite.config.mts. Plain
+      - ui-node-modules:/app/frontend/node_modules
+    # dev:web serves the renderer alone, via frontend/vite.config.mts. Plain
     # `vite` would find no config: the app is built by electron-vite, whose
     # config describes three bundles and cannot serve one of them on its own.
     command: >

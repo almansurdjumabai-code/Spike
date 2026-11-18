@@ -100,17 +100,17 @@ Local only. Packages run on the user's machine; remote APIs are used only for di
 
 ## 11. Borrow
 
-1. **Per-package choice of sharing method, declared by the package** (`RecommendedSharedFolderMethod` + `AvailableSharedFolderMethods`): a Clips Kitty pipeline manifest could declare `model_access: path-config | link | none`. Prefer the config-file method where the consumer can read a path list (it is what the `Configuration` strategy does and it never relocates files); use NTFS junctions, not symlinks, for Windows folder links.
+1. **Per-package choice of sharing method, declared by the package** (`RecommendedSharedFolderMethod` + `AvailableSharedFolderMethods`): a SpikeClip pipeline manifest could declare `model_access: path-config | link | none`. Prefer the config-file method where the consumer can read a path list (it is what the `Configuration` strategy does and it never relocates files); use NTFS junctions, not symlinks, for Windows folder links.
 2. **Move-then-link with hash-aware merge** (`overwriteIfHashMatches: true`) when adopting an existing model folder into the shared store; and the v2.16.4 rule "only remove links we created".
-3. **Typed category folders with a legacy-name map** (`SharedFolderType`, `LegacySharedFolderMapping`): Clips Kitty's store should have fixed categories (whisper, yolo, ocr, panns, llm/ollama) and a rename table from day one.
+3. **Typed category folders with a legacy-name map** (`SharedFolderType`, `LegacySharedFolderMapping`): SpikeClip's store should have fixed categories (whisper, yolo, ocr, panns, llm/ollama) and a rename table from day one.
 4. **Portable data directory with a marker file** (`Data/.sm-portable`, found before `%APPDATA%/StabilityMatrix/library.json`, `SettingsManager.cs` lines 339–350) plus "the Data Directory holds platform-specific assets and should not be moved to another Operating System".
 5. **Per-package in-app vulnerability notices** (`KnownVulnerabilities` with GHSA id, severity, affected versions, info URL): the plugin manifest/registry index should carry the same fields so a known-bad plugin can be flagged without a backend.
 6. **Static JSON index over a free CDN** for extensions (jsdelivr over a GitHub repo) — supports H3.
-7. **Per-package Python version + venv in the package folder**, with interpreters provisioned by `uv` into a shared `Assets/Python` — if Clips Kitty ever runs plugin-local Python it should copy this exactly (one venv per plugin, interpreters shared).
+7. **Per-package Python version + venv in the package folder**, with interpreters provisioned by `uv` into a shared `Assets/Python` — if SpikeClip ever runs plugin-local Python it should copy this exactly (one venv per plugin, interpreters shared).
 
 ## 12. Avoid
 
-1. Compiling the catalogue into the app (39 C# classes, PR required per package): Clips Kitty's registry must be data, not code.
+1. Compiling the catalogue into the app (39 C# classes, PR required per package): SpikeClip's registry must be data, not code.
 2. Downloading HF files at `main` with no revision pin (`resolve/main/`): pin a commit hash in the model manifest.
 3. Accepting pickle formats (`.ckpt/.pt/.pth/.bin`) without a warning, and parsing `pickleScanResult` without surfacing it.
 4. Links as the default sharing method where a config/path entry would do: links broke on drive moves, needed a "remove on shutdown" workaround, and produced the loop/deletion bugs fixed in v2.16.4.
@@ -141,6 +141,6 @@ Local only. Packages run on the user's machine; remote APIs are used only for di
 - **H1** (out-of-process is lowest risk): consistent. Packages are separate processes in their own venvs; Stability Matrix never imports package code. No permission model though.
 - **H3** (static Git index, no backend): supported for extensions — ComfyUI node lists are JSON files in Git repos served by jsdelivr (`ComfyUI.cs` 773–774). Packages themselves show the cost of the opposite choice (catalogue compiled in).
 - **H6** (dependency handling): supported. One venv per package (`SetupVenvPure`, `venv` inside the package dir) with shared interpreters under `Assets/Python`; conflicts are solved by hand-written pins per package (`FluxGym.cs`, `uv-build-constraints.txt`). Disk cost accepted. No prohibition of runtime pip installs — packages pip-install freely at install and update.
-- **H7** (HF revision pin, blob sharing, Windows symlinks, safetensors): partially contradicted by practice. Stability Matrix does not use the HF cache: it downloads single files at `resolve/main/` with no commit pin, so there is no blob sharing between revisions and the Windows HF-cache symlink problem is sidestepped by not having a cache. Folder sharing on Windows uses NTFS junctions (no symlink privilege). Safetensors are preferred in tooling (metadata viewer) but pickle formats are accepted without a warning; `pickleScanResult` is parsed and not surfaced (not confirmed in UI). Conclusion for Clips Kitty: H7's "pin to a commit" is the right correction to what Stability Matrix does; "share blobs" is only true if the HF cache is used, which it is not here.
+- **H7** (HF revision pin, blob sharing, Windows symlinks, safetensors): partially contradicted by practice. Stability Matrix does not use the HF cache: it downloads single files at `resolve/main/` with no commit pin, so there is no blob sharing between revisions and the Windows HF-cache symlink problem is sidestepped by not having a cache. Folder sharing on Windows uses NTFS junctions (no symlink privilege). Safetensors are preferred in tooling (metadata viewer) but pickle formats are accepted without a warning; `pickleScanResult` is parsed and not surfaced (not confirmed in UI). Conclusion for SpikeClip: H7's "pin to a commit" is the right correction to what Stability Matrix does; "share blobs" is only true if the HF cache is used, which it is not here.
 - **H5**: nothing to say (no permission concept).
 - **H10**: nothing; no usage counts.

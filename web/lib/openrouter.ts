@@ -26,8 +26,8 @@
 const BASE = "https://openrouter.ai/api/v1";
 const AUTH_URL = "https://openrouter.ai/auth";
 
-const KEY_STORAGE = "clipskitty-openrouter-key";
-const VERIFIER_STORAGE = "clipskitty-openrouter-verifier";
+const KEY_STORAGE = "spikeclip-openrouter-key";
+const VERIFIER_STORAGE = "spikeclip-openrouter-verifier";
 
 /** Sent on every inference call.
  *
@@ -41,7 +41,7 @@ const VERIFIER_STORAGE = "clipskitty-openrouter-verifier";
 function attribution(): Record<string, string> {
 	return {
 		"HTTP-Referer": typeof window === "undefined" ? "" : window.location.origin,
-		"X-OpenRouter-Title": "Clips Kitty Web",
+		"X-OpenRouter-Title": "SpikeClip Web",
 		"X-OpenRouter-Categories": "video-gen",
 	};
 }

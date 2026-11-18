@@ -94,7 +94,7 @@ require no configured Interactions Endpoint URL.
 The bot token uses the existing credential store and is masked in Settings.
 It is never returned by status, included in a query string, fed to the model,
 or printed. Incoming reply text is classified but not stored or logged. New
-internal writes require X-Clips-Kitty-Session. The generated API reference
+internal writes require X-SpikeClip-Session. The generated API reference
 lists the seven internal /text-updates routes.
 
 ## Evidence

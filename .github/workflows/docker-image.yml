@@ -55,14 +55,16 @@ jobs:
         with:
           # Lowercase: GHCR rejects capitals in a repository name, and the
           # owner here has them.
-          images: ghcr.io/${{ github.repository_owner }}/clips-studio-engine
+          images: ghcr.io/${{ github.repository_owner }}/spikeclip-engine
           tags: |
             type=ref,event=tag
             type=raw,value=latest
 
       - uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7
         with:
-          context: .
+          context: backend
+          build-args: |
+            SPIKECLIP_VERSION=${{ github.ref_name }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

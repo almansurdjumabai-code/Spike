@@ -79,17 +79,17 @@ Local by design ("100% Local, running on your PC", manual §1.1). Optional expos
 
 ## 11. Borrow
 
-1. **The consent dialog that names the exact git remote** before anything runs, and the install option toggles next to it. Clips Kitty's installer should show `publisher/pipeline @ tag (commit)` and the repo URL the same way.
+1. **The consent dialog that names the exact git remote** before anything runs, and the install option toggles next to it. SpikeClip's installer should show `publisher/pipeline @ tag (commit)` and the repo URL the same way.
 2. **Branch/hash install parameters** (`git switch --detach ${hash}`): the registry entry should carry the commit and the installer should check it out detached.
 3. **Freshness delay for dependency installs** (Bluefairy: block packages newer than 72h, exempt exact pins): cheap, no backend, directly addresses the 2024–25 PyPI/npm incidents behind H6. Worth adopting for any plugin-local `pip`/`npm` step, and worth saying which commands it does not cover.
 4. **Shared caches by environment variable** (`HF_HOME`, `TORCH_HOME`, `UV_CACHE_DIR`, `PIP_CACHE_DIR` under one home): the simplest form of model reuse across plugins, and it matches H7's blob sharing when the HF cache is used.
 5. **Content-addressed dedup with hardlinks as an opt-in tool** (Disk Saver: read-only scan, "Make separate", Trash) rather than forcing a central library — a good fallback for models that plugins download on their own.
 6. **Check-ins** (users posting platform/GPU/VRAM per app): opt-in telemetry that answers "does it run on my hardware" — fits H10 (opt-in counts).
-7. **The old zero-cost discovery**: GitHub topic search as a "latest/community" feed, separate from the curated list. Clips Kitty's static index can take submissions by PR and still show a topic feed for unreviewed pipelines, clearly labelled.
+7. **The old zero-cost discovery**: GitHub topic search as a "latest/community" feed, separate from the curated list. SpikeClip's static index can take submissions by PR and still show a topic feed for unreviewed pipelines, clearly labelled.
 
 ## 12. Avoid
 
-1. Calling location conventions "isolation" or "guaranteed to be secure and safe" when the runtime spawns a full shell. Clips Kitty only says "enforced" when the runtime enforces it (brief, fixed decision).
+1. Calling location conventions "isolation" or "guaranteed to be secure and safe" when the runtime spawns a full shell. SpikeClip only says "enforced" when the runtime enforces it (brief, fixed decision).
 2. A verification process that runs through one person's DMs on X, requires transferring the developer's repository to the project's org, and lets the admin edit it — this is the opposite of "developers never fork" and does not scale (H4).
 3. Executable manifests (`pinokio.js` with `menu` as an async function, inline JavaScript steps): the registry index must be inert JSON/YAML so it can be checked by CI.
 4. No compatibility fields: GPU/platform branching inside scripts instead of declared requirements.

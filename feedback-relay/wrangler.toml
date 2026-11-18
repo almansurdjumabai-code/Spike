@@ -1,4 +1,4 @@
-name = "clips-studio-feedback"
+name = "spikeclip-feedback"
 main = "worker.js"
 compatibility_date = "2026-01-01"
 
@@ -8,7 +8,7 @@ compatibility_date = "2026-01-01"
 enabled = true
 
 [vars]
-REPO = "ColinGPT9/clips-studio"
+REPO = "ColinGPT9/spikeclip"
 
 # Created with: npx wrangler kv namespace create FEEDBACK_KV
 [[kv_namespaces]]

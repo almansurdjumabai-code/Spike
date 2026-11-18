@@ -25,7 +25,7 @@
 
     var popup = window.open(
       link.href,
-      'clips-studio-donate',
+      'spikeclip-donate',
       'width=' + WIDTH + ',height=' + HEIGHT + ',left=' + Math.round(left) +
         ',top=' + Math.round(top) + ',resizable=yes,scrollbars=yes'
     );

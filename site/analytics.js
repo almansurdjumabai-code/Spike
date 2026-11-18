@@ -90,7 +90,7 @@ var MEASUREMENT_ID = ''
       var isGitHub = onHost('github.com')
       var isPayPal = onHost('paypal.me') || onHost('paypal.com')
 
-      // A whole path SEGMENT, so /ColinGPT9/clips-studio/releases matches and
+      // A whole path SEGMENT, so /ColinGPT9/spikeclip/releases matches and
       // so does /releases/latest, while a repository called "releases-notes"
       // does not. Safe to match loosely here: the host is already confirmed.
       var isReleases = /\/releases(\/|$)/.test(url.pathname)

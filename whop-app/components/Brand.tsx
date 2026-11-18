@@ -109,7 +109,7 @@ export function Footer() {
 				Privacy
 			</a>
 			<p style={{ margin: "10px 0 0" }}>
-				Clips Kitty is free and open source under AGPL-3.0, and is not
+				SpikeClip is free and open source under AGPL-3.0, and is not
 				affiliated with Whop. Everything runs on your own computer.
 			</p>
 		</footer>

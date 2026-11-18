@@ -47,4 +47,4 @@ jobs:
       # not a failed deploy, and the site is already live by this point.
       - name: Tell search engines
         continue-on-error: true
-        run: python scripts/ping_indexnow.py
+        run: python backend/scripts/ping_indexnow.py

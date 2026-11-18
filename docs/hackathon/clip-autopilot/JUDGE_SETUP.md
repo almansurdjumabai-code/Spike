@@ -6,14 +6,14 @@ bot token, private channel or DM and a successful test before Away from desk
 can be enabled. The base entry works with Clip updates off.
 
 Use Windows and the merged `main` branch. This feature runs inside the existing
-Clips Kitty desktop app; it is not an additional hosted service.
+SpikeClip desktop app; it is not an additional hosted service.
 
 You do not need to stream yourself. Connect a viewer account and watch a
 public channel you have permission to reuse, such as the demo channel in
 the brief. Five posts/day plus five upcoming clips controls volume even
 when that channel has a large audience making many clips.
 
-1. Clone https://github.com/ColinGPT9/clips-studio and check out `main`.
+1. Clone https://github.com/ColinGPT9/spikeclip and check out `main`.
    PRs #202/#204 and the live-test fixes in #205 are merged there. The original
    entry branch remains available for entry history. Follow the root README
    for Python 3.11, engine dependencies, FFmpeg and desktop setup. In `ui`,
@@ -65,7 +65,7 @@ overlap cannot be verified, and the queue/posting limits still protect volume.
 python -m ruff check .
 python -m pytest
 python scripts/gen_api_reference.py --check
-cd ui
+cd frontend
 npm run typecheck
 npm run build
 node scripts/test-watch-detector.cjs

@@ -13,7 +13,7 @@ Full instructions for each step are in [MSSTORE.md](MSSTORE.md).
       model switching fail inside an MSIX package (`core/paths.py`)
 - [x] **Packaged app verified to launch**: window, backend and bundled Ollama
       all come up
-- [x] **appx target added** (`ui/electron-builder.yml`), with `runFullTrust` as
+- [x] **appx target added** (`frontend/electron-builder.yml`), with `runFullTrust` as
       the only capability
 - [x] **Build script**: `python scripts/build_msix.py`
 - [x] **Version mapping**: 0.1.2 → package `1.1.2.0`, verified monotonic past
@@ -37,13 +37,13 @@ Full instructions for each step are in [MSSTORE.md](MSSTORE.md).
 - [x] Developer account created at **<https://storedeveloper.microsoft.com>**
       (free; that URL specifically, or you get the old paid flow, if you are
       asked for a registration fee, you are in the legacy flow, so back out)
-- [x] Publisher display name settled: **Clips Kitty**. It is public and cannot
+- [x] Publisher display name settled: **SpikeClip**. It is public and cannot
       be changed later, and it is not a personal name, so the listing does not
       identify the account holder.
 - [x] Identity verified (government ID + selfie)
 - [x] Product name reserved: **Apps and games → New product → MSIX or PWA app**
 - [x] Three values copied from **General → View product identity** into the
-      `appx:` block of `ui/electron-builder.yml`: done, and recorded in
+      `appx:` block of `frontend/electron-builder.yml`: done, and recorded in
       MSSTORE.md so a future release need not go looking
 
 `scripts/build_msix.py` refuses to run until those are filled in.
@@ -65,7 +65,7 @@ Full instructions for each step are in [MSSTORE.md](MSSTORE.md).
       config fix, so this is the one that mattered.
 - [ ] Restart, uninstall, reinstall
 - [x] Nothing written into the package directory: settings land in
-      `%LOCALAPPDATA%\Clips Studio\settings.yaml`, confirmed after a switch
+      `%LOCALAPPDATA%\SpikeClip\settings.yaml`, confirmed after a switch
 - [ ] Windows App Certification Kit passes: **cannot run here**, `appcert.exe`
       ships with the Windows SDK which is not installed. Optional, but it
       catches manifest problems before Microsoft's testers do.
@@ -99,7 +99,7 @@ The full list below is for a first submission.
       that subcategory does not exist, and Multimedia design is for graphics
       and art rather than video. See MSSTORE.md.
 - [ ] Privacy policy URL:
-      `https://colingpt9.github.io/clips-studio/privacy.html`
+      `https://colingpt9.github.io/spikeclip/privacy.html`
 - [ ] System requirements entered: **16 GB RAM minimum**, x64, Windows 10 1809+
 - [ ] Product declaration: **live generative AI** ticked (policy 11.16)
 - [ ] Product declaration: **third-party purchase API** ticked, for the PayPal
@@ -128,7 +128,7 @@ The full list below is for a first submission.
 
 ## Not blocking, but worth doing
 
-- [ ] **winget**. [`packaging/winget/`](../packaging/winget/) is ready to
+- [ ] **winget**. [`packaging/winget/`](../backend/packaging/winget/) is ready to
       submit and needs no account, certificate or certification. Much cheaper
       than the Store and reaches a different audience.
 - [ ] Screenshots and a demo video ([#35](../../issues/35)): the listing needs

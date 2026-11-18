@@ -1,6 +1,6 @@
-# Contributing to Clips Kitty
+# Contributing to SpikeClip
 
-Thanks for helping! Clips Kitty is a local-first AI clipping app. Python
+Thanks for helping! SpikeClip is a local-first AI clipping app. Python
 FastAPI backend + Electron/React UI. Issues labeled
 [`good-first-issue`](../../labels/good-first-issue) are small and
 well-scoped if you want a place to start.
@@ -24,23 +24,23 @@ usernames are redacted before reports ever leave the reporter's machine.
 ## Dev setup
 
 ```
-pip install -r requirements.txt
+pip install -r backend/requirements.txt
 pip install ruff pytest          # the checks CI runs
-cd ui && npm install
+cd frontend && npm install
 npm run dev                      # starts Electron + the backend together
 ```
 
 Working on the interface only? `npm run dev:web` serves it in a browser
 instead, with no Electron and no rebuild loop. The Electron-only calls
 (file pickers, the donate window) are stubbed there. See
-`ui/src/renderer/src/lib/browserShim.ts`.
+`frontend/src/renderer/src/lib/browserShim.ts`.
 
 Before a PR:
 
 ```
-pytest                                   # deterministic logic
-ruff check .                             # lint
-cd ui && npm run typecheck && npm run build
+cd backend && pytest                     # deterministic logic
+cd backend && ruff check .               # lint
+cd frontend && npm run typecheck && npm run build && npm run build:web
 ```
 
 Want to add a language, a model, a platform or an export format? Each is a
@@ -65,13 +65,13 @@ Electron itself still runs on your host, since it needs a display. See
 ## Something to run against
 
 You do not need a stream to start. There is a written-out transcript and a
-generator for synthetic footage in [tests/assets/](tests/assets/):
+generator for synthetic footage in [tests/assets/](backend/tests/assets/):
 
 ```
 python tests/assets/make_sample_video.py     # 2 min, 1080p, known audio peaks
 ```
 
-And [examples/](examples/) has small runnable programs for the two things
+And [examples/](backend/examples/) has small runnable programs for the two things
 you are most likely to be doing:
 
 ```
@@ -86,7 +86,7 @@ alternative is a full transcribe-and-render per attempt.
 
 ## Building on the app rather than in it
 
-You do not have to change Clips Kitty to use it. The desktop window is one
+You do not have to change SpikeClip to use it. The desktop window is one
 client of a local HTTP API, and anything else can be another. A bot, a batch
 runner, a different interface entirely.
 
@@ -101,16 +101,16 @@ way to get it moved from internal to supported.
 ### Write a plugin
 
 A plugin finds, understands or rates the moments in a video, for one game,
-sport or kind of show, without changing Clips Kitty. Three commands start one
+sport or kind of show, without changing SpikeClip. Three commands start one
 and run it on a test video (in PowerShell, write `py -m` for `python -m`):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new my-plugin --template game-events --publisher your-github-name
-python -m clipskitty_sdk run my-plugin --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new my-plugin --template game-events --publisher your-github-name
+python -m spikeclip_sdk run my-plugin --sample
 ```
 
-Clips Kitty 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0. The walk-through is
+SpikeClip 2.1.0 is the first release that runs plugins, and it comes with SDK 1.3.0. The walk-through is
 [docs/developers/first-game-pipeline.md](docs/developers/first-game-pipeline.md),
 and everything else for plugin developers is in
 [docs/developers/](docs/developers/README.md). The SDK is MIT, so your plugin
@@ -152,7 +152,7 @@ Things worth knowing before you change any of it:
 - **Code signing is off** (`signAndEditExecutable: false`). electron-builder
   otherwise downloads a bundle containing macOS symlinks, which an ordinary
   Windows account cannot extract. The trade-off and how to re-enable it are
-  documented in `ui/electron-builder.yml`.
+  documented in `frontend/electron-builder.yml`.
 - **Don't switch the target back to plain `nsis`.** `makensis.exe` is 32-bit
   and memory-maps the payload to embed it, so it dies around 2 GB with
   `failed creating mmap`. The app is ~5 GB unpacked. That is a ceiling, not
@@ -179,7 +179,7 @@ canonical issue so reactions concentrate in one place.
 
 ## Licence
 
-Clips Kitty is **AGPL-3.0**, and contributions are accepted under the same
+SpikeClip is **AGPL-3.0**, and contributions are accepted under the same
 terms: opening a PR means you are licensing your change that way.
 
 Practically: your work stays available to the creators this was built for,

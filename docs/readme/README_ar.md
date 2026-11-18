@@ -6,37 +6,37 @@
 
 <div dir="rtl">
 
-<a id="clips-kitty-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
+<a id="spikeclip-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
 
-# Clips Kitty: البديل المجاني مفتوح المصدر لـ Opus Clip لمحتوى الدردشة والألعاب والرياضة، يعمل على حاسوبك الشخصي
+# SpikeClip: البديل المجاني مفتوح المصدر لـ Opus Clip لمحتوى الدردشة والألعاب والرياضة، يعمل على حاسوبك الشخصي
 
 > تُرجم ملف README هذا بالذكاء الاصطناعي من [ملف README الإنجليزي](../../README.md)، وهو
 > المرجع ويُحدَّث أولًا. نرحّب كثيرًا بتصحيحات المتحدثين الأصليين للغة.
 >
-> 🌐 [صفحة الموقع بالعربية](https://colingpt9.github.io/clips-studio/ar.html)
+> 🌐 [صفحة الموقع بالعربية](https://colingpt9.github.io/spikeclip/ar.html)
 
 <a href="https://apps.microsoft.com/detail/9NB6XT7DSQZZ">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg">
-    <img alt="احصل على Clips Kitty من Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
+    <img alt="احصل على SpikeClip من Microsoft Store" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
   </picture>
 </a>
 
-[![Latest release](https://badgen.net/github/tag/ColinGPT9/clips-studio?label=release)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/clips-studio/total?label=downloads)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Licence](https://img.shields.io/github/license/ColinGPT9/clips-studio)](../../LICENSE)
-[![Stars](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars)](https://github.com/ColinGPT9/clips-studio/stargazers)
-[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/clips-studio)
+[![Latest release](https://badgen.net/github/tag/ColinGPT9/spikeclip?label=release)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/spikeclip/total?label=downloads)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Licence](https://img.shields.io/github/license/ColinGPT9/spikeclip)](../../LICENSE)
+[![Stars](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars)](https://github.com/ColinGPT9/spikeclip/stargazers)
+[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/spikeclip)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](../../CONTRIBUTING.md)
 [![Docker](https://img.shields.io/badge/docker-compose%20up-2496ED?logo=docker&logoColor=white)](../../docs/DOCKER.md)
 
-<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="Clips Kitty turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
+<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="SpikeClip turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
 
-<a id="star-and-share-clips-kitty--goal-225"></a>
+<a id="star-and-share-spikeclip--goal-225"></a>
 
-### امنح Clips Kitty نجمة وشاركه ⭐ الهدف: 225
+### امنح SpikeClip نجمة وشاركه ⭐ الهدف: 225
 
-[![Stars so far](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/clips-studio/stargazers) **من 225**
+[![Stars so far](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/spikeclip/stargazers) **من 225**
 
 **أرجوك امنح المستودع نجمة وشاركه.** لن يكلّفك ذلك شيئًا، ولا توجد ميزانية تسويق
 خلف هذا المشروع، لذا فإن التوصية الشفهية هي الطريقة الوحيدة التي سيعرف بها صانع
@@ -47,13 +47,10 @@
 وKlap يشغّل **Google Gemma** على حاسوبك الشخصي: بلا تكلفة خوادم، وبلا رسوم لكل مقطع،
 وبلا رسوم لاستخدام الذكاء الاصطناعي.
 
-> **كان اسم Clips Kitty هو Clips Studio حتى الإصدار 1.1.3**، وتغيّر الاسم لتلبية
-> متطلبات التسمية في Microsoft Store. التطبيق نفسه، والمستودع نفسه، والبيانات نفسها.
-
 <img src="../../docs/brand/mascot.png" alt="" width="150" align="right">
 
 **حوّل البثوث المباشرة والفيديوهات الطويلة إلى Shorts وReels وTikToks جاهزة للنشر،
-بالكامل على جهازك.** Clips Kitty أداة مجانية مفتوحة المصدر لتوليد المقاطع بالذكاء
+بالكامل على جهازك.** SpikeClip أداة مجانية مفتوحة المصدر لتوليد المقاطع بالذكاء
 الاصطناعي وتحرير الفيديو لصنّاع المحتوى: الصق رابطًا من YouTube أو Twitch أو Kick
 فيجد أفضل اللحظات، ويقصّها بنسبة 9:16 مع إبقاء المتحدث في المنتصف، ويدمج ترجمات
 نصية متزامنة كلمةً بكلمة، ويكتب العناوين والأوصاف والوسوم.
@@ -80,7 +77,7 @@
 لعدد المقاطع التي تصنعها.
 
 <img src="../../docs/store-screenshots/fs-dashboard-202754.png" width="100%"
-     alt="لوحة تحكم Clips Kitty: الصق رابط YouTube أو Twitch أو Kick، واختر خيارات الترجمة
+     alt="لوحة تحكم SpikeClip: الصق رابط YouTube أو Twitch أو Kick، واختر خيارات الترجمة
           النصية والتنسيق، وصفّ لفيديو مكتمل يُظهر 38 مقطعًا أُنتجت في 19 دقيقة و38 ثانية،
           وبجانبه قراءات حية للمعالج والذاكرة والمعالج الرسومي والتخزين.">
 
@@ -120,7 +117,7 @@
 
 ## ماذا يفعل
 
-تعطي Clips Kitty فيديو طويلًا، فيعيد إليك مجلدًا من المقاطع العمودية الجاهزة للنشر،
+تعطي SpikeClip فيديو طويلًا، فيعيد إليك مجلدًا من المقاطع العمودية الجاهزة للنشر،
 إضافةً إلى استوديو تراجعها فيه وتصلحها قبل أن تنشرها.
 
 صُمّم للمحتوى الذي تتعامل معه معظم أدوات المقاطع بأسوأ شكل: **البثوث المباشرة، ومحتوى
@@ -131,12 +128,12 @@ IRL والمتحدثين أمام الكاميرا، والبودكاست، وم
 
 ## مقارنته بـ Opus Clip وKlap وVizard وCapCut
 
-Clips Kitty بديل مفتوح المصدر لأدوات المقاطع السحابية. الفرق المهم هو مكان إنجاز العمل:
+SpikeClip بديل مفتوح المصدر لأدوات المقاطع السحابية. الفرق المهم هو مكان إنجاز العمل:
 فيديوك لا يُرفع أبدًا، لذا لا يوجد ما يُقاس ولا ما تُحتسب عليه رسوم.
 
 | الأداة | السعر، بفوترة شهرية | الخطة المجانية | يجد المقاطع نيابةً عنك | العلامة المائية | يرفع فيديوك | مفتوح المصدر |
 | ---- | --------------------- | --------- | ----------------------- | --------- | ------------------ | ----------- |
-| **Clips Kitty** | مجاني، بلا خطة مدفوعة | التطبيق بأكمله | نعم | أبدًا | لا، يعمل على حاسوبك | نعم، AGPL-3.0 |
+| **SpikeClip** | مجاني، بلا خطة مدفوعة | التطبيق بأكمله | نعم | أبدًا | لا، يعمل على حاسوبك | نعم، AGPL-3.0 |
 | Opus Clip | 15$ لخطة Starter، و29$ لخطة Pro | 1080p، بعلامة مائية، تنتهي صلاحيتها خلال 3 أيام | نعم | في الخطة المجانية | نعم | لا |
 | Klap | 29$ لخطة Pro، و14$ لخطة Basic بفوترة سنوية | فيديو واحد | نعم | غير مذكور | نعم | لا |
 | Vizard | 29$ لخطة Creator، و14.50$ بفوترة سنوية | 60 رصيدًا شهريًا، 720p | نعم | في الخطة المجانية | نعم | لا |
@@ -146,14 +143,14 @@ Clips Kitty بديل مفتوح المصدر لأدوات المقاطع الس�
 | CapCut | مجاني الاستخدام، وخطط مدفوعة على capcut.com | المحرّر بأكمله | **لا، أنت تقصّ يدويًا** | يختلف حسب الميزة | لا في تطبيق سطح المكتب | لا |
 
 **CapCut هو الجدير بالفهم**، لأنه الإجابة المجانية التي يقدّمها الجميع. إنه محرّر جيد ولا
-يكلّف شيئًا، لكنك أنت من يجد كل لحظة ويقصّ كل مقطع. Clips Kitty مجاني أيضًا، وتلك
+يكلّف شيئًا، لكنك أنت من يجد كل لحظة ويقصّ كل مقطع. SpikeClip مجاني أيضًا، وتلك
 المرحلة الأولى بالذات هي ما يقوم به نيابةً عنك.
 
 **Opus Clip أو Klap أو Vizard هي الخيار الأفضل** إذا لم يكن لديك حاسوب يعمل بنظام Windows
 مع بطاقة رسومات، أو كنت تصنع المقاطع من حين لآخر، أو تحتاج إلى العمل من الهاتف. أما
-Clips Kitty فمصمّم لصناعة المقاطع بكميات كبيرة على عتاد تملكه أصلًا.
+SpikeClip فمصمّم لصناعة المقاطع بكميات كبيرة على عتاد تملكه أصلًا.
 
-**[المقارنة الكاملة بين الأدوات السبع، مع ما تتفوّق فيه كل واحدة](https://colingpt9.github.io/clips-studio/alternatives.html)**
+**[المقارنة الكاملة بين الأدوات السبع، مع ما تتفوّق فيه كل واحدة](https://colingpt9.github.io/spikeclip/alternatives.html)**
 
 <sub>تم التحقق من الأسعار في صفحة الأسعار الخاصة بكل شركة بتاريخ 17 سبتمبر 2026. لا تنشر
 CapCut صفحة أسعار تمكّنا من قراءتها، لذا لم يُذكر لها سعر. الخطط تتغيّر، وهذا الجدول
@@ -265,7 +262,7 @@ Twitch مقيسة بعدد المشاركين الفريدين، وخريطة "�
   سطرًا بسطر قبل التصدير. وعند حديث شخصين، يمكن أن تأخذ ترجمات المتحدث الثاني لونًا آخر،
   ويمكن تبديل السطر الذي ينسبه خطأً يدويًا.
 - **محادثة التحرير بالذكاء الاصطناعي**: صِف المشكلة بلغة بسيطة فيعيد التحرير.
-- **Ask Clips Kitty** (اسأل Clips Kitty): مربع النص في أسفل لوحة التحكم. قل ما تريده في
+- **Ask SpikeClip** (اسأل SpikeClip): مربع النص في أسفل لوحة التحكم. قل ما تريده في
   جملة، مثل *"اصنع مقاطع من هذا البث، وتأكد من تضمين اللحظة التي متّ فيها أمام الزعيم،
   مع ترجمات نصية صفراء كبيرة"*، فيضع الفيديو في قائمة الانتظار، ويخبر أداة اختيار المقاطع
   بما تبحث عنه، ويضبط الخيارات التي ذكرتها. **يحتاج إلى نموذج Gemma 4**: راجع
@@ -331,7 +328,7 @@ Twitch مقيسة بعدد المشاركين الفريدين، وخريطة "�
 
 **التطبيق لـ Windows فقط.** يُفترض أن يعمل محرّك Python على Linux/macOS، لكن لا توجد نسخة
 لـ Mac، ولا يملك المشرف جهاز Mac ليختبر عليه. راجع
-[#62](https://github.com/ColinGPT9/clips-studio/issues/62) إن كان لديك واحد وتريد المساعدة.
+[#62](https://github.com/ColinGPT9/spikeclip/issues/62) إن كان لديك واحد وتريد المساعدة.
 
 التشغيل من الشيفرة المصدرية يحتاج إلى ما كان المثبّت سيجلبه لك:
 
@@ -346,15 +343,15 @@ Twitch مقيسة بعدد المشاركين الفريدين، وخريطة "�
 **أسهل طريقة هي [Microsoft Store](https://apps.microsoft.com/detail/9NB6XT7DSQZZ).**
 نقرة واحدة، ويحدّث نفسه، ولا يُظهر Windows أي تحذير أمني. لقد اعتمدت Microsoft الحزمة
 ووقّعتها، فلا يظهر تحذير SmartScreen الموصوف أدناه إطلاقًا. يثبّت المتجر الإصدارات الجديدة
-عندما يصل دورها؛ وللحصول على إصدار فورًا، افتح صفحة Clips Kitty في Microsoft Store واضغط
+عندما يصل دورها؛ وللحصول على إصدار فورًا، افتح صفحة SpikeClip في Microsoft Store واضغط
 **Update** (تحديث).
 
 **أو نزّل المثبّت.** نزّل أحدث **Web Setup** من
-[Releases](https://github.com/ColinGPT9/clips-studio/releases) وشغّله. يحمل التطبيق، ومحرّك Python، وكل
+[Releases](https://github.com/ColinGPT9/spikeclip/releases) وشغّله. يحمل التطبيق، ومحرّك Python، وكل
 المكتبات، وFFmpeg، وبيئة تشغيل الذكاء الاصطناعي، وكل أوزان الاكتشاف والتفريغ النصي: لا
 Python، ولا PATH، ولا طرفية، ولا برنامج ثانٍ للتثبيت.
 
-**أو استخدم winget.** الأمر `winget install ColinGPT9.ClipsKitty` يثبّت Web Setup نفسه
+**أو استخدم winget.** الأمر `winget install ColinGPT9.SpikeClip` يثبّت Web Setup نفسه
 من الطرفية.
 
 الشيء الوحيد الذي لا يحمله هو النموذج اللغوي نفسه، لأن هذه النماذج تأتي بتراخيص يجب أن
@@ -370,13 +367,13 @@ Python، ولا PATH، ولا طرفية، ولا برنامج ثانٍ للتث
 ### من الشيفرة المصدرية
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 pip install -r requirements.txt
 
-cd ui
+cd frontend
 npm install
-npm run dev        # opens the Clips Kitty desktop app
+npm run dev        # opens the SpikeClip desktop app
 ```
 
 يشغّل التطبيق محرّك Python الخاص به تلقائيًا. الصق رابطًا في **Clip Editor** (محرّر
@@ -393,8 +390,8 @@ npm run dev        # opens the Clips Kitty desktop app
 ولا شيء غيره: لا Python، ولا Node، ولا FFmpeg، ولا PyTorch.
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 docker compose up
 ```
 
@@ -430,7 +427,7 @@ docker compose run --rm ui npm run typecheck
 افتح صفحة **Models** (النماذج) لترى ما هو مثبّت وما يستطيع معالجك الرسومي تحمّله:
 
 معيار واحد فقط: مقدار ذاكرة الفيديو (VRAM) لديك. هذه هي الصفوف نفسها التي يعرضها التطبيق،
-من `RECOMMENDATIONS` في [`llm/manager.py`](../../llm/manager.py). يقرأ المعالج وصفحة Models
+من `RECOMMENDATIONS` في [`llm/manager.py`](../../backend/llm/manager.py). يقرأ المعالج وصفحة Models
 هذا الجدول نفسه، فلا يمكن أن يختلفا فيما بينهما، ولا مع هذا النص.
 
 | عتادك | النموذج الموصى به | |
@@ -453,7 +450,7 @@ docker compose run --rm ui npm run typecheck
 هو صاحب أكثر ساعات الاستخدام؛ وهو ما يأتي به `config/settings.yaml`. كل النماذج الأخرى مدرجة
 لأن حجمها معقول واستخدامها التجاري مجاني، لا لأن جودة المقاطع قيست بها. كلها تعمل، لأن
 التطبيق يتعامل مع كل النماذج بالطريقة نفسها عبر Ollama، لكن لم يتحقق أحد مما إذا كانت تختار
-لحظات أفضل. سدّ هذه الفجوة هو موضوع [#38](https://github.com/ColinGPT9/clips-studio/issues/38).
+لحظات أفضل. سدّ هذه الفجوة هو موضوع [#38](https://github.com/ColinGPT9/spikeclip/issues/38).
 
 أي نموذج يقدّمه Ollama يعمل، والتبديل بنقرة واحدة. يمكن للترجمة أن تستخدم نموذجًا *مختلفًا*
 عن نموذج صناعة المقاطع. اضبط `llm.translation_model`.
@@ -462,7 +459,7 @@ docker compose run --rm ui npm run typecheck
 
 ### مربع النص في الأسفل يحتاج إلى Gemma 4
 
-**Ask Clips Kitty**، مربع النص في أسفل لوحة التحكم، لا يعمل إلا مع نموذج قادر على استخدام
+**Ask SpikeClip**، مربع النص في أسفل لوحة التحكم، لا يعمل إلا مع نموذج قادر على استخدام
 أدوات التطبيق. Gemma 4 قادر على ذلك. أما `gemma:7b` ونماذج Gemma 3 فليست قادرة، ويثبّت
 الإعداد أحدها على حاسوب بلا بطاقة رسومات أو بذاكرة فيديو 8 GB أو أكثر. هناك لن يعمل المربع
 حتى تضيف نموذج Gemma 4: يقول الإصدار 2.0 *"No installed model can use tools"* (لا يوجد
@@ -477,7 +474,7 @@ docker compose run --rm ui npm run typecheck
 
 ## العتاد المُختبَر والأداء
 
-يُطوَّر Clips Kitty ويُختبر يوميًا على هذا الجهاز، لذا فهو نقطة مرجعية مفيدة إذا كنت تقارن
+يُطوَّر SpikeClip ويُختبر يوميًا على هذا الجهاز، لذا فهو نقطة مرجعية مفيدة إذا كنت تقارن
 نتائجك:
 
 | | |
@@ -493,8 +490,8 @@ docker compose run --rm ui npm run typecheck
 5 دقائق) مضبوط لهذه الفئة من الأجهزة تقريبًا. على معالج رسومي أكبر، ارفع `llm.num_ctx`
 و`analysis.chunk_seconds` معًا وانتقل إلى حجم نموذج أكبر؛ وعلى معالج أصغر، انزل إلى `gemma3:4b`.
 
-إذا قست أداء Clips Kitty على عتاد مختلف، فأرجو أن تنشر النتائج في
-[Discussions](https://github.com/ColinGPT9/clips-studio/discussions). الأرقام الحقيقية من أجهزة حقيقية تساعد الجميع على
+إذا قست أداء SpikeClip على عتاد مختلف، فأرجو أن تنشر النتائج في
+[Discussions](https://github.com/ColinGPT9/spikeclip/discussions). الأرقام الحقيقية من أجهزة حقيقية تساعد الجميع على
 تحديد حجم إعداداتهم.
 
 <a id="supported-platforms"></a>
@@ -521,7 +518,7 @@ docker compose run --rm ui npm run typecheck
 الأردية · البنغالية · التايلاندية · الكورية · الإيطالية
 
 إضافة لغة تعني سطرًا واحدًا في `multilingual/languages.py` وملف ترجمة في
-`ui/src/renderer/src/locales/`. أداة الترجمة وكاتب الترجمات النصية لا يعتمدان على لغة بعينها.
+`frontend/src/renderer/src/locales/`. أداة الترجمة وكاتب الترجمات النصية لا يعتمدان على لغة بعينها.
 
 <a id="help-wanted-the-maintainer-only-speaks-english"></a>
 
@@ -532,28 +529,28 @@ docker compose run --rm ui npm run typecheck
 كاملة بحد ذاتها**: لا حاجة إلى طلب سحب (pull request). [كيف يعمل ذلك](../../docs/TRANSLATING.md).
 
 **تحتاج إلى إكمال** (نحو 68 نصًا ما زالت بالإنجليزية):
-[বাংলা (البنغالية)](https://github.com/ColinGPT9/clips-studio/issues/43) ·
-[Italiano (الإيطالية)](https://github.com/ColinGPT9/clips-studio/issues/44) ·
-[한국어 (الكورية)](https://github.com/ColinGPT9/clips-studio/issues/45) ·
-[ไทย (التايلاندية)](https://github.com/ColinGPT9/clips-studio/issues/46) ·
-[Tagalog (الفلبينية)](https://github.com/ColinGPT9/clips-studio/issues/47) ·
-[Türkçe (التركية)](https://github.com/ColinGPT9/clips-studio/issues/48) ·
-[اردو (الأردية)](https://github.com/ColinGPT9/clips-studio/issues/49) ·
-[Tiếng Việt (الفيتنامية)](https://github.com/ColinGPT9/clips-studio/issues/50) ·
-[中文 (الصينية)](https://github.com/ColinGPT9/clips-studio/issues/51)
+[বাংলা (البنغالية)](https://github.com/ColinGPT9/spikeclip/issues/43) ·
+[Italiano (الإيطالية)](https://github.com/ColinGPT9/spikeclip/issues/44) ·
+[한국어 (الكورية)](https://github.com/ColinGPT9/spikeclip/issues/45) ·
+[ไทย (التايلاندية)](https://github.com/ColinGPT9/spikeclip/issues/46) ·
+[Tagalog (الفلبينية)](https://github.com/ColinGPT9/spikeclip/issues/47) ·
+[Türkçe (التركية)](https://github.com/ColinGPT9/spikeclip/issues/48) ·
+[اردو (الأردية)](https://github.com/ColinGPT9/spikeclip/issues/49) ·
+[Tiếng Việt (الفيتنامية)](https://github.com/ColinGPT9/spikeclip/issues/50) ·
+[中文 (الصينية)](https://github.com/ColinGPT9/spikeclip/issues/51)
 
 **تحتاج إلى مراجعة** (مكتملة، لكن لم يتحقق أحد من أنها تُقرأ بشكل طبيعي):
-[العربية](https://github.com/ColinGPT9/clips-studio/issues/52) ·
-[Deutsch (الألمانية)](https://github.com/ColinGPT9/clips-studio/issues/53) ·
-[Español (الإسبانية)](https://github.com/ColinGPT9/clips-studio/issues/54) ·
-[Français (الفرنسية)](https://github.com/ColinGPT9/clips-studio/issues/55) ·
-[हिन्दी (الهندية)](https://github.com/ColinGPT9/clips-studio/issues/56) ·
-[Bahasa Indonesia (الإندونيسية)](https://github.com/ColinGPT9/clips-studio/issues/57) ·
-[日本語 (اليابانية)](https://github.com/ColinGPT9/clips-studio/issues/58) ·
-[Português (البرتغالية)](https://github.com/ColinGPT9/clips-studio/issues/59) ·
-[Русский (الروسية)](https://github.com/ColinGPT9/clips-studio/issues/60)
+[العربية](https://github.com/ColinGPT9/spikeclip/issues/52) ·
+[Deutsch (الألمانية)](https://github.com/ColinGPT9/spikeclip/issues/53) ·
+[Español (الإسبانية)](https://github.com/ColinGPT9/spikeclip/issues/54) ·
+[Français (الفرنسية)](https://github.com/ColinGPT9/spikeclip/issues/55) ·
+[हिन्दी (الهندية)](https://github.com/ColinGPT9/spikeclip/issues/56) ·
+[Bahasa Indonesia (الإندونيسية)](https://github.com/ColinGPT9/spikeclip/issues/57) ·
+[日本語 (اليابانية)](https://github.com/ColinGPT9/spikeclip/issues/58) ·
+[Português (البرتغالية)](https://github.com/ColinGPT9/spikeclip/issues/59) ·
+[Русский (الروسية)](https://github.com/ColinGPT9/spikeclip/issues/60)
 
-هل تريد لغة غير موجودة هنا؟ [#61](https://github.com/ColinGPT9/clips-studio/issues/61).
+هل تريد لغة غير موجودة هنا؟ [#61](https://github.com/ColinGPT9/spikeclip/issues/61).
 
 <a id="publish-to-youtube"></a>
 
@@ -561,7 +558,7 @@ docker compose run --rm ui npm run typecheck
 
 متوقف افتراضيًا. فعّله من **Settings → Publish to YouTube** (الإعدادات ← النشر على YouTube)
 فيظهر تبويب **YouTube** في المحرّر: املأ العنوان والوصف والوسوم والصورة المصغّرة وقائمة
-التشغيل والجمهور ومستوى الظهور، ثم اضغط **Upload now** (ارفع الآن). يصيّر Clips Kitty المقطع
+التشغيل والجمهور ومستوى الظهور، ثم اضغط **Upload now** (ارفع الآن). يصيّر SpikeClip المقطع
 إن كانت لديك تعديلات غير محفوظة، ثم يرفعه مباشرةً إلى قناتك. لا توجد خطوة تصدير ولا صفحة
 نشر منفصلة. لن تغادر المحرّر أبدًا.
 
@@ -574,17 +571,17 @@ docker compose run --rm ui npm run typecheck
 اختيار **Schedule on YouTube** (الجدولة على YouTube) يرفع الفيديو *فورًا*، ويجعله خاصًا،
 ويسلّم YouTube موعد النشر. ثم ينشره YouTube في يومه.
 
-**يمكنك إغلاق Clips Kitty وإطفاء حاسوبك.** لا يوجد مؤقّت في هذا التطبيق، ولا خدمة في
-الخلفية، ولا شيء يجب تركه قيد التشغيل. بمجرد أن يقبل YouTube الفيديو، تنتهي مهمة Clips Kitty.
+**يمكنك إغلاق SpikeClip وإطفاء حاسوبك.** لا يوجد مؤقّت في هذا التطبيق، ولا خدمة في
+الخلفية، ولا شيء يجب تركه قيد التشغيل. بمجرد أن يقبل YouTube الفيديو، تنتهي مهمة SpikeClip.
 
 <a id="you-need-your-own-google-api-key"></a>
 
 ### تحتاج إلى مفتاح Google API خاص بك
 
-لا يأتي Clips Kitty بمفتاح مشترك، وهذا ليس مجرد حذر. حصة الرفع في Google **لكل مشروع
+لا يأتي SpikeClip بمفتاح مشترك، وهذا ليس مجرد حذر. حصة الرفع في Google **لكل مشروع
 Cloud**: والمفتاح المشترك يعني أن كل مستخدم في العالم سيسحب من الرصيد نفسه البالغ 100 عملية
 رفع يوميًا. مشروعك الخاص يمنحك حصتك الخاصة، وبيانات اعتمادك لا تغادر جهازك أبدًا. ولا يوجد
-أي خادم لـ Clips Kitty في المسار.
+أي خادم لـ SpikeClip في المسار.
 
 الإعداد مجاني ويستغرق نحو عشر دقائق؛ ويرشدك المعالج في Settings خلاله:
 
@@ -610,7 +607,7 @@ Cloud**: والمفتاح المشترك يعني أن كل مستخدم في ا
 > يُرفع من خلاله على وضع "خاص".** القفل دائم. لا يمكنك جعل الفيديو عامًا لاحقًا من Studio،
 > ولا يوجد استئناف. الحل الوحيد هو رفعه مجددًا من مشروع اجتاز التدقيق.
 
-يتحقق Clips Kitty بعد كل عملية رفع ويخبرك بوضوح إن حدث ذلك، بدلًا من الإبلاغ عن نجاح
+يتحقق SpikeClip بعد كل عملية رفع ويخبرك بوضوح إن حدث ذلك، بدلًا من الإبلاغ عن نجاح
 فيديو لا يستطيع أحد مشاهدته. إذا كنت تنوي النشر للعامة، فقدّم أولًا
 [نموذج تدقيق YouTube API Services](https://support.google.com/youtube/contact/yt_api_form).
 الرفع بوضع **غير مدرج** أو **خاص** لا يتأثر.
@@ -644,7 +641,7 @@ Cloud**: والمفتاح المشترك يعني أن كل مستخدم في ا
 دزينة من المقاطع في الثانية نفسها.
 
 هذه الميزة **ليست محلية**. يُرسَل المقطع وتفاصيله إلى خدمة نشر، تتولى إيصالها وتحتفظ
-بالاتصالات بحساباتك على مواقع التواصل، فلا يطلب Clips Kitty أبدًا كلمة مرور لأي حساب
+بالاتصالات بحساباتك على مواقع التواصل، فلا يطلب SpikeClip أبدًا كلمة مرور لأي حساب
 تواصل اجتماعي. وكل ما عدا ذلك في التطبيق ما زال يعمل على حاسوبك.
 
 خدمتان مدعومتان: **[WoopSocial](https://woopsocial.com/?via=clipskitty)**، التي تربط خطتها
@@ -652,11 +649,11 @@ Cloud**: والمفتاح المشترك يعني أن كل مستخدم في ا
 و<strong>[Upload-Post](https://www.upload-post.com/)</strong>، التي تصل إلى وجهات أكثر وتضيف الصور
 المصغّرة والتعليقات الأولى وقائمة انتظار للنشر. فعّل أيًّا منهما، أو كلتيهما.
 
-<sub>رابط إحالة - قد يحصل Clips Kitty على عمولة إذا سجّلت من خلاله، دون أي تكلفة إضافية
+<sub>رابط إحالة - قد يحصل SpikeClip على عمولة إذا سجّلت من خلاله، دون أي تكلفة إضافية
 عليك.</sub>
 
 **استخدم مفتاحك الخاص.** أنت تنشئ الحساب، وتربط حساباتك على مواقع التواصل، وتستخدم حصتك
-الخاصة. لا يتقاضى Clips Kitty شيئًا، ولا يحتفظ بأي مفتاح مشترك، ولا يدفع ثمن أي شيء —
+الخاصة. لا يتقاضى SpikeClip شيئًا، ولا يحتفظ بأي مفتاح مشترك، ولا يدفع ثمن أي شيء —
 الترتيب نفسه المتّبع في التكامل مع YouTube، وللسبب نفسه.
 
 الشرح الكامل، والدعم لكل منصة، والحدود:
@@ -721,24 +718,24 @@ python main.py status                                               # processing
 python main.py serve                                                # just the API engine
 ```
 
-توجد الإعدادات في [config/settings.yaml](../../config/settings.yaml). أعلى الملف كتلة قصيرة
+توجد الإعدادات في [config/settings.yaml](../../backend/config/settings.yaml). أعلى الملف كتلة قصيرة
 للإعداد السريع، وكل ما هو متقدم يأتي بعدها. كل موجّه (prompt) للنموذج اللغوي ملف نصي عادي في
-[config/prompts/](../../config/prompts/)، فيمكنك ضبط طريقة تقييم المقاطع دون لمس Python.
+[config/prompts/](../../backend/config/prompts/)، فيمكنك ضبط طريقة تقييم المقاطع دون لمس Python.
 
 <a id="write-a-plugin"></a>
 
 ## اكتب إضافة
 
 هل تعرف لعبة أو رياضة أو نوعًا من البرامج أفضل مما يعرفه كاشف عام الأغراض؟ اكتب إضافة صغيرة
-بلغة Python تجد اللحظات في الفيديو أو تفهمها أو تقيّمها، ويتولى Clips Kitty الباقي. حزمة SDK
+بلغة Python تجد اللحظات في الفيديو أو تفهمها أو تقيّمها، ويتولى SpikeClip الباقي. حزمة SDK
 مرخّصة بـ MIT، فيمكن لإضافتك أن تستخدم أي ترخيص، ولا حاجة إلى تفريع (fork) أي شيء.
 
 ```text
-Clips Kitty SDK
+SpikeClip SDK
 
 Input                      a link or a video file
   ↓
-Video                      Clips Kitty downloads it and writes down what is said
+Video                      SpikeClip downloads it and writes down what is said
   ↓
 Your plugin                every step is optional
   ├── find                 picks the moments                  built
@@ -746,17 +743,17 @@ Your plugin                every step is optional
   ├── rate                 scores each moment                 built
   └── edit                 suggests edits for the creator     built
   ↓
-Clips Kitty                does every step no plugin does, then cuts, frames and captions the clips
+SpikeClip                does every step no plugin does, then cuts, frames and captions the clips
   ↓
 Creator / Social Platform  posts when the creator clicks Publish, or on a schedule or automatic posting the creator switched on
 ```
 
-- يمكن لإضافة واحدة أن تجد اللحظات في الفيديو؛ وهي تحلّ محل البحث الذي يجريه Clips Kitty بنفسه.
+- يمكن لإضافة واحدة أن تجد اللحظات في الفيديو؛ وهي تحلّ محل البحث الذي يجريه SpikeClip بنفسه.
 - يمكن لما يصل إلى 3 إضافات أن تفهم، ولما يصل إلى 3 أن تقيّم، بعد أي إضافة باحثة.
 - يتحدد دور الإضافة من `inputs` و`outputs` في ملف البيان الخاص بها ([الخطوات](../../docs/developers/steps.md)).
 - يمكن لما يصل إلى 3 إضافات أن تقترح تعديلات على المقاطع التي ستُصنع.
 - إضافات التحرير تقترح تعديلات تنتظر صانع المحتوى في المحرّر ([الخطوات](../../docs/developers/steps.md#suggest-edits-the-edit-step)).
-- النشر ليس خطوة من خطوات الإضافات: يتولى Clips Kitty نشر المقاطع بنفسه، ويمكنه عبر WoopSocial النشر على مواقع كثيرة دفعة واحدة بحساب صانع المحتوى نفسه ([النشر على كل المنصات دفعة واحدة](#publish-to-every-platform-at-once)). `kind: publisher` مرفوض: الإضافات لا تنشر.
+- النشر ليس خطوة من خطوات الإضافات: يتولى SpikeClip نشر المقاطع بنفسه، ويمكنه عبر WoopSocial النشر على مواقع كثيرة دفعة واحدة بحساب صانع المحتوى نفسه ([النشر على كل المنصات دفعة واحدة](#publish-to-every-platform-at-once)). `kind: publisher` مرفوض: الإضافات لا تنشر.
 
 ثلاثة أوامر تثبّت حزمة SDK، وتنشئ إضافة من القالب `game-events` (للعبة Quarkbloom Arena، وهي
 لعبة خيالية)، وتشغّلها على فيديو تجريبي تصنعه الحزمة. تحتاج إلى Python 3.11 وFFmpeg وGit.
@@ -764,34 +761,34 @@ Creator / Social Platform  posts when the creator clicks Publish, or on a schedu
 PowerShell (على Windows):
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash (على macOS وLinux):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
-Clips Kitty 2.1.0 هو أول إصدار يشغّل الإضافات، ويأتي مع SDK 1.3.0.
+SpikeClip 2.1.0 هو أول إصدار يشغّل الإضافات، ويأتي مع SDK 1.3.0.
 
 **[أول مسار معالجة للعبتك](../../docs/developers/first-game-pipeline.md)** يكمل من هناك، خطوة
-بخطوة، حتى تصل إلى إضافة مثبّتة في Clips Kitty ومدرجة في متجر الإضافات (Marketplace) الخاص به.
+بخطوة، حتى تصل إلى إضافة مثبّتة في SpikeClip ومدرجة في متجر الإضافات (Marketplace) الخاص به.
 يحتوي [دليل وصفات الإشارات](../../docs/developers/signals-cookbook.md) على وصفات لقراءة فيديو
 اللعبة، ويحتوي [مرجع SDK](../../docs/developers/sdk.md) على كل أمر واستدعاء، وتحتوي
 [وثائق المطوّرين](../../docs/developers/README.md) على كل ما عدا ذلك. وصفحة
-[Clips Kitty SDK](https://colingpt9.github.io/clips-studio/developers.html) على الموقع هي النسخة
+[SpikeClip SDK](https://colingpt9.github.io/spikeclip/developers.html) على الموقع هي النسخة
 المختصرة.
 
 <a id="build-on-it"></a>
 
 ## ابنِ عليه
 
-تطبيق سطح المكتب نافذة على **واجهة HTTP API محلية**، تعمل كلما كان Clips Kitty مفتوحًا. يمكن
+تطبيق سطح المكتب نافذة على **واجهة HTTP API محلية**، تعمل كلما كان SpikeClip مفتوحًا. يمكن
 لبوت Discord، أو أداة تشغيل دفعات، أو واجهة ويب، أو تكامل مع OBS أن يقود مسار المعالجة نفسه،
 دون الحاجة إلى إضافة أي شيء إلى التطبيق أولًا.
 
@@ -825,14 +822,14 @@ API قبل أن توجّه أي شيء إليها.
 ذلك هو البناء *حول* التطبيق. ويمكنك أيضًا البناء *داخله*، ونقطة البداية هي الإضافة
 ([اكتب إضافة](#write-a-plugin)). إذا كانت اللقطات التي تهمّك ليست ما ضُبط له التطبيق، سواء
 كانت رياضة أو ألعابًا أو ردود فعل أو محاضرات أو شيئًا لم يجرّبه أحد، فبإمكان الإضافة أن تجد
-لحظاتها أو تفهمها أو تقيّمها دون تفريع. تعمل الإضافة على Python الخاص بـ Clips Kitty، مع
-المكتبة القياسية (باستثناء بضع وحدات يستبعدها التطبيق) وحزمة SDK: لا يستطيع Clips Kitty بعد
+لحظاتها أو تفهمها أو تقيّمها دون تفريع. تعمل الإضافة على Python الخاص بـ SpikeClip، مع
+المكتبة القياسية (باستثناء بضع وحدات يستبعدها التطبيق) وحزمة SDK: لا يستطيع SpikeClip بعد
 تثبيت حزم Python أخرى لإضافة ما.
 
 أما لتغيير التطبيق نفسه: فمسار المعالجة يشغّل **YOLOv8 (ultralytics) وOpenCV وTalkNet-ASD**
 محليًا، وما يقرّر أي اللحظات تصبح مقاطع هو مجموعة من الإشارات لكل ثانية، لا فكرة مُثبّتة في
 الشيفرة عمّا هو مثير للاهتمام. يمكن إضافة كاشف يُصدر درجة ثقة على امتداد الخط الزمني كإشارة
-إضافية، فتصبح ذرواته مقاطع مرشّحة. وإذا احتاج كاشفك إلى حزم Python لا يستطيع Clips Kitty بعد
+إضافية، فتصبح ذرواته مقاطع مرشّحة. وإذا احتاج كاشفك إلى حزم Python لا يستطيع SpikeClip بعد
 تثبيتها لإضافة، فافرع المستودع وأدخل كاشفك الخاص.
 يحتوي **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model)** على العقد، والملف
 الذي تنسخه، وفخ الأداء الذي يستحق أن تعرفه قبل أن تبدأ.
@@ -846,32 +843,32 @@ API قبل أن توجّه أي شيء إليها.
 
 ### اطلب من وكيل ذكاء اصطناعي أن يقوم بذلك
 
-يأتي Clips Kitty مع **خادم MCP**، فيستطيع Claude أو Cursor أو أي عميل MCP قيادة مسار المعالجة
+يأتي SpikeClip مع **خادم MCP**، فيستطيع Claude أو Cursor أو أي عميل MCP قيادة مسار المعالجة
 نفسه بلغة بسيطة: وضع بث في قائمة الانتظار، ومتابعة المهمة، وقراءة المقاطع التي اختارها، وتصدير
 أحدها.
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 في النسخة المثبّتة، الملف التنفيذي للمحرّك هو `api.exe` (في مجلد `resources\backend` الخاص
 بالتطبيق)، فيكون الأمر هناك `api.exe mcp`.
 
-يتواصل مع المحرّك العامل عبر `127.0.0.1:8765`، لذا يجب أن يكون Clips Kitty مفتوحًا، ولا يحتاج
+يتواصل مع المحرّك العامل عبر `127.0.0.1:8765`، لذا يجب أن يكون SpikeClip مفتوحًا، ولا يحتاج
 إلى أي نوع من مفاتيح API: النموذج الذي يصنع المقاطع هو الموجود على جهازك (أو، إن اخترت واحدًا
 في Settings → AI، نموذج سحابي بمفتاحك الخاص، لا يراه عميل MCP أبدًا). توجد مهارة وكيل (agent
-skill) للعملاء الذين يدعمونها في [skills/clips-kitty/](../../skills/clips-kitty/).
+skill) للعملاء الذين يدعمونها في [skills/spikeclip/](../../skills/spikeclip/).
 
-<a id="built-with-clips-kitty"></a>
+<a id="built-with-spikeclip"></a>
 
-### مبني بـ Clips Kitty
+### مبني بـ SpikeClip
 
-المشاريع التي تعمل على هذه الواجهة البرمجية مدرجة في **[Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)**،
-قائمة مسارات المعالجة والإضافات والتكاملات والتطبيقات والأدوات المبنية بـ Clips Kitty. وأولها
-[Clips Kitty OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin)، وهو لوحة (dock)
-في OBS Studio تسلّم بثك إلى Clips Kitty بعد انتهائه. هل بنيت واحدًا؟ أضفه بطلب سحب
+المشاريع التي تعمل على هذه الواجهة البرمجية مدرجة في **[Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)**،
+قائمة مسارات المعالجة والإضافات والتكاملات والتطبيقات والأدوات المبنية بـ SpikeClip. وأولها
+[SpikeClip OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin)، وهو لوحة (dock)
+في OBS Studio تسلّم بثك إلى SpikeClip بعد انتهائه. هل بنيت واحدًا؟ أضفه بطلب سحب
 ([كيف](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md))، وأعطِ مستودعك
-الموضوع `clips-kitty`.
+الموضوع `spikeclip`.
 
 <a id="architecture"></a>
 
@@ -886,7 +883,7 @@ skill) للعملاء الذين يدعمونها في [skills/clips-kitty/](../
 
 المساهمات مرحّب بها. راجع **[CONTRIBUTING.md](../../CONTRIBUTING.md)** لإعداد بيئة التطوير وما
 يُتوقع من طلبات السحب، و<strong>[SECURITY.md](../../SECURITY.md)</strong> للإبلاغ عن ثغرة أمنية. المشكلات
-الموسومة بـ [`good-first-issue`](https://github.com/ColinGPT9/clips-studio/labels/good-first-issue) صغيرة
+الموسومة بـ [`good-first-issue`](https://github.com/ColinGPT9/spikeclip/labels/good-first-issue) صغيرة
 ومحددة النطاق جيدًا إن أردت مكانًا تبدأ منه.
 
 يوجد الموقع في [site/](../../site/) ويُنشر على GitHub Pages وعلى Space في Hugging Face. راجع
@@ -899,13 +896,13 @@ skill) للعملاء الذين يدعمونها في [skills/clips-kitty/](../
   الرئيسية
 - **[docs/MSSTORE.md](../../docs/MSSTORE.md)**: حزمة Microsoft Store، من إنشاء حساب مطوّر حتى
   الاعتماد
-- **[packaging/winget/](../../packaging/winget/)**: ملفات بيان winget، التي تشير إلى المثبّت
+- **[packaging/winget/](../../backend/packaging/winget/)**: ملفات بيان winget، التي تشير إلى المثبّت
   المذكور أعلاه
-- **[whop-app/](../../whop-app/)**: تطبيق Whop، الذي يعرض Clips Kitty على أعضاء مجتمعات صناعة
+- **[whop-app/](../../whop-app/)**: تطبيق Whop، الذي يعرض SpikeClip على أعضاء مجتمعات صناعة
   المقاطع. صفحات تسويقية فقط: لا يعالج الفيديو، ولا يخزّن أي شيء، ولا يتواصل مع تطبيق سطح المكتب
 - **[docs/DOCKER.md](../../docs/DOCKER.md)**: تشغيل المحرّك دون تثبيت Python وFFmpeg وPyTorch
   بنفسك
-- **[الخصوصية](https://colingpt9.github.io/clips-studio/privacy.html)**: ما يخزّنه التطبيق وما
+- **[الخصوصية](https://colingpt9.github.io/spikeclip/privacy.html)**: ما يخزّنه التطبيق وما
   يمكن أن يغادر جهازك (الجواب المختصر: لا شيء، إلا إذا أرسلت تقرير خطأ)
 
 <a id="changelog-known-issues-roadmap"></a>
@@ -961,14 +958,14 @@ skill) للعملاء الذين يدعمونها في [skills/clips-kitty/](../
 تعديل بموجب CC BY 4.0. شكرًا على
 نشره بشكل مفتوح. كل مكوّن آخر مضمَّن وترخيصه موجود في [NOTICE](../../NOTICE).
 
-ثلاثة أجزاء مرخّصة بشكل منفصل، كي يظل البناء على Clips Kitty سهلًا:
+ثلاثة أجزاء مرخّصة بشكل منفصل، كي يظل البناء على SpikeClip سهلًا:
 
 | الجزء | الترخيص |
 |---|---|
-| Clips Kitty (التطبيق، ومحرّكه، وهذا المستودع) | AGPL-3.0-or-later |
-| حزمة SDK للإضافات، [`sdk/python/`](../../sdk/python/) | MIT ([sdk/python/LICENSE](../../sdk/python/LICENSE)) |
-| الإضافات النموذجية، [`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) و[`examples/pipelines/keyword-rater/`](../../examples/pipelines/keyword-rater/) | MIT |
-| نسخة قائمة Awesome Clips Kitty المرفقة بالتطبيق، `plugins/catalog_index.json` (القائمة [مستودع مستقل](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
+| SpikeClip (التطبيق، ومحرّكه، وهذا المستودع) | AGPL-3.0-or-later |
+| حزمة SDK للإضافات، [`sdk/python/`](../../backend/sdk/python/) | MIT ([sdk/python/LICENSE](../../backend/sdk/python/LICENSE)) |
+| الإضافات النموذجية، [`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) و[`examples/pipelines/keyword-rater/`](../../backend/examples/pipelines/keyword-rater/) | MIT |
+| نسخة قائمة Awesome SpikeClip المرفقة بالتطبيق، `plugins/catalog_index.json` (القائمة [مستودع مستقل](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
 
 تحتفظ الإضافات ومسارات المعالجة والتطبيقات التي يصنعها آخرون بالترخيص الذي اختاره مؤلفوها؛
 ويعرضه متجر الإضافات (Marketplace) في كل إدراج. واستخدام حزمة SDK لا يضع الإضافة تحت AGPL.
@@ -986,13 +983,13 @@ skill) للعملاء الذين يدعمونها في [skills/clips-kitty/](../
 
 ## سجل النجوم
 
-شكرًا لكل من يمنح Clips Kitty نجمة، أو يشاركه، أو يبلّغ عن الأخطاء، أو يساعد في ترجمته.
+شكرًا لكل من يمنح SpikeClip نجمة، أو يشاركه، أو يبلّغ عن الأخطاء، أو يساعد في ترجمته.
 
-<a href="https://www.star-history.com/#ColinGPT9/clips-studio&amp;Date">
+<a href="https://www.star-history.com/#ColinGPT9/spikeclip&amp;Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;legend=top-left" />
-    <img alt="سجل نجوم Clips Kitty على GitHub" src="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;legend=top-left" />
+    <img alt="سجل نجوم SpikeClip على GitHub" src="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date" />
   </picture>
 </a>
 

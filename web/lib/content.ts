@@ -38,9 +38,9 @@ export const VERSION = "2.1.0";
 export const SITE_URL: string = "https://clips-kitty-web.vercel.app";
 
 export const LINKS = {
-	download: `https://github.com/ColinGPT9/clips-studio/releases/download/v${VERSION}/ClipsKitty-Web-Setup-${VERSION}.exe`,
-	site: "https://colingpt9.github.io/clips-studio/",
-	github: "https://github.com/ColinGPT9/clips-studio",
+	download: `https://github.com/ColinGPT9/spikeclip/releases/download/v${VERSION}/SpikeClip-Web-Setup-${VERSION}.exe`,
+	site: "https://colingpt9.github.io/spikeclip/",
+	github: "https://github.com/ColinGPT9/spikeclip",
 	/** The Microsoft Store listing. Canonical URL with no query string on
 	 *  purpose: the share link Microsoft hands you carries hl=en-us&gl=US,
 	 *  which forces a US English page on every visitor — wrong for an app that
@@ -142,7 +142,7 @@ export const DESKTOP_ONLY: { title: string; body: string }[] = [
  *  call, and copy here should describe what is true now rather than commit
  *  them to anything. */
 export const DESKTOP_IS_FREE =
-	"Clips Kitty for Windows is completely free to run. It is open source, there is no subscription, no credits and no watermark, and because the AI runs on your own PC, clipping a hundred VODs costs exactly nothing. Only this browser version needs paid API credits, because a browser cannot run the model itself.";
+	"SpikeClip for Windows is completely free to run. It is open source, there is no subscription, no credits and no watermark, and because the AI runs on your own PC, clipping a hundred VODs costs exactly nothing. Only this browser version needs paid API credits, because a browser cannot run the model itself.";
 
 /** The donate copy, taken VERBATIM from the desktop app and the website.
  *
@@ -156,7 +156,7 @@ export const DESKTOP_IS_FREE =
  *
  *  If the wording changes in the app or on the site, change it here too. Do
  *  not improve it here. */
-export const DONATE_TITLE = "Clips Kitty is free & open source ❤️";
+export const DONATE_TITLE = "SpikeClip is free & open source ❤️";
 
 export const DONATE_NOTE =
 	"It runs entirely on your PC with no fees. Please consider donating to help cover development costs and keep it free for everyone.";

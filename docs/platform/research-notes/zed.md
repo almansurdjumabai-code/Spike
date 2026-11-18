@@ -3,7 +3,7 @@
 - Platform: Zed editor extensions (`extension.toml`, `zed_extension_api`, the `zed-industries/extensions` registry)
 - Tier: Track C, Tier 2 (registry-design precedent; point 6 matters most)
 - Date read: 2026-10-06
-- Brief's question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
+- Brief's question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
 - Verdict (two lines): Zed is the one precedent in this set where a declared capability is an enforced one: extensions compile to WebAssembly, the manifest lists `capabilities` (`process:exec` with command/args patterns, `download_file` with host/path patterns, `npm:install` with package patterns), and the host refuses an API call unless both the extension's manifest and the user's `granted_extension_capabilities` allow it (`capability_granter.rs`). The registry is a Git repository of submodules pinned to commits plus an `extensions.toml` (`id → submodule, version, path`), submitted one extension per PR, reviewed by humans ("a few weeks ... up to one or two months"), packaged by CI into a blob store. Borrow the capability model and the pinned-commit index with CI-built artifacts; treat the human review queue as the thing to automate around.
 
 Every claim carries a URL and the read date 2026-10-06 unless stated. Zed's docs were read from the raw sources in `zed-industries/zed` (`docs/src/extensions/...`) because the rendered pages summarise poorly; the registry repo was read from a shallow clone at commit aa00fad (dated 2026-10-05).
@@ -98,7 +98,7 @@ Local Wasm in the editor; `download_file` fetches tools from allowed hosts; MCP 
 
 ## 11. Borrow
 
-1. The capability model exactly as structured: a `capabilities` list in the plugin manifest with kinds and patterns (`process:exec` command + args, `download_file` host + path), checked by the runtime on every call, intersected with a user-editable granted list. This is what lets Clips Kitty say "enforced" truthfully for the subset the runtime mediates (process spawning, downloads, network hosts).
+1. The capability model exactly as structured: a `capabilities` list in the plugin manifest with kinds and patterns (`process:exec` command + args, `download_file` host + path), checked by the runtime on every call, intersected with a user-editable granted list. This is what lets SpikeClip say "enforced" truthfully for the subset the runtime mediates (process spawning, downloads, network hosts).
 2. Index entry = `id`, pinned ref, version, optional subpath; CI verifies the pinned ref's manifest has the same id and version, that versions never decrease and ids never change.
 3. CI builds or at least validates the artifact so users never run a build; artifacts keyed by `(id, version)` are never overwritten.
 4. PR hygiene that keeps a queue workable: exactly one plugin per PR, a cap on open PRs, a stale deadline, a bot that refuses PRs without an index change, a license allowlist checked mechanically.
@@ -107,7 +107,7 @@ Local Wasm in the editor; `download_file` fetches tools from allowed hosts; MCP 
 
 ## 12. Avoid
 
-1. Making human review the only gate: Zed's own FAQ documents a backlog of one to two months; Clips Kitty should let automated checks publish well-formed entries and reserve humans for flags.
+1. Making human review the only gate: Zed's own FAQ documents a backlog of one to two months; SpikeClip should let automated checks publish well-formed entries and reserve humans for flags.
 2. Permissive wildcard defaults if "enforced" is claimed: an enforced `download_file host="*"` protects nothing; defaults should be the manifest's declared set, narrowed by the user.
 3. Git submodules as the only pinning mechanism: they work but add contributor friction (init/update, detached-commit rules); a `repo + ref` pair in the index file with CI resolving the commit SHA gives the same pin with less ceremony (inferred).
 4. Trusting the sandbox boundary without testing archive extraction (zip slip, symlinks) — the one Zed CVE found was exactly there.
@@ -136,5 +136,5 @@ Local Wasm in the editor; `download_file` fetches tools from allowed hosts; MCP 
 - H3 (static Git registry costs nothing, needs no backend): supports with a caveat. The index is a Git repo built by CI with no application server, but Zed also builds and hosts artifacts in a blob store and runs a Danger proxy; "no backend" is true, "no hosting" is not.
 - H4 (hand review does not scale): supports. Zed documents first feedback "within a few weeks ... up to one or two months" and a "large backlog", and has added PR caps and stale rules to cope.
 - H5 (declared is not enforced; Zed is the exception): confirms the Zed half. `capability_granter.rs` rejects calls not allowed by both the manifest and the user grant; the docs state the error behaviour.
-- H8 (namespaced ids + declared capabilities): partial. IDs are flat kebab-case, not namespaced; capabilities are declared and typed by kind/pattern, which is the shape Clips Kitty needs for the "declared capabilities" half.
+- H8 (namespaced ids + declared capabilities): partial. IDs are flat kebab-case, not namespaced; capabilities are declared and typed by kind/pattern, which is the shape SpikeClip needs for the "declared capabilities" half.
 - H10 (counts need telemetry): not addressed by the pages read; no install counts appear in the index repository, and whether the gallery shows them was not confirmed.

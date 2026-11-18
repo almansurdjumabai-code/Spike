@@ -6,7 +6,7 @@
 - Brief's question: what should the Marketplace and extension ecosystem look like?
 
 **Verdict (two lines):** Kilo's marketplace is a Git monorepo with one metadata file per item, PR-only submission, CI-generated catalogs and strict validators, served to clients through a thin pass-through API with a one-hour cache; it is cheap, honest about risk ("Marketplace validation is not a security review") and has a careful installer, but it has no version field, installs skills from a mutable `skills-latest` archive, has no update or rollback, vendors third-party skills into the registry, and runs plugins in-process with hooks that can silence the permission system.
-Clips Kitty should borrow the registry layout, generators, install dialog, staging/receipt mechanics and the wording; it should not borrow the mutable archive, the vendoring, the flat id namespace or the in-process plugin model.
+SpikeClip should borrow the registry layout, generators, install dialog, staging/receipt mechanics and the wording; it should not borrow the mutable archive, the vendoring, the flat id namespace or the in-process plugin model.
 
 ## 1. Unit of extension
 
@@ -90,13 +90,13 @@ One file per item, in a directory named after the id. Real field names from the 
 
 ## 8. Models
 
-The marketplace distributes no models. Plugins can "Register model providers — dynamic model catalogs" (`provider` hook); the bundled `@kilocode/plugin-atomic-chat` discovers local models via `GET /v1/models` only when opted in (docs llms.txt). Model weights are the user's provider's concern. Not comparable to Clips Kitty's model manager.
+The marketplace distributes no models. Plugins can "Register model providers — dynamic model catalogs" (`provider` hook); the bundled `@kilocode/plugin-atomic-chat` discovers local models via `GET /v1/models` only when opted in (docs llms.txt). Model weights are the user's provider's concern. Not comparable to SpikeClip's model manager.
 
 Note the unrelated commercial page at https://kilo.ai/marketplace (read 2026-10-06): coding plans and partner apps paid "with your Kilo Credits … No separate billing, no extra accounts." It is a billing marketplace, separate from the extension registry studied here.
 
 ## 9. Local, remote or both
 
-Both. MCP servers are local (stdio child process) or remote (`streamable-http`, 31 of 128 entries; OAuth supported, e.g. `mcps/anaconda`). Skills, agents and plugins are local files/processes. Clips Kitty's "local, remote and hybrid are all legitimate" maps directly onto Kilo's local/remote MCP split.
+Both. MCP servers are local (stdio child process) or remote (`streamable-http`, 31 of 128 entries; OAuth supported, e.g. `mcps/anaconda`). Skills, agents and plugins are local files/processes. SpikeClip's "local, remote and hybrid are all legitimate" maps directly onto Kilo's local/remote MCP split.
 
 ## 10. Known incidents and stated limitations
 
@@ -111,7 +111,7 @@ Both. MCP servers are local (stdio child process) or remote (`streamable-http`, 
 
 1. **Registry layout and generators.** One `pipeline.yaml`-style file per item under `<type>/<id>/`, directory name = `id`, closed category set, typed `requirements` resolved against the index at build time, self-reference rejected, generated `index` committed with `linguist-generated=true` and a "do not edit manually" header (bin/*.ts, .gitattributes). Add what Kilo lacks: a `version`, a pinned `ref`/`commit` and an index build date.
 2. **Install dialog and mechanics.** Show scope, destination paths, prerequisites and parameters before writing anything; stage in a sibling temp dir and `rename` atomically; inspect archives before extraction (links, traversal, device names, one root, duplicates); refuse archives that carry the installer's own ownership file; parse manifests with a plain YAML parser, never a front-matter library with code engines; keep an ownership receipt per install so removal works when the registry has changed (skill-archive.ts, companions.ts).
-3. **Git source spec and identity.** `git:<repo>[@ref][#subpath]` with option-injection-safe ref validation, `git/<host>/<owner>/<repo>[/subpath]` identities that cannot collide with package names, a 40-hex SHA treated as immutable and a recorded `sha` marker for everything else (git-source.ts). Clips Kitty should require the SHA at index-build time rather than allow mutable refs.
+3. **Git source spec and identity.** `git:<repo>[@ref][#subpath]` with option-injection-safe ref validation, `git/<host>/<owner>/<repo>[/subpath]` identities that cannot collide with package names, a 40-hex SHA treated as immutable and a recorded `sha` marker for everything else (git-source.ts). SpikeClip should require the SHA at index-build time rather than allow mutable refs.
 4. **Provenance fields.** `metadata.source.{repository,path,commit,license_path}` and the rule that a contributed item is not accepted without an external canonical source and a licence file (CONTRIBUTING.md).
 5. **Honest wording.** "Marketplace validation is not a security review"; "Plugins run code with full permissions"; a SECURITY.md threat model that says prompts are UX, not isolation. Matches the owner's rule "never hide a security or permission risk".
 6. **Trusted vs untrusted locations for anything that executes** (embedded skill commands run only from trusted dirs, every command listed in one prompt, env kill switch) and a `KILO_PURE`-style switch to boot with no third-party code.
@@ -119,9 +119,9 @@ Both. MCP servers are local (stdio child process) or remote (`streamable-http`, 
 
 ## 12. Avoid
 
-1. **Mutable "latest" artefacts.** `skills-latest` is overwritten on every main push and the catalog has no version, so a client cannot pin, diff or roll back, and a bad upstream sync ships to everyone within an hour. Clips Kitty's fixed decision (install at a pinned ref, rollback) is the opposite; keep per-version assets and never reference a mutable tag.
-2. **Vendoring third-party content into the registry.** Kilo copies skills in, then maintains `local.patch` overlays for 64 of 191 skills and a periodic re-sync; the registry becomes a fork of everyone's repo (licence checks, drift, review load). Clips Kitty's registry should hold metadata only and point at the developer's repo at a commit.
-3. **In-process plugins with hooks over the permission system.** A plugin that can implement `permission.ask`, `tool.execute.before` and `shell.env` can neutralise every safeguard silently. Clips Kitty pipelines should stay out-of-process over the local API with no hook into the host's permission decisions.
+1. **Mutable "latest" artefacts.** `skills-latest` is overwritten on every main push and the catalog has no version, so a client cannot pin, diff or roll back, and a bad upstream sync ships to everyone within an hour. SpikeClip's fixed decision (install at a pinned ref, rollback) is the opposite; keep per-version assets and never reference a mutable tag.
+2. **Vendoring third-party content into the registry.** Kilo copies skills in, then maintains `local.patch` overlays for 64 of 191 skills and a periodic re-sync; the registry becomes a fork of everyone's repo (licence checks, drift, review load). SpikeClip's registry should hold metadata only and point at the developer's repo at a commit.
+3. **In-process plugins with hooks over the permission system.** A plugin that can implement `permission.ask`, `tool.execute.before` and `shell.env` can neutralise every safeguard silently. SpikeClip pipelines should stay out-of-process over the local API with no hook into the host's permission decisions.
 4. **A flat id namespace** for skills/MCPs (first PR wins the name; collisions only caught by the generator). Use `publisher/pipeline`.
 5. **"Remove it first" instead of update.** Provide update, enable/disable and rollback as first-class actions with the old version kept.
 6. **Index and asset published separately.** Kilo documents a window where the catalog references a missing archive. Build the index only after the referenced assets exist (or point at immutable commits that already exist).

@@ -17,7 +17,7 @@ Last assessed: **2026-07-26**, against electron 31.7.7 / electron-builder
 | `brace-expansion` | No: build tooling | No | Transitive |
 | `esbuild`, `vite` | No: dev server only | No | Dev-time only |
 
-Only the first row can reach anyone who installs Clips Kitty. Everything
+Only the first row can reach anyone who installs SpikeClip. Everything
 else lives in tooling that produces the installer and is never inside it.
 
 ## electron 31.7.7: the one that matters
@@ -35,7 +35,7 @@ app has almost none:
 - The main window loads **local files only**, under a CSP of
   `default-src 'self'` with a `connect-src` limited to the local engine.
 - The one window that loads **remote** content is the PayPal donate popup in
-  `ui/src/main/index.ts`, and it is about as locked down as Electron allows:
+  `frontend/src/main/index.ts`, and it is about as locked down as Electron allows:
   `sandbox: true`, `nodeIntegration: false`, `contextIsolation: true`, no
   preload, `window.open` denied, and `will-navigate` refuses anything that is
   not `paypal.com` / `paypal.me`.
@@ -62,7 +62,7 @@ Not as a drive-by merge the night before a release. Upgrading also closes the
 twelve advisories including the only **critical** one. The 6.x line was never
 patched; the fix exists only in 7.x.
 
-`ui/package.json` therefore pins it with:
+`frontend/package.json` therefore pins it with:
 
 ```json
 "overrides": { "tar": "^7.5.22" }
@@ -85,7 +85,7 @@ from a prompt. Run `npm audit` to read, never `--force` to fix.
 ## Re-checking this
 
 ```
-cd ui && npm audit
+cd frontend && npm audit
 ```
 
 If a new advisory appears, the question to answer first is always the one in

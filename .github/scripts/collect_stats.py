@@ -16,7 +16,7 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 
-REPO = os.environ.get("REPO", "ColinGPT9/clips-studio")
+REPO = os.environ.get("REPO", "ColinGPT9/spikeclip")
 TOKEN = os.environ.get("GH_TOKEN", "")
 OUT = Path("docs/stats")
 
@@ -38,7 +38,7 @@ def api(path: str):
         headers={
             "Authorization": f"Bearer {TOKEN}",
             "Accept": "application/vnd.github+json",
-            "User-Agent": "clips-kitty-stats",
+            "User-Agent": "spikeclip-stats",
         },
     )
     try:

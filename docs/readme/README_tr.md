@@ -4,37 +4,37 @@
 
 </div>
 
-<a id="clips-kitty-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
+<a id="spikeclip-the-free-open-source-opus-clip-alternative-for-chatting-gaming-and-sports-on-your-own-pc"></a>
 
-# Clips Kitty: sohbet, oyun ve spor için kendi bilgisayarınızda çalışan ücretsiz, açık kaynaklı Opus Clip alternatifi
+# SpikeClip: sohbet, oyun ve spor için kendi bilgisayarınızda çalışan ücretsiz, açık kaynaklı Opus Clip alternatifi
 
 > Bu README, referans kabul edilen ve her zaman ilk güncellenen [İngilizce README](../../README.md)'den
 > yapay zekâ ile çevrildi. Anadili Türkçe olanların düzeltmelerini memnuniyetle bekliyoruz.
 >
-> 🌐 [Web sitesinin Türkçe sayfası](https://colingpt9.github.io/clips-studio/tr.html)
+> 🌐 [Web sitesinin Türkçe sayfası](https://colingpt9.github.io/spikeclip/tr.html)
 
 <a href="https://apps.microsoft.com/detail/9NB6XT7DSQZZ">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://get.microsoft.com/images/en-us%20dark.svg">
-    <img alt="Clips Kitty'yi Microsoft Store'dan edinin" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
+    <img alt="SpikeClip'yi Microsoft Store'dan edinin" src="https://get.microsoft.com/images/en-us%20light.svg" height="52">
   </picture>
 </a>
 
-[![Latest release](https://badgen.net/github/tag/ColinGPT9/clips-studio?label=release)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/clips-studio/total?label=downloads)](https://github.com/ColinGPT9/clips-studio/releases)
-[![Licence](https://img.shields.io/github/license/ColinGPT9/clips-studio)](../../LICENSE)
-[![Stars](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars)](https://github.com/ColinGPT9/clips-studio/stargazers)
-[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/clips-studio)
+[![Latest release](https://badgen.net/github/tag/ColinGPT9/spikeclip?label=release)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Downloads](https://img.shields.io/github/downloads/ColinGPT9/spikeclip/total?label=downloads)](https://github.com/ColinGPT9/spikeclip/releases)
+[![Licence](https://img.shields.io/github/license/ColinGPT9/spikeclip)](../../LICENSE)
+[![Stars](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars)](https://github.com/ColinGPT9/spikeclip/stargazers)
+[![Open source](https://img.shields.io/badge/open%20source-yes-brightgreen)](https://github.com/ColinGPT9/spikeclip)
 [![PRs welcome](https://img.shields.io/badge/PRs-welcome-brightgreen)](../../CONTRIBUTING.md)
 [![Docker](https://img.shields.io/badge/docker-compose%20up-2496ED?logo=docker&logoColor=white)](../../docs/DOCKER.md)
 
-<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="Clips Kitty turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
+<a href="https://youtu.be/g1dMqrq-YaI"><img src="https://github.com/user-attachments/assets/2a1bdd85-723e-46d6-b74b-00579c71b6a7" alt="SpikeClip turning an NBA broadcast into a 9:16 clip that follows the ball" width="100%"></a>
 
-<a id="star-and-share-clips-kitty--goal-225"></a>
+<a id="star-and-share-spikeclip--goal-225"></a>
 
-### Clips Kitty'ye yıldız verin ve paylaşın ⭐ Hedef: 225
+### SpikeClip'ye yıldız verin ve paylaşın ⭐ Hedef: 225
 
-[![Stars so far](https://badgen.net/github/stars/ColinGPT9/clips-studio?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/clips-studio/stargazers) **/ 225**
+[![Stars so far](https://badgen.net/github/stars/ColinGPT9/spikeclip?label=stars%20so%20far&color=0969da&scale=1.6)](https://github.com/ColinGPT9/spikeclip/stargazers) **/ 225**
 
 **Lütfen depoya yıldız verin ve paylaşın.** Size hiçbir maliyeti yok. Bu projenin
 arkasında bir pazarlama bütçesi de yok; bir sonraki küçük YouTuber'ın ya da yayıncının
@@ -45,13 +45,10 @@ yayıncıları ve içerik üreticileri için yaptım.** Kendi bilgisayarınızda
 Opus Clip, Vizard ve Klap alternatifi: sunucu maliyeti yok, klip başına ücret yok, yapay
 zekâ kullanım ücreti yok.
 
-> **Clips Kitty, 1.1.3 sürümüne kadar Clips Studio adını taşıyordu**; Microsoft Store'un
-> adlandırma kurallarına uymak için adı değişti. Aynı uygulama, aynı depo, aynı veriler.
-
 <img src="../../docs/brand/mascot.png" alt="" width="150" align="right">
 
 **Uzun yayınları ve videoları, tamamen kendi bilgisayarınızda, paylaşıma hazır Shorts,
-Reels ve TikTok videolarına dönüştürün.** Clips Kitty, içerik üreticileri için ücretsiz ve
+Reels ve TikTok videolarına dönüştürün.** SpikeClip, içerik üreticileri için ücretsiz ve
 açık kaynaklı bir yapay zekâ klip oluşturucu ve video düzenleyicidir: bir YouTube, Twitch
 ya da Kick bağlantısı yapıştırın; en iyi anları bulur, konuşan kişiyi ortada tutarak 9:16
 olarak kırpar, kelimelerle senkronize altyazıları videoya gömer ve başlıkları,
@@ -80,7 +77,7 @@ gereken bir gününüzü alır. Bu uygulama zaten sahip olduğunuz donanımda ç
 size hiçbir şeye mal olmaz ve kaç klip yapacağınıza dair bir sınır yoktur.
 
 <img src="../../docs/store-screenshots/fs-dashboard-202754.png" width="100%"
-     alt="Clips Kitty kontrol paneli: bir YouTube, Twitch ya da Kick URL'si yapıştırılıyor,
+     alt="SpikeClip kontrol paneli: bir YouTube, Twitch ya da Kick URL'si yapıştırılıyor,
           altyazı ve format seçenekleri belirleniyor; tamamlanmış bir video satırı 19 dk 38 sn'de
           üretilen 38 klibi, yanında da canlı CPU, RAM, GPU ve depolama göstergelerini gösteriyor.">
 
@@ -120,7 +117,7 @@ size hiçbir şeye mal olmaz ve kaç klip yapacağınıza dair bir sınır yoktu
 
 ## Ne yapar
 
-Clips Kitty'ye uzun bir video verirsiniz. O da size paylaşabileceğiniz, bitmiş dikey
+SpikeClip'ye uzun bir video verirsiniz. O da size paylaşabileceğiniz, bitmiş dikey
 kliplerle dolu bir klasör ve paylaşmadan önce bunları gözden geçirip düzeltebileceğiniz
 bir stüdyo verir.
 
@@ -133,13 +130,13 @@ bulamayacağı uzun, gevşek yapılı videolar.
 
 ## Opus Clip, Klap, Vizard ve CapCut ile karşılaştırma
 
-Clips Kitty, bulut tabanlı klip araçlarına açık kaynaklı bir alternatiftir. Asıl fark
+SpikeClip, bulut tabanlı klip araçlarına açık kaynaklı bir alternatiftir. Asıl fark
 işin nerede yapıldığıdır: videonuz hiçbir zaman yüklenmez, bu yüzden ölçülecek ya da
 ücretlendirilecek bir şey yoktur.
 
 | Araç | Fiyat, aylık faturalandırma | Ücretsiz plan | Klipleri sizin için bulur | Filigran | Videonuzu yükler | Açık kaynak |
 | ---- | --------------------- | --------- | ----------------------- | --------- | ------------------ | ----------- |
-| **Clips Kitty** | Ücretsiz, ücretli plan yok | Uygulamanın tamamı | Evet | Asla | Hayır, bilgisayarınızda çalışır | Evet, AGPL-3.0 |
+| **SpikeClip** | Ücretsiz, ücretli plan yok | Uygulamanın tamamı | Evet | Asla | Hayır, bilgisayarınızda çalışır | Evet, AGPL-3.0 |
 | Opus Clip | Starter $15, Pro $29 | 1080p, filigranlı, 3 gün sonra sona erer | Evet | Ücretsiz planda | Evet | Hayır |
 | Klap | Pro $29, yıllık faturalandırmada Basic $14 | Bir video | Evet | Belirtilmemiş | Evet | Hayır |
 | Vizard | Creator $29, yıllık faturalandırmada $14.50 | Ayda 60 kredi, 720p | Evet | Ücretsiz planda | Evet | Hayır |
@@ -150,13 +147,13 @@ işin nerede yapıldığıdır: videonuz hiçbir zaman yüklenmez, bu yüzden ö
 
 **Asıl iyi anlaşılması gereken CapCut**, çünkü herkesin verdiği ücretsiz cevap o.
 İyi bir düzenleyici ve hiçbir ücreti yok; ama her anı bulmak ve her klibi kırpmak size
-kalıyor. Clips Kitty de ücretsiz ve tam da o ilk aşamayı sizin yerinize yapıyor.
+kalıyor. SpikeClip de ücretsiz ve tam da o ilk aşamayı sizin yerinize yapıyor.
 
 Grafik kartlı bir Windows bilgisayarınız yoksa, ara sıra klip yapıyorsanız ya da
 telefondan çalışmanız gerekiyorsa **Opus Clip, Klap veya Vizard daha iyi bir seçimdir**.
-Clips Kitty, zaten sahip olduğunuz donanımda yüksek hacimde klip üretmek için yapıldı.
+SpikeClip, zaten sahip olduğunuz donanımda yüksek hacimde klip üretmek için yapıldı.
 
-**[Yedi aracın tam karşılaştırması ve her birinin en iyi olduğu alanlar](https://colingpt9.github.io/clips-studio/alternatives.html)**
+**[Yedi aracın tam karşılaştırması ve her birinin en iyi olduğu alanlar](https://colingpt9.github.io/spikeclip/alternatives.html)**
 
 <sub>Fiyatlar 17 Eylül 2026'da her şirketin kendi fiyatlandırma sayfasından kontrol edildi.
 CapCut okuyabildiğimiz bir fiyatlandırma sayfası yayınlamadığı için onun fiyatı verilmedi.
@@ -279,7 +276,7 @@ donanımsal video kodlama (otomatik algılanır, CPU yedeğiyle) ve Ollama üzer
   değiştirilebilir.
 - **Yapay zekâ ile düzenleme sohbeti**: neyin yanlış olduğunu günlük dille anlatın, o
   yeniden düzenlesin.
-- **Ask Clips Kitty**: kontrol panelinin altındaki metin kutusu. Ne istediğinizi tek
+- **Ask SpikeClip**: kontrol panelinin altındaki metin kutusu. Ne istediğinizi tek
   cümleyle söyleyin, örneğin *"bu yayından klip çıkar, boss'a öldüğüm anı mutlaka ekle,
   altyazılar büyük ve sarı olsun"*; videoyu sıraya alır, klip seçiciye neye bakması
   gerektiğini söyler ve belirttiğiniz seçenekleri ayarlar. **Bir Gemma 4 modeli
@@ -354,7 +351,7 @@ Bunlardan ikisini biraz açmakta fayda var:
 Uygulama **yalnızca Windows** içindir. Python motorunun Linux/macOS'ta çalışması gerekir,
 ancak bir Mac sürümü yok ve geliştiricinin test edebileceği bir Mac'i de yok. Mac'iniz
 varsa ve yardım etmek istiyorsanız
-[#62](https://github.com/ColinGPT9/clips-studio/issues/62) numaralı konuya bakın.
+[#62](https://github.com/ColinGPT9/spikeclip/issues/62) numaralı konuya bakın.
 
 Kaynaktan çalıştırmak için, kurulum programının normalde sizin için paketlediği şeyler
 gerekir:
@@ -371,14 +368,14 @@ gerekir:
 Tek tıkla kurulur, kendini günceller ve Windows hiçbir güvenlik uyarısı göstermez.
 Paketi Microsoft onayladı ve imzaladı; bu yüzden aşağıda anlatılan SmartScreen uyarısı
 hiç görünmez. Store yeni sürümleri sırası geldiğinde yükler; hemen almak için Microsoft
-Store'da Clips Kitty'nin sayfasını açıp **Update** (Güncelleştir) düğmesine basın.
+Store'da SpikeClip'nin sayfasını açıp **Update** (Güncelleştir) düğmesine basın.
 
-**Ya da kurulum programını indirin.** [Releases](https://github.com/ColinGPT9/clips-studio/releases)
+**Ya da kurulum programını indirin.** [Releases](https://github.com/ColinGPT9/spikeclip/releases)
 sayfasından en son **Web Setup**'ı indirip çalıştırın. İçinde uygulama, Python motoru, tüm
 kütüphaneler, FFmpeg, yapay zekâ çalışma ortamı ve tüm tespit ve transkripsiyon
 ağırlıkları var: Python yok, PATH yok, terminal yok, kurulacak ikinci bir program yok.
 
-**Ya da winget kullanın.** `winget install ColinGPT9.ClipsKitty`, aynı Web Setup'ı bir
+**Ya da winget kullanın.** `winget install ColinGPT9.SpikeClip`, aynı Web Setup'ı bir
 terminalden kurar.
 
 İçinde olmayan tek şey dil modelinin kendisidir; çünkü modeller, indiren kişinin kendisinin
@@ -396,13 +393,13 @@ ilerleme çubuğu. Sonrasında çevrimdışı çalışır.
 ### Kaynaktan
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 pip install -r requirements.txt
 
-cd ui
+cd frontend
 npm install
-npm run dev        # opens the Clips Kitty desktop app
+npm run dev        # opens the SpikeClip desktop app
 ```
 
 Uygulama kendi Python motorunu otomatik olarak başlatır. **Clip Editor** (Klip
@@ -420,8 +417,8 @@ Katkıda bulunanlar için. Yalnızca [Docker Desktop](https://docs.docker.com/ge
 gerekir, başka hiçbir şey: Python yok, Node yok, FFmpeg yok, PyTorch yok.
 
 ```bash
-git clone https://github.com/ColinGPT9/clips-studio
-cd clips-studio
+git clone https://github.com/ColinGPT9/spikeclip
+cd spikeclip
 docker compose up
 ```
 
@@ -458,7 +455,7 @@ Neyin kurulu olduğunu ve GPU'nuzun neyi kaldırabileceğini görmek için **Mod
 (Modeller) sayfasını açın:
 
 Tek bir ölçüt var: ne kadar VRAM'iniz olduğu. Bunlar uygulamanın gösterdiği satırların
-aynısı ve [`llm/manager.py`](../../llm/manager.py) içindeki `RECOMMENDATIONS` tablosundan
+aynısı ve [`llm/manager.py`](../../backend/llm/manager.py) içindeki `RECOMMENDATIONS` tablosundan
 geliyor. Sihirbaz ve Models sayfası bu tek tabloyu okur; bu yüzden ne birbirleriyle ne de
 bu belgeyle çelişebilirler.
 
@@ -483,7 +480,7 @@ VRAM dışında bir nedenle seçmeye değer modeller de şunlar:
 boyutta oldukları ve ticari kullanımları ücretsiz olduğu için listede; klip kalitesi
 onlarla ölçüldüğü için değil. Uygulama Ollama üzerinden her modelle aynı şekilde konuştuğu
 için hepsi çalışır, ama daha iyi anlar seçip seçmediklerini kimse kontrol etmedi. Bu açığı
-kapatmak [#38](https://github.com/ColinGPT9/clips-studio/issues/38) numaralı konunun işi.
+kapatmak [#38](https://github.com/ColinGPT9/spikeclip/issues/38) numaralı konunun işi.
 
 Ollama'nın sunduğu her model çalışır ve geçiş yapmak tek tık. Çeviri, klip çıkarmadan
 *farklı* bir model kullanabilir. `llm.translation_model` ayarını yapın.
@@ -492,7 +489,7 @@ Ollama'nın sunduğu her model çalışır ve geçiş yapmak tek tık. Çeviri, 
 
 ### Alttaki metin kutusu Gemma 4 gerektirir
 
-Kontrol panelinin altındaki metin kutusu **Ask Clips Kitty**, yalnızca uygulamanın
+Kontrol panelinin altındaki metin kutusu **Ask SpikeClip**, yalnızca uygulamanın
 araçlarını kullanabilen bir modelle çalışır. Gemma 4 bunu yapabilir. `gemma:7b` ve Gemma 3
 modelleri yapamaz; kurulum da grafik kartı olmayan ya da 8 GB veya daha fazla VRAM'i olan
 bir bilgisayara bunlardan birini kurar. Böyle bir bilgisayarda bir Gemma 4 modeli
@@ -509,7 +506,7 @@ yine seçtiğiniz model tarafından seçilir. Yapay zekâyı OpenRouter üzerind
 
 ## Test edilen donanım ve performans
 
-Clips Kitty her gün bu makinede geliştirilip test ediliyor; kendi sonuçlarınızı
+SpikeClip her gün bu makinede geliştirilip test ediliyor; kendi sonuçlarınızı
 karşılaştırıyorsanız işe yarar bir referans noktası:
 
 | | |
@@ -526,8 +523,8 @@ boyutu) kabaca bu sınıftaki bir makineye göre ayarlandı. Daha güçlü bir G
 `llm.num_ctx` ve `analysis.chunk_seconds` değerlerini birlikte artırın ve bir model boyutu
 yukarı çıkın; daha zayıf bir GPU'da `gemma3:4b` modeline inin.
 
-Clips Kitty'yi farklı bir donanımda test ederseniz lütfen sonuçları
-[Discussions](https://github.com/ColinGPT9/clips-studio/discussions) bölümünde paylaşın.
+SpikeClip'yi farklı bir donanımda test ederseniz lütfen sonuçları
+[Discussions](https://github.com/ColinGPT9/spikeclip/discussions) bölümünde paylaşın.
 Gerçek makinelerden gelen gerçek sayılar herkesin kendi kurulumunu boyutlandırmasına
 yardımcı olur.
 
@@ -556,7 +553,7 @@ Japonca · Rusça · Arapça · Çince (Basitleştirilmiş) · Vietnamca · Fili
 Urduca · Bengalce · Tayca · Korece · İtalyanca
 
 Dil eklemek, `multilingual/languages.py` içinde bir satır ve
-`ui/src/renderer/src/locales/` içinde bir yerel ayar dosyası demektir. Çevirmen ve altyazı
+`frontend/src/renderer/src/locales/` içinde bir yerel ayar dosyası demektir. Çevirmen ve altyazı
 yazıcı dilden bağımsızdır.
 
 <a id="help-wanted-the-maintainer-only-speaks-english"></a>
@@ -569,28 +566,28 @@ kelimeyi bildirmek başlı başına eksiksiz bir katkıdır**: pull request gere
 [Nasıl işler](../../docs/TRANSLATING.md).
 
 **Bitirilmesi gerekiyor** (yaklaşık 68 metin hâlâ İngilizce):
-[বাংলা (Bengalce)](https://github.com/ColinGPT9/clips-studio/issues/43) ·
-[Italiano (İtalyanca)](https://github.com/ColinGPT9/clips-studio/issues/44) ·
-[한국어 (Korece)](https://github.com/ColinGPT9/clips-studio/issues/45) ·
-[ไทย (Tayca)](https://github.com/ColinGPT9/clips-studio/issues/46) ·
-[Tagalog (Filipince)](https://github.com/ColinGPT9/clips-studio/issues/47) ·
-[Türkçe](https://github.com/ColinGPT9/clips-studio/issues/48) ·
-[اردو (Urduca)](https://github.com/ColinGPT9/clips-studio/issues/49) ·
-[Tiếng Việt (Vietnamca)](https://github.com/ColinGPT9/clips-studio/issues/50) ·
-[中文 (Çince)](https://github.com/ColinGPT9/clips-studio/issues/51)
+[বাংলা (Bengalce)](https://github.com/ColinGPT9/spikeclip/issues/43) ·
+[Italiano (İtalyanca)](https://github.com/ColinGPT9/spikeclip/issues/44) ·
+[한국어 (Korece)](https://github.com/ColinGPT9/spikeclip/issues/45) ·
+[ไทย (Tayca)](https://github.com/ColinGPT9/spikeclip/issues/46) ·
+[Tagalog (Filipince)](https://github.com/ColinGPT9/spikeclip/issues/47) ·
+[Türkçe](https://github.com/ColinGPT9/spikeclip/issues/48) ·
+[اردو (Urduca)](https://github.com/ColinGPT9/spikeclip/issues/49) ·
+[Tiếng Việt (Vietnamca)](https://github.com/ColinGPT9/spikeclip/issues/50) ·
+[中文 (Çince)](https://github.com/ColinGPT9/spikeclip/issues/51)
 
 **Kontrol edilmesi gerekiyor** (tamamlandı, ama doğal okunup okunmadığını kimse doğrulamadı):
-[العربية (Arapça)](https://github.com/ColinGPT9/clips-studio/issues/52) ·
-[Deutsch (Almanca)](https://github.com/ColinGPT9/clips-studio/issues/53) ·
-[Español (İspanyolca)](https://github.com/ColinGPT9/clips-studio/issues/54) ·
-[Français (Fransızca)](https://github.com/ColinGPT9/clips-studio/issues/55) ·
-[हिन्दी (Hintçe)](https://github.com/ColinGPT9/clips-studio/issues/56) ·
-[Bahasa Indonesia (Endonezce)](https://github.com/ColinGPT9/clips-studio/issues/57) ·
-[日本語 (Japonca)](https://github.com/ColinGPT9/clips-studio/issues/58) ·
-[Português (Portekizce)](https://github.com/ColinGPT9/clips-studio/issues/59) ·
-[Русский (Rusça)](https://github.com/ColinGPT9/clips-studio/issues/60)
+[العربية (Arapça)](https://github.com/ColinGPT9/spikeclip/issues/52) ·
+[Deutsch (Almanca)](https://github.com/ColinGPT9/spikeclip/issues/53) ·
+[Español (İspanyolca)](https://github.com/ColinGPT9/spikeclip/issues/54) ·
+[Français (Fransızca)](https://github.com/ColinGPT9/spikeclip/issues/55) ·
+[हिन्दी (Hintçe)](https://github.com/ColinGPT9/spikeclip/issues/56) ·
+[Bahasa Indonesia (Endonezce)](https://github.com/ColinGPT9/spikeclip/issues/57) ·
+[日本語 (Japonca)](https://github.com/ColinGPT9/spikeclip/issues/58) ·
+[Português (Portekizce)](https://github.com/ColinGPT9/spikeclip/issues/59) ·
+[Русский (Rusça)](https://github.com/ColinGPT9/spikeclip/issues/60)
 
-Burada olmayan bir dil mi istiyorsunuz? [#61](https://github.com/ColinGPT9/clips-studio/issues/61).
+Burada olmayan bir dil mi istiyorsunuz? [#61](https://github.com/ColinGPT9/spikeclip/issues/61).
 
 <a id="publish-to-youtube"></a>
 
@@ -600,7 +597,7 @@ Varsayılan olarak kapalıdır. **Settings → Publish to YouTube** (Ayarlar →
 yayınla) bölümünden açtığınızda düzenleyicide bir **YouTube** sekmesi belirir: başlığı,
 açıklamayı, etiketleri, küçük resmi, oynatma listesini, kitleyi ve görünürlüğü doldurun,
 ardından **Upload now** (Şimdi yükle) düğmesine basın. Kaydedilmemiş düzenlemeleriniz
-varsa Clips Kitty klibi render eder ve doğrudan kanalınıza yükler. Dışa aktarma adımı yok,
+varsa SpikeClip klibi render eder ve doğrudan kanalınıza yükler. Dışa aktarma adımı yok,
 ayrı bir yayınlama sayfası yok. Düzenleyiciden hiç çıkmazsınız.
 
 Kapalı bırakırsanız uygulamanın hiçbir yerinde hiçbir şey değişmez.
@@ -612,18 +609,18 @@ Kapalı bırakırsanız uygulamanın hiçbir yerinde hiçbir şey değişmez.
 **Schedule on YouTube** (YouTube'da zamanla) seçeneği videoyu *hemen* yükler, özel olarak
 işaretler ve YouTube'a bir yayın zamanı iletir. YouTube videoyu o gün yayınlar.
 
-**Clips Kitty'yi kapatabilir, bilgisayarınızı da kapatabilirsiniz.** Bu uygulamada
+**SpikeClip'yi kapatabilir, bilgisayarınızı da kapatabilirsiniz.** Bu uygulamada
 zamanlayıcı yok, arka plan servisi yok, açık bırakılması gereken hiçbir şey yok. YouTube
-videoyu kabul ettiği anda Clips Kitty'nin işi biter.
+videoyu kabul ettiği anda SpikeClip'nin işi biter.
 
 <a id="you-need-your-own-google-api-key"></a>
 
 ### Kendi Google API anahtarınız gerekir
 
-Clips Kitty ortak bir anahtarla gelmez ve bunun nedeni yalnızca temkin değil. Google'ın
+SpikeClip ortak bir anahtarla gelmez ve bunun nedeni yalnızca temkin değil. Google'ın
 yükleme kotası **Cloud projesi başınadır**: tek bir ortak anahtar, dünyadaki her
 kullanıcının aynı günlük 100 yüklemeyi paylaşması anlamına gelirdi. Kendi projeniz size
-kendi kotanızı verir ve kimlik bilgileriniz makinenizden hiç çıkmaz. Arada bir Clips Kitty
+kendi kotanızı verir ve kimlik bilgileriniz makinenizden hiç çıkmaz. Arada bir SpikeClip
 sunucusu yoktur.
 
 Kurulum ücretsizdir ve yaklaşık on dakika sürer; Settings'teki sihirbaz adım adım yol
@@ -654,7 +651,7 @@ Buna güvenmeden önce bilmeniz gereken bir şey var, çünkü hiçbir yazılım
 > Studio'da herkese açık yapamazsınız ve itiraz yolu da yoktur. Tek çözüm, denetimden
 > geçmiş bir projeden yeniden yüklemektir.
 
-Clips Kitty her yüklemeden sonra kontrol eder ve kimsenin izleyemeyeceği bir video için
+SpikeClip her yüklemeden sonra kontrol eder ve kimsenin izleyemeyeceği bir video için
 başarı bildirmek yerine bu olduysa size açıkça söyler. Herkese açık yayınlamayı
 düşünüyorsanız önce
 [YouTube API Hizmetleri denetim formunu](https://support.google.com/youtube/contact/yt_api_form)
@@ -692,7 +689,7 @@ aralıklarla bütün bir grubu yayınlar.
 
 Bu özellik **yerel değildir**. Klip ve ayrıntıları bir yayınlama hizmetine gönderilir; bu
 hizmet onları teslim eder ve sosyal hesaplarınızla bağlantıları elinde tutar, bu yüzden
-Clips Kitty sizden hiçbir zaman bir sosyal medya şifresi istemez. Uygulamadaki diğer her
+SpikeClip sizden hiçbir zaman bir sosyal medya şifresi istemez. Uygulamadaki diğer her
 şey yine bilgisayarınızda çalışır.
 
 İki hizmet desteklenir: ücretsiz planı iki hesap bağlamaya ve günde yaklaşık 5 YouTube
@@ -702,11 +699,11 @@ küçük resimler, ilk yorumlar ve bir gönderi kuyruğu ekleyen
 **[Upload-Post](https://www.upload-post.com/)**. İkisinden birini ya da ikisini birden
 açabilirsiniz.
 
-<sub>Satış ortaklığı bağlantısı - Bu bağlantı üzerinden kaydolursanız Clips Kitty
+<sub>Satış ortaklığı bağlantısı - Bu bağlantı üzerinden kaydolursanız SpikeClip
 komisyon kazanabilir; bunun size ek bir maliyeti olmaz.</sub>
 
 **Kendi anahtarınızı getirin.** Hesabı siz oluşturur, kendi sosyal hesaplarınızı bağlar ve
-kendi kotanızı kullanırsınız. Clips Kitty hiçbir ücret almaz, ortak bir anahtar tutmaz ve
+kendi kotanızı kullanırsınız. SpikeClip hiçbir ücret almaz, ortak bir anahtar tutmaz ve
 hiçbir şeyin parasını ödemez — YouTube entegrasyonuyla aynı düzen, aynı nedenle.
 
 Tam rehber, platform bazında destek ve sınırlar:
@@ -773,9 +770,9 @@ python main.py status                                               # processing
 python main.py serve                                                # just the API engine
 ```
 
-Ayarlar [config/settings.yaml](../../config/settings.yaml) içindedir. Dosyanın en üstünde
+Ayarlar [config/settings.yaml](../../backend/config/settings.yaml) içindedir. Dosyanın en üstünde
 kısa bir hızlı kurulum bloğu, altında ise tüm gelişmiş ayarlar bulunur. Her LLM istemi
-[config/prompts/](../../config/prompts/) içinde düz bir metin dosyasıdır; böylece Python'a
+[config/prompts/](../../backend/config/prompts/) içinde düz bir metin dosyasıdır; böylece Python'a
 dokunmadan kliplerin nasıl puanlandığını ayarlayabilirsiniz.
 
 <a id="write-a-plugin"></a>
@@ -784,15 +781,15 @@ dokunmadan kliplerin nasıl puanlandığını ayarlayabilirsiniz.
 
 Bir oyunu, bir sporu ya da bir program türünü genel amaçlı bir dedektörden daha iyi mi
 tanıyorsunuz? Bir videodaki anları bulan, anlayan ya da puanlayan küçük bir Python
-eklentisi yazın, gerisini Clips Kitty halletsin. SDK MIT lisanslıdır; bu yüzden eklentiniz
+eklentisi yazın, gerisini SpikeClip halletsin. SDK MIT lisanslıdır; bu yüzden eklentiniz
 istediği lisansı kullanabilir ve hiçbir şeyi çatallamanız (fork) gerekmez.
 
 ```text
-Clips Kitty SDK
+SpikeClip SDK
 
 Input                      a link or a video file
   ↓
-Video                      Clips Kitty downloads it and writes down what is said
+Video                      SpikeClip downloads it and writes down what is said
   ↓
 Your plugin                every step is optional
   ├── find                 picks the moments                  built
@@ -800,18 +797,18 @@ Your plugin                every step is optional
   ├── rate                 scores each moment                 built
   └── edit                 suggests edits for the creator     built
   ↓
-Clips Kitty                does every step no plugin does, then cuts, frames and captions the clips
+SpikeClip                does every step no plugin does, then cuts, frames and captions the clips
   ↓
 Creator / Social Platform  posts when the creator clicks Publish, or on a schedule or automatic posting the creator switched on
 ```
 
-- Bir video için anları tek bir eklenti bulabilir; bu, Clips Kitty'nin kendi bulma
+- Bir video için anları tek bir eklenti bulabilir; bu, SpikeClip'nin kendi bulma
   işleminin yerini alır.
 - Bulma adımından sonra en fazla 3 eklenti anlama, en fazla 3 eklenti de puanlama yapabilir.
 - Bir eklentinin rolü, manifestindeki `inputs` ve `outputs` alanlarından gelir ([Adımlar](../../docs/developers/steps.md)).
 - Oluşturulacak klipler için en fazla 3 eklenti düzenleme önerebilir.
 - Düzenleme eklentileri, düzenleyicide içerik üreticisinin onayını bekleyen düzenlemeler önerir ([Adımlar](../../docs/developers/steps.md#suggest-edits-the-edit-step)).
-- Paylaşım bir eklenti adımı değildir: Clips Kitty klipleri kendisi paylaşır ve WoopSocial üzerinden içerik üreticisinin kendi hesabıyla aynı anda birçok siteye gönderebilir ([Tüm platformlarda aynı anda yayınlama](#publish-to-every-platform-at-once)). `kind: publisher` reddedilir: eklentiler paylaşım yapmaz.
+- Paylaşım bir eklenti adımı değildir: SpikeClip klipleri kendisi paylaşır ve WoopSocial üzerinden içerik üreticisinin kendi hesabıyla aynı anda birçok siteye gönderebilir ([Tüm platformlarda aynı anda yayınlama](#publish-to-every-platform-at-once)). `kind: publisher` reddedilir: eklentiler paylaşım yapmaz.
 
 Üç komut SDK'yı kurar, `game-events` şablonundan (uydurma bir oyun olan Quarkbloom Arena
 için) bir eklenti oluşturur ve onu SDK'nın hazırladığı bir test videosunda çalıştırır.
@@ -820,35 +817,35 @@ Python 3.11, FFmpeg ve Git gerekir.
 PowerShell (Windows):
 
 ```powershell
-py -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-py -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-py -m clipskitty_sdk run quarkbloom-bursts --sample
+py -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+py -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+py -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
 bash (macOS, Linux):
 
 ```bash
-python -m pip install "clipskitty-sdk[yaml,test] @ git+https://github.com/ColinGPT9/clips-studio#subdirectory=sdk/python"
-python -m clipskitty_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
-python -m clipskitty_sdk run quarkbloom-bursts --sample
+python -m pip install "spikeclip-sdk[yaml,test] @ git+https://github.com/ColinGPT9/spikeclip#subdirectory=sdk/python"
+python -m spikeclip_sdk new quarkbloom-bursts --template game-events --publisher your-github-name
+python -m spikeclip_sdk run quarkbloom-bursts --sample
 ```
 
-Clips Kitty 2.1.0, eklenti çalıştıran ilk sürümdür ve SDK 1.3.0 ile birlikte gelir.
+SpikeClip 2.1.0, eklenti çalıştıran ilk sürümdür ve SDK 1.3.0 ile birlikte gelir.
 
 **[İlk oyun işlem hattınız](../../docs/developers/first-game-pipeline.md)** buradan
-devam eder ve sizi adım adım Clips Kitty'ye kurulmuş, Marketplace'te listelenmiş bir
+devam eder ve sizi adım adım SpikeClip'ye kurulmuş, Marketplace'te listelenmiş bir
 eklentiye kadar götürür. [Sinyaller tarif kitabı](../../docs/developers/signals-cookbook.md)
 bir oyunun videosunu okumak için tarifler, [SDK başvuru belgesi](../../docs/developers/sdk.md)
 her komut ve çağrıyı, [geliştirici belgeleri](../../docs/developers/README.md) de geri kalan
 her şeyi içerir. Web sitesindeki
-[Clips Kitty SDK](https://colingpt9.github.io/clips-studio/developers.html) sayfası bunun
+[SpikeClip SDK](https://colingpt9.github.io/spikeclip/developers.html) sayfası bunun
 kısa sürümüdür.
 
 <a id="build-on-it"></a>
 
 ## Üzerine inşa edin
 
-Masaüstü uygulaması, Clips Kitty açık olduğu sürece çalışan bir **yerel HTTP API**'ye
+Masaüstü uygulaması, SpikeClip açık olduğu sürece çalışan bir **yerel HTTP API**'ye
 açılan bir penceredir. Bir Discord botu, bir toplu iş çalıştırıcısı, bir web arayüzü ya da
 bir OBS entegrasyonu aynı işlem hattını yönetebilir; bunun için önce uygulamaya hiçbir şey
 eklenmesi gerekmez.
@@ -885,9 +882,9 @@ Bu, uygulamanın *etrafında* inşa etmek. Uygulamanın *içinde* de inşa edebi
 başlangıç noktası bir eklentidir ([Eklenti yazma](#write-a-plugin)). Önemsediğiniz
 görüntüler bu uygulamanın ayarlandığı türden değilse (ister spor, oyun, tepki videoları,
 dersler olsun ister kimsenin denemediği bir şey), bir eklenti çatallamaya gerek kalmadan o
-görüntülerin anlarını bulabilir, anlayabilir ya da puanlayabilir. Eklenti, Clips Kitty'nin
+görüntülerin anlarını bulabilir, anlayabilir ya da puanlayabilir. Eklenti, SpikeClip'nin
 kendi Python'unda, standart kütüphaneyle (uygulamanın dışarıda bıraktığı birkaç modül
-hariç) ve SDK ile çalışır: Clips Kitty henüz bir eklenti için başka Python paketleri
+hariç) ve SDK ile çalışır: SpikeClip henüz bir eklenti için başka Python paketleri
 kuramıyor.
 
 Bunun yerine uygulamanın kendisini değiştirmek isterseniz: işlem hattı **YOLOv8
@@ -895,7 +892,7 @@ Bunun yerine uygulamanın kendisini değiştirmek isterseniz: işlem hattı **YO
 olacağına, neyin ilginç olduğuna dair sabit kodlanmış bir fikir değil, saniye başına bir
 dizi sinyal karar verir. Zaman çizelgesi boyunca bir güven değeri üreten bir dedektör, bir
 sinyal daha olarak eklenebilir ve onun dorukları aday klipler hâline gelir. Tespitiniz,
-Clips Kitty'nin henüz bir eklenti için kuramadığı Python paketlerine ihtiyaç duyuyorsa,
+SpikeClip'nin henüz bir eklenti için kuramadığı Python paketlerine ihtiyaç duyuyorsa,
 projeyi çatallayın ve kendi tespitinizi takın.
 **[docs/EXTENDING.md](../../docs/EXTENDING.md#bring-your-own-model)**; sözleşmeyi,
 kopyalanacak dosyayı ve başlamadan önce bilmeye değer performans tuzağını içerir.
@@ -910,36 +907,36 @@ dakika boyunca sessizce bekleyebilir. Ayrıntılar
 
 ### Bir yapay zekâ ajanına yaptırın
 
-Clips Kitty bir **MCP sunucusu** ile gelir; böylece Claude, Cursor ya da herhangi bir MCP
+SpikeClip bir **MCP sunucusu** ile gelir; böylece Claude, Cursor ya da herhangi bir MCP
 istemcisi aynı işlem hattını günlük dille yönetebilir: bir yayını sıraya almak, işi takip
 etmek, seçtiği klipleri okumak, birini dışa aktarmak.
 
 ```bash
-claude mcp add clips-kitty -- python main.py mcp
+claude mcp add spikeclip -- python main.py mcp
 ```
 
 Kurulu bir derlemede motorun çalıştırılabilir dosyası `api.exe`'dir (uygulamanın
 `resources\backend` klasöründe), dolayısıyla oradaki komut `api.exe mcp` olur.
 
-`127.0.0.1:8765` üzerinden çalışan motorla konuşur; bu yüzden Clips Kitty'nin açık olması
+`127.0.0.1:8765` üzerinden çalışan motorla konuşur; bu yüzden SpikeClip'nin açık olması
 gerekir ve hiçbir türde API anahtarına ihtiyaç duymaz: klip çıkaran model kendi
 makinenizdeki modeldir (ya da Settings → AI'da bir tane seçtiyseniz, kendi anahtarınızla
 çalışan ve MCP istemcisinin hiç görmediği bir bulut modelidir). Ajan becerilerini
-destekleyen istemciler için bir beceri [skills/clips-kitty/](../../skills/clips-kitty/)
+destekleyen istemciler için bir beceri [skills/spikeclip/](../../skills/spikeclip/)
 içinde.
 
-<a id="built-with-clips-kitty"></a>
+<a id="built-with-spikeclip"></a>
 
-### Clips Kitty ile yapılanlar
+### SpikeClip ile yapılanlar
 
-Bu API üzerinde çalışan projeler, Clips Kitty ile yapılmış işlem hatları, eklentiler,
+Bu API üzerinde çalışan projeler, SpikeClip ile yapılmış işlem hatları, eklentiler,
 entegrasyonlar, uygulamalar ve araçların listesi olan
-**[Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)**'de listelenir.
-İlki, yayınınız bittikten sonra onu Clips Kitty'ye teslim eden bir OBS Studio paneli olan
-[Clips Kitty OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin). Siz de bir
+**[Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)**'de listelenir.
+İlki, yayınınız bittikten sonra onu SpikeClip'ye teslim eden bir OBS Studio paneli olan
+[SpikeClip OBS Plugin](https://github.com/ColinGPT9/clips-kitty-obs-plugin). Siz de bir
 tane mi yaptınız? Bir pull request ile ekleyin
 ([nasıl](https://github.com/ColinGPT9/awesome-clips-kitty/blob/main/CONTRIBUTING.md)) ve
-deponuza `clips-kitty` konusunu (topic) ekleyin.
+deponuza `spikeclip` konusunu (topic) ekleyin.
 
 <a id="architecture"></a>
 
@@ -956,7 +953,7 @@ tasarım kuralları.
 Katkılara açığız. Geliştirme ortamı kurulumu ve pull request beklentileri için
 **[CONTRIBUTING.md](../../CONTRIBUTING.md)**'ye, bir güvenlik açığı bildirmek için
 **[SECURITY.md](../../SECURITY.md)**'ye bakın. Başlayacak bir yer arıyorsanız
-[`good-first-issue`](https://github.com/ColinGPT9/clips-studio/labels/good-first-issue)
+[`good-first-issue`](https://github.com/ColinGPT9/spikeclip/labels/good-first-issue)
 etiketli konular küçük ve kapsamı net konulardır.
 
 Web sitesi [site/](../../site/) içinde bulunur ve GitHub Pages ile bir Hugging Face
@@ -970,14 +967,14 @@ Paketleme ve sürüm belgeleri:
   kurulum programını derleme ve yayınlama
 - **[docs/MSSTORE.md](../../docs/MSSTORE.md)**: geliştirici hesabı oluşturmaktan
   sertifikasyona kadar Microsoft Store paketi
-- **[packaging/winget/](../../packaging/winget/)**: yukarıdaki kurulum programını işaret
+- **[packaging/winget/](../../backend/packaging/winget/)**: yukarıdaki kurulum programını işaret
   eden winget manifestleri
-- **[whop-app/](../../whop-app/)**: Clips Kitty'yi klip topluluklarının üyelerine tanıtan
+- **[whop-app/](../../whop-app/)**: SpikeClip'yi klip topluluklarının üyelerine tanıtan
   Whop uygulaması. Yalnızca pazarlama sayfalarıdır: video işlemez, hiçbir şey saklamaz ve
   masaüstü uygulamasıyla konuşmaz
 - **[docs/DOCKER.md](../../docs/DOCKER.md)**: Python, FFmpeg ve PyTorch'u kendiniz
   kurmadan motoru çalıştırma
-- **[PRIVACY](https://colingpt9.github.io/clips-studio/privacy.html)**: uygulamanın neleri
+- **[PRIVACY](https://colingpt9.github.io/spikeclip/privacy.html)**: uygulamanın neleri
   sakladığı ve makinenizden nelerin çıkabileceği (kısa cevap: bir hata bildirimi
   göndermediğiniz sürece hiçbir şey)
 
@@ -1041,14 +1038,14 @@ kullanılır. Herkese açık
 olarak yayımlandığı için teşekkürler. Paketlenen diğer her bileşen ve lisansı [NOTICE](../../NOTICE)
 içinde yer alır.
 
-Clips Kitty üzerine inşa etmek kolay kalsın diye üç parça ayrı lisanslanmıştır:
+SpikeClip üzerine inşa etmek kolay kalsın diye üç parça ayrı lisanslanmıştır:
 
 | Parça | Lisans |
 |---|---|
-| Clips Kitty (uygulama, motoru, bu depo) | AGPL-3.0-or-later |
-| Eklenti SDK'sı, [`sdk/python/`](../../sdk/python/) | MIT ([sdk/python/LICENSE](../../sdk/python/LICENSE)) |
-| Örnek eklentiler, [`examples/pipelines/scene-cut-highlights/`](../../examples/pipelines/scene-cut-highlights/) ve [`examples/pipelines/keyword-rater/`](../../examples/pipelines/keyword-rater/) | MIT |
-| Uygulamayla birlikte gelen Awesome Clips Kitty listesinin kopyası, `plugins/catalog_index.json` (liste [kendi deposunda](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
+| SpikeClip (uygulama, motoru, bu depo) | AGPL-3.0-or-later |
+| Eklenti SDK'sı, [`sdk/python/`](../../backend/sdk/python/) | MIT ([sdk/python/LICENSE](../../backend/sdk/python/LICENSE)) |
+| Örnek eklentiler, [`examples/pipelines/scene-cut-highlights/`](../../backend/examples/pipelines/scene-cut-highlights/) ve [`examples/pipelines/keyword-rater/`](../../backend/examples/pipelines/keyword-rater/) | MIT |
+| Uygulamayla birlikte gelen Awesome SpikeClip listesinin kopyası, `plugins/catalog_index.json` (liste [kendi deposunda](https://github.com/ColinGPT9/awesome-clips-kitty)) | CC0-1.0 |
 
 Başkalarının yaptığı eklentiler, işlem hatları ve uygulamalar, yazarlarının seçtiği lisansı
 korur; Marketplace bunu her listelemede gösterir. SDK'yı kullanmak bir eklentiyi AGPL
@@ -1070,12 +1067,12 @@ platform ekleyin.
 
 ## Yıldız geçmişi
 
-Clips Kitty'ye yıldız veren, paylaşan, hata bildiren ve çeviri yapan herkese teşekkürler.
+SpikeClip'ye yıldız veren, paylaşan, hata bildiren ve çeviri yapan herkese teşekkürler.
 
-<a href="https://www.star-history.com/#ColinGPT9/clips-studio&amp;Date">
+<a href="https://www.star-history.com/#ColinGPT9/spikeclip&amp;Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;theme=dark&amp;legend=top-left" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date&amp;legend=top-left" />
-    <img alt="Clips Kitty GitHub yıldız geçmişi" src="https://api.star-history.com/chart?repos=ColinGPT9/clips-studio&amp;type=date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;theme=dark&amp;legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date&amp;legend=top-left" />
+    <img alt="SpikeClip GitHub yıldız geçmişi" src="https://api.star-history.com/chart?repos=ColinGPT9/spikeclip&amp;type=date" />
   </picture>
 </a>

@@ -16,7 +16,7 @@ Offline evidence proves software behavior; it does not prove the live demo.
 | Submission description, Codex use, repo/branch links | SUBMISSION.md | Written |
 | Entry-only commits and existing foundations | NEW_WORK.md; reproducible base-to-branch log | Written |
 | Judge instructions: Client ID, connect, WoopSocial and clips watch | JUDGE_SETUP.md | Written |
-| Pull request to main | https://github.com/ColinGPT9/clips-studio/pull/202; merge `0963ff2e8fee5031f3bb9361be8b32f79b4ba8aa` | Merged; includes approval add-on #204 |
+| Pull request to main | https://github.com/ColinGPT9/spikeclip/pull/202; merge `0963ff2e8fee5031f3bb9361be8b32f79b4ba8aa` | Merged; includes approval add-on #204 |
 | Public YouTube URL and actual demonstration | Placeholder and recording plan in SUBMISSION.md / DEMO_SCRIPT.md | Pending owner/live evidence |
 
 ## Build requirements
@@ -106,7 +106,7 @@ opening the PR cannot substitute for the pending live-account and video evidence
 
 | Add-on requirement | Evidence | State |
 |---|---|---|
-| Branch from fetched entry head; PR into the entry branch | `feature/clip-autopilot-text-updates` based on `6326b19`; NEW_WORK.md; https://github.com/ColinGPT9/clips-studio/pull/204 | Merged into the entry branch, then main through #202 |
+| Branch from fetched entry head; PR into the entry branch | `feature/clip-autopilot-text-updates` based on `6326b19`; NEW_WORK.md; https://github.com/ColinGPT9/spikeclip/pull/204 | Merged into the entry branch, then main through #202 |
 | Verify current Discord details before coding and record this session | Official sources and differences in TEXT_UPDATES.md; environment session ID | Verified |
 | Off-by-default settings, Away safety gate, local Gemma/plain fallback | server/text_updates.py; guarded settings tests; local-only bounded inference | Verified offline |
 | Shared first-answer decision helpers; watcher tick integration even with watching off | server/automation.py; button/typed/app, stale-answer, off-watch, baseline and Deny admission regressions | Verified offline |

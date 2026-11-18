@@ -1,5 +1,5 @@
 /**
- * Clips Kitty Twitch proxy — the one piece of server the web version needs.
+ * SpikeClip Twitch proxy — the one piece of server the web version needs.
  *
  * ## Why it exists
  *

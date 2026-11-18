@@ -3,7 +3,7 @@
 - Platforms: Node-RED Flow Library (Tier 3), AUTOMATIC1111 `stable-diffusion-webui-extensions` index (Tier 2 for the index design), Jellyfin plugin repositories (Tier 3), Raycast extensions store (Tier 3), OBS Studio plugins (Tier 3)
 - Track C
 - Date read: 2026-10-06
-- Brief's question: what makes an extension ecosystem successful, and what mistakes should Clips Kitty avoid?
+- Brief's question: what makes an extension ecosystem successful, and what mistakes should SpikeClip avoid?
 - Verdict (two lines): the cheapest registries in the set are static JSON built by CI (A1111: one JSON file per extension, PR-merged, `index.json` assembled and GitHub stars refreshed daily by Actions; Node-RED: a 2.5 MB `catalogue.json` derived from npm) and they cost nothing to run; what they lack is any pin (A1111 installs the default branch and runs the extension's `install.py`), any compatibility field, or any enforcement. Jellyfin shows the minimal repository format worth copying (a manifest URL with per-version zips, checksums and `targetAbi`); Raycast shows the review-everything monorepo that is transparent but human-gated; OBS shows a native-code ecosystem with a forum list and no registry at all.
 
 Every claim carries a URL and the read date 2026-10-06 unless stated. Sections are compact; the A1111 section is fuller because the brief rates its index design Tier 2.
@@ -93,7 +93,7 @@ Local runtime; nodes may call any network.
 None found in the pages read. Limitation stated by the project: scorecard does not inspect code.
 
 ## 11. Borrow
-A static catalogue JSON regenerated on a schedule from the package source (npm here; GitHub for Clips Kitty) with weekly download counts from the package registry (H10: counts without own telemetry when a package registry exists); a scorecard of mechanical checks shown next to each entry (unique name, compatibility range present, examples present, dependency count/freshness, bug URL present) that informs without blocking; a host-side allow/deny list.
+A static catalogue JSON regenerated on a schedule from the package source (npm here; GitHub for SpikeClip) with weekly download counts from the package registry (H10: counts without own telemetry when a package registry exists); a scorecard of mechanical checks shown next to each entry (unique name, compatibility range present, examples present, dependency count/freshness, bug URL present) that informs without blocking; a host-side allow/deny list.
 
 ## 12. Avoid
 In-process execution; "not gatekeepers" as the whole trust story when the runtime cannot enforce anything.
@@ -107,7 +107,7 @@ In-process execution; "not gatekeepers" as the whole trust story when the runtim
 - Registry: a "repository" is a URL to a `manifest.json`; official `https://repo.jellyfin.org/files/plugin/manifest.json` (36 plugins on 2026-10-06), unstable at `/plugin-unstable/manifest.json`; third-party repositories are listed in the docs with "Official" vs "Third Party" labels and added by URL in the dashboard. Manifest shape (fetched 2026-10-06): array of `{guid, name, description, overview, owner, category, versions: [{version, changelog, targetAbi, sourceUrl, checksum, timestamp}]}`; `sourceUrl` is a zip per version (e.g. `bookshelf_13.0.0.0.zip`), `checksum` is a 32-hex digest (MD5-length; algorithm not stated in the manifest — not confirmed). Updates: install from the catalog and restart ("After that start Jellyfin back up, and reinstall each plugin").
 - Trust: in-process .NET; the docs pages read contain no warning text about third-party repositories (checked with a targeted fetch, 2026-10-06); compatibility is `targetAbi` per version.
 - Cost: static files on a web host (the official repo is `repo.jellyfin.org/files/...`); anyone can host a manifest. Review of third-party repositories: none (they are just URLs) — inferred.
-- Lesson: the minimal, self-hostable repository format — one JSON manifest, per-version archive URL + checksum + target ABI + timestamp — is a good shape for Clips Kitty's index entries and for "not in default" repositories added by URL; the missing parts are signing (checksum only proves transfer integrity) and any isolation.
+- Lesson: the minimal, self-hostable repository format — one JSON manifest, per-version archive URL + checksum + target ABI + timestamp — is a good shape for SpikeClip's index entries and for "not in default" repositories added by URL; the missing parts are signing (checksum only proves transfer integrity) and any isolation.
 
 ---
 
@@ -128,7 +128,7 @@ In-process execution; "not gatekeepers" as the whole trust story when the runtim
 - Registry: the forum Resources list — "OBS Studio Plugins (331 items)", Themes 53, Tools 468, Scripts 384; each shows creator, version, update date, star rating, downloads; "1,418" resources and "46,912,030" downloads overall. No submission rules, review or verification text was visible on the listing page (2026-10-06) — not confirmed. https://obsproject.com/forum/resources/.
 - Trust: native code in the OBS process; nothing declared or enforced; installers from GitHub releases.
 - Cost: a forum category (XenForo resource manager, inferred from the layout) — effectively zero marginal cost.
-- Lesson: a forum list with ratings and download counts is discovery, not a registry: no manifest, no compatibility field, no pin, no checks. The useful part is the build template (CI produces signed installers per platform from a tag) — Clips Kitty's plugin template should do the same for Windows.
+- Lesson: a forum list with ratings and download counts is discovery, not a registry: no manifest, no compatibility field, no pin, no checks. The useful part is the build template (CI produces signed installers per platform from a tag) — SpikeClip's plugin template should do the same for Windows.
 
 ---
 
@@ -177,4 +177,4 @@ In-process execution; "not gatekeepers" as the whole trust story when the runtim
 - H4 (hand review does not scale): supports. A1111 and Raycast both rely on a human "assessment"/review per PR; Node-RED and OBS avoided the problem by not reviewing at all ("not gatekeepers"); none shows a scalable human process.
 - H5 (declared is not enforced): supports. A1111's `online` tag, Node-RED's scorecard and Raycast's guidelines are declarations and checks; no runtime enforces any of them.
 - H6 (runtime pip installs, shared env): supports the risk. A1111 runs each extension's `install.py` (pip) at install and every startup in one shared environment; Node-RED delegates dependency isolation to npm's per-package nesting, which is the "one env per plugin costs disk" trade-off in practice.
-- H10 (counts need telemetry; stars/updated from GitHub at build time): supports. A1111 refreshes `stars`, `commit_time`, `default_branch_commit_sha` daily from the GitHub API at index-build time; Node-RED shows weekly downloads taken from npm; Jellyfin's manifest has no counts; OBS counts downloads because the forum serves them. For GitHub-hosted plugins, install counts therefore need Clips Kitty's own opt-in telemetry.
+- H10 (counts need telemetry; stars/updated from GitHub at build time): supports. A1111 refreshes `stars`, `commit_time`, `default_branch_commit_sha` daily from the GitHub API at index-build time; Node-RED shows weekly downloads taken from npm; Jellyfin's manifest has no counts; OBS counts downloads because the forum serves them. For GitHub-hosted plugins, install counts therefore need SpikeClip's own opt-in telemetry.

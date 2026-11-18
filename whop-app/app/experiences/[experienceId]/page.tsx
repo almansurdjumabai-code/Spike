@@ -46,7 +46,7 @@ export default async function ExperiencePage({
 				<p className="cs-lede">
 					{firstName ? `${firstName} — p` : "P"}aste a link to a{" "}
 					{PLATFORMS.join(", ").replace(/, ([^,]*)$/, " or $1")} video and
-					Clips Kitty watches the whole thing, picks the moments worth
+					SpikeClip watches the whole thing, picks the moments worth
 					posting, crops them to a phone screen with the speaker kept in
 					frame, burns in word-synced captions and writes the titles.{" "}
 					<strong>No credits, no watermark, no subscription.</strong>

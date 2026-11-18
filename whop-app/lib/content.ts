@@ -16,7 +16,7 @@
  *  PINNED ON PURPOSE — do not change it to "whatever is newest".
  *
  *  The Web Setup on GitHub is only ~800 KB. During install it fetches
- *  `clips-studio-<version>-x64.nsis.7z` **by name** from the Hugging Face
+ *  `spikeclip-<version>-x64.nsis.7z` **by name** from the Hugging Face
  *  repo, because a GitHub release asset is capped at 2 GiB and the payload
  *  is 5.88 GiB. So the setup and the payload are a matched pair: pointing
  *  at a setup whose payload has not been uploaded yet gives every person
@@ -25,7 +25,7 @@
  *  When a new version ships, this changes ONLY after its payload is live on
  *  Hugging Face. See docs/RELEASING.md in the main repo.
  *
- *  Verified 2026-09-15: `clips-studio-1.2.0-x64.nsis.7z` is live on Hugging
+ *  Verified 2026-09-15: `spikeclip-1.2.0-x64.nsis.7z` is live on Hugging
  *  Face (6,156,604,703 bytes, size-checked against the local build), so the
  *  pin moves to 1.2.0. Not before — this app redeploys on push, so bumping it
  *  ahead of the upload puts a broken download in front of people within seconds.
@@ -40,20 +40,20 @@ export const LINKS = {
 	 *  moment a release is published; VERSION above moves only once its payload
 	 *  is confirmed live on Hugging Face. Pinning the version keeps those two
 	 *  from drifting apart and handing someone a setup with nothing to fetch. */
-	download: `https://github.com/ColinGPT9/clips-studio/releases/download/v${VERSION}/ClipsKitty-Web-Setup-${VERSION}.exe`,
-	site: "https://colingpt9.github.io/clips-studio/",
+	download: `https://github.com/ColinGPT9/spikeclip/releases/download/v${VERSION}/SpikeClip-Web-Setup-${VERSION}.exe`,
+	site: "https://colingpt9.github.io/spikeclip/",
 	/** Same destination as the desktop app's donate button and the website,
 	 *  so there is one place money goes. */
 	donate: "https://paypal.me/clipsstudio",
-	github: "https://github.com/ColinGPT9/clips-studio",
+	github: "https://github.com/ColinGPT9/spikeclip",
 	/** The Microsoft Store listing. Canonical URL with no query string on
 	 *  purpose: the share link Microsoft hands you carries hl=en-us&gl=US,
 	 *  which forces a US English page on every visitor — wrong for an app that
 	 *  ships 19 languages — plus an ocid= share-tracking parameter that means
 	 *  nothing coming from our own pages. */
 	msstore: "https://apps.microsoft.com/detail/9NB6XT7DSQZZ",
-	issues: "https://github.com/ColinGPT9/clips-studio/issues",
-	privacy: "https://colingpt9.github.io/clips-studio/privacy.html",
+	issues: "https://github.com/ColinGPT9/spikeclip/issues",
+	privacy: "https://colingpt9.github.io/spikeclip/privacy.html",
 } as const;
 
 export const REQUIREMENTS: { label: string; value: string; note?: string }[] = [
@@ -80,7 +80,7 @@ export const REQUIREMENTS: { label: string; value: string; note?: string }[] = [
 ];
 
 export const STEPS: string[] = [
-	"Install Clips Kitty and let it pick an AI model that fits your graphics card.",
+	"Install SpikeClip and let it pick an AI model that fits your graphics card.",
 	"Paste a link to a Twitch VOD, a Kick VOD or a YouTube video.",
 	"Leave it running. It watches the whole thing, picks the moments, crops them vertical with the speaker kept in frame, and burns in word-synced captions.",
 	"Review the clips, fix anything the AI got wrong in the editor, and export.",
@@ -138,7 +138,7 @@ export const DOWNLOAD_NOTE = `Version ${VERSION}. The setup is under 1 MB and th
 /** Paste-ready text for a community owner to post to their members. Kept
  *  short enough to survive a Discord or Whop chat message, and honest
  *  about the hardware so their members do not bounce off a failed install. */
-export const OWNER_BLURB = `Clips Kitty — free, open-source AI clipping that runs on your own PC.
+export const OWNER_BLURB = `SpikeClip — free, open-source AI clipping that runs on your own PC.
 
 Paste a Twitch, Kick or YouTube VOD and it finds the moments worth posting, crops them vertical with the speaker kept in frame, burns in word-synced captions and writes titles. No credits, no watermark, no subscription, and the video never leaves your machine.
 

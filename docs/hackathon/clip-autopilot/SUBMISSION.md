@@ -6,8 +6,8 @@
 
 Viewers make and share Twitch clips. Clip Autopilot checks a public channel's
 viewer clips through the Twitch Clips API using a connected user account.
-When a clip first qualifies for the streamer's view target, it enters Clips
-Kitty's persistent queue once. Clips below the target are checked again on
+When a clip first qualifies for the streamer's view target, it enters
+SpikeClip's persistent queue once. Clips below the target are checked again on
 future polls. Restart recovery and the existing publishing ledger prevent
 repeat work and repeat automatic posts.
 
@@ -44,9 +44,9 @@ footage or a live crossing. See [TEST_LOG.md](TEST_LOG.md).
 - Session identity is verified from the running Codex environment and thread
   metadata. Client `/status` capture remains pending; the agent cannot invoke
   that client command.
-- Repository: https://github.com/ColinGPT9/clips-studio
-- Current runnable code: https://github.com/ColinGPT9/clips-studio/tree/main
-- Entry branch: https://github.com/ColinGPT9/clips-studio/tree/feature/twitch-clip-autopilot
+- Repository: https://github.com/ColinGPT9/spikeclip
+- Current runnable code: https://github.com/ColinGPT9/spikeclip/tree/main
+- Entry branch: https://github.com/ColinGPT9/spikeclip/tree/feature/twitch-clip-autopilot
 - Public YouTube demonstration: **PENDING — record actual operation and add URL.**
 
 ## Submission readiness

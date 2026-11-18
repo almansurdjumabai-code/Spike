@@ -1,6 +1,6 @@
 # Connected accounts in a pipeline
 
-Clips Kitty owns account connections. A pipeline does not register an OAuth
+SpikeClip owns account connections. A pipeline does not register an OAuth
 client, run a login flow, store Twitch tokens, or ask the creator to connect an
 account again. Connections belong to the main application and can be reused by
 game-specific pipelines and other integrations.
@@ -10,7 +10,7 @@ pipeline's source Twitch VOD belongs to a connected broadcaster, it grants that
 run access to the operations its installed manifest declares. A channel name in
 Watched Channels, or a video's display name, is not proof of authorization.
 
-Declare only the operations the pipeline needs in `clipskitty.yaml`:
+Declare only the operations the pipeline needs in `spikeclip.yaml`:
 
 ```yaml
 permissions:
@@ -21,7 +21,7 @@ permissions:
 Read context using the supported SDK:
 
 ```python
-from clipskitty_sdk import AccountOperationError, run
+from spikeclip_sdk import AccountOperationError, run
 
 
 def main(job):
@@ -44,8 +44,8 @@ because the account was disconnected, consent was revoked, a required scope is
 missing, or Twitch is unavailable. `AccountOperationError.status` is the HTTP
 status: 400 a refused argument, 401 Twitch needs reconnecting, 403 not granted,
 404 gone, 412 the video's Twitch timeline is not verified, 429 a limit, 502 or
-503 Twitch or the connection is unavailable (0 when Clips Kitty didn't answer).
-`AccountOperationError.code` is the fixed word Clips Kitty gave, which tells
+503 Twitch or the connection is unavailable (0 when SpikeClip didn't answer).
+`AccountOperationError.code` is the fixed word SpikeClip gave, which tells
 apart refusals that share a status, and the error's message follows it:
 
 | `code` | Status | Meaning |
@@ -60,17 +60,17 @@ apart refusals that share a status, and the error's message follows it:
 | `run_limit` | 429 | This run's own request limit |
 | `rate_limited` | 429 | Twitch's rate limit |
 | `provider_unavailable` | 503 | Twitch could not be reached or is having trouble |
-| `unavailable`, `provider_not_configured`, `credential_store_unavailable` | 503 | A part of Clips Kitty's Twitch support isn't running or set up |
+| `unavailable`, `provider_not_configured`, `credential_store_unavailable` | 503 | A part of SpikeClip's Twitch support isn't running or set up |
 | `failed` | 502 | Anything else |
 
-A code is "" when Clips Kitty sent none. No response body or provider text
+A code is "" when SpikeClip sent none. No response body or provider text
 reaches the message. Standalone SDK samples do not grant real account access.
 
-A plugin that uses these needs a Clips Kitty that knows the `twitch.*`
-permissions. Set `requires.clips_kitty` to the first release that bundles
-Connected Accounts. An older Clips Kitty refuses the manifest as naming an
+A plugin that uses these needs a SpikeClip that knows the `twitch.*`
+permissions. Set `requires.spikeclip` to the first release that bundles
+Connected Accounts. An older SpikeClip refuses the manifest as naming an
 unknown permission, before it compares versions, so it says nothing about
-needing a newer release ([Versioning](versioning.md#connected-accounts-and-older-clips-kitty)).
+needing a newer release ([Versioning](versioning.md#connected-accounts-and-older-spikeclip)).
 
 | Manifest permission | SDK operation | Host restrictions |
 | --- | --- | --- |

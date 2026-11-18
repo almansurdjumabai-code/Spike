@@ -1,4 +1,4 @@
-# Releasing Clips Kitty
+# Releasing SpikeClip
 
 How to turn a commit into something a creator can install.
 
@@ -46,10 +46,10 @@ Measured at 0.1.0, the first build carrying the bundled runtime and weights:
 
 | File | Size | What it is |
 |---|---|---|
-| `nsis-web/ClipsStudio-Web-Setup-<v>.exe` | 813 KB | What people download. Fetches the payload and installs it. |
-| `nsis-web/clips-studio-<v>-x64.nsis.7z` | 5.88 GiB | The payload the setup downloads. |
+| `nsis-web/SpikeClip-Web-Setup-<v>.exe` | 813 KB | What people download. Fetches the payload and installs it. |
+| `nsis-web/spikeclip-<v>-x64.nsis.7z` | 5.88 GiB | The payload the setup downloads. |
 | `nsis-web/latest.yml` | 586 B | Version + SHA512 of both. The update checker reads this. |
-| `ClipsStudio-<v>-x64.zip` | 6.90 GiB | Offline alternative: unzip, run `Clips Kitty.exe`. |
+| `SpikeClip-<v>-x64.zip` | 6.90 GiB | Offline alternative: unzip, run `SpikeClip.exe`. |
 
 Installed, that unpacks to about **10 GB**. Roughly 4 GB of the growth is the
 bundled Ollama runtime and the two Whisper models; the rest is CUDA PyTorch,
@@ -67,19 +67,19 @@ amount of retrying changes that.
 So the big files live in a Hugging Face repository, which has no such cap,
 costs nothing and serves from a CDN. This project already pushes to Hugging
 Face for the website (see [MIRRORS.md](MIRRORS.md)); this is a second repo,
-`ColinGPT9/clips-studio-releases`, for release payloads.
+`ColinGPT9/spikeclip-releases`, for release payloads.
 
 | Where | What |
 |---|---|
-| Hugging Face `clips-studio-releases` | `clips-studio-<v>-x64.nsis.7z`, `latest.yml`, `ClipsStudio-<v>-x64.zip` |
-| GitHub release | `ClipsStudio-Web-Setup-<v>.exe` and the release notes |
+| Hugging Face `spikeclip-releases` | `spikeclip-<v>-x64.nsis.7z`, `latest.yml`, `SpikeClip-<v>-x64.zip` |
+| GitHub release | `SpikeClip-Web-Setup-<v>.exe` and the release notes |
 
-Tag the GitHub release to match the version in `ui/package.json` (`v0.1.0` for
+Tag the GitHub release to match the version in `frontend/package.json` (`v0.1.0` for
 `0.1.0`).
 
 > **The setup and its payload must go up together.** The Web Setup fetches
-> `clips-studio-<v>-x64.nsis.7z` **by name, from the URL in the `publish`
-> block of `ui/electron-builder.yml`**. Publish the setup before the payload
+> `spikeclip-<v>-x64.nsis.7z` **by name, from the URL in the `publish`
+> block of `frontend/electron-builder.yml`**. Publish the setup before the payload
 > has finished uploading and every download fails partway through with a
 > confusing error, because the installer is a downloader with nothing to
 > download.
@@ -88,7 +88,7 @@ Files that big need Git LFS on the Hugging Face side, or the `hf` CLI, which
 handles the chunking itself:
 
 ```
-hf upload ColinGPT9/clips-studio-releases release/nsis-web/ . --repo-type=model
+hf upload ColinGPT9/spikeclip-releases release/nsis-web/ . --repo-type=model
 ```
 
 **`huggingface-cli` no longer works.** It was deprecated and now exits with
@@ -134,14 +134,14 @@ To ship something stable users must not be pulled onto, upload it as
 ### The website's download buttons name the version
 
 All nine "Download for Windows" buttons across `site/` link to
-`releases/download/v<version>/ClipsStudio-Web-Setup-<version>.exe`, so **they
+`releases/download/v<version>/SpikeClip-Web-Setup-<version>.exe`, so **they
 have to be bumped with the version**. The CI website job checks that internal
 paths resolve; it cannot tell that an external GitHub URL now points at a
 release that does not exist.
 
 The two pages hosted on Vercel carry the version as well: `VERSION` in
-`whop-app/lib/content.ts` (the Whop page) and in `web/lib/content.ts` (Clips
-Kitty Web, the browser version). Each builds its download link from that value.
+`whop-app/lib/content.ts` (the Whop page) and in `web/lib/content.ts` (
+SpikeClip Web, the browser version). Each builds its download link from that value.
 **Bump both together, and only after the payload is on Hugging Face.** Nothing
 checks them: the browser version stayed on 1.1.3 through 1.1.4, 1.2.0 and 2.0.0.
 
@@ -154,14 +154,14 @@ Check after publishing:
 - [ ] Payload, zip and feed file uploaded to Hugging Face; Web Setup on the
       GitHub release
 - [ ] Nothing over 2 GiB was attached to the GitHub release
-- [ ] Tag matches `ui/package.json`
+- [ ] Tag matches `frontend/package.json`
 - [ ] `VERSION` bumped in `whop-app/lib/content.ts` and `web/lib/content.ts`
 - [ ] Feed file uploaded **last**, after the payload finished
 - [ ] Named `alpha.yml` / `beta.yml` if stable users should not get it
 - [ ] Release notes mention the SmartScreen warning (see below)
 - [ ] Release notes written for creators: they appear inside the app, in the
       update bar's "What's new"
-- [ ] Downloaded the Web Setup on a machine that has never run Clips Kitty,
+- [ ] Downloaded the Web Setup on a machine that has never run SpikeClip,
       and installed it end to end
 
 ## Testing it the way a stranger meets it
@@ -180,7 +180,7 @@ boots clean and is destroyed on close.
    ```
    Enable-WindowsOptionalFeature -Online -FeatureName Containers-DisposableClientVM -All
    ```
-3. Launch [`scripts/test-install.wsb`](../scripts/test-install.wsb):
+3. Launch [`scripts/test-install.wsb`](../backend/scripts/test-install.wsb):
 
    ```
    & "$env:WINDIR\System32\WindowsSandbox.exe" scripts\test-install.wsb
@@ -220,14 +220,14 @@ untested.
 **Included:** the Electron app, the frozen Python engine, every Python
 dependency, CUDA PyTorch, FFmpeg, the Ollama runtime, and the YOLO, TalkNet
 and Whisper weights. No Python install, no second installer, no PATH edits,
-no terminal. A creator installs Clips Kitty and nothing else.
+no terminal. A creator installs SpikeClip and nothing else.
 
 The bundled Ollama listens on **127.0.0.1:11435**, not its default 11434, so
 it cannot collide with one the creator already runs. Electron starts it, tells
-the engine where it is via `CLIPS_STUDIO_OLLAMA_HOST`, and kills the process
-tree on quit. Its models go to `%LOCALAPPDATA%\Clips Studio\data\models`,
+the engine where it is via `SPIKECLIP_OLLAMA_HOST`, and kills the process
+tree on quit. Its models go to `%LOCALAPPDATA%\SpikeClip\data\models`,
 except on installs where 1.1.3 or 1.1.4 already downloaded them to
-`%LOCALAPPDATA%\Clips Kitty\data\models`, which keep using that folder.
+`%LOCALAPPDATA%\SpikeClip\data\models`, which keep using that folder.
 
 **Not included:** the language model itself. Not for packaging reasons. It
 would fit, but licensing ones: Gemma and friends ship under terms the person
@@ -241,7 +241,7 @@ The app reports anything missing at `GET /health/preflight`, in words a
 creator can act on.
 
 Installed copies keep videos, clips and the database in
-`%LOCALAPPDATA%\Clips Studio\data`, never inside Program Files. Uninstalling
+`%LOCALAPPDATA%\SpikeClip\data`, never inside Program Files. Uninstalling
 leaves that alone: removing a program must not delete someone's footage.
 
 ## SmartScreen
@@ -253,16 +253,16 @@ it is a virus and stops.
 
 This clears once a certificate is bought (an OV certificate warns until it
 builds reputation; an EV certificate does not warn at all). Signing is off
-in `ui/electron-builder.yml`, and turning it back on is documented there.
+in `frontend/electron-builder.yml`, and turning it back on is documented there.
 
 ## Version bump
 
-Version lives in `ui/package.json` only. Bump it, commit, then build. The
+Version lives in `frontend/package.json` only. Bump it, commit, then build. The
 artifact names and `latest.yml` follow from it.
 
 ## The Marketplace's list
 
-The app ships a copy of [Awesome Clips Kitty](https://github.com/ColinGPT9/awesome-clips-kitty)'s index,
+The app ships a copy of [Awesome SpikeClip](https://github.com/ColinGPT9/awesome-clips-kitty)'s index,
 `plugins/catalog_index.json`: what the Marketplace shows before the app has been
 online, and the copy it takes labels from. Before building, run
 `python scripts/sync_catalog_index.py` and commit the file if it changed, so the
@@ -280,7 +280,7 @@ so a problem in either cannot affect it.
 different wrapper, not a different app: the only runtime differences are that a
 Store copy is updated by the Store rather than by `electron-updater`, and its
 donate button opens the system browser. Both are decided at runtime in
-`ui/src/main/distribution.ts`.
+`frontend/src/main/distribution.ts`.
 
 The package version is **not** the app version. The Store forbids a major of
 0, so 0.1.2 ships as package `1.1.2.0`. The script computes that; do not set it
@@ -293,7 +293,7 @@ which would discard the ratings and the Store URL.
 
 ### winget
 
-[`packaging/winget/`](../packaging/winget/) points at the installer this
+[`packaging/winget/`](../backend/packaging/winget/) points at the installer this
 document already produces, so there is nothing extra to build. Each release
 needs the version, URL and SHA256 updated in the manifest and a pull request to
 `microsoft/winget-pkgs`. No account, no certificate, no certification.

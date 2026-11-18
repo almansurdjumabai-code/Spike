@@ -1,6 +1,6 @@
 # Feedback relay (Cloudflare Worker)
 
-This tiny worker is what lets Clips Kitty users send bug reports and
+This tiny worker is what lets SpikeClip users send bug reports and
 feature requests **without a GitHub account**. The app posts the report
 here; the worker checks it (proof-of-work challenge, per-IP daily limit,
 size caps, field validation, honeypot) and files it as a GitHub Issue
@@ -13,7 +13,7 @@ using a token that only exists in the worker's secrets: never in the app.
 
 2. **GitHub token**: github.com → Settings → Developer settings →
    Fine-grained personal access tokens → Generate new token:
-   - Repository access: *Only select repositories* → `clips-studio`
+   - Repository access: *Only select repositories* → `spikeclip`
    - Permissions → Repository → **Issues: Read and write**
      and **Contents: Read and write** (Contents is only for screenshot
      uploads to the `feedback-assets` branch: skip it to disable those).
@@ -62,7 +62,7 @@ secret:
 
 ```bash
 # as the bot account: Settings -> Developer settings -> fine-grained PAT
-#   repository access: ColinGPT9/clips-studio only
+#   repository access: ColinGPT9/spikeclip only
 #   permissions: Issues Read+Write, Contents Read+Write (screenshots branch)
 npx wrangler secret put GITHUB_TOKEN     # paste the BOT's token
 npx wrangler deploy
@@ -71,7 +71,7 @@ npx wrangler deploy
 Issues then appear from the bot, which is what a reader expects of an automated
 relay.
 
-**Name it as a bot**: `clips-kitty-bot` or similar, with a profile that says
+**Name it as a bot**: `spikeclip-bot` or similar, with a profile that says
 what it is. The goal is accurate attribution: these reports genuinely are not
 the maintainer's, and a clearly-labelled machine account says so. A second
 account posing as a *person* would be the opposite, and would breach GitHub's

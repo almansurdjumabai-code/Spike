@@ -116,7 +116,7 @@ the collector cannot reconstruct an exact count for the partial bucket. Returned
 
 ```http
 PUT /stream-workflows/twitch:123/vod-mapping
-X-Clips-Kitty-Session: <desktop session>
+X-SpikeClip-Session: <desktop session>
 Content-Type: application/json
 
 {"broadcaster_id":"123","vod_id":"456","stream_id":"789","stream_start":"2026-10-24T12:00:00Z","offset_seconds":-12.0,"source_offset_seconds":0.0,"source_id":"sha256:replace-with-host-source-info-id","verified":true}
@@ -198,7 +198,7 @@ persisted or exposed.
 
 ## Local application API
 
-Every route below requires the desktop `X-Clips-Kitty-Session` header. These are
+Every route below requires the desktop `X-SpikeClip-Session` header. These are
 trusted application routes; pipeline plugins use their run-scoped SDK grant.
 
 | Method | Path | Purpose |
