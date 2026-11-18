@@ -15,7 +15,7 @@
 
 # Extractors break whenever a site changes, so this is the one dependency
 # you always want newest. No ceiling.
-yt-dlp>=2026.8.19
+yt-dlp>=2026.10.26
 # YouTube's player JavaScript solver scripts for the YouTube cookies fallback
 # (run by the bundled QuickJS, scripts/fetch_quickjs.py). Bump with yt-dlp: it
 # expects the version in yt_dlp/extractor/youtube/jsc/_builtin/vendor/_info.py.
