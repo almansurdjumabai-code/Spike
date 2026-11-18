@@ -46,9 +46,13 @@ ENV SPIKECLIP_VERSION=${SPIKECLIP_VERSION} \
     PYTHONUNBUFFERED=1
 
 # Downloads, clips and the database live on a volume, never in the image.
+# The container starts as root only long enough for docker-entrypoint.sh to
+# hand /data to this user: cloud disks (Render, Fly, Railway) are mounted
+# root-owned at run time, hiding any chown done while building the image.
 RUN useradd --create-home --uid 10001 spikeclip \
-    && mkdir -p /data && chown spikeclip:spikeclip /data /app
-USER spikeclip
+    && mkdir -p /data && chown spikeclip:spikeclip /data /app \
+    && sed -i 's/\r$//' /app/docker-entrypoint.sh \
+    && chmod +x /app/docker-entrypoint.sh
 VOLUME ["/data"]
 
 EXPOSE 8765
@@ -59,4 +63,5 @@ EXPOSE 8765
 HEALTHCHECK --interval=30s --timeout=5s --start-period=60s \
     CMD python -c "import os,urllib.request; urllib.request.urlopen(f'http://127.0.0.1:{os.environ.get(\"PORT\",\"8765\")}/health', timeout=4)" || exit 1
 
+ENTRYPOINT ["/app/docker-entrypoint.sh"]
 CMD ["python", "main.py", "serve"]

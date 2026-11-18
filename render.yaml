@@ -1,0 +1,44 @@
+# Render Blueprint: the SpikeClip backend with its persistent storage.
+#
+# Deploy: https://dashboard.render.com/blueprint/new?repo=https://github.com/almansurdjumabai-code/Spike
+# Render reads this file, shows the price, and creates everything on "Apply".
+#
+# The frontend is not here: it is a static site on Vercel
+# (https://spikeclip-app.vercel.app), see DEPLOY.md.
+
+services:
+  - type: web
+    name: spikeclip-backend
+    runtime: docker
+    rootDir: backend
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    region: frankfurt
+    # Video work needs memory: the engine is developed against 16 GB and an
+    # hour of source is about the limit at 12 GB (8 GB analyses a video and
+    # then renders nothing). "pro max" = 16 GB RAM / 4 CPU. "pro plus"
+    # (8 GB) is cheaper and fine for short videos; anything smaller is not.
+    plan: pro max
+    healthCheckPath: /health
+    # A disk pins the service to one instance, which this needs anyway: one
+    # worker processes the queue, kept in SQLite on the disk.
+    disk:
+      name: spikeclip-data
+      mountPath: /data
+      # Source downloads, rendered clips, the database and the model cache.
+      # Can be grown later in the dashboard, never shrunk.
+      sizeGB: 50
+    envVars:
+      # Generated once by Render. Copy it from Environment in the dashboard:
+      # the website asks for it on first visit.
+      - key: SPIKECLIP_API_TOKEN
+        generateValue: true
+      - key: SPIKECLIP_CORS_ORIGINS
+        value: https://spikeclip-app.vercel.app,https://spikeclip-eight.vercel.app
+      # The service's own *.onrender.com name is allowed automatically
+      # (RENDER_EXTERNAL_HOSTNAME). With a custom domain, add
+      # SPIKECLIP_ALLOWED_HOSTS=api.your-domain in the dashboard.
+      - key: SPIKECLIP_DATA_DIR
+        value: /data
+      - key: SPIKECLIP_VERSION
+        value: 2.1.0

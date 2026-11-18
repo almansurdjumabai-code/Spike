@@ -10,7 +10,10 @@ none of them is set, so the desktop app behaves exactly as before.
     SPIKECLIP_CORS_ORIGINS     comma-separated origins of the web frontend,
                                e.g. https://app.spikeclip.example
     SPIKECLIP_ALLOWED_HOSTS    comma-separated Host names the API answers to,
-                               e.g. api.spikeclip.example ("*" for any)
+                               e.g. api.spikeclip.example ("*" for any).
+                               On Render, RENDER_EXTERNAL_HOSTNAME (set by the
+                               platform: the service's *.onrender.com name) is
+                               added automatically.
     SPIKECLIP_INSECURE_NO_AUTH set to 1 to allow binding a public interface
                                without a token (local Docker only)
 
@@ -52,7 +55,7 @@ def cors_origins() -> list[str]:
 
 
 def allowed_hosts() -> list[str]:
-    extra = _csv("SPIKECLIP_ALLOWED_HOSTS")
+    extra = _csv("SPIKECLIP_ALLOWED_HOSTS") + _csv("RENDER_EXTERNAL_HOSTNAME")
     return ["*"] if "*" in extra else LOCAL_HOSTS + extra
 
 

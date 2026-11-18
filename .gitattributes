@@ -10,3 +10,4 @@ vendor/** linguist-vendored
 *.model binary
 *.mp4  binary
 *.png  binary
+*.sh text eol=lf

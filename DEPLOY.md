@@ -43,7 +43,20 @@ docker build -t spikeclip-backend --build-arg SPIKECLIP_VERSION=2.1.0 backend/
 docker run -p 8765:8765 -v spikeclip-data:/data --env-file backend/.env spikeclip-backend
 ```
 
-На Render / Railway / Fly.io / Google Cloud Run укажите `backend/` как корень сборки (Dockerfile подхватится сам), задайте переменные выше и подключите постоянный диск в `/data`. Образ публикуется и в GHCR воркфлоу `.github/workflows/docker-image.yml` (при пуше тега).
+### Render (готовый Blueprint)
+
+В корне лежит [`render.yaml`](render.yaml): веб-сервис из `backend/Dockerfile` и **постоянный диск 50 ГБ в `/data`** (видео, клипы, SQLite-база и кэш моделей). Токен Render генерирует сам. CORS уже настроен на `spikeclip-app.vercel.app`, а домен `*.onrender.com` бэкенд разрешает автоматически.
+
+1. Откройте https://dashboard.render.com/blueprint/new?repo=https://github.com/almansurdjumabai-code/Spike, дайте Render доступ к репозиторию, проверьте цену и нажмите **Apply**.
+2. Когда сервис поднимется, скопируйте его адрес (`https://spikeclip-backend-….onrender.com`) и значение `SPIKECLIP_API_TOKEN` (Environment).
+3. В Vercel задайте `VITE_API_BASE=<адрес>` и сделайте Redeploy фронтенда.
+4. Откройте сайт и введите токен. Затем в Settings → AI выберите облачного провайдера (OpenRouter): Ollama на Render не запускается.
+
+Диск у Render доступен только на платных тарифах. Он привязывает сервис к одному экземпляру, а при деплое сервис ненадолго перезапускается — для этой архитектуры это нормально.
+
+### Другие платформы
+
+На Railway / Fly.io / Google Cloud Run укажите `backend/` как корень сборки (Dockerfile подхватится сам), задайте переменные выше и подключите постоянный диск в `/data`. Образ публикуется и в GHCR воркфлоу `.github/workflows/docker-image.yml` (при пуше тега).
 
 ### Ресурсы
 

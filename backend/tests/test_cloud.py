@@ -93,6 +93,12 @@ def test_unknown_hosts_are_refused(monkeypatch):
     assert client.get("/health", headers={"Host": "evil.test"}).status_code == 400
 
 
+def test_render_s_own_host_name_is_allowed(monkeypatch):
+    monkeypatch.delenv("SPIKECLIP_ALLOWED_HOSTS", raising=False)
+    monkeypatch.setenv("RENDER_EXTERNAL_HOSTNAME", "spikeclip-backend.onrender.com")
+    assert "spikeclip-backend.onrender.com" in cloud.allowed_hosts()
+
+
 def test_a_public_bind_needs_a_token(monkeypatch):
     monkeypatch.delenv("SPIKECLIP_API_TOKEN", raising=False)
     monkeypatch.delenv("SPIKECLIP_INSECURE_NO_AUTH", raising=False)
