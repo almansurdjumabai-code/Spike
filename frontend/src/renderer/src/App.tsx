@@ -19,25 +19,24 @@ import { useEvents } from './lib/useEvents'
 import { useQueueNotifications } from './lib/queueNotifications'
 import { ApprovalCards, ClipUpdatesProvider } from './components/ApprovalCard'
 import { OPEN_MARKETPLACE, checkOnlineListAtStart } from './lib/plugins'
-import mascot from './assets/mascot.png'
 
 type Page = 'dashboard' | 'queue' | 'watch' | 'studio' | 'creators' | 'marketplace' | 'models' | 'settings'
 
 const GITHUB_URL = 'https://github.com/ColinGPT9/spikeclip'
 
 const NAV: { id: Page; label: string; icon: string }[] = [
-  { id: 'dashboard', label: 'Dashboard', icon: '◧' },
-  { id: 'queue', label: 'Queue', icon: '≡' },
-  { id: 'watch', label: 'Watched channels', icon: '◎' },
+  { id: 'dashboard', label: 'Dashboard', icon: '🏠' },
+  { id: 'queue', label: 'Queue', icon: '📋' },
+  { id: 'watch', label: 'Watched channels', icon: '📡' },
   // Renamed in 1.1.3. The previous label matched an existing product closely
   // enough to block the Microsoft Store listing, so do not change it back —
   // "Clip Editor" is also just what the page is.
-  { id: 'studio', label: 'Clip Editor', icon: '✂' },
-  { id: 'creators', label: 'Creators', icon: '◉' },
+  { id: 'studio', label: 'Clip Editor', icon: '✂️' },
+  { id: 'creators', label: 'Creators', icon: '🎙️' },
   // Community pipelines: browse the registry, install, manage (plugins/).
-  { id: 'marketplace', label: 'Marketplace', icon: '⊞' },
-  { id: 'models', label: 'Models', icon: '⬢' },
-  { id: 'settings', label: 'Settings', icon: '⚙' }
+  { id: 'marketplace', label: 'Marketplace', icon: '🧩' },
+  { id: 'models', label: 'Models', icon: '🧠' },
+  { id: 'settings', label: 'Settings', icon: '⚙️' }
 ]
 
 export interface StudioTarget {
@@ -157,38 +156,32 @@ export default function App(): JSX.Element {
   return (
     <ClipUpdatesProvider><div className="flex h-screen" key={locale}>
       <ApprovalCards onOpen={videoId => { setStudioTarget({videoId}); setPage('studio') }} />
-      <aside className="w-52 shrink-0 bg-surface border-r border-raised/60 flex flex-col">
+      <aside className="vc-side w-60 shrink-0 flex flex-col">
         {/* Same lockup as the website header: Clippy, then the name and
             tagline stacked beside him. `min-w-0` on the text column so a
             longer translated tagline wraps instead of pushing Clippy out of
             the sidebar — several of the 19 locales are wordier than English. */}
-        <div className="px-5 py-5 flex items-center gap-2.5">
-          <img
-            src={mascot}
-            alt=""
-            width={34}
-            height={34}
-            className="shrink-0 w-[34px] h-[34px]"
-          />
+        <div className="px-5 pt-6 pb-5 flex items-center gap-3">
+          <span className="vc-side-mark" aria-hidden>
+            ⚡
+          </span>
           <div className="min-w-0">
-            <h1 className="text-lg font-bold leading-tight notranslate" translate="no">
-              Spike<span className="text-accent">Clip</span>
+            <h1 className="vc-side-logo notranslate" translate="no">
+              Spike<span className="clip">Clip</span>
             </h1>
-            <p className="text-xs text-muted mt-px">{t('local-first AI clipping')}</p>
+            <p className="text-[11px] text-muted mt-1 leading-snug">{t('local-first AI clipping')}</p>
           </div>
         </div>
-        <nav className="flex-1 px-3 space-y-1">
+        <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
           {NAV.map((item) => (
             <button
               key={item.id}
               onClick={() => setPage(item.id)}
-              className={`w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition-colors ${
-                page === item.id
-                  ? 'bg-accent/15 text-accent font-medium'
-                  : 'text-muted hover:bg-raised hover:text-ink'
-              }`}
+              className={`vc-nav-item${page === item.id ? ' is-active' : ''}`}
             >
-              <span aria-hidden>{item.icon}</span>
+              <span className="vc-nav-ico" aria-hidden>
+                {item.icon}
+              </span>
               {t(item.label)}
               {item.id === 'watch' && watching > 0 && (
                 <span
@@ -210,9 +203,11 @@ export default function App(): JSX.Element {
           {window.studio?.platform === 'browser' && (
             <button
               onClick={() => void logout().then(() => window.location.assign('/'))}
-              className="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-muted hover:bg-raised hover:text-ink transition-colors"
+              className="vc-nav-item"
             >
-              <span aria-hidden>⎋</span>
+              <span className="vc-nav-ico" aria-hidden>
+                🚪
+              </span>
               {t('Log out')}
             </button>
           )}
@@ -237,7 +232,7 @@ export default function App(): JSX.Element {
           </p>
         </div>
       </aside>
-      <main className="flex-1 overflow-y-auto flex flex-col">
+      <main className="flex-1 overflow-y-auto flex flex-col vc-page-enter" key={page}>
         <UpdateBanner />
         {page === 'dashboard' && <Dashboard onOpenInStudio={openInStudio} />}
         {page === 'queue' && <Queue onOpenInStudio={(videoId) => openInStudio(videoId)} />}

@@ -1,22 +1,67 @@
 @import 'tailwindcss';
 
-/* Navy + sky design tokens (see DESIGN-V2.md, "Visual theme") */
+/* "Vice sunset" design tokens — the same look as the web landing page:
+   night-purple surfaces, neon pink accent, sunset gold and cyan highlights. */
 @theme {
-  --color-base: #0a1628;
-  --color-surface: #13243d;
-  --color-raised: #1c3354;
-  --color-accent: #38bdf8;
-  --color-accent-strong: #0ea5e9;
-  --color-ink: #f1f5f9;
-  --color-muted: #94a3b8;
-  --color-success: #34d399;
-  --color-warn: #fbbf24;
-  --color-error: #f87171;
+  --color-base: #0d0722;
+  --color-surface: #170c33;
+  --color-raised: #2a1757;
+  --color-accent: #ff4fa3;
+  --color-accent-strong: #ff2e7e;
+  --color-ink: #fff6fb;
+  --color-muted: #b9a8d9;
+  --color-success: #5effc1;
+  --color-warn: #ffd56b;
+  --color-error: #ff5d7a;
+  --color-gold: #ffd56b;
+  --color-sunset: #ff9a52;
+  --color-cyan: #39f0ff;
+  --color-violet: #a855f7;
+  --font-display: 'Anton', 'Impact', sans-serif;
+}
+
+:root {
+  --vc-sunset: linear-gradient(100deg, #ffd56b 0%, #ff9a52 30%, #ff4fa3 65%, #a855f7 100%);
+  --vc-neon: linear-gradient(90deg, #39f0ff, #ff4fa3);
+  --vc-glass: linear-gradient(160deg, rgb(255 255 255 / 0.075), rgb(255 255 255 / 0.02));
+  color-scheme: dark;
 }
 
 body {
   @apply bg-base text-ink antialiased;
-  font-family: 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+}
+
+/* The studio's backdrop: sunset glow from the top right, a violet haze, and
+   a faint skyline with palms along the bottom. Fixed, behind everything. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    radial-gradient(900px 520px at 100% -10%, rgb(255 79 163 / 0.16), transparent 70%),
+    radial-gradient(700px 500px at 85% 0%, rgb(255 154 82 / 0.1), transparent 70%),
+    radial-gradient(900px 700px at 0% 100%, rgb(109 59 242 / 0.18), transparent 70%),
+    var(--color-base);
+}
+body::after {
+  content: '';
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 180px;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.18;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 180' preserveAspectRatio='none'><g fill='%237a3fd0'><rect x='40' y='90' width='60' height='90'/><rect x='110' y='50' width='44' height='130'/><rect x='170' y='100' width='70' height='80'/><rect x='420' y='70' width='52' height='110'/><rect x='480' y='30' width='40' height='150'/><rect x='530' y='95' width='80' height='85'/><rect x='820' y='60' width='60' height='120'/><rect x='890' y='20' width='46' height='160'/><rect x='945' y='85' width='70' height='95'/><rect x='1180' y='75' width='56' height='105'/><rect x='1245' y='40' width='42' height='140'/><rect x='1300' y='100' width='90' height='80'/></g><g fill='%23ff4fa3'><path d='M300 180 C302 130 310 90 326 60 L332 62 C318 92 312 130 312 180Z'/><path d='M329 60 c20 -14 44 -12 60 2 c-20 -6 -40 -4 -60 -2z M329 60 c-18 -14 -40 -14 -56 -2 c18 -4 38 -2 56 2z M329 60 c6 -20 22 -30 40 -30 c-16 8 -28 18 -40 30z M329 60 c-6 -18 -20 -28 -36 -30 c14 10 26 18 36 30z'/><path d='M1480 180 C1482 140 1488 105 1502 80 L1508 82 C1496 106 1491 140 1491 180Z'/><path d='M1505 80 c18 -12 40 -10 54 2 c-18 -5 -36 -3 -54 -2z M1505 80 c-16 -12 -36 -12 -50 -2 c16 -4 34 -2 50 2z M1505 80 c6 -18 20 -26 36 -26 c-14 7 -26 16 -36 26z'/></g></svg>") bottom / 100% 100% no-repeat;
+}
+
+::selection {
+  background: rgb(255 79 163 / 0.45);
+  color: #fff;
 }
 
 /* Accessibility (WCAG 2.1 / AODA):
@@ -25,7 +70,7 @@ body {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
-  border-radius: 4px;
+  border-radius: 6px;
 }
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -40,21 +85,225 @@ body {
 /* Shared primitives (Tailwind v4: custom classes can't @apply each other,
    so the button base styles are repeated in both variants) */
 .card {
-  @apply bg-surface rounded-xl p-4 border border-raised/60;
+  @apply rounded-2xl p-4;
+  background: var(--vc-glass), rgb(23 12 51 / 0.72);
+  border: 1px solid rgb(255 255 255 / 0.09);
+  box-shadow: 0 20px 50px -30px rgb(0 0 0 / 0.8), inset 0 1px 0 rgb(255 255 255 / 0.05);
+  backdrop-filter: blur(14px);
+  transition: border-color 0.25s, box-shadow 0.25s;
 }
+.card:hover {
+  border-color: rgb(255 79 163 / 0.22);
+}
+
 .btn-accent {
-  @apply px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed bg-accent text-base hover:bg-accent-strong;
+  @apply px-4 py-2 rounded-xl font-bold disabled:opacity-40 disabled:cursor-not-allowed;
+  position: relative;
+  color: #1b0730;
+  background: var(--vc-sunset);
+  background-size: 160% 100%;
+  background-position: 0 0;
+  box-shadow: 0 8px 26px -10px rgb(255 79 163 / 0.85), inset 0 1px 0 rgb(255 255 255 / 0.45);
+  transition: transform 0.15s ease, box-shadow 0.25s ease, background-position 0.4s ease, filter 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-accent:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background-position: 100% 0;
+  box-shadow: 0 12px 34px -8px rgb(255 79 163 / 1), inset 0 1px 0 rgb(255 255 255 / 0.5);
+}
+.btn-accent:active:not(:disabled) {
+  transform: translateY(0) scale(0.97);
 }
 .btn-ghost {
-  @apply px-4 py-2 rounded-lg font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed bg-raised text-ink hover:bg-raised/70;
+  @apply px-4 py-2 rounded-xl font-semibold text-ink disabled:opacity-40 disabled:cursor-not-allowed;
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  transition: transform 0.15s ease, background 0.2s, border-color 0.2s, color 0.2s;
 }
+.btn-ghost:hover:not(:disabled) {
+  background: rgb(255 79 163 / 0.12);
+  border-color: rgb(255 79 163 / 0.45);
+  transform: translateY(-1px);
+}
+.btn-ghost:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
 /* Disabled matches .btn-ghost / .btn-accent above: a field that cannot be
    used has to look it, or "greyed out until it applies" reads as broken. */
 .input {
-  @apply bg-raised text-ink rounded-lg px-3 py-2 w-full outline-none border border-transparent focus:border-accent placeholder:text-muted/60 disabled:opacity-40 disabled:cursor-not-allowed;
+  @apply text-ink rounded-xl px-3 py-2 w-full outline-none placeholder:text-muted/60 disabled:opacity-40 disabled:cursor-not-allowed;
+  background: rgb(8 3 20 / 0.45);
+  border: 1px solid rgb(255 255 255 / 0.12);
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.input:hover:not(:disabled) {
+  border-color: rgb(255 255 255 / 0.22);
+}
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 4px rgb(255 79 163 / 0.18);
+  background: rgb(8 3 20 / 0.6);
+}
+select.input option {
+  background: #170c33;
+  color: var(--color-ink);
 }
 .label {
-  @apply text-xs uppercase tracking-wider text-muted;
+  @apply text-xs uppercase tracking-wider text-muted font-semibold;
+}
+
+/* Page titles: the landing's display type, in sunset. */
+main h1.text-xl.font-bold,
+main h2.text-2xl.font-bold,
+main h2.text-xl.font-bold {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(30px, 3.2vw, 44px);
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  background: var(--vc-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 4px 20px rgb(255 79 163 / 0.3));
+}
+
+/* Checkboxes and radios in the theme. */
+input[type='checkbox'],
+input[type='radio'] {
+  appearance: none;
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  border-radius: 6px;
+  border: 1.5px solid rgb(255 255 255 / 0.3);
+  background: rgb(8 3 20 / 0.5);
+  display: inline-grid;
+  place-content: center;
+  cursor: pointer;
+  vertical-align: middle;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+input[type='radio'] {
+  border-radius: 50%;
+}
+input[type='checkbox']::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+  transform: scale(0);
+  transition: transform 0.15s cubic-bezier(0.2, 0.9, 0.2, 1.4);
+  background: #1b0730;
+  clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+input[type='radio']::before {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  transform: scale(0);
+  transition: transform 0.15s;
+  background: #1b0730;
+}
+input[type='checkbox']:checked,
+input[type='radio']:checked {
+  border-color: transparent;
+  background: var(--vc-sunset);
+  box-shadow: 0 0 14px rgb(255 79 163 / 0.55);
+}
+input[type='checkbox']:checked::before,
+input[type='radio']:checked::before {
+  transform: scale(1);
+}
+input[type='checkbox']:hover:not(:disabled),
+input[type='radio']:hover:not(:disabled) {
+  border-color: var(--color-accent);
+}
+input[type='checkbox']:disabled,
+input[type='radio']:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+input[type='range'] {
+  accent-color: var(--color-accent);
+}
+
+/* Progress bars (track: h-2 rounded-full bg-raised; fill: h-full bg-accent):
+   sunset gradient with a moving sheen and a glow. */
+.h-full.bg-accent.rounded-full,
+.h-full.rounded-full.bg-accent {
+  background: var(--vc-sunset);
+  box-shadow: 0 0 14px rgb(255 79 163 / 0.6);
+  position: relative;
+  overflow: hidden;
+}
+.h-full.bg-accent.rounded-full::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 20%, rgb(255 255 255 / 0.55) 50%, transparent 80%);
+  transform: translateX(-100%);
+  animation: vc-sheen 1.8s ease-in-out infinite;
+}
+@keyframes vc-sheen {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* "Connecting…", "Loading…" and other waiting text pulses gently. */
+.animate-pulse {
+  animation: vc-breathe 1.6s ease-in-out infinite;
+}
+@keyframes vc-breathe {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+/* A loader the studio can use anywhere: <span className="vc-loader" /> */
+.vc-loader {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  border: 2.5px solid rgb(255 255 255 / 0.15);
+  border-top-color: var(--color-accent);
+  border-right-color: var(--color-gold);
+  animation: vc-spin 0.8s linear infinite;
+  vertical-align: middle;
+}
+@keyframes vc-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(255 79 163 / 0.35) transparent;
+}
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(255 79 163 / 0.3);
+  border-radius: 999px;
+  border: 3px solid transparent;
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(255 79 163 / 0.55);
+  background-clip: padding-box;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 /* Scroll containers that navigate by gesture (timeline pan/zoom) — no
@@ -64,4 +313,125 @@ body {
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
+}
+
+/* ------------------------------------------------------------ sidebar */
+.vc-side {
+  background:
+    linear-gradient(180deg, rgb(255 79 163 / 0.08), transparent 30%),
+    linear-gradient(0deg, rgb(109 59 242 / 0.12), transparent 40%),
+    rgb(17 8 40 / 0.82);
+  border-right: 1px solid rgb(255 255 255 / 0.08);
+  backdrop-filter: blur(18px);
+}
+.vc-side-logo {
+  font-family: var(--font-display);
+  font-size: 26px;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+.vc-side-logo .clip {
+  background: var(--vc-sunset);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+.vc-side-mark {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-size: 18px;
+  background: linear-gradient(135deg, #ff9a52, #ff4fa3 55%, #6d3bf2);
+  box-shadow: 0 0 24px rgb(255 79 163 / 0.5);
+}
+.vc-nav-item {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 9px 10px;
+  border-radius: 14px;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-muted);
+  transition: background 0.2s, color 0.2s, transform 0.15s;
+}
+.vc-nav-item:hover {
+  background: rgb(255 255 255 / 0.06);
+  color: var(--color-ink);
+}
+.vc-nav-item:active {
+  transform: scale(0.98);
+}
+.vc-nav-ico {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  font-size: 15px;
+  background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.08);
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+}
+.vc-nav-item.is-active {
+  color: #fff;
+  background: linear-gradient(90deg, rgb(255 79 163 / 0.22), rgb(109 59 242 / 0.12));
+  box-shadow: inset 0 0 0 1px rgb(255 79 163 / 0.3);
+}
+.vc-nav-item.is-active::before {
+  content: '';
+  position: absolute;
+  left: -12px;
+  top: 10px;
+  bottom: 10px;
+  width: 4px;
+  border-radius: 0 4px 4px 0;
+  background: var(--vc-sunset);
+  box-shadow: 0 0 12px rgb(255 79 163 / 0.9);
+}
+.vc-nav-item.is-active .vc-nav-ico {
+  color: #1b0730;
+  background: var(--vc-sunset);
+  border-color: transparent;
+  box-shadow: 0 0 16px rgb(255 79 163 / 0.6);
+}
+.vc-page-enter {
+  animation: vc-page-in 0.35s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}
+@keyframes vc-page-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+/* The dashboard's "paste a link" card: the studio's launch pad. */
+.card.vc-launch {
+  position: relative;
+  border-color: rgb(255 79 163 / 0.28);
+  background:
+    radial-gradient(600px 160px at 0% 0%, rgb(255 79 163 / 0.16), transparent 70%),
+    radial-gradient(500px 160px at 100% 100%, rgb(57 240 255 / 0.08), transparent 70%),
+    var(--vc-glass),
+    rgb(23 12 51 / 0.78);
+  box-shadow: 0 24px 60px -30px rgb(255 79 163 / 0.6), inset 0 1px 0 rgb(255 255 255 / 0.06);
+}
+.input.vc-url-input {
+  height: 52px;
+  padding-left: 46px;
+  font-size: 15px;
+  border-radius: 16px;
+  background:
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M13 2 4 14h7l-1 8 9-12h-7z' fill='%23ff4fa3'/></svg>") 15px 50% / 20px no-repeat,
+    rgb(8 3 20 / 0.55);
+}
+.input.vc-url-input:focus {
+  box-shadow: 0 0 0 4px rgb(255 79 163 / 0.2), 0 0 30px -6px rgb(255 79 163 / 0.6);
 }

@@ -950,7 +950,7 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
 
   return (
     <div className="space-y-3">
-      <div className="card space-y-2">
+      <div className="card vc-launch space-y-2">
         {slots.map((slot, n) => (
           <div key={slot.key}>
             <div className="flex gap-3 items-center flex-wrap">
@@ -965,7 +965,7 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
                 />
               ) : (
                 <input
-                  className="input w-72 max-w-full"
+                  className="input vc-url-input w-72 max-w-full"
                   placeholder={t('Paste a YouTube, Twitch, or Kick URL…')}
                   aria-label={`Video URL ${n + 1}`}
                   value={slot.url}

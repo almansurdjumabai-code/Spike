@@ -2,6 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import AppBoundary from './components/AppBoundary'
+import '@fontsource/anton/400.css'
+import '@fontsource-variable/inter'
 import './theme.css'
 import { applyAppearance, loadAppearance } from './lib/appearance'
 import { installBrowserShim } from './lib/browserShim'
@@ -25,7 +27,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         too. A blank window is the one failure that tells nobody anything. */}
     <AppBoundary>
       {/* Web build: the welcome page at /, the studio at /app. */}
-      {inBrowser && !window.location.pathname.startsWith('/app') ? (
+      {(import.meta as unknown as { env: { DEV: boolean } }).env.DEV && window.location.search.includes('studio-preview') ? (
+        // Dev server only: the studio without a backend, to work on its look.
+        <App />
+      ) : inBrowser && !window.location.pathname.startsWith('/app') ? (
         <LandingRoute />
       ) : inBrowser ? (
         <AuthGate>

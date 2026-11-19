@@ -183,14 +183,14 @@ export default function FeedbackHub(): JSX.Element {
   return (
     <>
       <button
-        className="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 transition-colors text-muted hover:bg-raised hover:text-ink"
+        className="vc-nav-item"
         onClick={() => {
           reset()
           setOpen(true)
         }}
         title={t("Report a bug, request a feature, or suggest an improvement — no account needed")}
       >
-        <span aria-hidden>
+        <span className="vc-nav-ico" aria-hidden>
           <Chat />
         </span>
         {t('Feedback')}
