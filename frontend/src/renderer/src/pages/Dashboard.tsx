@@ -9,6 +9,7 @@ import { api } from '../lib/api'
 import { useEvents } from '../lib/useEvents'
 import { useJobWatch } from '../lib/useJobWatch'
 import { t } from '../lib/i18n'
+import { isSimple } from '../lib/edition'
 import type { Clip, Settings, StudioEvent, Video } from '../lib/types'
 
 const DONATE_URL = 'https://paypal.me/clipsstudio'
@@ -67,6 +68,8 @@ export default function Dashboard({
 }: {
   onOpenInStudio: (videoId: string, clipId?: number) => void
 }): JSX.Element {
+  // Customers of the web app see the clipping tools only (lib/edition.ts).
+  const simple = isSimple()
   const [videos, setVideos] = useState<Video[]>([])
   const [settings, setSettings] = useState<Settings | null>(null)
   const [log, setLog] = useState<string[]>([])
@@ -413,7 +416,7 @@ export default function Dashboard({
       <div className="shrink-0 space-y-4">
         <div className="flex items-center justify-between">
           <h2 className="text-2xl font-bold">{t('Dashboard')}</h2>
-          {settings && (
+          {settings && !simple && (
             <span className="bg-raised px-3 py-1.5 rounded-lg text-sm">
               model: <span className="text-accent font-medium">{settings.model}</span>
             </span>
@@ -432,7 +435,7 @@ export default function Dashboard({
           pool's own height does not depend on where the split falls, which is
           what makes the cap below stable. */}
       <div ref={poolRef} className="flex-1 min-h-0 flex flex-col gap-5">
-        <div className="flex-1 min-h-0 grid grid-cols-1 xl:grid-cols-2 gap-5">
+        <div className={`flex-1 min-h-0 grid grid-cols-1 gap-5${simple ? '' : ' xl:grid-cols-2'}`}>
         <section
           ref={videosCardRef}
           className="card flex flex-col overflow-hidden"
@@ -587,6 +590,7 @@ export default function Dashboard({
           </div>
         </section>
 
+        {!simple && (
         <section
           ref={activityCardRef}
           className="card flex flex-col overflow-hidden"
@@ -613,6 +617,7 @@ export default function Dashboard({
             <SystemStats compact />
           </div>
         </section>
+        )}
 
         </div>
 
@@ -633,6 +638,7 @@ export default function Dashboard({
             two cards, a left-to-right gradient ended one half bright and
             started the next half dark, so the seam down the middle read as
             two different colours. */}
+        {!simple && (<>
         <div ref={promoRef} className="shrink-0 grid gap-4 md:grid-cols-2 items-stretch">
           {publishUrl && (
             <div className="card bg-accent/20 border border-accent/40 !py-3 flex flex-col">
@@ -746,6 +752,7 @@ export default function Dashboard({
             <Assistant />
           </div>
         </div>
+        </>)}
       </div>
     </div>
   )

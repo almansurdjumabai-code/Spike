@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { isSimple } from '../lib/edition'
 import {
   DEFAULT_APPEARANCE,
   FONTS,
@@ -770,6 +771,18 @@ function BrandingCard(): JSX.Element {
 }
 
 export default function Settings(): JSX.Element {
+  // Customers of the web app: language and look only (lib/edition.ts).
+  // Storage, AI, models, publishing keys and the rest run the service and
+  // stay with the owner.
+  if (isSimple()) {
+    return (
+      <div className="p-6 space-y-5 max-w-xl">
+        <h2 className="text-2xl font-bold">{t('Settings')}</h2>
+        <LanguageCard />
+        <AppearanceCard />
+      </div>
+    )
+  }
   return (
     <div className="p-6 space-y-5 max-w-xl">
       <h2 className="text-2xl font-bold">{t('Settings')}</h2>

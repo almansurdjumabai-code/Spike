@@ -9,6 +9,7 @@ import Settings from './pages/Settings'
 import Watch from './pages/Watch'
 import FeedbackHub from './components/FeedbackHub'
 import { logout } from './lib/backend'
+import { isSimple } from './lib/edition'
 import ModelSwitcher from './components/ModelSwitcher'
 import SetupWizard, { setupDone } from './components/SetupWizard'
 import UpdateBanner from './components/UpdateBanner'
@@ -23,6 +24,9 @@ import { OPEN_MARKETPLACE, checkOnlineListAtStart } from './lib/plugins'
 type Page = 'dashboard' | 'queue' | 'watch' | 'studio' | 'creators' | 'marketplace' | 'models' | 'settings'
 
 const GITHUB_URL = 'https://github.com/ColinGPT9/spikeclip'
+
+// What a customer of the web app sees: make clips, follow them, edit them.
+const SIMPLE_PAGES: Page[] = ['dashboard', 'queue', 'studio', 'settings']
 
 const NAV: { id: Page; label: string; icon: string }[] = [
   { id: 'dashboard', label: 'Dashboard', icon: '🏠' },
@@ -45,13 +49,15 @@ export interface StudioTarget {
 }
 
 export default function App(): JSX.Element {
+  // Customers of the web app get the simple studio (lib/edition.ts).
+  const simple = isSimple()
   const [page, setPage] = useState<Page>('dashboard')
   const [studioTarget, setStudioTarget] = useState<StudioTarget | null>(null)
   const [creatorTarget, setCreatorTarget] = useState<number | null>(null)
   // First run: walk the creator through what the installer can't bundle
   // (Ollama, a model) before they hit a video that fails for want of it.
   // Settings can re-open it, so this is not a one-shot.
-  const [wizard, setWizard] = useState(!setupDone())
+  const [wizard, setWizard] = useState(!simple && !setupDone())
   useEffect(() => {
     const open = (): void => setWizard(true)
     window.addEventListener('open-setup-wizard', open)
@@ -169,11 +175,11 @@ export default function App(): JSX.Element {
             <h1 className="vc-side-logo notranslate" translate="no">
               Spike<span className="clip">Clip</span>
             </h1>
-            <p className="text-[11px] text-muted mt-1 leading-snug">{t('local-first AI clipping')}</p>
+            <p className="text-[11px] text-muted mt-1 leading-snug">{simple ? t('AI clipping for streamers') : t('local-first AI clipping')}</p>
           </div>
         </div>
         <nav className="flex-1 px-3 space-y-1 overflow-y-auto">
-          {NAV.map((item) => (
+          {NAV.filter((item) => !simple || SIMPLE_PAGES.includes(item.id)).map((item) => (
             <button
               key={item.id}
               onClick={() => setPage(item.id)}
@@ -199,7 +205,7 @@ export default function App(): JSX.Element {
         {/* Pinned below the nav: reachable from every page — bugs don't
             only happen on the Dashboard. */}
         <div className="px-3 pb-1">
-          <FeedbackHub />
+          {!simple && <FeedbackHub />}
           {window.studio?.platform === 'browser' && (
             <button
               onClick={() => void logout().then(() => window.location.assign('/'))}
@@ -212,7 +218,15 @@ export default function App(): JSX.Element {
             </button>
           )}
         </div>
-        <ModelSwitcher />
+        {!simple && <ModelSwitcher />}
+        {simple ? (
+          // The AGPL asks that people using the service can get its source.
+          <div className="px-5 py-3 border-t border-raised/60">
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="text-[10px] text-muted/60 hover:text-accent">
+              {t('Source code')} · AGPL-3.0
+            </a>
+          </div>
+        ) : (
         <div className="px-5 py-4 border-t border-raised/60">
           <a
             href={GITHUB_URL}
@@ -231,6 +245,7 @@ export default function App(): JSX.Element {
               : t('AGPL-3.0 · 100% local · no cloud AI')}
           </p>
         </div>
+        )}
       </aside>
       <main className="flex-1 overflow-y-auto flex flex-col vc-page-enter" key={page}>
         <UpdateBanner />

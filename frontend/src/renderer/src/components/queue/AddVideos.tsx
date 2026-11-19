@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { SIMPLE_TOGGLES, isSimple } from '../../lib/edition'
 import { api } from '../../lib/api'
 import type { CaptionStyle, JobOptions, PipelineChoice } from '../../lib/types'
 import CaptionStyleControls, { DEFAULT_CAPTION_STYLE } from '../CaptionStyleControls'
@@ -1005,6 +1006,7 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
               </button>
 
               {TOGGLES.map((tg) => {
+                if (isSimple() && !SIMPLE_TOGGLES.has(tg.key)) return null
                 // Sports shows once the engine says it has a sport (and stays
                 // while it's on, so it can always be turned off).
                 if (tg.key === 'sport' && offered.length === 0 && !slot.options.sport) return null
@@ -1312,10 +1314,12 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
           >
             + {t('Add video')}
           </button>
+          {!isSimple() && (
           <button className="btn-ghost shrink-0" onClick={addFiles} disabled={full}>
             <Folder className="mr-1.5" />
             {t('Upload video file')}
           </button>
+          )}
           {/* Greyed out until there is an upload, the same way Caption style
               is greyed out until Captions is ticked. A downloaded video takes
               its channel from the source metadata; only a file off your
@@ -1324,7 +1328,7 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
               Shown blank while disabled: a greyed-out box still displaying the
               last creator reads as stuck rather than inapplicable. The value
               is remembered and returns with the next upload. */}
-          <input
+          {!isSimple() && <input
             className="input !w-44 shrink-0"
             placeholder={t('Creator profile')}
             aria-label={t("Creator profile for uploaded files")}
@@ -1339,7 +1343,7 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
               setChannel(e.target.value)
               localStorage.setItem('upload-channel', e.target.value)
             }}
-          />
+          />}
           {settingsBad && (
             <span className="text-xs text-error ml-auto">{t('Fix the pipeline setting marked in red first.')}</span>
           )}
