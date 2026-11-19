@@ -266,7 +266,9 @@ export default function Landing({
           <a href="#clips">Clips</a>
           <a href="#how">How it works</a>
           <a href="#features">Features</a>
-          <a href="#pricing">Pricing</a>
+          <a href="#pricing" className="vc-nav-hot">
+            💸 Pricing<b>−20%</b>
+          </a>
           <a href="#faq">FAQ</a>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>

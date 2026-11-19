@@ -1,5 +1,6 @@
 import '@fontsource/alfa-slab-one/400.css'
-import { useState } from 'react'
+import { useState, type MouseEvent } from 'react'
+import { BigHeli, BigPalm, Bill, CashStack, Coin, Diamond, GoldBars, MoneyBag } from './Decor'
 
 /** Plans: Free, Pro, Max — priced like GTA cash. */
 
@@ -119,10 +120,65 @@ const PLANS: Plan[] = [
   }
 ]
 
+/** Props behind each card: they peek out past its edges. */
+const DECOR: Record<Plan['id'], JSX.Element> = {
+  free: (
+    <>
+      <span className="vc-deco d-palm"><BigPalm /></span>
+      <span className="vc-deco d-coin1"><Coin /></span>
+      <span className="vc-deco d-coin2"><Coin /></span>
+    </>
+  ),
+  pro: (
+    <>
+      <span className="vc-deco d-bag"><MoneyBag /></span>
+      <span className="vc-deco d-cash"><CashStack /></span>
+      <span className="vc-deco d-coin3"><Coin /></span>
+    </>
+  ),
+  max: (
+    <>
+      <span className="vc-deco d-heli"><BigHeli /></span>
+      <span className="vc-deco d-gold"><GoldBars /></span>
+      <span className="vc-deco d-diamond"><Diamond /></span>
+    </>
+  )
+}
+
+/** Tilt a card toward the pointer. */
+function tilt(e: MouseEvent<HTMLDivElement>): void {
+  const el = e.currentTarget
+  const r = el.getBoundingClientRect()
+  const x = (e.clientX - r.left) / r.width - 0.5
+  const y = (e.clientY - r.top) / r.height - 0.5
+  el.style.setProperty('--ry', `${(x * 10).toFixed(2)}deg`)
+  el.style.setProperty('--rx', `${(-y * 8).toFixed(2)}deg`)
+}
+function untilt(e: MouseEvent<HTMLDivElement>): void {
+  e.currentTarget.style.setProperty('--ry', '0deg')
+  e.currentTarget.style.setProperty('--rx', '0deg')
+}
+
 export default function Pricing({ onChoose }: { onChoose: (plan: Plan['id']) => void }): JSX.Element {
   const [yearly, setYearly] = useState(false)
   return (
-    <section className="vc-section" id="pricing">
+    <section className="vc-section vc-pricing" id="pricing">
+      <div className="vc-money-rain" aria-hidden="true">
+        {Array.from({ length: 14 }, (_, i) => (
+          <span
+            key={i}
+            style={{
+              left: `${(i * 7.3 + 3) % 100}%`,
+              animationDelay: `${-i * 1.7}s`,
+              animationDuration: `${11 + (i % 5) * 2.5}s`,
+              transform: `scale(${0.6 + (i % 4) * 0.15})`
+            }}
+          >
+            <Bill />
+          </span>
+        ))}
+      </div>
+      <div className="vc-spotlight" aria-hidden="true" />
       <div className="vc-reveal" style={{ textAlign: 'center' }}>
         <div className="vc-kicker">Pricing</div>
         <h2 className="vc-display vc-h2">
@@ -147,9 +203,14 @@ export default function Pricing({ onChoose }: { onChoose: (plan: Plan['id']) => 
           return (
             <div
               key={p.id}
-              className={`vc-plan vc-reveal${p.popular ? ' is-popular' : ''}`}
+              className={`vc-plan vc-plan-${p.id} vc-reveal${p.popular ? ' is-popular' : ''}`}
               style={{ transitionDelay: `${i * 0.1}s` }}
+              onMouseMove={tilt}
+              onMouseLeave={untilt}
             >
+              <div className="vc-deco-layer" aria-hidden="true">
+                {DECOR[p.id]}
+              </div>
               {p.popular && <div className="vc-plan-ribbon">🔥 Most popular</div>}
               <div className="vc-plan-inner">
                 <div className="vc-plan-head">
