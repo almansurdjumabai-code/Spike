@@ -73,3 +73,61 @@ export async function checkBackendAccess(): Promise<BackendAccess> {
     return 'unreachable'
   }
 }
+
+// ---- Accounts (web app, cloud backend) ------------------------------------
+
+export interface SpikeUser {
+  id: number
+  email: string
+  name: string
+}
+
+export type SignupMode = 'open' | 'invite' | 'closed'
+
+async function authPost<T>(path: string, body: unknown): Promise<T> {
+  const res = await fetch(`${API_BASE}${path}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body)
+  })
+  const data = (await res.json().catch(() => ({}))) as { detail?: unknown }
+  if (!res.ok) {
+    const detail = typeof data.detail === 'string' ? data.detail : 'Something went wrong. Try again.'
+    throw new Error(detail)
+  }
+  return data as T
+}
+
+export async function signupMode(): Promise<SignupMode> {
+  try {
+    const res = await fetch(`${API_BASE}/auth/config`)
+    return res.ok ? ((await res.json()) as { signup: SignupMode }).signup : 'closed'
+  } catch {
+    return 'closed'
+  }
+}
+
+export async function register(input: {
+  email: string
+  password: string
+  name: string
+  invite: string
+}): Promise<SpikeUser> {
+  const out = await authPost<{ token: string; user: SpikeUser }>('/auth/register', input)
+  setApiToken(out.token)
+  return out.user
+}
+
+export async function login(email: string, password: string): Promise<SpikeUser> {
+  const out = await authPost<{ token: string; user: SpikeUser }>('/auth/login', { email, password })
+  setApiToken(out.token)
+  return out.user
+}
+
+export async function logout(): Promise<void> {
+  try {
+    await fetch(`${API_BASE}/auth/logout`, { method: 'POST' })
+  } finally {
+    setApiToken(null)
+  }
+}

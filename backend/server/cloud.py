@@ -39,7 +39,11 @@ LOCAL_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]  # Vite dev s
 # Reachable without the token: the health probe the frontend uses to find out
 # whether it needs to ask for one, and OAuth redirects a provider sends the
 # browser back to (those carry their own single-use state).
-PUBLIC_PATHS = ("/health",)
+PUBLIC_PATHS = ("/health", "/auth/config", "/auth/register", "/auth/login")
+
+# Set by server/accounts.py: token -> is it a live user session? The admin
+# token (SPIKECLIP_API_TOKEN) always works as well.
+SESSION_CHECK = None
 
 
 def _csv(name: str) -> list[str]:
@@ -101,7 +105,9 @@ class TokenAuthMiddleware:
         if is_public(scope.get("path", "")):
             return await self.app(scope, receive, send)
         presented = self._presented(scope)
-        if presented is not None and hmac.compare_digest(presented, self.token):
+        if presented is not None and (
+                hmac.compare_digest(presented, self.token)
+                or (SESSION_CHECK is not None and SESSION_CHECK(presented.decode("latin-1")))):
             return await self.app(scope, receive, send)
 
         if scope["type"] == "websocket":

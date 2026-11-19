@@ -33,6 +33,10 @@ services:
       # the website asks for it on first visit.
       - key: SPIKECLIP_API_TOKEN
         generateValue: true
+      # Sign-up on the website needs this code (all accounts share one
+      # engine and library, so sign-up is not open to the public).
+      - key: SPIKECLIP_INVITE_CODE
+        generateValue: true
       - key: SPIKECLIP_CORS_ORIGINS
         value: https://spikeclip-app.vercel.app,https://spikeclip-eight.vercel.app
       # The service's own *.onrender.com name is allowed automatically

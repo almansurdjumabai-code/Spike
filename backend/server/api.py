@@ -718,6 +718,12 @@ def create_app(config: dict, settings_path: Path) -> FastAPI:
 
     data_dir = Path(config["paths"]["data_dir"]).resolve()
     db_path = data_dir / "state.db"
+
+    # Web-app accounts (sign up / log in), only behind a cloud token.
+    if auth_required:
+        from server import accounts as accounts_mod
+
+        cloud.SESSION_CHECK = accounts_mod.install(app, data_dir).session_valid
     worker = Worker(config)
 
     def db() -> StateDB:

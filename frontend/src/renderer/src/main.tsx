@@ -6,7 +6,7 @@ import './theme.css'
 import { applyAppearance, loadAppearance } from './lib/appearance'
 import { installBrowserShim } from './lib/browserShim'
 import { installAuthFetch } from './lib/backend'
-import TokenGate from './components/TokenGate'
+import AuthGate from './components/AuthGate'
 
 // Before anything renders. Under Electron this returns immediately; it only
 // does something when the renderer is opened in a browser, which is how the
@@ -25,9 +25,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         too. A blank window is the one failure that tells nobody anything. */}
     <AppBoundary>
       {inBrowser ? (
-        <TokenGate>
+        <AuthGate>
           <App />
-        </TokenGate>
+        </AuthGate>
       ) : (
         <App />
       )}
