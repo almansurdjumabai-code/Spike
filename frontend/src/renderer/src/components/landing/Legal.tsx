@@ -14,9 +14,9 @@ import type { ReactNode } from 'react'
 export const LEGAL = {
   product: 'SpikeClip',
   // The person or registered business that sells SpikeClip (e.g. your IP in Kazakhstan).
-  seller: 'SpikeClip',
+  seller: 'Djumabai Almansur Ardakovich',
   country: 'the Republic of Kazakhstan',
-  email: '', // support address shown on these pages, e.g. support@yourdomain.com
+  email: 'almansurdjumabai@gmail.com', // support address shown on these pages
   updated: 'November 20, 2026'
 }
 

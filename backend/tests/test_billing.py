@@ -44,6 +44,7 @@ def _client(monkeypatch, tmp_path):
     monkeypatch.setenv("SPIKECLIP_OPEN_SIGNUP", "1")
     monkeypatch.setenv("PADDLE_WEBHOOK_SECRET", SECRET)
     monkeypatch.setenv("PADDLE_CLIENT_TOKEN", "test_abc")
+    monkeypatch.setenv("PADDLE_ENV", "sandbox")
     for k, v in PRICES.items():
         monkeypatch.setenv(k, v)
     app = FastAPI()
@@ -95,3 +96,12 @@ def test_unknown_prices_and_other_events_are_ignored(monkeypatch, tmp_path):
     client = _client(monkeypatch, tmp_path)
     assert not _post(client, _event(price="pri_someone_else")).json()["stored"]
     assert not _post(client, {"event_type": "transaction.completed", "data": {}}).json()["stored"]
+
+
+def test_live_defaults_need_only_the_webhook_secret(monkeypatch):
+    for k in ("PADDLE_ENV", "PADDLE_CLIENT_TOKEN", *PRICES):
+        monkeypatch.delenv(k, raising=False)
+    cfg = billing.config()
+    assert cfg["enabled"] and cfg["environment"] == "production"
+    assert cfg["client_token"].startswith("live_") and all(v.startswith("pri_") for v in cfg["prices"].values())
+    assert billing.plan_for_price(cfg["prices"]["max_yearly"]) == "max"

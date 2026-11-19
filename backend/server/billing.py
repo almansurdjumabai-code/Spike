@@ -5,9 +5,11 @@ handles sales tax / VAT and refunds, and tells this server what happened
 through signed webhooks. This module keeps one row per subscription and
 answers "which plan is this user on?".
 
-Configuration (environment variables, set on the backend host):
+Configuration. The public values (client token, price ids) have defaults
+below for SpikeClip's live Paddle account; an environment variable of the
+same name overrides each. Only the webhook secret must be set on the host:
 
-    PADDLE_ENV                 "sandbox" (testing) or "production"
+    PADDLE_ENV                 "production" (default) or "sandbox"
     PADDLE_CLIENT_TOKEN        client-side token (public; starts test_/live_)
     PADDLE_WEBHOOK_SECRET      the notification destination's secret key
     PADDLE_PRICE_PRO_MONTHLY   price ids (pri_...) from the Paddle catalog
@@ -32,6 +34,22 @@ from pathlib import Path
 from fastapi import HTTPException, Request
 
 PLANS = ("free", "pro", "max")
+# Public by design: the client token is sent to every browser that opens
+# checkout, and price ids appear in it too. The webhook secret is NOT here.
+DEFAULTS = {
+    "PADDLE_ENV": "production",
+    "PADDLE_CLIENT_TOKEN": "live_34e224b5ac701715da2f516291c",
+    "PADDLE_PRICE_PRO_MONTHLY": "pri_01m7t5x5gssxg4xm7jr3t88j6v",
+    "PADDLE_PRICE_PRO_YEARLY": "pri_01m7t62md9gyh9msbq36ycvrjq",
+    "PADDLE_PRICE_MAX_MONTHLY": "pri_01m7t5y7dvkd5h42bgve5gh0r4",
+    "PADDLE_PRICE_MAX_YEARLY": "pri_01m7t63qmhgx9m07pan3w0d4y3",
+}
+
+
+def setting(name: str) -> str:
+    return os.environ.get(name) or DEFAULTS.get(name, "")
+
+
 PRICE_ENV = {
     ("pro", "monthly"): "PADDLE_PRICE_PRO_MONTHLY",
     ("pro", "yearly"): "PADDLE_PRICE_PRO_YEARLY",
@@ -45,22 +63,22 @@ SIGNATURE_TOLERANCE_S = 5 * 60
 
 
 def prices() -> dict[str, str]:
-    return {f"{plan}_{period}": os.environ.get(env, "") for (plan, period), env in PRICE_ENV.items()}
+    return {f"{plan}_{period}": setting(env) for (plan, period), env in PRICE_ENV.items()}
 
 
 def plan_for_price(price_id: str) -> str | None:
     for (plan, _), env in PRICE_ENV.items():
-        if price_id and os.environ.get(env) == price_id:
+        if price_id and setting(env) == price_id:
             return plan
     return None
 
 
 def config() -> dict:
-    token = os.environ.get("PADDLE_CLIENT_TOKEN", "")
+    token = setting("PADDLE_CLIENT_TOKEN")
     p = prices()
     return {
         "enabled": bool(token and all(p.values())),
-        "environment": "production" if os.environ.get("PADDLE_ENV") == "production" else "sandbox",
+        "environment": "sandbox" if setting("PADDLE_ENV") == "sandbox" else "production",
         "client_token": token,
         "prices": p,
     }
