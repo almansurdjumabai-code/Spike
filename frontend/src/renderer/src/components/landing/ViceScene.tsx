@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState, type ReactNode } from 'react'
 
 /** The hero's moving backdrop: a Vice-sunset skyline drawn in SVG.
  *
@@ -70,7 +70,7 @@ function Palm({ x, y, s, flip = false, slow = false }: { x: number; y: number; s
   )
 }
 
-export default function ViceScene(): JSX.Element {
+export default function ViceScene({ children }: { children?: ReactNode }): JSX.Element {
   const root = useRef<HTMLDivElement>(null)
   const [videoReady, setVideoReady] = useState(false)
   const [videoFailed, setVideoFailed] = useState(false)
@@ -266,6 +266,7 @@ export default function ViceScene(): JSX.Element {
           onError={() => setVideoFailed(true)}
         />
       )}
+      {children}
       <div className="vc-shade" />
       <div className="vc-grain" />
     </div>

@@ -185,7 +185,7 @@
 @keyframes vc-blink { 50% { opacity: 0.2; } }
 
 .vc-hero-title {
-  font-size: clamp(54px, 8.6vw, 128px);
+  font-size: clamp(50px, 7.2vw, 108px);
   margin: 22px 0 18px;
   text-shadow: 0 4px 0 rgb(13 7 34 / 0.35);
 }
@@ -483,7 +483,7 @@
   width: 100%;
   transform-origin: left;
   background: linear-gradient(90deg, var(--vc-gold), var(--vc-pink));
-  animation: vc-progress var(--dur, 9s) linear infinite;
+  transform: scaleX(0);
 }
 @keyframes vc-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 .vc-tag {
@@ -848,11 +848,4 @@
   .vc-graph-line { stroke-dashoffset: 0; }
 }
 
-/* Small cards (phone hero fan): keep the clip readable, drop the chat. */
-@container (max-width: 210px) {
-  .vc-chat { display: none; }
-  .vc-reacts { width: 28px; }
-  .vc-react { font-size: 15px; }
-  .vc-spike-badge, .vc-views { display: none; }
-  .vc-tag { font-size: 8px; }
-}
+/* Real clips, the video wall, platforms, pipeline, FAQ: landing-extra.css */

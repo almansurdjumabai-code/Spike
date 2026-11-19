@@ -6,6 +6,8 @@ export default defineConfig({
   main: {},
   preload: {},
   renderer: {
-    plugins: [react(), tailwindcss()]
+    plugins: [react(), tailwindcss()],
+    // public/ holds the web landing page's clips; the desktop app never shows it.
+    publicDir: false
   }
 })
