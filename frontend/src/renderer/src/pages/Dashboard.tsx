@@ -1,4 +1,5 @@
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import EmptyStart from '../components/EmptyStart'
 import Assistant from '../components/Assistant'
 import NoClipsExplanation from '../components/NoClipsExplanation'
 import AddVideos from '../components/queue/AddVideos'
@@ -477,7 +478,11 @@ export default function Dashboard({
 
           <div ref={videosScrollRef} className="overflow-y-auto flex-1 min-h-0">
           {shown.length === 0 ? (
-            <p className="text-muted text-sm">{t('Nothing yet - paste a link above to make your first clips.')}</p>
+            videos.length === 0 ? (
+              <EmptyStart />
+            ) : (
+              <p className="text-muted text-sm">{t('Nothing yet - paste a link above to make your first clips.')}</p>
+            )
           ) : (
             <table className="w-full text-sm">
               <thead>

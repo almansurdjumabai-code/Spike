@@ -965,8 +965,9 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
                   onChange={(e) => patch(slot.key, { title: e.target.value })}
                 />
               ) : (
+                <div className="vc-url-wrap">
                 <input
-                  className="input vc-url-input w-72 max-w-full"
+                  className="input vc-url-input w-full"
                   placeholder={t('Paste a YouTube, Twitch, or Kick URL…')}
                   aria-label={`Video URL ${n + 1}`}
                   value={slot.url}
@@ -978,6 +979,25 @@ export default function AddVideos({ onAdded }: { onAdded?: () => void }): JSX.El
                   }
                   onKeyDown={(e) => e.key === 'Enter' && generate()}
                 />
+                {/* One click instead of Ctrl+V: reads the link off the clipboard. */}
+                {!slot.url && navigator.clipboard?.readText && (
+                  <button
+                    type="button"
+                    className="vc-paste-btn"
+                    onClick={() => {
+                      navigator.clipboard
+                        .readText()
+                        .then((text) => {
+                          const url = text.trim()
+                          if (url) patch(slot.key, { url })
+                        })
+                        .catch(() => undefined)
+                    }}
+                  >
+                    📋 {t('Paste')}
+                  </button>
+                )}
+                </div>
               )}
 
               <label

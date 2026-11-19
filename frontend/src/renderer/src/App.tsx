@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import TopBar from './components/TopBar'
 import Dashboard from './pages/Dashboard'
 import ClipStudio from './pages/ClipStudio'
 import Creators from './pages/Creators'
@@ -248,6 +249,7 @@ export default function App(): JSX.Element {
         )}
       </aside>
       <main className="flex-1 overflow-y-auto flex flex-col vc-page-enter" key={page}>
+        {window.studio?.platform === 'browser' && <TopBar />}
         <UpdateBanner />
         {page === 'dashboard' && <Dashboard onOpenInStudio={openInStudio} />}
         {page === 'queue' && <Queue onOpenInStudio={(videoId) => openInStudio(videoId)} />}
