@@ -39,6 +39,12 @@ function cspForBackend(apiBase: string | undefined): Plugin {
     transformIndexHtml: {
       order: 'pre',
       handler: (html) => {
+        // Paddle checkout (lib/billing.ts): its script, overlay frame and API.
+        html = html
+          .replace("default-src 'self';", "default-src 'self'; script-src 'self' https://cdn.paddle.com https://public.profitwell.com; frame-src https://buy.paddle.com https://sandbox-buy.paddle.com;")
+          .replace("connect-src 'self'", "connect-src 'self' https://*.paddle.com https://*.profitwell.com")
+          .replace("img-src 'self' data:", "img-src 'self' data: https://*.paddle.com")
+          .replace("style-src 'self' 'unsafe-inline'", "style-src 'self' 'unsafe-inline' https://cdn.paddle.com")
         if (!apiBase) return html
         const origin = new URL(apiBase).origin
         const ws = origin.replace(/^http/, 'ws')

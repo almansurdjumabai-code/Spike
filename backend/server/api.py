@@ -723,7 +723,12 @@ def create_app(config: dict, settings_path: Path) -> FastAPI:
     if auth_required:
         from server import accounts as accounts_mod
 
-        cloud.SESSION_CHECK = accounts_mod.install(app, data_dir).session_valid
+        accounts = accounts_mod.install(app, data_dir)
+        cloud.SESSION_CHECK = accounts.session_valid
+        # Paid plans through Paddle (server/billing.py).
+        from server import billing as billing_mod
+
+        billing_mod.install(app, data_dir, accounts.user_for)
     worker = Worker(config)
 
     def db() -> StateDB:

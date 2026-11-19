@@ -147,6 +147,19 @@ export default function AuthModal({
           </form>
         )}
 
+        {tab === 'signup' && !useAdmin && !signupClosed && (
+          <p className="vc-note" style={{ marginTop: 14, textAlign: 'center' }}>
+            By signing up you agree to the{' '}
+            <a className="vc-link" href="/terms" target="_blank" rel="noreferrer">
+              Terms
+            </a>{' '}
+            and{' '}
+            <a className="vc-link" href="/privacy" target="_blank" rel="noreferrer">
+              Privacy Policy
+            </a>
+            .
+          </p>
+        )}
         <p className="vc-note" style={{ marginTop: 18, textAlign: 'center' }}>
           <span className="vc-link" onClick={() => setUseAdmin((v) => !v)}>
             {useAdmin ? '← Back to sign up' : 'Owner? Use an access token'}

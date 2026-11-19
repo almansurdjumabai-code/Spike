@@ -159,7 +159,11 @@ function untilt(e: MouseEvent<HTMLDivElement>): void {
   e.currentTarget.style.setProperty('--rx', '0deg')
 }
 
-export default function Pricing({ onChoose }: { onChoose: (plan: Plan['id']) => void }): JSX.Element {
+export default function Pricing({
+  onChoose
+}: {
+  onChoose: (plan: Plan['id'], period: 'monthly' | 'yearly') => void
+}): JSX.Element {
   const [yearly, setYearly] = useState(false)
   return (
     <section className="vc-section vc-pricing" id="pricing">
@@ -235,7 +239,7 @@ export default function Pricing({ onChoose }: { onChoose: (plan: Plan['id']) => 
 
                 <button
                   className={`vc-btn ${p.popular ? 'vc-btn-primary' : 'vc-btn-glass'} vc-plan-cta`}
-                  onClick={() => onChoose(p.id)}
+                  onClick={() => onChoose(p.id, yearly ? 'yearly' : 'monthly')}
                 >
                   {p.cta} →
                 </button>

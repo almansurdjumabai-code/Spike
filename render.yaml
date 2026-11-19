@@ -44,5 +44,21 @@ services:
       # SPIKECLIP_ALLOWED_HOSTS=api.your-domain in the dashboard.
       - key: SPIKECLIP_DATA_DIR
         value: /data
+      # Paddle (server/billing.py). Values come from the Paddle dashboard;
+      # sync: false means Render asks for them instead of storing them here.
+      - key: PADDLE_ENV
+        value: sandbox
+      - key: PADDLE_CLIENT_TOKEN
+        sync: false
+      - key: PADDLE_WEBHOOK_SECRET
+        sync: false
+      - key: PADDLE_PRICE_PRO_MONTHLY
+        sync: false
+      - key: PADDLE_PRICE_PRO_YEARLY
+        sync: false
+      - key: PADDLE_PRICE_MAX_MONTHLY
+        sync: false
+      - key: PADDLE_PRICE_MAX_YEARLY
+        sync: false
       - key: SPIKECLIP_VERSION
         value: 2.1.0

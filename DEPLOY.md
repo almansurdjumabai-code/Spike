@@ -98,6 +98,21 @@ docker compose up --build        # backend на :8765 + интерфейс на 
 
 ---
 
+## 4. Оплата через Paddle
+
+Paddle — продавец (Merchant of Record): проводит оплату, берёт налоги США и НДС ЕС, делает возвраты и сообщает бэкенду о подписках через webhook (`backend/server/billing.py`). Тарифы и цены — в `frontend/src/renderer/src/components/landing/Pricing.tsx`, юридические страницы — `/terms`, `/privacy`, `/refund` (данные продавца — в `LEGAL` в `components/landing/Legal.tsx`).
+
+Переменные на Render:
+
+| Переменная | Где взять |
+|---|---|
+| `PADDLE_ENV` | `sandbox` для тестов, `production` для реальных денег |
+| `PADDLE_CLIENT_TOKEN` | Developer tools → Authentication → Client-side tokens (`test_…` / `live_…`) |
+| `PADDLE_WEBHOOK_SECRET` | Developer tools → Notifications → ваш destination → Secret key |
+| `PADDLE_PRICE_PRO_MONTHLY` / `_YEARLY`, `PADDLE_PRICE_MAX_MONTHLY` / `_YEARLY` | Catalog → Products → цена → ID `pri_…` |
+
+Webhook URL для Paddle: `https://<backend>/billing/paddle/webhook`, события `subscription.created`, `subscription.updated`, `subscription.canceled` и др. `subscription.*`. В Paddle → Checkout settings укажите Default payment link: `https://<frontend>/app`.
+
 ## 4. Ограничения веб-версии
 
 Эти возможности рассчитаны на локальный ПК и в облаке работают иначе или не работают:

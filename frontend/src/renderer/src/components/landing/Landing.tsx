@@ -1,4 +1,5 @@
 import '@fontsource/anton/400.css'
+import { openCheckout, setPendingPlan } from '../../lib/billing'
 import '@fontsource-variable/inter'
 import './landing.css'
 import './landing-extra.css'
@@ -222,6 +223,7 @@ export default function Landing({
   signedIn?: boolean
 }): JSX.Element {
   const [auth, setAuth] = useState<AuthTab | null>(null)
+  const [toast, setToast] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const cursor = useRef<HTMLDivElement>(null)
   useReveal()
@@ -446,7 +448,17 @@ export default function Landing({
         </div>
       </section>
 
-      <Pricing onChoose={() => (signedIn ? onAuthed() : setAuth('signup'))} />
+      <Pricing
+        onChoose={(plan, period) => {
+          if (plan === 'free') return signedIn ? onAuthed() : setAuth('signup')
+          if (!signedIn) {
+            // Sign up first; the studio opens checkout for this plan.
+            setPendingPlan(plan, period)
+            return setAuth('signup')
+          }
+          openCheckout(plan, period).catch((e: Error) => setToast(e.message))
+        }}
+      />
 
       <section className="vc-section" id="faq">
         <div className="vc-reveal">
@@ -515,11 +527,20 @@ export default function Landing({
         </div>
       </div>
       <footer className="vc-footer">
-        <span>© 2026 SpikeClip</span>
+        <span className="vc-legal-links">
+          © 2026 SpikeClip
+          <a href="/terms">Terms</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/refund">Refunds</a>
+        </span>
         <span>Example clips belong to their creators. Not affiliated with Rockstar Games, the streamers shown or the platforms named.</span>
       </footer>
 
-      {notice && <div className="vc-banner">{notice}</div>}
+      {(toast || notice) && (
+        <div className="vc-banner" onClick={() => setToast(null)}>
+          {toast || notice}
+        </div>
+      )}
       {auth && <AuthModal initial={auth} onClose={() => setAuth(null)} onDone={onAuthed} />}
     </div>
   )

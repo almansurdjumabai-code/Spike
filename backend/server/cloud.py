@@ -39,7 +39,8 @@ LOCAL_ORIGINS = ["http://localhost:5173", "http://127.0.0.1:5173"]  # Vite dev s
 # Reachable without the token: the health probe the frontend uses to find out
 # whether it needs to ask for one, and OAuth redirects a provider sends the
 # browser back to (those carry their own single-use state).
-PUBLIC_PATHS = ("/health", "/auth/config", "/auth/register", "/auth/login")
+PUBLIC_PATHS = ("/health", "/auth/config", "/auth/register", "/auth/login",
+                "/billing/config", "/billing/paddle/webhook")  # the webhook checks Paddle's signature
 
 # Set by server/accounts.py: token -> is it a live user session? The admin
 # token (SPIKECLIP_API_TOKEN) always works as well.

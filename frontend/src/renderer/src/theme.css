@@ -648,3 +648,38 @@ input[type='range'] {
   color: var(--color-muted);
   margin-right: 4px;
 }
+
+/* plan badge in the top bar */
+.vc-plan-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  border: 1px solid rgb(255 255 255 / 0.15);
+  background: rgb(255 255 255 / 0.06);
+}
+.vc-plan-badge.sm { padding: 2px 8px; font-size: 10px; }
+.vc-plan-badge.is-free { color: #5effc1; border-color: rgb(94 255 193 / 0.4); }
+.vc-plan-badge.is-pro { color: #1b0730; border-color: transparent; background: var(--vc-sunset); box-shadow: 0 0 16px rgb(255 79 163 / 0.5); }
+.vc-plan-badge.is-max { color: #fff; border-color: transparent; background: linear-gradient(135deg, #a855f7, #6d3bf2 50%, #39f0ff); box-shadow: 0 0 16px rgb(168 85 247 / 0.6); }
+.vc-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 22px;
+  z-index: 100;
+  transform: translateX(-50%);
+  padding: 12px 20px;
+  border-radius: 999px;
+  font-weight: 800;
+  background: #170c33;
+  border: 1px solid rgb(255 79 163 / 0.5);
+  box-shadow: 0 20px 50px -10px rgb(0 0 0 / 0.8), 0 0 30px -6px rgb(255 79 163 / 0.6);
+  cursor: pointer;
+  animation: vc-page-in 0.3s cubic-bezier(0.2, 0.9, 0.2, 1) both;
+}

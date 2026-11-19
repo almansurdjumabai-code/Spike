@@ -1,4 +1,5 @@
 import React from 'react'
+import Legal, { type LegalKind } from './components/landing/Legal'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 import AppBoundary from './components/AppBoundary'
@@ -15,6 +16,9 @@ import AuthGate, { LandingRoute } from './components/AuthGate'
 // Docker `ui` service serves it.
 // Read before the shim fills window.studio in: true only in the web build.
 const inBrowser = !window.studio
+
+// Legal pages of the web app (Paddle reviews them).
+const LEGAL_PATHS: Record<string, LegalKind> = { '/terms': 'terms', '/privacy': 'privacy', '/refund': 'refund' }
 installBrowserShim()
 // Adds the backend token (web build with a cloud backend) to API requests.
 installAuthFetch()
@@ -30,6 +34,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       {(import.meta as unknown as { env: { DEV: boolean } }).env.DEV && window.location.search.includes('studio-preview') ? (
         // Dev server only: the studio without a backend, to work on its look.
         <App />
+      ) : inBrowser && LEGAL_PATHS[window.location.pathname] ? (
+        <Legal kind={LEGAL_PATHS[window.location.pathname]} />
       ) : inBrowser && !window.location.pathname.startsWith('/app') ? (
         <LandingRoute />
       ) : inBrowser ? (
