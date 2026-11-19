@@ -44,6 +44,9 @@ export default function TopBar(): JSX.Element {
         <p className="vc-topbar-date">{today}</p>
       </div>
       <div className="flex items-center gap-3">
+        <a className="btn-accent !py-1.5 !px-3.5 text-sm" href="/#pricing">
+          ⚡ {t('Upgrade')}
+        </a>
         <span className="vc-pill-badge" title={t('You are using an early version of SpikeClip')}>
           <span className="vc-pill-dot" />
           {t('Early access')}

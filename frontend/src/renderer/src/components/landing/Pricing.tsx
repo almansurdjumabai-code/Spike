@@ -1,0 +1,202 @@
+import '@fontsource/alfa-slab-one/400.css'
+import { useState } from 'react'
+
+/** Plans: Free, Pro, Max — priced like GTA cash. */
+
+function PalmIcon(): JSX.Element {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M30 60 C 31 46, 33 34, 38 24 L 41 25 C 37 35, 35 47, 35 60 Z" fill="#1b0730" />
+      <g fill="#1b0730">
+        <path d="M39 24 c8 -7 18 -6 23 1 c-8 -3 -16 -2 -23 -1z" />
+        <path d="M39 24 c-7 -7 -17 -7 -22 -1 c7 -2 15 -1 22 1z" />
+        <path d="M39 24 c2 -9 9 -14 17 -14 c-7 4 -13 9 -17 14z" />
+        <path d="M39 24 c-3 -8 -10 -12 -16 -12 c6 4 12 8 16 12z" />
+        <path d="M39 24 c6 2 11 8 12 16 c-4 -7 -8 -11 -12 -16z" />
+        <circle cx="38" cy="26" r="3" />
+      </g>
+    </svg>
+  )
+}
+
+function CarIcon(): JSX.Element {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <path
+        d="M6 40 c0 -5 3 -8 8 -9 l9 -2 l8 -8 c2 -2 5 -3 8 -3 h8 c3 0 6 2 7 5 l3 7 c4 1 7 4 7 8 v4 c0 1 -1 2 -2 2 h-4 a7 7 0 0 0 -14 0 h-16 a7 7 0 0 0 -14 0 h-6 c-1 0 -2 -1 -2 -2z"
+        fill="#1b0730"
+      />
+      <path d="M27 29 l6 -6 c1 -1 3 -2 5 -2 h6 c2 0 3 1 4 3 l2 5z" fill="#fff" opacity="0.85" />
+      <circle cx="17" cy="46" r="5" fill="#1b0730" />
+      <circle cx="17" cy="46" r="2" fill="#fff" />
+      <circle cx="47" cy="46" r="5" fill="#1b0730" />
+      <circle cx="47" cy="46" r="2" fill="#fff" />
+    </svg>
+  )
+}
+
+function HeliIcon(): JSX.Element {
+  return (
+    <svg viewBox="0 0 64 64" aria-hidden="true">
+      <rect className="vc-plan-rotor" x="8" y="14" width="48" height="3.5" rx="1.75" fill="#1b0730" />
+      <rect x="30" y="16" width="4" height="6" fill="#1b0730" />
+      <path d="M14 30 c0 -6 6 -9 14 -9 h10 c8 0 14 5 14 12 c0 6 -5 10 -12 10 h-14 c-7 0 -12 -6 -12 -13z" fill="#1b0730" />
+      <path d="M36 25 h4 c5 0 8 3 9 7 h-13z" fill="#fff" opacity="0.85" />
+      <path d="M14 30 h-8 l-2 -4 h-2 v8 h12z" fill="#1b0730" />
+      <path d="M20 48 h28 M24 43 v5 M44 43 v5" stroke="#1b0730" strokeWidth="3" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+interface Plan {
+  id: 'free' | 'pro' | 'max'
+  name: string
+  tagline: string
+  monthly: number
+  yearly: number
+  icon: JSX.Element
+  iconBg: string
+  cta: string
+  popular?: boolean
+  perks: { text: string; hot?: boolean }[]
+}
+
+const PLANS: Plan[] = [
+  {
+    id: 'free',
+    name: 'Free',
+    tagline: 'Try it on your next stream',
+    monthly: 0,
+    yearly: 0,
+    icon: <PalmIcon />,
+    iconBg: 'linear-gradient(135deg, #5effc1, #39f0ff)',
+    cta: 'Start free',
+    perks: [
+      { text: '2 clips per month' },
+      { text: 'Auto 9:16 reframe + captions' },
+      { text: 'VODs up to 1 hour' },
+      { text: '720p export' },
+      { text: 'SpikeClip end card on clips' }
+    ]
+  },
+  {
+    id: 'pro',
+    name: 'Pro',
+    tagline: 'For streamers who post every day',
+    monthly: 19,
+    yearly: 15,
+    icon: <CarIcon />,
+    iconBg: 'linear-gradient(135deg, #ffd56b, #ff9a52 45%, #ff4fa3)',
+    cta: 'Go Pro',
+    popular: true,
+    perks: [
+      { text: '50 clips per month', hot: true },
+      { text: '1080p export, no end card', hot: true },
+      { text: 'Gaming / Reaction facecam layouts' },
+      { text: 'Every caption style' },
+      { text: 'VODs up to 4 hours' },
+      { text: 'Titles, descriptions & hashtags written for you' }
+    ]
+  },
+  {
+    id: 'max',
+    name: 'Max',
+    tagline: 'For clippers and full-time creators',
+    monthly: 29,
+    yearly: 23,
+    icon: <HeliIcon />,
+    iconBg: 'linear-gradient(135deg, #a855f7, #6d3bf2 50%, #39f0ff)',
+    cta: 'Get Max',
+    perks: [
+      { text: 'Everything in Pro' },
+      { text: '150 clips per month', hot: true },
+      { text: 'Priority processing — skip the line', hot: true },
+      { text: 'VODs up to 12 hours' },
+      { text: '60s+ clips for TikTok Creator Rewards' },
+      { text: 'Translated captions for global reach' },
+      { text: 'Early access to new features' }
+    ]
+  }
+]
+
+export default function Pricing({ onChoose }: { onChoose: (plan: Plan['id']) => void }): JSX.Element {
+  const [yearly, setYearly] = useState(false)
+  return (
+    <section className="vc-section" id="pricing">
+      <div className="vc-reveal" style={{ textAlign: 'center' }}>
+        <div className="vc-kicker">Pricing</div>
+        <h2 className="vc-display vc-h2">
+          Pick your <span className="vc-gradient-text">ride</span>
+        </h2>
+        <p className="vc-lead" style={{ margin: '0 auto' }}>
+          Start free. Upgrade when the clips start paying off.
+        </p>
+        <div className="vc-billing" role="group" aria-label="Billing period">
+          <button className={!yearly ? 'on' : ''} onClick={() => setYearly(false)}>
+            Monthly
+          </button>
+          <button className={yearly ? 'on' : ''} onClick={() => setYearly(true)}>
+            Yearly <span className="vc-save">−20%</span>
+          </button>
+        </div>
+      </div>
+
+      <div className="vc-plans">
+        {PLANS.map((p, i) => {
+          const price = yearly ? p.yearly : p.monthly
+          return (
+            <div
+              key={p.id}
+              className={`vc-plan vc-reveal${p.popular ? ' is-popular' : ''}`}
+              style={{ transitionDelay: `${i * 0.1}s` }}
+            >
+              {p.popular && <div className="vc-plan-ribbon">🔥 Most popular</div>}
+              <div className="vc-plan-inner">
+                <div className="vc-plan-head">
+                  <span className="vc-plan-icon" style={{ background: p.iconBg }}>
+                    {p.icon}
+                  </span>
+                  <div>
+                    <h3 className="vc-plan-name">{p.name}</h3>
+                    <p className="vc-plan-tag">{p.tagline}</p>
+                  </div>
+                </div>
+
+                <div className="vc-plan-price">
+                  <span className="vc-cash" key={`${p.id}-${price}`}>
+                    ${price}
+                  </span>
+                  <span className="vc-per">
+                    {price === 0 ? 'forever' : '/ month'}
+                    {yearly && price > 0 && <em>billed ${price * 12}/yr</em>}
+                  </span>
+                </div>
+
+                <button
+                  className={`vc-btn ${p.popular ? 'vc-btn-primary' : 'vc-btn-glass'} vc-plan-cta`}
+                  onClick={() => onChoose(p.id)}
+                >
+                  {p.cta} →
+                </button>
+
+                <ul className="vc-perks">
+                  {p.perks.map((perk) => (
+                    <li key={perk.text} className={perk.hot ? 'hot' : ''}>
+                      <span className="vc-check" aria-hidden>
+                        ✓
+                      </span>
+                      {perk.text}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          )
+        })}
+      </div>
+      <p className="vc-plans-note vc-reveal">
+        Cancel anytime · Prices in USD · Sales tax and VAT handled at checkout
+      </p>
+    </section>
+  )
+}

@@ -5,6 +5,7 @@ import './landing-extra.css'
 import { useEffect, useRef, useState } from 'react'
 import AuthModal, { type AuthTab } from './AuthModal'
 import ClipCard, { type ClipSpec } from './ClipCard'
+import Pricing from './Pricing'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import ViceScene from './ViceScene'
 
@@ -265,6 +266,7 @@ export default function Landing({
           <a href="#clips">Clips</a>
           <a href="#how">How it works</a>
           <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
@@ -442,6 +444,8 @@ export default function Landing({
         </div>
       </section>
 
+      <Pricing onChoose={() => (signedIn ? onAuthed() : setAuth('signup'))} />
+
       <section className="vc-section" id="faq">
         <div className="vc-reveal">
           <div className="vc-kicker">FAQ</div>
@@ -493,6 +497,7 @@ export default function Landing({
           <a href="#clips">Clips</a>
           <a href="#how">How it works</a>
           <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
           <a href="#faq">FAQ</a>
         </div>
         <div>
