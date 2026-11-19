@@ -6,7 +6,7 @@ import './theme.css'
 import { applyAppearance, loadAppearance } from './lib/appearance'
 import { installBrowserShim } from './lib/browserShim'
 import { installAuthFetch } from './lib/backend'
-import AuthGate from './components/AuthGate'
+import AuthGate, { LandingRoute } from './components/AuthGate'
 
 // Before anything renders. Under Electron this returns immediately; it only
 // does something when the renderer is opened in a browser, which is how the
@@ -24,7 +24,10 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     {/* Outside App on purpose: a crash in App's own render has to be caught
         too. A blank window is the one failure that tells nobody anything. */}
     <AppBoundary>
-      {inBrowser ? (
+      {/* Web build: the welcome page at /, the studio at /app. */}
+      {inBrowser && !window.location.pathname.startsWith('/app') ? (
+        <LandingRoute />
+      ) : inBrowser ? (
         <AuthGate>
           <App />
         </AuthGate>

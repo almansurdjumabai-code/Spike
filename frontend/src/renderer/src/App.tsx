@@ -8,6 +8,7 @@ import Queue from './pages/Queue'
 import Settings from './pages/Settings'
 import Watch from './pages/Watch'
 import FeedbackHub from './components/FeedbackHub'
+import { logout } from './lib/backend'
 import ModelSwitcher from './components/ModelSwitcher'
 import SetupWizard, { setupDone } from './components/SetupWizard'
 import UpdateBanner from './components/UpdateBanner'
@@ -170,7 +171,7 @@ export default function App(): JSX.Element {
             className="shrink-0 w-[34px] h-[34px]"
           />
           <div className="min-w-0">
-            <h1 className="text-lg font-bold leading-tight">
+            <h1 className="text-lg font-bold leading-tight notranslate" translate="no">
               Spike<span className="text-accent">Clip</span>
             </h1>
             <p className="text-xs text-muted mt-px">{t('local-first AI clipping')}</p>
@@ -206,6 +207,15 @@ export default function App(): JSX.Element {
             only happen on the Dashboard. */}
         <div className="px-3 pb-1">
           <FeedbackHub />
+          {window.studio?.platform === 'browser' && (
+            <button
+              onClick={() => void logout().then(() => window.location.assign('/'))}
+              className="w-full text-left px-3 py-2.5 rounded-lg flex items-center gap-3 text-muted hover:bg-raised hover:text-ink transition-colors"
+            >
+              <span aria-hidden>⎋</span>
+              {t('Log out')}
+            </button>
+          )}
         </div>
         <ModelSwitcher />
         <div className="px-5 py-4 border-t border-raised/60">

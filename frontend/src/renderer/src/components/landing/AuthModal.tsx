@@ -68,7 +68,7 @@ export default function AuthModal({
         <button className="vc-close" onClick={onClose} aria-label="Close">
           ×
         </button>
-        <div className="vc-logo">
+        <div className="vc-logo" translate="no">
           <span className="vc-logo-mark">⚡</span>
           <span>
             Spike<span className="vc-gradient-text">Clip</span>

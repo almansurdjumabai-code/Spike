@@ -211,7 +211,15 @@ function HypeGraph(): JSX.Element {
   )
 }
 
-export default function Landing({ notice, onAuthed }: { notice: string | null; onAuthed: () => void }): JSX.Element {
+export default function Landing({
+  notice,
+  onAuthed,
+  signedIn = false
+}: {
+  notice: string | null
+  onAuthed: () => void
+  signedIn?: boolean
+}): JSX.Element {
   const [auth, setAuth] = useState<AuthTab | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const cursor = useRef<HTMLDivElement>(null)
@@ -247,7 +255,7 @@ export default function Landing({ notice, onAuthed }: { notice: string | null; o
       <div className="vc-cursor" ref={cursor} aria-hidden="true" />
 
       <nav className={`vc-nav${scrolled ? ' is-scrolled' : ''}`}>
-        <a className="vc-logo" href="#top">
+        <a className="vc-logo" translate="no" href="#top">
           <span className="vc-logo-mark">⚡</span>
           <span>
             Spike<span className="vc-gradient-text">Clip</span>
@@ -260,12 +268,20 @@ export default function Landing({ notice, onAuthed }: { notice: string | null; o
           <a href="#faq">FAQ</a>
         </div>
         <div style={{ display: 'flex', gap: 10 }}>
-          <button className="vc-btn vc-btn-glass vc-btn-sm" onClick={() => setAuth('login')}>
-            Log in
-          </button>
-          <button className="vc-btn vc-btn-primary vc-btn-sm" onClick={() => setAuth('signup')}>
-            Sign up
-          </button>
+          {signedIn ? (
+            <button className="vc-btn vc-btn-primary vc-btn-sm" onClick={onAuthed}>
+              Open studio →
+            </button>
+          ) : (
+            <>
+              <button className="vc-btn vc-btn-glass vc-btn-sm" onClick={() => setAuth('login')}>
+                Log in
+              </button>
+              <button className="vc-btn vc-btn-primary vc-btn-sm" onClick={() => setAuth('signup')}>
+                Sign up
+              </button>
+            </>
+          )}
         </div>
       </nav>
 
@@ -290,8 +306,8 @@ export default function Landing({ notice, onAuthed }: { notice: string | null; o
               rage quits, the W spam. All of it.
             </p>
             <div className="vc-hero-ctas">
-              <button className="vc-btn vc-btn-primary" onClick={() => setAuth('signup')}>
-                Start clipping free →
+              <button className="vc-btn vc-btn-primary" onClick={() => (signedIn ? onAuthed() : setAuth('signup'))}>
+                {signedIn ? 'Open studio →' : 'Start clipping free →'}
               </button>
               <button className="vc-btn vc-btn-glass" onClick={go('clips')}>
                 ▶ Watch clips
@@ -462,7 +478,7 @@ export default function Landing({ notice, onAuthed }: { notice: string | null; o
 
       <div className="vc-footer-grid">
         <div>
-          <a className="vc-logo" href="#top" style={{ fontSize: 24 }}>
+          <a className="vc-logo" translate="no" href="#top" style={{ fontSize: 24 }}>
             <span className="vc-logo-mark">⚡</span>
             <span>
               Spike<span className="vc-gradient-text">Clip</span>

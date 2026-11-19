@@ -2,7 +2,25 @@ import { useCallback, useEffect, useState, type ReactNode } from 'react'
 import { checkBackendAccess, type BackendAccess } from '../lib/backend'
 import Landing from './landing/Landing'
 
-/** Web build only: the landing page until the visitor is signed in.
+export const STUDIO_PATH = '/app'
+
+/** The welcome page at /. Signed-in visitors see "Open studio" instead of
+ *  sign up / log in; signing in goes straight to the studio. */
+export function LandingRoute(): JSX.Element {
+  const [access, setAccess] = useState<BackendAccess | 'checking'>('checking')
+  useEffect(() => {
+    void checkBackendAccess().then(setAccess)
+  }, [])
+  return (
+    <Landing
+      notice={null}
+      signedIn={access === 'ok'}
+      onAuthed={() => window.location.assign(STUDIO_PATH)}
+    />
+  )
+}
+
+/** Web build only, at /app: the landing page until the visitor is signed in.
  *
  *  A backend with no token configured (local development) lets everyone
  *  straight into the studio. A cloud backend answers 401 until the visitor
