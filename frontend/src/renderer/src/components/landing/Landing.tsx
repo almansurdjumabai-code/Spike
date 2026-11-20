@@ -7,7 +7,6 @@ import { useEffect, useRef, useState } from 'react'
 import AuthModal, { type AuthTab } from './AuthModal'
 import ClipCard, { type ClipSpec } from './ClipCard'
 import Pricing from './Pricing'
-import Scene3D from './Scene3D'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import ViceScene from './ViceScene'
 
@@ -360,8 +359,6 @@ export default function Landing({
           ))}
         </div>
       </div>
-
-      <Scene3D />
 
       <section className="vc-section" style={{ paddingTop: 40, paddingBottom: 40 }}>
         <div className="vc-glass vc-board vc-reveal">
