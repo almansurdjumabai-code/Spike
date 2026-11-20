@@ -11,6 +11,7 @@ import { installBrowserShim } from './lib/browserShim'
 import { installAuthFetch } from './lib/backend'
 import { LandingRoute } from './components/AuthGate'
 import Account from './components/landing/Account'
+import Admin from './components/landing/Admin'
 
 // Before anything renders. Under Electron this returns immediately; it only
 // does something when the renderer is opened in a browser, which is how the
@@ -39,6 +40,8 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
         <App />
       ) : inBrowser && LEGAL_PATHS[window.location.pathname] ? (
         <Legal kind={LEGAL_PATHS[window.location.pathname]} />
+      ) : inBrowser && window.location.pathname.startsWith('/admin') ? (
+        <Admin />
       ) : inBrowser && !window.location.pathname.startsWith('/app') ? (
         <LandingRoute />
       ) : inBrowser ? (

@@ -23,7 +23,8 @@
     radial-gradient(900px 700px at 20% 360vh, rgb(255 154 82 / 0.14), transparent 70%),
     var(--vc-night);
   min-height: 100vh;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes this a scroll container and breaks the sticky 3D scene */
+  overflow-x: clip;
 }
 
 .vc-display {
