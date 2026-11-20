@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react'
 import AuthModal, { type AuthTab } from './AuthModal'
 import ClipCard, { type ClipSpec } from './ClipCard'
 import Pricing from './Pricing'
+import LiveStats from './LiveStats'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import ViceScene from './ViceScene'
 
@@ -59,38 +60,6 @@ function useReveal(): void {
     els.forEach((e) => io.observe(e))
     return () => io.disconnect()
   }, [])
-}
-
-function CountUp({ to, suffix = '' }: { to: number; suffix?: string }): JSX.Element {
-  const el = useRef<HTMLElement>(null)
-  const [n, setN] = useState(0)
-  useEffect(() => {
-    const node = el.current
-    if (!node) return
-    let raf = 0
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return
-      io.disconnect()
-      const start = performance.now()
-      const step = (t: number): void => {
-        const k = Math.min(1, (t - start) / 1400)
-        setN(Math.round(to * (1 - Math.pow(1 - k, 3))))
-        if (k < 1) raf = requestAnimationFrame(step)
-      }
-      raf = requestAnimationFrame(step)
-    })
-    io.observe(node)
-    return () => {
-      io.disconnect()
-      cancelAnimationFrame(raf)
-    }
-  }, [to])
-  return (
-    <b ref={el} className="vc-gradient-text">
-      {n}
-      {suffix}
-    </b>
-  )
 }
 
 function VideoWall(): JSX.Element {
@@ -360,39 +329,7 @@ export default function Landing({
         </div>
       </div>
 
-      <section className="vc-section" style={{ paddingTop: 40, paddingBottom: 40 }}>
-        <div className="vc-glass vc-board vc-reveal">
-          <div>
-            <h4>Clip from</h4>
-            <div className="vc-board-row">
-              {CLIP_FROM.map((p) => (
-                <span key={p} className="vc-board-tile">
-                  <PlatformIcon id={p} />
-                  {PLATFORMS[p].label}
-                </span>
-              ))}
-            </div>
-          </div>
-          <div className="vc-board-arrow">→</div>
-          <div>
-            <h4>Post to</h4>
-            <div className="vc-board-row">
-              {POST_TO.map((p) => (
-                <span key={p} className="vc-board-tile">
-                  <PlatformIcon id={p} />
-                  {PLATFORMS[p].label}
-                </span>
-              ))}
-            </div>
-          </div>
-        </div>
-        <div className="vc-counters">
-          <div className="vc-glass vc-counter vc-reveal"><CountUp to={20} suffix="s" /><span>captured before every chat peak</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><CountUp to={10} suffix="s" /><span>after it, for the reaction</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><b className="vc-gradient-text">$0</b><span>cloud render fees, ever</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><b className="vc-gradient-text">9:16</b><span>vertical clips, captions burned in</span></div>
-        </div>
-      </section>
+      <LiveStats />
 
       <section className="vc-section" id="clips">
         <div className="vc-reveal">
