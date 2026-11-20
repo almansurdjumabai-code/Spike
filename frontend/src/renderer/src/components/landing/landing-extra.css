@@ -1041,3 +1041,260 @@
 @media (prefers-reduced-motion: reduce) {
   .vc-pipe .vc-board-tile, .vc-pipe-wire::after, .vc-hub-ring, .vc-hub-core, .vc-stat-bar i, .vc-stat-ring circle.run, .vc-stat-phone i { animation: none; }
 }
+
+/* ------------------------------------------------------------ texture: film grain over the whole page */
+.vc::after {
+  content: '';
+  position: fixed;
+  inset: -50%;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: vc-grain 0.6s steps(3) infinite;
+}
+@keyframes vc-grain { 33% { transform: translate(-3%, 2%); } 66% { transform: translate(2%, -3%); } }
+
+/* full-bleed background layers inside a centred section */
+.vc-bg-clips, .vc-bg-how, .vc-bg-features, .vc-bg-faq { isolation: isolate; }
+.vc-bgword, .vc-floor, .vc-stripes, .vc-bigword, .vc-qmark {
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* clips: a giant outlined "FOR YOU" crawling behind, halftone sunset under the cards */
+.vc-bgword {
+  top: 40px;
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%) rotate(-4deg);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.vc-bgword span {
+  display: inline-block;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(120px, 18vw, 260px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(255 79 163 / 0.16);
+  animation: vc-crawl 40s linear infinite;
+}
+@keyframes vc-crawl { to { transform: translateX(-50%); } }
+.vc-bg-clips::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  bottom: 0;
+  width: 100vw;
+  height: 70%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgb(255 120 90 / 0.55) 1.6px, transparent 2px) 0 0 / 14px 14px;
+  mask: radial-gradient(ellipse 60% 70% at 50% 100%, #000, transparent 70%);
+  pointer-events: none;
+}
+
+/* how it works: a synthwave floor running toward the horizon */
+.vc-floor {
+  left: 50%;
+  bottom: 0;
+  width: 140vw;
+  height: 60%;
+  transform: translateX(-50%) perspective(420px) rotateX(62deg);
+  transform-origin: 50% 100%;
+  background:
+    linear-gradient(to top, rgb(255 46 126 / 0.0), rgb(13 7 34 / 1) 92%),
+    repeating-linear-gradient(90deg, rgb(255 79 163 / 0.35) 0 2px, transparent 2px 80px),
+    repeating-linear-gradient(0deg, rgb(57 240 255 / 0.3) 0 2px, transparent 2px 80px);
+  background-size: 100% 100%, 100% 100%, 100% 80px;
+  animation: vc-floor-run 2.4s linear infinite;
+  mask: linear-gradient(to top, #000 10%, transparent 85%);
+}
+@keyframes vc-floor-run { to { background-position: 0 0, 0 0, 0 80px; } }
+.vc-bg-how::before {
+  content: '';
+  position: absolute;
+  z-index: -2;
+  left: 50%;
+  bottom: 30%;
+  width: 520px;
+  height: 260px;
+  transform: translateX(-50%);
+  border-radius: 520px 520px 0 0;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 22px, rgb(13 7 34 / 0.9) 22px 28px),
+    linear-gradient(to bottom, var(--vc-gold), var(--vc-hot) 70%);
+  opacity: 0.22;
+  filter: blur(1px);
+  pointer-events: none;
+}
+
+/* poster cards: solid, hard offset shadow on hover instead of frosted glass */
+.vc-poster {
+  --acc: var(--vc-pink);
+  position: relative;
+  border-radius: 20px;
+  padding: 26px;
+  background:
+    linear-gradient(180deg, rgb(255 255 255 / 0.05), transparent 40%),
+    #160b31;
+  border: 2px solid rgb(255 255 255 / 0.08);
+  box-shadow: 0 0 0 0 var(--acc);
+  transition: transform 0.25s cubic-bezier(0.2, 0.9, 0.2, 1), box-shadow 0.25s, border-color 0.25s;
+}
+.vc-poster::before {
+  content: '';
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  top: -2px;
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+  background: var(--acc);
+}
+.vc-poster:hover { transform: translate(-5px, -5px); box-shadow: 8px 8px 0 0 var(--acc); border-color: var(--acc); }
+.vc-step-0 { --acc: var(--vc-cyan); }
+.vc-step-1 { --acc: var(--vc-pink); }
+.vc-step-2 { --acc: var(--vc-gold); }
+.vc-step-3 { --acc: var(--vc-mint); }
+.vc-poster.vc-step .vc-step-num {
+  position: absolute;
+  top: -18px;
+  right: 18px;
+  font-size: 46px;
+  padding: 2px 14px;
+  border-radius: 12px;
+  color: #160b31;
+  -webkit-text-stroke: 0;
+  background: var(--acc);
+  transform: rotate(4deg);
+  box-shadow: 0 10px 24px -8px var(--acc);
+}
+.vc-poster.vc-step h3 { margin-top: 18px; }
+
+/* how it works art */
+.vc-art { position: relative; height: 110px; border-radius: 14px; background: rgb(0 0 0 / 0.35); border: 1px solid rgb(255 255 255 / 0.06); overflow: hidden; }
+.vc-art-link { display: flex; align-items: center; gap: 8px; padding: 0 12px; }
+.vc-art-url { flex: 1; min-width: 0; padding: 10px 12px; border-radius: 10px; background: rgb(255 255 255 / 0.07); font-size: 13px; white-space: nowrap; overflow: hidden; font-family: ui-monospace, Consolas, monospace; }
+.vc-art-url i { font-style: normal; color: var(--vc-dim); }
+.vc-art-url b { display: inline-block; overflow: hidden; vertical-align: bottom; width: 0; color: #fff; border-right: 2px solid var(--vc-cyan); animation: vc-type 4s steps(10) infinite; }
+@keyframes vc-type { 0% { width: 0; } 45%, 90% { width: 10ch; } 100% { width: 0; } }
+.vc-art-go { padding: 9px 12px; border-radius: 10px; font-weight: 900; font-size: 12px; background: var(--vc-cyan); color: #0d0722; animation: vc-press 4s infinite; }
+@keyframes vc-press { 0%, 48% { transform: none; filter: none; } 52% { transform: scale(0.9); filter: brightness(1.4); } 58%, 100% { transform: none; } }
+.vc-art-scan { display: flex; align-items: flex-end; gap: 3px; padding: 10px 10px 0; }
+.vc-art-scan i { flex: 1; border-radius: 3px 3px 0 0; background: rgb(57 240 255 / 0.45); }
+.vc-art-scan i.pk { background: linear-gradient(to top, var(--vc-hot), var(--vc-gold)); animation: vc-pk 3s infinite; }
+@keyframes vc-pk { 0%, 30% { filter: brightness(0.6); } 40%, 100% { filter: brightness(1.3); box-shadow: 0 0 12px var(--vc-pink); } }
+.vc-art-sweep { position: absolute; top: 0; bottom: 0; width: 2px; background: #fff; box-shadow: 0 0 12px #fff; animation: vc-sweep 3s linear infinite; }
+@keyframes vc-sweep { from { left: 0; } to { left: 100%; } }
+.vc-art-crop { display: grid; place-items: center; }
+.vc-art-wide { position: relative; width: 150px; height: 84px; border-radius: 6px; overflow: hidden; background: linear-gradient(135deg, #3a1670, #6d3bf2); }
+.vc-art-face { position: absolute; left: 10px; top: 10px; width: 34px; height: 26px; border-radius: 4px; background: #ff9a52; }
+.vc-art-game { position: absolute; left: 0; right: 0; bottom: 0; height: 40%; background: repeating-linear-gradient(90deg, #2bd4a0 0 10px, #23b088 10px 20px); }
+.vc-art-frame { position: absolute; top: 50%; left: 50%; width: 47px; height: 84px; margin: -42px 0 0 -23px; border: 3px solid var(--vc-gold); border-radius: 6px; box-shadow: 0 0 0 999px rgb(13 7 34 / 0.55); animation: vc-crop 4s cubic-bezier(0.6, 0, 0.2, 1) infinite; }
+.vc-art-frame em { position: absolute; bottom: -2px; left: 50%; transform: translate(-50%, 100%); font-style: normal; font-size: 11px; font-weight: 900; color: var(--vc-gold); }
+@keyframes vc-crop { 0% { width: 150px; margin-left: -75px; } 35%, 85% { width: 47px; margin-left: -23px; } 100% { width: 150px; margin-left: -75px; } }
+.vc-art-post { display: grid; align-content: center; gap: 12px; padding: 0 14px; }
+.vc-art-bar { height: 8px; border-radius: 8px; background: rgb(255 255 255 / 0.08); overflow: hidden; }
+.vc-art-bar i { display: block; height: 100%; background: linear-gradient(90deg, var(--vc-mint), var(--vc-cyan)); transform-origin: left; animation: vc-export 3.6s ease-in-out infinite; }
+@keyframes vc-export { 0% { transform: scaleX(0); } 55%, 100% { transform: scaleX(1); } }
+.vc-art-dests { display: flex; gap: 6px; }
+.vc-art-dests b { flex: 1; text-align: center; padding: 7px 0; border-radius: 8px; font-size: 11px; opacity: 0.25; transform: scale(0.9); animation: vc-dest 3.6s infinite; }
+.vc-art-dests b:nth-child(2) { animation-delay: 0.15s; }
+.vc-art-dests b:nth-child(3) { animation-delay: 0.3s; }
+@keyframes vc-dest { 0%, 55% { opacity: 0.25; transform: scale(0.9); } 62%, 95% { opacity: 1; transform: scale(1); } 100% { opacity: 0.25; } }
+
+/* features: diagonal loading-screen stripes and a huge tilted word behind */
+.vc-stripes {
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(135deg, rgb(255 79 163 / 0.07) 0 40px, transparent 40px 80px, rgb(255 154 82 / 0.05) 80px 120px, transparent 120px 160px);
+  mask: linear-gradient(to bottom, transparent, #000 25%, #000 75%, transparent);
+  animation: vc-stripes 12s linear infinite;
+}
+@keyframes vc-stripes { to { background-position: 226px 0; } }
+.vc-bigword {
+  right: -2%;
+  top: 30px;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(110px, 16vw, 230px);
+  line-height: 0.9;
+  color: transparent;
+  -webkit-text-stroke: 2px rgb(255 213 107 / 0.14);
+  transform: rotate(-6deg);
+}
+.vc-feature-0, .vc-feature-3 { --acc: var(--vc-pink); }
+.vc-feature-1, .vc-feature-4 { --acc: var(--vc-cyan); }
+.vc-feature-2, .vc-feature-5 { --acc: var(--vc-gold); }
+.vc-poster.vc-feature { overflow: hidden; }
+.vc-poster.vc-feature::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+  background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%), rgb(255 255 255 / 0.1), transparent 60%);
+}
+.vc-poster.vc-feature:hover::after { opacity: 1; }
+.vc-poster.vc-feature .ico {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  color: var(--acc);
+  background: rgb(255 255 255 / 0.04);
+  border: 2px solid var(--acc);
+  box-shadow: 4px 4px 0 0 var(--acc);
+}
+.vc-poster.vc-feature:hover .ico { animation: vc-wiggle 0.5s ease; }
+@keyframes vc-wiggle { 30% { transform: rotate(-8deg) scale(1.08); } 60% { transform: rotate(6deg); } }
+
+/* faq: a giant question mark swinging slowly */
+.vc-qmark {
+  right: 4%;
+  top: 40px;
+  font-family: 'Anton', sans-serif;
+  font-size: clamp(200px, 30vw, 420px);
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 3px rgb(57 240 255 / 0.14);
+  transform-origin: 50% 10%;
+  animation: vc-swing 7s ease-in-out infinite;
+}
+@keyframes vc-swing { 50% { transform: rotate(10deg); } }
+.vc-bg-faq .vc-faq details { position: relative; background: #160b31; border-width: 2px; }
+.vc-bg-faq .vc-faq details[open] { box-shadow: 6px 6px 0 0 var(--vc-pink); transform: translate(-3px, -3px); }
+
+/* final CTA: a striped sunset sinking behind the copy */
+.vc-final-sun {
+  position: absolute;
+  left: 50%;
+  bottom: -160px;
+  width: 560px;
+  height: 560px;
+  margin-left: -280px;
+  border-radius: 50%;
+  background:
+    repeating-linear-gradient(to bottom, transparent 0 26px, rgb(140 30 120 / 0.85) 26px 34px),
+    linear-gradient(to bottom, #ffe58a, #ff7a59 55%, #ff2e7e);
+  opacity: 0.55;
+  animation: vc-sun 8s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes vc-sun { 50% { transform: translateY(24px); } }
+.vc-final > *:not(.vc-final-sun) { position: relative; }
+
+@media (max-width: 760px) {
+  .vc-bg-how::before { width: 300px; height: 150px; }
+  .vc-qmark { right: -6%; }
+  .vc-final-sun { width: 380px; height: 380px; margin-left: -190px; bottom: -120px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vc::after, .vc-bgword span, .vc-floor, .vc-stripes, .vc-qmark, .vc-final-sun,
+  .vc-art *, .vc-art-frame { animation: none !important; }
+}

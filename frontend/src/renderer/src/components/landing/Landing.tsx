@@ -8,6 +8,7 @@ import AuthModal, { type AuthTab } from './AuthModal'
 import ClipCard, { type ClipSpec } from './ClipCard'
 import Pricing from './Pricing'
 import LiveStats from './LiveStats'
+import { FeatureIcon, StepArt } from './StepArt'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import ViceScene from './ViceScene'
 
@@ -331,7 +332,8 @@ export default function Landing({
 
       <LiveStats />
 
-      <section className="vc-section" id="clips">
+      <section className="vc-section vc-bg-clips" id="clips">
+        <div className="vc-bgword" aria-hidden="true"><span>FOR YOU · FOR YOU · FOR YOU · FOR YOU · </span></div>
         <div className="vc-reveal">
           <div className="vc-kicker">Clips that went off</div>
           <h2 className="vc-display vc-h2">
@@ -353,7 +355,8 @@ export default function Landing({
         </div>
       </section>
 
-      <section className="vc-section" id="how">
+      <section className="vc-section vc-bg-how" id="how">
+        <div className="vc-floor" aria-hidden="true" />
         <div className="vc-reveal">
           <div className="vc-kicker">How it works</div>
           <h2 className="vc-display vc-h2">
@@ -367,8 +370,9 @@ export default function Landing({
             { n: '03', t: 'Cut 9:16 clips', p: 'Each peak becomes a vertical clip, from 20 s before to 10 s after, with captions. Your PC does the rendering.' },
             { n: '04', t: 'Polish & post', p: 'Trim, fix captions and switch layouts in the built-in editor, then export for TikTok, Shorts and Reels.' }
           ].map((s, i) => (
-            <div key={s.n} className="vc-glass vc-step vc-reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
+            <div key={s.n} className={`vc-poster vc-step vc-step-${i} vc-reveal`} style={{ transitionDelay: `${i * 0.1}s` }}>
               <div className="vc-step-num">{s.n}</div>
+              <StepArt n={i} />
               <h3>{s.t}</h3>
               <p>{s.p}</p>
             </div>
@@ -378,7 +382,9 @@ export default function Landing({
         <HypeGraph />
       </section>
 
-      <section className="vc-section" id="features">
+      <section className="vc-section vc-bg-features" id="features">
+        <div className="vc-stripes" aria-hidden="true" />
+        <div className="vc-bigword" aria-hidden="true">YOUR PC</div>
         <div className="vc-reveal">
           <div className="vc-kicker">Why a desktop app</div>
           <h2 className="vc-display vc-h2">
@@ -387,8 +393,19 @@ export default function Landing({
         </div>
         <div className="vc-features">
           {FEATURES.map((f, i) => (
-            <div key={f.title} className="vc-glass vc-feature vc-reveal" style={{ transitionDelay: `${(i % 3) * 0.08}s` }}>
-              <div className="ico">{f.ico}</div>
+            <div
+              key={f.title}
+              className={`vc-poster vc-feature vc-feature-${i} vc-reveal`}
+              style={{ transitionDelay: `${(i % 3) * 0.08}s` }}
+              onPointerMove={(e) => {
+                const r = e.currentTarget.getBoundingClientRect()
+                e.currentTarget.style.setProperty('--mx', `${e.clientX - r.left}px`)
+                e.currentTarget.style.setProperty('--my', `${e.clientY - r.top}px`)
+              }}
+            >
+              <div className="ico">
+                <FeatureIcon i={i} />
+              </div>
               <h3>{f.title}</h3>
               <p>{f.text}</p>
             </div>
@@ -407,7 +424,8 @@ export default function Landing({
         }}
       />
 
-      <section className="vc-section" id="faq">
+      <section className="vc-section vc-bg-faq" id="faq">
+        <div className="vc-qmark" aria-hidden="true">?</div>
         <div className="vc-reveal">
           <div className="vc-kicker">FAQ</div>
           <h2 className="vc-display vc-h2">
@@ -426,6 +444,7 @@ export default function Landing({
 
       <section className="vc-section">
         <div className="vc-final vc-reveal">
+          <div className="vc-final-sun" aria-hidden="true" />
           <h2 className="vc-display vc-h2">Stop paying for cloud renders.</h2>
           <p className="vc-lead" style={{ margin: '0 auto 24px', color: '#ffe9f4' }}>
             Download SpikeClip, point it at a stream and let your own PC cut the clips.
@@ -454,7 +473,7 @@ export default function Landing({
             </span>
           </a>
           <p className="vc-note" style={{ marginTop: 12, maxWidth: 300 }}>
-            AI that turns long streams into viral vertical clips.
+            The desktop app that turns long streams into vertical clips, on your own PC.
           </p>
         </div>
         <div>
