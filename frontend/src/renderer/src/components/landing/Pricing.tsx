@@ -2,7 +2,7 @@ import '@fontsource/alfa-slab-one/400.css'
 import { useState, type MouseEvent } from 'react'
 import { BigHeli, BigPalm, Bill, CashStack, Coin, Diamond, GoldBars, MoneyBag } from './Decor'
 
-/** Plans: Free, Pro, Max — priced like GTA cash. */
+/** Plans: Pro (on sale) and Max (coming soon) — priced like GTA cash. */
 
 function PalmIcon(): JSX.Element {
   return (
@@ -50,7 +50,7 @@ function HeliIcon(): JSX.Element {
 }
 
 interface Plan {
-  id: 'free' | 'pro' | 'max'
+  id: 'pro' | 'max'
   name: string
   tagline: string
   monthly: number
@@ -64,23 +64,6 @@ interface Plan {
 }
 
 const PLANS: Plan[] = [
-  {
-    id: 'free',
-    name: 'Free',
-    tagline: 'Try it on your own PC',
-    monthly: 0,
-    yearly: 0,
-    icon: <PalmIcon />,
-    iconBg: 'linear-gradient(135deg, #5effc1, #39f0ff)',
-    cta: 'Download free',
-    perks: [
-      { text: 'Desktop app for Windows & Mac' },
-      { text: '5 clips per month' },
-      { text: 'Chat-spike detection (−20 s / +10 s)' },
-      { text: '720p export with a SpikeClip watermark' },
-      { text: '1 computer, no key needed' }
-    ]
-  },
   {
     id: 'pro',
     name: 'Pro',
@@ -123,13 +106,6 @@ const PLANS: Plan[] = [
 
 /** Props behind each card: they peek out past its edges. */
 const DECOR: Record<Plan['id'], JSX.Element> = {
-  free: (
-    <>
-      <span className="vc-deco d-palm"><BigPalm /></span>
-      <span className="vc-deco d-coin1"><Coin /></span>
-      <span className="vc-deco d-coin2"><Coin /></span>
-    </>
-  ),
   pro: (
     <>
       <span className="vc-deco d-bag"><MoneyBag /></span>
@@ -190,7 +166,7 @@ export default function Pricing({
           Pick your <span className="vc-gradient-text">ride</span>
         </h2>
         <p className="vc-lead" style={{ margin: '0 auto' }}>
-          Start free. Upgrade when the clips start paying off.
+          One license, everything unlocked. Your PC does the rendering, so there are no cloud fees on top.
         </p>
         <div className="vc-billing" role="group" aria-label="Billing period">
           <button className={!yearly ? 'on' : ''} onClick={() => setYearly(false)}>
@@ -202,7 +178,7 @@ export default function Pricing({
         </div>
       </div>
 
-      <div className="vc-plans">
+      <div className="vc-plans vc-plans-2">
         {PLANS.map((p, i) => {
           const price = yearly ? p.yearly : p.monthly
           return (
@@ -234,8 +210,8 @@ export default function Pricing({
                     ${price}
                   </span>
                   <span className="vc-per">
-                    {price === 0 ? 'forever' : '/ month'}
-                    {yearly && price > 0 && <em>billed ${price * 12}/yr</em>}
+                    / month
+                    {yearly && <em>billed ${price * 12}/yr</em>}
                   </span>
                 </div>
 

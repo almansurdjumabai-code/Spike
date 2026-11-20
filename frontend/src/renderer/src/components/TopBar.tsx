@@ -68,7 +68,7 @@ export default function TopBar(): JSX.Element {
   const hour = new Date().getHours()
   const wave = hour < 5 ? '🌙' : hour < 12 ? '☀️' : hour < 18 ? '👋' : '🌆'
   const today = new Date().toLocaleDateString(undefined, { weekday: 'long', month: 'long', day: 'numeric' })
-  const tier = plan?.plan ?? 'free'
+  const tier = plan?.plan === 'pro' || plan?.plan === 'max' ? plan.plan : 'free'
   const isOwner = plan?.owner ?? !user
 
   return (

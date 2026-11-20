@@ -41,7 +41,7 @@ Schema: [`app/db.py`](app/db.py). Plans and what they unlock: [`app/settings.py`
 | `POST /v1/license/activate` | desktop app | bind this device to the key |
 | `POST /v1/license/validate` | desktop app | is the key still good on this device? |
 | `POST /v1/license/deactivate` | desktop app | free this device's slot |
-| `GET /v1/plans` | desktop app | limits per plan (incl. the keyless free trial) |
+| `GET /v1/plans` | desktop app | what each paid plan unlocks |
 | `GET /downloads` | website | Windows / Mac build links and version |
 | `POST /admin/licenses` · `GET /admin/licenses` · `POST /admin/licenses/{key}/revoke` | owner (`Bearer ADMIN_TOKEN`) | issue keys by hand (gifts, testers, reviewers), list, revoke |
 
@@ -70,5 +70,5 @@ Response:
 `code` is one of `ok`, `invalid_key`, `revoked`, `expired`, `inactive`, `activation_limit`,
 `not_activated`; `message` is ready to show the user. Suggested app behaviour: activate on first
 entry of the key; validate on start-up when `check_again_after_hours` has passed; if the server can't
-be reached, keep working for `offline_grace_days` after the last good answer; without a key, run the
-`free` plan from `/v1/plans`. Key endpoints are rate-limited per IP (`LICENSE_RATE_PER_MINUTE`, 30).
+be reached, keep working for `offline_grace_days` after the last good answer. There is no free tier:
+without a valid key the app stays on its activation screen. Key endpoints are rate-limited per IP (`LICENSE_RATE_PER_MINUTE`, 30).

@@ -457,7 +457,6 @@ export default function Landing({
 
       <Pricing
         onChoose={(plan, period) => {
-          if (plan === 'free') return signedIn ? onAuthed() : setAuth('signup')
           if (!signedIn) {
             // Sign up first; the account page opens checkout for this plan.
             setPendingPlan(plan, period)

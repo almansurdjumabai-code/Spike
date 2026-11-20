@@ -249,10 +249,11 @@ export default function Account(): JSX.Element {
             ) : lics.length === 0 ? (
               <div className="vc-glass vc-key-card">
                 <p className="font-bold" style={{ fontSize: 18 }}>
-                  You&apos;re on the Free trial
+                  No license yet
                 </p>
                 <p className="vc-note" style={{ marginTop: 6 }}>
-                  5 clips a month with a watermark, no key needed. Go Pro for unlimited clips in 1080p on 2 computers.
+                  SpikeClip needs a license key to run. Pro unlocks unlimited clips in 1080p, with no watermark, on 2
+                  computers. Your key appears here right after payment.
                 </p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
                   <button className="vc-btn vc-btn-primary" onClick={() => buy('monthly')}>

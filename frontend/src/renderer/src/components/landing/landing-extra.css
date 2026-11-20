@@ -773,3 +773,7 @@
   color: #1b0730;
   background: linear-gradient(135deg, #ffd56b, #ff4fa3);
 }
+
+/* two plans: centred */
+.vc-plans.vc-plans-2 { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; }
+@media (max-width: 980px) { .vc-plans.vc-plans-2 { grid-template-columns: 1fr; } }

@@ -69,7 +69,7 @@ def _row(row: tuple) -> dict:
 def issue(c: Conn, *, plan: str, user_id: int | None, email: str | None, source: str,
           expires_at: int | None = None, status: str = "active", subscription_id: str | None = None,
           customer_id: str | None = None, note: str | None = None) -> dict:
-    if plan not in settings.PLANS or plan == "free":
+    if plan not in settings.PLANS:
         raise ValueError(f"unknown plan {plan!r}")
     now = int(time.time())
     for _ in range(5):  # a collision is astronomically unlikely; retry anyway
@@ -203,9 +203,9 @@ def for_user(c: Conn, user_id: int) -> list[dict]:
 
 def best_plan(c: Conn, user_id: int | None) -> str:
     if user_id is None:
-        return "free"
-    rank = {"free": 0, "pro": 1, "max": 2}
-    best = "free"
+        return "none"
+    rank = {"none": 0, "pro": 1, "max": 2}
+    best = "none"
     for lic in for_user(c, user_id):
         if state(lic) == "ok" and rank[lic["plan"]] > rank[best]:
             best = lic["plan"]

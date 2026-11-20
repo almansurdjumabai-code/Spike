@@ -48,17 +48,11 @@ def invite_code() -> str:
     return env("INVITE_CODE", "SPIKECLIP_INVITE_CODE")
 
 
-# What each plan unlocks in the desktop app. The app enforces the limits on
+# What each paid plan unlocks in the desktop app. There is no free tier:
+# without a valid key the app stays locked. The app enforces the limits on
 # the user's PC; the API is the source of truth for which plan a key has.
 # None means "no limit".
 PLANS: dict[str, dict] = {
-    "free": {
-        "label": "Free trial",
-        "max_activations": 1,
-        "clips_per_month": 5,
-        "watermark": True,
-        "max_resolution": 720,
-    },
     "pro": {
         "label": "Pro",
         "max_activations": 2,

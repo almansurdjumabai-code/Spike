@@ -54,7 +54,7 @@ function Terms(): JSX.Element {
       </p>
       <h2>3. Plans and payment</h2>
       <p>
-        {LEGAL.product} offers a free trial and paid subscriptions with the limits shown on our pricing page. A paid
+        {LEGAL.product} is sold as paid subscriptions with the features shown on our pricing page. A paid
         plan comes with a license key that unlocks the app on the number of computers your plan allows; keys are
         personal and may not be shared or resold. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for
         all our orders. Paddle provides all customer service inquiries and handles returns. Subscriptions renew
