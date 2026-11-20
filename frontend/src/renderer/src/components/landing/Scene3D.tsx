@@ -2,9 +2,9 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
 
 /** The scroll film: a pre-rendered Blender sequence scrubbed by scroll.
  *
- *  The scene (dusk bay, live ocean, palms, neon skyline, a phone playing a
- *  clip, gold coins) is rendered offline into FRAMES WebP stills under
- *  /media/film. Scrolling through the pinned section picks the frame to draw
+ *  The scene (film/bay_scene.py: dusk over the bay, a lit skyline, the pink
+ *  causeway, a SpikeClip speedboat, then a phone playing a clip rising out of
+ *  the water) is rendered offline into FRAMES WebP stills under /media/film. Scrolling through the pinned section picks the frame to draw
  *  on a canvas, so the page shows film-quality graphics while the browser only
  *  ever paints one image: no WebGL, almost no GPU work.
  *
@@ -16,7 +16,7 @@ import { useEffect, useRef, useState, type CSSProperties } from 'react'
  *  burst out of the phone)  3. the clip lands (the phone, front and centre).
  */
 
-const FRAMES = 150
+const FRAMES = 180
 const src = (i: number): string => `/media/film/f_${String(i + 1).padStart(4, '0')}.webp`
 
 const BEATS = [
@@ -114,7 +114,7 @@ export default function Scene3D(): React.JSX.Element {
         draw(i)
         drawn = i
       }
-      const b = shown < 0.3 ? 0 : shown < 0.64 ? 1 : 2
+      const b = target < 0.33 ? 0 : target < 0.64 ? 1 : 2
       setBeat((old) => (old === b ? old : b))
     }
 
