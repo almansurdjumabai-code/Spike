@@ -40,7 +40,7 @@ const FAQ = [
   { q: 'Where is the video processed?', a: 'On your computer. SpikeClip is a desktop app for Windows and Mac: downloading the stream, finding chat peaks and rendering the clips all happen locally. Nothing is uploaded to our servers, which only handle your account, payment and license key.' },
   { q: 'How does it pick the moments?', a: 'It measures chat activity across the whole stream and finds the spikes. Each clip starts 20 seconds before a peak and ends 10 seconds after, so you get the build-up and the reaction.' },
   { q: 'What do I need to run it?', a: 'A Windows 10/11 or macOS computer with at least 8 GB of RAM (16 GB recommended) and free disk space for the streams you clip. A dedicated graphics card makes rendering faster but is not required.' },
-  { q: 'How does the license key work?', a: 'After you buy, a key like CLIP-XXXX-XXXX-XXXX appears in your account. Paste it into the app to unlock your plan. Pro works on 2 computers; you can move it to a new PC from your account page.' },
+  { q: 'How does the license key work?', a: 'After you buy, a key like CLIP-XXXX-XXXX-XXXX appears in your account. Paste it into the app to unlock it. Every key is unique and bound to one computer, so it cannot be shared; moving to a new PC takes one click in your account.' },
   { q: 'Does it work offline?', a: 'Yes. Once activated, the app checks your key every few days and keeps working for up to 7 days without internet. Downloading streams of course needs a connection.' },
   { q: 'Can I cancel or get a refund?', a: 'Cancel anytime from your account and keep your plan until the end of the period you paid for. Not happy? Full refund within 14 days.' }
 ]

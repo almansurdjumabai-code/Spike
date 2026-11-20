@@ -73,10 +73,6 @@
 name: SpikeClip
 
 paths-ignore:
-  - backend/third_party
-  - backend/vendor
   - frontend/node_modules
   - frontend/dist-web
-  - backend/build
-  - backend/dist
   - release

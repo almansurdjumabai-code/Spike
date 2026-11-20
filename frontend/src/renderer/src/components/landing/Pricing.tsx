@@ -77,7 +77,7 @@ const PLANS: Plan[] = [
     perks: [
       { text: 'Unlimited clips — your PC does the work', hot: true },
       { text: '1080p export, no watermark', hot: true },
-      { text: 'License key for 2 computers' },
+      { text: 'Personal license key, bound to your PC' },
       { text: 'Gaming / Reaction facecam layouts' },
       { text: 'Every caption style + the clip editor' },
       { text: 'All updates while subscribed' }
@@ -95,7 +95,7 @@ const PLANS: Plan[] = [
     soon: true,
     perks: [
       { text: 'Everything in Pro' },
-      { text: 'License key for 5 computers', hot: true },
+      { text: 'License key for 3 computers', hot: true },
       { text: 'Up to 4K export', hot: true },
       { text: 'Batch-clip several streams at once' },
       { text: 'Priority support' },

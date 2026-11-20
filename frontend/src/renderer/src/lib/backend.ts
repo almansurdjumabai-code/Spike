@@ -8,7 +8,7 @@
  *  backend has SPIKECLIP_API_TOKEN set, the token is asked for once and kept
  *  in this browser. Ordinary requests carry it as a Bearer header; URLs used
  *  in <img>, <video>, <audio> and the WebSocket cannot send headers, so those
- *  carry it as `access_token` in the query (see backend/server/cloud.py).
+ *  carry it as `access_token` in the query (see backend/app/main.py).
  */
 
 const env = (import.meta as unknown as { env?: Record<string, string | undefined> }).env ?? {}

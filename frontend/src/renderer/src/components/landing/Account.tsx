@@ -5,7 +5,7 @@ import './landing-extra.css'
 import { useCallback, useEffect, useState } from 'react'
 import { API_BASE, getApiToken, logout, type SpikeUser } from '../../lib/backend'
 import { openCheckout, takePendingPlan, type Period } from '../../lib/billing'
-import { downloads, myLicenses, releaseDevice, type Downloads, type License } from '../../lib/licenses'
+import { downloadLink, downloads, myLicenses, releaseDevice, type Downloads, type License } from '../../lib/licenses'
 import AuthModal from './AuthModal'
 
 /** /app on the website: the buyer's license key, downloads and setup steps.
@@ -141,7 +141,7 @@ function Setup({ dl }: { dl: Downloads }): JSX.Element {
 export default function Account(): JSX.Element {
   const [user, setUser] = useState<SpikeUser | null | undefined>(undefined)
   const [lics, setLics] = useState<License[] | null>(null)
-  const [dl, setDl] = useState<Downloads>({ version: '', windows: null, mac: null })
+  const [dl, setDl] = useState<Downloads>({ version: '', windows: false, mac: false })
   const [error, setError] = useState<string | null>(null)
   const purchased = new URLSearchParams(window.location.search).get('upgraded')
 
@@ -252,8 +252,8 @@ export default function Account(): JSX.Element {
                   No license yet
                 </p>
                 <p className="vc-note" style={{ marginTop: 6 }}>
-                  SpikeClip needs a license key to run. Pro unlocks unlimited clips in 1080p, with no watermark, on 2
-                  computers. Your key appears here right after payment.
+                  SpikeClip needs a license key to run. Pro unlocks unlimited clips in 1080p with no watermark on your
+                  computer. The download and your personal key appear here right after payment.
                 </p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
                   <button className="vc-btn vc-btn-primary" onClick={() => buy('monthly')}>
@@ -274,30 +274,34 @@ export default function Account(): JSX.Element {
 
             <h2 className="vc-account-h">⬇ Download the app</h2>
             <div className="vc-downloads">
-              <a
-                className={`vc-dl${dl.windows ? '' : ' is-soon'}`}
-                href={dl.windows ?? undefined}
-                aria-disabled={!dl.windows}
-                onClick={(e) => !dl.windows && e.preventDefault()}
-              >
-                <span className="vc-dl-ico">⊞</span>
-                <span>
-                  <b>Windows</b>
-                  <em>{dl.windows ? `Installer${dl.version ? ` · v${dl.version}` : ''}` : 'Coming soon'}</em>
-                </span>
-              </a>
-              <a
-                className={`vc-dl${dl.mac ? '' : ' is-soon'}`}
-                href={dl.mac ?? undefined}
-                aria-disabled={!dl.mac}
-                onClick={(e) => !dl.mac && e.preventDefault()}
-              >
-                <span className="vc-dl-ico">🍎</span>
-                <span>
-                  <b>macOS</b>
-                  <em>{dl.mac ? `.dmg${dl.version ? ` · v${dl.version}` : ''}` : 'Coming soon'}</em>
-                </span>
-              </a>
+              {(['windows', 'mac'] as const).map((os) => {
+                const ready = dl[os]
+                const licensed = !!lics?.some((l) => l.state === 'ok')
+                return (
+                  <button
+                    key={os}
+                    className={`vc-dl${ready && licensed ? '' : ' is-soon'}`}
+                    disabled={!ready || !licensed}
+                    onClick={() =>
+                      void downloadLink(os)
+                        .then((url) => window.location.assign(url))
+                        .catch((e: Error) => setError(e.message))
+                    }
+                  >
+                    <span className="vc-dl-ico">{os === 'windows' ? '⊞' : '🍎'}</span>
+                    <span>
+                      <b>{os === 'windows' ? 'Windows' : 'macOS'}</b>
+                      <em>
+                        {!ready
+                          ? 'Coming soon'
+                          : !licensed
+                            ? '🔒 For subscribers'
+                            : `${os === 'windows' ? 'Installer' : '.dmg'}${dl.version ? ` · v${dl.version}` : ''}`}
+                      </em>
+                    </span>
+                  </button>
+                )
+              })}
             </div>
 
             <h2 className="vc-account-h">🛠 Install &amp; activate</h2>

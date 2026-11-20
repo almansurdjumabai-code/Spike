@@ -1,6 +1,6 @@
 import { API_BASE, getApiToken } from './backend'
 
-/** Paid plans through Paddle (checkout overlay) — see backend/server/billing.py. */
+/** Paid plans through Paddle (checkout overlay) — see backend/app/paddle.py. */
 
 export type PaidPlan = 'pro' | 'max'
 export type Period = 'monthly' | 'yearly'

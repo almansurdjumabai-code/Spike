@@ -1,6 +1,6 @@
 import { API_BASE } from './backend'
 
-/** The account page's view of the licence API (api/app/main.py). */
+/** The account page's view of the licence API (backend/app/main.py). */
 
 export interface Device {
   device: string
@@ -26,8 +26,8 @@ export interface License {
 
 export interface Downloads {
   version: string
-  windows: string | null
-  mac: string | null
+  windows: boolean
+  mac: boolean
 }
 
 export async function myLicenses(): Promise<License[]> {
@@ -50,5 +50,13 @@ export async function downloads(): Promise<Downloads> {
   } catch {
     /* fall through */
   }
-  return { version: '', windows: null, mac: null }
+  return { version: '', windows: false, mac: false }
+}
+
+/** The installer link: the server only gives it to someone with an active key. */
+export async function downloadLink(platform: 'windows' | 'mac'): Promise<string> {
+  const r = await fetch(`${API_BASE}/downloads/${platform}`)
+  const data = (await r.json().catch(() => ({}))) as { url?: string; detail?: string }
+  if (!r.ok || !data.url) throw new Error(data.detail || 'Download is not available right now.')
+  return data.url
 }

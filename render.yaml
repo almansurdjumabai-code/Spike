@@ -8,9 +8,9 @@
 
 services:
   - type: web
-    name: spikeclip-api
+    name: spikeclip-backend
     runtime: docker
-    rootDir: api
+    rootDir: backend
     dockerfilePath: ./Dockerfile
     dockerContext: .
     region: frankfurt

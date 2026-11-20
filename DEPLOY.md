@@ -4,23 +4,24 @@ SpikeClip продаётся как **десктоп-приложение для
 
 | Папка | Что это | Где работает |
 |---|---|---|
-| [`api/`](api/) | Лёгкий веб-API: аккаунты, оплата Paddle, лицензионные ключи `CLIP-XXXX-XXXX-XXXX`, их активация и проверка. Описание эндпоинтов и схема базы — в [`api/README.md`](api/README.md) | Сервер (Render, Docker) |
-| [`frontend/`](frontend/) | Сайт (лендинг, тарифы, личный кабинет `/app` с ключом и загрузками, юридические страницы) **и** оболочка десктоп-приложения (Electron) | Сайт — Vercel; приложение — на ПК пользователя |
-| [`backend/`](backend/) | Движок нарезки (скачивание VOD, чат, транскрипция, рендер FFmpeg). Упаковывается **внутрь десктоп-приложения** и запускается локально | ПК пользователя (на сервер больше не деплоится) |
+| [`backend/`](backend/) | Лёгкий веб-API: аккаунты, оплата Paddle, лицензионные ключи `CLIP-XXXX-XXXX-XXXX`, их активация и проверка. Описание эндпоинтов и схема базы — в [`backend/README.md`](backend/README.md) | Сервер (Render, Docker) |
+| [`frontend/`](frontend/) | Сайт: лендинг, тарифы, личный кабинет `/app` (ключ, загрузка приложения), админка `/admin`, юридические страницы | Vercel |
+
+Само десктоп-приложение делается отдельно и подключается к этому API по контракту из [`backend/README.md`](backend/README.md#desktop-app-contract). Прежний движок нарезки удалён из репозитория (он остался в истории git).
 
 ```
-Браузер ──HTTPS──▶ сайт (Vercel) ──HTTPS──▶ api/ (Render) ──▶ Postgres (ключи, аккаунты)
+Браузер ──HTTPS──▶ сайт (Vercel) ──HTTPS──▶ backend/ (Render) ──▶ Postgres (ключи, аккаунты)
                                                ▲
 Paddle ──webhook (подписан)────────────────────┘
-Десктоп-приложение ──/v1/license/activate|validate──▶ api/
-       └─ локально: backend/ (движок) → клипы 9:16 на диске пользователя
+Десктоп-приложение ──/v1/license/activate|validate──▶ backend/
+       └─ локально на ПК: пики чата → клипы 9:16
 ```
 
 ---
 
-## 1. API (`api/`)
+## 1. API (`backend/`)
 
-Render: сервис с **Root Directory = `api`** (Dockerfile подхватится сам), бесплатного или Starter-плана хватает. Готовый Blueprint — [`render.yaml`](render.yaml).
+Render: сервис с **Root Directory = `backend`** (Dockerfile подхватится сам), бесплатного или Starter-плана хватает. Готовый Blueprint — [`render.yaml`](render.yaml).
 
 | Переменная | Нужна | Назначение |
 |---|---|---|
@@ -29,9 +30,9 @@ Render: сервис с **Root Directory = `api`** (Dockerfile подхвати�
 | `CORS_ORIGINS` | да | адрес сайта, например `https://spikeclip-app.vercel.app` (старое `SPIKECLIP_CORS_ORIGINS` тоже работает) |
 | `PADDLE_WEBHOOK_SECRET` | да | Paddle → Events → Notifications → destination → Secret key |
 | `SIGNUP` | нет | `open` (по умолчанию), `invite` (+ `INVITE_CODE`) или `closed` |
-| `DOWNLOAD_WINDOWS_URL`, `DOWNLOAD_MAC_URL`, `APP_VERSION` | когда будут сборки | ссылки на установщики в личном кабинете (пока пусто — кабинет пишет «Coming soon») |
+| `DOWNLOAD_WINDOWS_URL`, `DOWNLOAD_MAC_URL`, `APP_VERSION` | когда будут сборки | где лежат установщики. Ссылку получает **только владелец активного ключа** (`GET /downloads/{windows,mac}`); публично видно лишь, какие сборки есть |
 
-Ключ клиента Paddle и ID цен уже вшиты в `api/app/paddle.py` (переменные `PADDLE_*` их переопределяют).
+Ключ клиента Paddle и ID цен уже вшиты в `backend/app/paddle.py` (переменные `PADDLE_*` их переопределяют).
 
 Выдать ключ вручную (подарок, тестер, проверяющий Paddle):
 
@@ -50,21 +51,15 @@ curl -X POST https://<api>/admin/licenses -H "Authorization: Bearer $ADMIN_TOKEN
 
 ## 3. Десктоп-приложение
 
-Собирается из `frontend/` (Electron) + `backend/` (движок):
-
-```bash
-cd backend && python scripts/build_installer.py      # Windows-установщик → release/
-```
-
-Готовый установщик загрузите туда, откуда его можно скачать (GitHub Releases, Cloudflare R2 и т. п.), и пропишите ссылку в `DOWNLOAD_WINDOWS_URL`. Сборки для macOS пока нет. Экран ввода ключа в самом приложении ещё предстоит сделать — контракт API для него описан в [`api/README.md`](api/README.md#desktop-app-contract).
-
-Локальная разработка движка и интерфейса: `docker compose up --build` или `cd frontend && npm run dev` (Electron сам запустит `backend/main.py`).
+1. Соберите установщик (Windows `.exe`, macOS `.dmg`).
+2. Загрузите его туда, где ссылку никто не угадает (например приватный бакет Cloudflare R2 или S3 со случайным именем файла), и впишите ссылку в `DOWNLOAD_WINDOWS_URL` / `DOWNLOAD_MAC_URL` на Render. Сайт покажет кнопку скачивания только подписчикам.
+3. В приложении: при первом запуске — экран ввода ключа → `POST /v1/license/activate`; при каждом запуске раз в несколько дней — `validate`. Ключ Pro работает на **1 компьютере**, Max — на 3; перенести ключ на новый ПК можно в кабинете («Release»). Даже если установщик утечёт, без купленного ключа он не запустится.
 
 ---
 
 ## 4. Оплата через Paddle
 
-Paddle — продавец (Merchant of Record): проводит оплату, берёт налоги США и НДС ЕС, делает возвраты и через подписанный webhook сообщает API о подписках. Webhook **выпускает лицензионный ключ** при первой оплате и обновляет его срок, тариф и статус при продлении, смене тарифа и отмене (`api/app/paddle.py`).
+Paddle — продавец (Merchant of Record): проводит оплату, берёт налоги США и НДС ЕС, делает возвраты и через подписанный webhook сообщает API о подписках. Webhook **выпускает лицензионный ключ** при первой оплате и обновляет его срок, тариф и статус при продлении, смене тарифа и отмене (`backend/app/paddle.py`).
 
 Webhook URL: `https://<api>/billing/paddle/webhook`, события `subscription.*`. Checkout settings → Default payment link: `https://<сайт>/app`.
 
