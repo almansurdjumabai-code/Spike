@@ -1,126 +1,72 @@
-# SpikeClip: деплой в облако
+# SpikeClip: как устроен и как деплоится
 
-Репозиторий состоит из двух независимо деплоящихся частей:
+SpikeClip продаётся как **десктоп-приложение для Windows и Mac**. Поиск пиков чата (клип: 20 с до пика и 10 с после) и нарезка вертикальных клипов 9:16 идут **на компьютере пользователя**. На сервере нет ни видео, ни очередей рендера, ни хранилища клипов.
 
-| Папка | Что это | Как деплоится |
+| Папка | Что это | Где работает |
 |---|---|---|
-| [`backend/`](backend/) | Python-движок: загрузка видео (yt-dlp), транскрипция (faster-whisper), поиск моментов (LLM + аудио/видео-сигналы), **нарезка и рендер клипов (FFmpeg)**, публикация. HTTP API + WebSocket на FastAPI. | Docker-образ (`backend/Dockerfile`) на любом хостинге контейнеров |
-| [`frontend/`](frontend/) | React + TypeScript + Tailwind интерфейс. Собирается как статический сайт (`npm run build:web`) **или** как десктоп-приложение Windows (Electron, `npm run package`). | Vercel / Netlify / Cloudflare Pages / nginx-контейнер |
-
-Остальные папки в корне (`site/`, `web/`, `whop-app/`, `feedback-relay/`, `twitch-proxy/`, `docs/`) — отдельные проекты (лендинг, браузерная демо-версия, воркеры Cloudflare, документация) и к этим двум частям не относятся.
+| [`api/`](api/) | Лёгкий веб-API: аккаунты, оплата Paddle, лицензионные ключи `CLIP-XXXX-XXXX-XXXX`, их активация и проверка. Описание эндпоинтов и схема базы — в [`api/README.md`](api/README.md) | Сервер (Render, Docker) |
+| [`frontend/`](frontend/) | Сайт (лендинг, тарифы, личный кабинет `/app` с ключом и загрузками, юридические страницы) **и** оболочка десктоп-приложения (Electron) | Сайт — Vercel; приложение — на ПК пользователя |
+| [`backend/`](backend/) | Движок нарезки (скачивание VOD, чат, транскрипция, рендер FFmpeg). Упаковывается **внутрь десктоп-приложения** и запускается локально | ПК пользователя (на сервер больше не деплоится) |
 
 ```
-Браузер ──HTTPS──▶ frontend (статика)
-   │
-   └──HTTPS / WSS + токен──▶ backend (FastAPI :8765) ──▶ FFmpeg, Whisper, LLM (Ollama или OpenRouter)
-                                   │
-                                   └──▶ /data (постоянный диск: видео, клипы, SQLite)
+Браузер ──HTTPS──▶ сайт (Vercel) ──HTTPS──▶ api/ (Render) ──▶ Postgres (ключи, аккаунты)
+                                               ▲
+Paddle ──webhook (подписан)────────────────────┘
+Десктоп-приложение ──/v1/license/activate|validate──▶ api/
+       └─ локально: backend/ (движок) → клипы 9:16 на диске пользователя
 ```
 
 ---
 
-## 1. Backend
+## 1. API (`api/`)
 
-### Переменные окружения
+Render: сервис с **Root Directory = `api`** (Dockerfile подхватится сам), бесплатного или Starter-плана хватает. Готовый Blueprint — [`render.yaml`](render.yaml).
 
-Полный список — в [`backend/.env.example`](backend/.env.example).
-
-| Переменная | Обязательна | Назначение |
+| Переменная | Нужна | Назначение |
 |---|---|---|
-| `SPIKECLIP_API_TOKEN` | **да** | Общий секрет. Без него сервер **откажется** слушать публичный интерфейс. Сгенерировать: `python -c "import secrets; print(secrets.token_urlsafe(32))"` |
-| `SPIKECLIP_CORS_ORIGINS` | да | Адрес фронтенда, например `https://app.example.com` (через запятую, если их несколько) |
-| `SPIKECLIP_ALLOWED_HOSTS` | да | Домен самого API, например `api.example.com` (`*` — любой; не рекомендуется) |
-| `SPIKECLIP_INVITE_CODE` | для регистрации | Код, без которого на сайте нельзя зарегистрироваться. Все аккаунты пока работают с одной общей библиотекой видео, поэтому открытая регистрация (`SPIKECLIP_OPEN_SIGNUP=1`) — только для закрытых тестов. Без обеих переменных регистрация закрыта, входить можно только по токену владельца |
-| `SPIKECLIP_DATA_DIR` | нет | По умолчанию `/data` — сюда нужно смонтировать постоянный диск |
-| `PORT` | нет | Большинство платформ задают его сами; иначе 8765 |
-| `SPIKECLIP_OLLAMA_HOST` | нет | Адрес Ollama, если LLM запускается рядом; иначе выберите облачного провайдера (OpenRouter) в Settings → AI |
+| `DATABASE_URL` | **да** | Postgres (например бесплатный Neon: `postgresql://…?sslmode=require`). Без него ключи пишутся в SQLite-файл, который бесплатный хост **стирает при каждом перезапуске** |
+| `ADMIN_TOKEN` | да | токен владельца для `/admin/*` (выдать/отозвать ключ вручную). Старое имя `SPIKECLIP_API_TOKEN` тоже работает |
+| `CORS_ORIGINS` | да | адрес сайта, например `https://spikeclip-app.vercel.app` (старое `SPIKECLIP_CORS_ORIGINS` тоже работает) |
+| `PADDLE_WEBHOOK_SECRET` | да | Paddle → Events → Notifications → destination → Secret key |
+| `SIGNUP` | нет | `open` (по умолчанию), `invite` (+ `INVITE_CODE`) или `closed` |
+| `DOWNLOAD_WINDOWS_URL`, `DOWNLOAD_MAC_URL`, `APP_VERSION` | когда будут сборки | ссылки на установщики в личном кабинете (пока пусто — кабинет пишет «Coming soon») |
 
-Токен принимается как `Authorization: Bearer …`, заголовок `X-SpikeClip-Token` или параметр `?access_token=…` (последний нужен для `<video>`, `<img>` и WebSocket, которые не умеют слать заголовки). Без токена открыты только `/health` и OAuth-колбэки (`…/callback…`).
+Ключ клиента Paddle и ID цен уже вшиты в `api/app/paddle.py` (переменные `PADDLE_*` их переопределяют).
 
-### Сборка и запуск
+Выдать ключ вручную (подарок, тестер, проверяющий Paddle):
 
 ```bash
-docker build -t spikeclip-backend --build-arg SPIKECLIP_VERSION=2.1.0 backend/
-docker run -p 8765:8765 -v spikeclip-data:/data --env-file backend/.env spikeclip-backend
+curl -X POST https://<api>/admin/licenses -H "Authorization: Bearer $ADMIN_TOKEN" -H "Content-Type: application/json" -d '{"plan":"pro","email":"friend@example.com","days":30}'
 ```
-
-### Render (готовый Blueprint)
-
-В корне лежит [`render.yaml`](render.yaml): веб-сервис из `backend/Dockerfile` и **постоянный диск 50 ГБ в `/data`** (видео, клипы, SQLite-база и кэш моделей). Токен Render генерирует сам. CORS уже настроен на `spikeclip-app.vercel.app`, а домен `*.onrender.com` бэкенд разрешает автоматически.
-
-1. Откройте https://dashboard.render.com/blueprint/new?repo=https://github.com/almansurdjumabai-code/Spike, дайте Render доступ к репозиторию, проверьте цену и нажмите **Apply**.
-2. Когда сервис поднимется, скопируйте его адрес (`https://spikeclip-backend-….onrender.com`) и значение `SPIKECLIP_API_TOKEN` (Environment).
-3. В Vercel задайте `VITE_API_BASE=<адрес>` и сделайте Redeploy фронтенда.
-4. Откройте сайт и введите токен. Затем в Settings → AI выберите облачного провайдера (OpenRouter): Ollama на Render не запускается.
-
-Диск у Render доступен только на платных тарифах. Он привязывает сервис к одному экземпляру, а при деплое сервис ненадолго перезапускается — для этой архитектуры это нормально.
-
-### Другие платформы
-
-На Railway / Fly.io / Google Cloud Run укажите `backend/` как корень сборки (Dockerfile подхватится сам), задайте переменные выше и подключите постоянный диск в `/data`. Образ публикуется и в GHCR воркфлоу `.github/workflows/docker-image.yml` (при пуше тега).
-
-### Ресурсы
-
-Обработка видео тяжёлая. Ориентиры из исходного проекта: **12 ГБ RAM и 4 vCPU** — минимум, при котором рендер вообще проходит (8 ГБ анализирует видео, но клипов не выдаёт); примерно час исходника на 12 ГБ. Образ собран на CPU-версии PyTorch. Для GPU нужен образ на базе `nvidia/cuda` и CUDA-сборка `torch` — см. [`docs/DOCKER.md`](docs/DOCKER.md).
-
-Воркер обрабатывает **одно видео за раз** и хранит очередь в SQLite на диске. Поэтому backend нужно запускать **одним экземпляром** (не масштабировать горизонтально) с постоянным диском.
 
 ---
+## 2. Сайт (`frontend/`, Vercel)
 
-## 2. Frontend
+Адрес API встраивается в сборку: `VITE_API_BASE=https://<api>` (Vercel → Settings → Environment Variables), затем Redeploy. Root Directory = `frontend`, `frontend/vercel.json` уже настроен.
 
-Адрес бэкенда встраивается в сборку (это статический сайт). Задайте его в [`frontend/.env.example`](frontend/.env.example) → `.env.production` или в панели хостинга:
+- `/` — лендинг: оффер, шаги, преимущества, тарифы, FAQ.
+- `/app` — личный кабинет: лицензионный ключ (копировать), устройства (отвязать), управление подпиской, загрузки Windows / Mac, инструкция по установке и активации. После оплаты Paddle возвращает сюда.
+- `/terms`, `/privacy`, `/refund` — юридические страницы (данные продавца — `LEGAL` в `components/landing/Legal.tsx`).
 
-```
-VITE_API_BASE=https://api.example.com
-```
+## 3. Десктоп-приложение
 
-**Vercel:** Root Directory = `frontend` (`frontend/vercel.json` уже настроен).
-**Netlify / Cloudflare Pages:** base `frontend`, build `npm run build:web`, publish `dist-web`, переменная `ELECTRON_SKIP_BINARY_DOWNLOAD=1`.
-**Свой сервер:**
-
-```bash
-docker build -t spikeclip-frontend --build-arg VITE_API_BASE=https://api.example.com frontend/
-docker run -p 8080:8080 spikeclip-frontend
-```
-
-При первом открытии сайт спросит токен доступа (`SPIKECLIP_API_TOKEN`) и сохранит его в браузере. В Electron-версии экрана с токеном нет: десктоп по-прежнему работает с локальным движком на `127.0.0.1:8765`.
-
----
-
-## 3. Локальная разработка
+Собирается из `frontend/` (Electron) + `backend/` (движок):
 
 ```bash
-docker compose up --build        # backend на :8765 + интерфейс на :5173 + Ollama
+cd backend && python scripts/build_installer.py      # Windows-установщик → release/
 ```
 
-или без Docker: `pip install -r backend/requirements.txt`, затем `cd frontend && npm install && npm run dev:web` (в браузере) или `npm run dev` (Electron сам запустит `backend/main.py`).
+Готовый установщик загрузите туда, откуда его можно скачать (GitHub Releases, Cloudflare R2 и т. п.), и пропишите ссылку в `DOWNLOAD_WINDOWS_URL`. Сборки для macOS пока нет. Экран ввода ключа в самом приложении ещё предстоит сделать — контракт API для него описан в [`api/README.md`](api/README.md#desktop-app-contract).
+
+Локальная разработка движка и интерфейса: `docker compose up --build` или `cd frontend && npm run dev` (Electron сам запустит `backend/main.py`).
 
 ---
 
 ## 4. Оплата через Paddle
 
-Paddle — продавец (Merchant of Record): проводит оплату, берёт налоги США и НДС ЕС, делает возвраты и сообщает бэкенду о подписках через webhook (`backend/server/billing.py`). Тарифы и цены — в `frontend/src/renderer/src/components/landing/Pricing.tsx`, юридические страницы — `/terms`, `/privacy`, `/refund` (данные продавца — в `LEGAL` в `components/landing/Legal.tsx`).
+Paddle — продавец (Merchant of Record): проводит оплату, берёт налоги США и НДС ЕС, делает возвраты и через подписанный webhook сообщает API о подписках. Webhook **выпускает лицензионный ключ** при первой оплате и обновляет его срок, тариф и статус при продлении, смене тарифа и отмене (`api/app/paddle.py`).
 
-Переменные на Render:
-
-| Переменная | Где взять |
-|---|---|
-| `PADDLE_ENV` | `sandbox` для тестов, `production` для реальных денег |
-| `PADDLE_CLIENT_TOKEN` | Developer tools → Authentication → Client-side tokens (`test_…` / `live_…`) |
-| `PADDLE_WEBHOOK_SECRET` | Developer tools → Notifications → ваш destination → Secret key |
-| `PADDLE_PRICE_PRO_MONTHLY` / `_YEARLY`, `PADDLE_PRICE_MAX_MONTHLY` / `_YEARLY` | Catalog → Products → цена → ID `pri_…` |
-
-Webhook URL для Paddle: `https://<backend>/billing/paddle/webhook`, события `subscription.created`, `subscription.updated`, `subscription.canceled` и др. `subscription.*`. В Paddle → Checkout settings укажите Default payment link: `https://<frontend>/app`.
-
-## 4. Ограничения веб-версии
-
-Эти возможности рассчитаны на локальный ПК и в облаке работают иначе или не работают:
-
-- **Выбор локального файла** (кнопки «открыть видео/аудио») — это диалоги Electron; в браузере они отключены. Видео добавляются по ссылке (YouTube / Twitch / Kick). Загрузка файлов с компьютера пользователя потребует отдельного эндпоинта.
-- **OAuth через localhost.** Вход YouTube для публикации (`publish/oauth.py`) и Discord (`/discord/callback`, «работает только на порту 8765») рассчитаны на loopback-адрес. Для облака нужно зарегистрировать redirect URI на домене API у Google/Discord.
-- **Remote rendering** (`remote_render/`, порт 8766) — второй ПК для рендера; в облаке не нужен.
-- **Модели и Ollama** в упакованном десктопе идут в комплекте; в облаке нужен отдельный сервис Ollama или облачный провайдер.
+Webhook URL: `https://<api>/billing/paddle/webhook`, события `subscription.*`. Checkout settings → Default payment link: `https://<сайт>/app`.
 
 ---
 

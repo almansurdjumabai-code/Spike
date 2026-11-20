@@ -35,9 +35,10 @@ function Terms(): JSX.Element {
   return (
     <>
       <p>
-        These terms govern your use of {LEGAL.product}, an online service that turns stream recordings into short
-        vertical clips, operated by {LEGAL.seller} ("we", "us"). By creating an account or using the service you agree
-        to them.
+        These terms govern your use of {LEGAL.product}, a desktop application for Windows and macOS that finds the
+        moments chat reacts to in a stream and turns them into short vertical clips on your own computer, together
+        with the website and account services that sell and activate it. {LEGAL.product} is operated by {LEGAL.seller}
+        ("we", "us"). By creating an account, buying a license or using the app you agree to these terms.
       </p>
       <h2>1. Your account</h2>
       <p>
@@ -46,24 +47,26 @@ function Terms(): JSX.Element {
       </p>
       <h2>2. Your content</h2>
       <p>
-        You may only submit videos and links you own or have permission to use. You keep all rights to your content and
-        to the clips made from it. You give us the limited permission needed to download, process, store and show it
-        to you in order to run the service. Do not use {LEGAL.product} for content that is illegal, infringes anyone's
-        rights, or breaks the rules of the platform it came from.
+        The app processes videos on your computer; we do not receive, store or process your videos or clips. You may
+        only clip videos you own or have permission to use, and you keep all rights to your content and to the clips
+        made from it. Do not use {LEGAL.product} for content that is illegal, infringes anyone's rights, or breaks the
+        rules of the platform it came from.
       </p>
       <h2>3. Plans and payment</h2>
       <p>
-        {LEGAL.product} offers a free plan and paid subscriptions (Pro and Max) with the limits shown on our pricing
-        page. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for
+        {LEGAL.product} offers a free trial and paid subscriptions with the limits shown on our pricing page. A paid
+        plan comes with a license key that unlocks the app on the number of computers your plan allows; keys are
+        personal and may not be shared or resold. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for
         all our orders. Paddle provides all customer service inquiries and handles returns. Subscriptions renew
         automatically each month or year until cancelled; you can cancel at any time and keep access until the end of
         the paid period. Prices may change with at least 30 days' notice before your next renewal.
       </p>
       <h2>4. Fair use and availability</h2>
       <p>
-        Plan limits apply per calendar month. We work to keep the service available but do not guarantee it will be
-        uninterrupted or error-free, and clips are produced automatically by AI, so their selection and captions may
-        contain mistakes.
+        Plan limits apply per calendar month. The app checks your license with our servers from time to time and keeps
+        working offline for a limited period. How fast clips are made depends on your computer. Clips are produced
+        automatically, so their selection and captions may contain mistakes. We work to keep our license servers
+        available but do not guarantee they will be uninterrupted.
       </p>
       <h2>5. Liability</h2>
       <p>
@@ -97,7 +100,8 @@ function Privacy(): JSX.Element {
           <b>Account:</b> your email, display name and a hashed password (we never store it in plain text).
         </li>
         <li>
-          <b>Your content:</b> the links and videos you submit and the clips, captions and titles made from them.
+          <b>License:</b> your license key, your plan and the computers you activated it on (a one-way hash of a
+          random device id, the device name you see in your account, the platform and the app version).
         </li>
         <li>
           <b>Billing:</b> handled by Paddle, our merchant of record. We receive your plan, subscription status and a
@@ -110,13 +114,14 @@ function Privacy(): JSX.Element {
       </ul>
       <h2>Why</h2>
       <p>
-        To run the service you asked for: process your videos, keep your library, manage your subscription and support
-        you. AI processing may use third-party model providers that only receive what is needed to produce your clips.
+        To sell and activate the app, manage your subscription and support you. Your videos and clips are processed on
+        your own computer and are never sent to us. If you choose to use a cloud AI provider inside the app, the data
+        you send goes to that provider under your own account and its terms.
       </p>
       <h2>How long</h2>
       <p>
-        We keep your account and library while your account exists. Source downloads may be deleted sooner to save
-        space. When you delete your account, we delete your data within 30 days, except what the law requires us to keep.
+        We keep your account and license records while your account exists. When you delete your account, we delete
+        your data within 30 days, except what the law requires us to keep (for example, records of payments).
       </p>
       <h2>Your rights</h2>
       <p>

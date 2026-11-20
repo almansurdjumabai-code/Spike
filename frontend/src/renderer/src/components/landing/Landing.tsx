@@ -28,20 +28,21 @@ const HERO = [CLIPS[2], CLIPS[4], CLIPS[5]]
 const MARQUEE = ['W chat', 'Clip it', 'No shot', 'Goated', 'Run it back', 'W streamer', 'Spike detected', 'He is cooked', 'Vice City nights']
 
 const FEATURES = [
-  { ico: '⚡', title: 'Spike detection', text: 'Chat floods, voice peaks, kills, crashes and laughs scored together, so the clip starts before the moment, not after.' },
-  { ico: '🎮', title: 'Built for gameplay', text: 'Reads what the game shows on screen and hears what it sounds like: chases, wrecks, wins and fails.' },
-  { ico: '📱', title: 'Auto 9:16 reframe', text: 'Facecam and game split, tracked and composed for Shorts, Reels and TikTok without touching an editor.' },
-  { ico: '💬', title: 'Captions that pop', text: 'Word-synced captions, plus titles, descriptions and hashtags written for every clip.' },
-  { ico: '🔗', title: 'Paste a link', text: 'Twitch, Kick or YouTube VOD. Drop the link, get a stack of ready-to-post clips back.' },
-  { ico: '🚀', title: 'Post everywhere', text: 'Export for every platform or publish straight from the studio when you are ready.' }
+  { ico: '💸', title: 'No server bills', text: 'Clips render on your own PC. No per-minute cloud rendering, no credits that run out mid-stream.' },
+  { ico: '⚡', title: 'Fast on your hardware', text: "Uses your CPU and GPU directly. No uploading hours of footage, no waiting in someone else's queue." },
+  { ico: '🎛️', title: 'You control the limits', text: 'Clip as many streams as your plan allows, whenever you want. What you pay is what you get.' },
+  { ico: '📈', title: 'Chat-spike detection', text: 'Finds the moments chat explodes and cuts from 20 seconds before the peak to 10 seconds after.' },
+  { ico: '📱', title: 'Vertical 9:16, captioned', text: 'Facecam and gameplay framed for TikTok, Shorts and Reels, with captions burned in.' },
+  { ico: '🔒', title: 'Your footage stays yours', text: 'Videos never leave your computer. Our servers only know your account and your license key.' }
 ]
 
 const FAQ = [
-  { q: 'Which streams can I clip?', a: 'Twitch, Kick and YouTube VODs by link, or a video file. Long streams are fine: SpikeClip scans the whole thing and keeps the best moments.' },
-  { q: 'How does it know what is a good moment?', a: 'It scores chat activity, the streamer\'s voice, game audio and what happens on screen together. Where they spike at once, that is a clip.' },
-  { q: 'Where can I post the clips?', a: 'Every clip comes out 9:16 with captions, ready for TikTok, YouTube Shorts, Instagram Reels, X and Facebook. You can also publish straight to YouTube from the studio.' },
-  { q: 'Do I have to edit anything?', a: 'No. Every clip is cut, framed and captioned for you. If you want to, the editor lets you trim, fix captions and change the layout.' },
-  { q: 'How do I get access?', a: 'SpikeClip is in early access. Sign up with an invite code; if you already have an account, just log in.' }
+  { q: 'Where is the video processed?', a: 'On your computer. SpikeClip is a desktop app for Windows and Mac: downloading the stream, finding chat peaks and rendering the clips all happen locally. Nothing is uploaded to our servers, which only handle your account, payment and license key.' },
+  { q: 'How does it pick the moments?', a: 'It measures chat activity across the whole stream and finds the spikes. Each clip starts 20 seconds before a peak and ends 10 seconds after, so you get the build-up and the reaction.' },
+  { q: 'What do I need to run it?', a: 'A Windows 10/11 or macOS computer with at least 8 GB of RAM (16 GB recommended) and free disk space for the streams you clip. A dedicated graphics card makes rendering faster but is not required.' },
+  { q: 'How does the license key work?', a: 'After you buy, a key like CLIP-XXXX-XXXX-XXXX appears in your account. Paste it into the app to unlock your plan. Pro works on 2 computers; you can move it to a new PC from your account page.' },
+  { q: 'Does it work offline?', a: 'Yes. Once activated, the app checks your key every few days and keeps working for up to 7 days without internet. Downloading streams of course needs a connection.' },
+  { q: 'Can I cancel or get a refund?', a: 'Cancel anytime from your account and keep your plan until the end of the period you paid for. Not happy? Full refund within 14 days.' }
 ]
 
 function useReveal(): void {
@@ -276,7 +277,7 @@ export default function Landing({
         <div style={{ display: 'flex', gap: 10 }}>
           {signedIn ? (
             <button className="vc-btn vc-btn-primary vc-btn-sm" onClick={onAuthed}>
-              Open studio →
+              My account →
             </button>
           ) : (
             <>
@@ -298,8 +299,8 @@ export default function Landing({
         <div className="vc-hero-inner">
           <div>
             <span className="vc-eyebrow">
-              <span className="vc-live-dot">LIVE</span>
-              AI clipping for GTA 6 streams & beyond
+              <span className="vc-live-dot">NEW</span>
+              Desktop app for Windows &amp; Mac
             </span>
             <h1 className="vc-display vc-hero-title">
               <span className="line"><span>Every stream</span></span>
@@ -307,17 +308,22 @@ export default function Landing({
               <span className="line"><span className="vc-gradient-text">viral spike.</span></span>
             </h1>
             <p className="vc-hero-sub">
-              SpikeClip watches the whole VOD, catches the moments chat loses it, and cuts them into
-              captioned 9:16 clips ready for TikTok, Shorts and Reels. Car chases, trailer reactions,
-              rage quits, the W spam. All of it.
+              SpikeClip reads your stream&apos;s chat, finds every moment it explodes and cuts it into a
+              vertical 9:16 clip — 20 seconds before the peak, 10 after. It runs on your own PC, so you
+              never pay for cloud rendering.
             </p>
             <div className="vc-hero-ctas">
               <button className="vc-btn vc-btn-primary" onClick={() => (signedIn ? onAuthed() : setAuth('signup'))}>
-                {signedIn ? 'Open studio →' : 'Start clipping free →'}
+                {signedIn ? 'My license & downloads →' : '⬇ Get SpikeClip for PC'}
               </button>
               <button className="vc-btn vc-btn-glass" onClick={go('clips')}>
                 ▶ Watch clips
               </button>
+            </div>
+            <div className="vc-os-row">
+              <span className="vc-os">⊞ Windows 10/11</span>
+              <span className="vc-os">🍎 macOS</span>
+              <span className="vc-os">💻 Runs 100% on your PC</span>
             </div>
             <div className="vc-post-to">
               <span>Post to</span>
@@ -377,10 +383,10 @@ export default function Landing({
           </div>
         </div>
         <div className="vc-counters">
-          <div className="vc-glass vc-counter vc-reveal"><CountUp to={40} suffix="+" /><span>clips from a single stream</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><b className="vc-gradient-text">9:16</b><span>auto reframe, facecam tracked</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><CountUp to={3} /><span>stream sources: Twitch, Kick, YouTube</span></div>
-          <div className="vc-glass vc-counter vc-reveal"><CountUp to={5} /><span>platforms ready to post</span></div>
+          <div className="vc-glass vc-counter vc-reveal"><CountUp to={20} suffix="s" /><span>captured before every chat peak</span></div>
+          <div className="vc-glass vc-counter vc-reveal"><CountUp to={10} suffix="s" /><span>after it, for the reaction</span></div>
+          <div className="vc-glass vc-counter vc-reveal"><b className="vc-gradient-text">$0</b><span>cloud render fees, ever</span></div>
+          <div className="vc-glass vc-counter vc-reveal"><b className="vc-gradient-text">9:16</b><span>vertical clips, captions burned in</span></div>
         </div>
       </section>
 
@@ -410,14 +416,15 @@ export default function Landing({
         <div className="vc-reveal">
           <div className="vc-kicker">How it works</div>
           <h2 className="vc-display vc-h2">
-            Stream tonight. <span className="vc-gradient-text">Post tomorrow.</span>
+            Chat explodes. <span className="vc-gradient-text">You get the clip.</span>
           </h2>
         </div>
-        <div className="vc-steps">
+        <div className="vc-steps vc-steps-4">
           {[
-            { n: '01', t: 'Drop the VOD', p: 'Paste a Twitch, Kick or YouTube link. An 8-hour stream is fine.' },
-            { n: '02', t: 'AI finds the spikes', p: 'Chat, voice, game audio and what is on screen are scored together to find the peaks.' },
-            { n: '03', t: 'Post the bangers', p: 'Review, tweak captions in the editor, export or publish straight to your channels.' }
+            { n: '01', t: 'Pick a stream', p: 'Paste a Twitch, Kick or YouTube VOD link, or open a recording on your PC. SpikeClip grabs the chat replay with it.' },
+            { n: '02', t: 'Find the peaks', p: 'The app scans chat activity across the whole stream on your computer and marks every spike.' },
+            { n: '03', t: 'Cut 9:16 clips', p: 'Each peak becomes a vertical clip, from 20 s before to 10 s after, with captions. Your PC does the rendering.' },
+            { n: '04', t: 'Polish & post', p: 'Trim, fix captions and switch layouts in the built-in editor, then export for TikTok, Shorts and Reels.' }
           ].map((s, i) => (
             <div key={s.n} className="vc-glass vc-step vc-reveal" style={{ transitionDelay: `${i * 0.1}s` }}>
               <div className="vc-step-num">{s.n}</div>
@@ -432,9 +439,9 @@ export default function Landing({
 
       <section className="vc-section" id="features">
         <div className="vc-reveal">
-          <div className="vc-kicker">Features</div>
+          <div className="vc-kicker">Why a desktop app</div>
           <h2 className="vc-display vc-h2">
-            Your editor <span className="vc-gradient-text">never sleeps</span>
+            Your PC is <span className="vc-gradient-text">the render farm</span>
           </h2>
         </div>
         <div className="vc-features">
@@ -452,7 +459,7 @@ export default function Landing({
         onChoose={(plan, period) => {
           if (plan === 'free') return signedIn ? onAuthed() : setAuth('signup')
           if (!signedIn) {
-            // Sign up first; the studio opens checkout for this plan.
+            // Sign up first; the account page opens checkout for this plan.
             setPendingPlan(plan, period)
             return setAuth('signup')
           }
@@ -479,17 +486,21 @@ export default function Landing({
 
       <section className="vc-section">
         <div className="vc-final vc-reveal">
-          <h2 className="vc-display vc-h2">Stop scrubbing VODs.</h2>
+          <h2 className="vc-display vc-h2">Stop paying for cloud renders.</h2>
           <p className="vc-lead" style={{ margin: '0 auto 24px', color: '#ffe9f4' }}>
-            Make an account, paste your first stream and watch the clips stack up.
+            Download SpikeClip, point it at a stream and let your own PC cut the clips.
           </p>
           <div className="vc-post-to" style={{ justifyContent: 'center', marginTop: 0, marginBottom: 28 }}>
             {POST_TO.map((p, i) => (
               <PlatformIcon key={p} id={p} delay={-i * 0.6} />
             ))}
           </div>
-          <button className="vc-btn vc-btn-primary" style={{ background: '#fff', color: '#1b0730' }} onClick={() => setAuth('signup')}>
-            Create free account →
+          <button
+            className="vc-btn vc-btn-primary"
+            style={{ background: '#fff', color: '#1b0730' }}
+            onClick={() => (signedIn ? onAuthed() : setAuth('signup'))}
+          >
+            ⬇ Get SpikeClip for PC
           </button>
         </div>
       </section>

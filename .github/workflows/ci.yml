@@ -166,6 +166,21 @@ jobs:
         shell: bash
         run: python -m pytest -q --tb=short tests/test_plugin_sdk_*.py
 
+  api:
+    name: Web API (licenses)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: '3.11'
+      - run: pip install --quiet -r requirements-dev.txt
+      - run: python -m ruff check app tests
+      - run: python -m pytest -q --tb=short
+
   ui:
     name: Desktop app
     runs-on: ubuntu-latest

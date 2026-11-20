@@ -59,6 +59,7 @@ interface Plan {
   iconBg: string
   cta: string
   popular?: boolean
+  soon?: boolean
   perks: { text: string; hot?: boolean }[]
 }
 
@@ -66,24 +67,24 @@ const PLANS: Plan[] = [
   {
     id: 'free',
     name: 'Free',
-    tagline: 'Try it on your next stream',
+    tagline: 'Try it on your own PC',
     monthly: 0,
     yearly: 0,
     icon: <PalmIcon />,
     iconBg: 'linear-gradient(135deg, #5effc1, #39f0ff)',
-    cta: 'Start free',
+    cta: 'Download free',
     perks: [
-      { text: '2 clips per month' },
-      { text: 'Auto 9:16 reframe + captions' },
-      { text: 'VODs up to 1 hour' },
-      { text: '720p export' },
-      { text: 'SpikeClip end card on clips' }
+      { text: 'Desktop app for Windows & Mac' },
+      { text: '5 clips per month' },
+      { text: 'Chat-spike detection (−20 s / +10 s)' },
+      { text: '720p export with a SpikeClip watermark' },
+      { text: '1 computer, no key needed' }
     ]
   },
   {
     id: 'pro',
     name: 'Pro',
-    tagline: 'For streamers who post every day',
+    tagline: 'For streamers and clippers who post daily',
     monthly: 14,
     yearly: 11,
     icon: <CarIcon />,
@@ -91,30 +92,30 @@ const PLANS: Plan[] = [
     cta: 'Go Pro',
     popular: true,
     perks: [
-      { text: '50 clips per month', hot: true },
-      { text: '1080p export, no end card', hot: true },
+      { text: 'Unlimited clips — your PC does the work', hot: true },
+      { text: '1080p export, no watermark', hot: true },
+      { text: 'License key for 2 computers' },
       { text: 'Gaming / Reaction facecam layouts' },
-      { text: 'Every caption style' },
-      { text: 'VODs up to 4 hours' },
-      { text: 'Titles, descriptions & hashtags written for you' }
+      { text: 'Every caption style + the clip editor' },
+      { text: 'All updates while subscribed' }
     ]
   },
   {
     id: 'max',
     name: 'Max',
-    tagline: 'For clippers and full-time creators',
+    tagline: 'For teams and full-time clippers',
     monthly: 29,
     yearly: 23,
     icon: <HeliIcon />,
     iconBg: 'linear-gradient(135deg, #a855f7, #6d3bf2 50%, #39f0ff)',
-    cta: 'Get Max',
+    cta: 'Coming soon',
+    soon: true,
     perks: [
       { text: 'Everything in Pro' },
-      { text: '150 clips per month', hot: true },
-      { text: 'Priority processing — skip the line', hot: true },
-      { text: 'VODs up to 12 hours' },
-      { text: '60s+ clips for TikTok Creator Rewards' },
-      { text: 'Translated captions for global reach' },
+      { text: 'License key for 5 computers', hot: true },
+      { text: 'Up to 4K export', hot: true },
+      { text: 'Batch-clip several streams at once' },
+      { text: 'Priority support' },
       { text: 'Early access to new features' }
     ]
   }
@@ -216,6 +217,7 @@ export default function Pricing({
                 {DECOR[p.id]}
               </div>
               {p.popular && <div className="vc-plan-ribbon">🔥 Most popular</div>}
+              {p.soon && <div className="vc-plan-ribbon soon">🚧 Coming soon</div>}
               <div className="vc-plan-inner">
                 <div className="vc-plan-head">
                   <span className="vc-plan-icon" style={{ background: p.iconBg }}>
@@ -240,8 +242,10 @@ export default function Pricing({
                 <button
                   className={`vc-btn ${p.popular ? 'vc-btn-primary' : 'vc-btn-glass'} vc-plan-cta`}
                   onClick={() => onChoose(p.id, yearly ? 'yearly' : 'monthly')}
+                  disabled={p.soon}
                 >
-                  {p.cta} →
+                  {p.cta}
+                  {!p.soon && ' →'}
                 </button>
 
                 <ul className="vc-perks">
@@ -260,7 +264,7 @@ export default function Pricing({
         })}
       </div>
       <p className="vc-plans-note vc-reveal">
-        Cancel anytime · Prices in USD · Sales tax and VAT handled at checkout
+        Cancel anytime · Prices in USD · Sales tax and VAT handled at checkout · Clips render on your PC — no cloud fees
       </p>
     </section>
   )

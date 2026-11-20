@@ -82,7 +82,7 @@ export default function AuthModal({
             ? 'Paste the SPIKECLIP_API_TOKEN from your server.'
             : tab === 'signup'
               ? 'Create your account and start turning streams into clips.'
-              : 'Log in to your SpikeClip studio.'}
+              : 'Log in to get your license key and downloads.'}
         </p>
 
         {!useAdmin && (

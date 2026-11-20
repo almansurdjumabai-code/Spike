@@ -1,64 +1,35 @@
-# Render Blueprint: the SpikeClip backend with its persistent storage.
+# Render Blueprint: the SpikeClip web API (accounts, Paddle, licence keys).
 #
-# Deploy: https://dashboard.render.com/blueprint/new?repo=https://github.com/almansurdjumabai-code/Spike
-# Render reads this file, shows the price, and creates everything on "Apply".
+# Clipping runs in the desktop app on each user's PC, so the server is small:
+# no video, no queue, no disk. Keys live in Postgres (DATABASE_URL) — a free
+# Neon / Supabase / Render Postgres works.
 #
-# The frontend is not here: it is a static site on Vercel
-# (https://spikeclip-app.vercel.app), see DEPLOY.md.
+# The website is a static site on Vercel (frontend/), see DEPLOY.md.
 
 services:
   - type: web
-    name: spikeclip-backend
+    name: spikeclip-api
     runtime: docker
-    rootDir: backend
+    rootDir: api
     dockerfilePath: ./Dockerfile
     dockerContext: .
     region: frankfurt
-    # Video work needs memory: the engine is developed against 16 GB and an
-    # hour of source is about the limit at 12 GB (8 GB analyses a video and
-    # then renders nothing). "pro max" = 16 GB RAM / 4 CPU. "pro plus"
-    # (8 GB) is cheaper and fine for short videos; anything smaller is not.
-    plan: pro max
+    plan: starter
     healthCheckPath: /health
-    # A disk pins the service to one instance, which this needs anyway: one
-    # worker processes the queue, kept in SQLite on the disk.
-    disk:
-      name: spikeclip-data
-      mountPath: /data
-      # Source downloads, rendered clips, the database and the model cache.
-      # Can be grown later in the dashboard, never shrunk.
-      sizeGB: 50
     envVars:
-      # Generated once by Render. Copy it from Environment in the dashboard:
-      # the website asks for it on first visit.
-      - key: SPIKECLIP_API_TOKEN
-        generateValue: true
-      # Sign-up on the website needs this code (all accounts share one
-      # engine and library, so sign-up is not open to the public).
-      - key: SPIKECLIP_INVITE_CODE
-        generateValue: true
-      - key: SPIKECLIP_CORS_ORIGINS
-        value: https://spikeclip-app.vercel.app,https://spikeclip-eight.vercel.app
-      # The service's own *.onrender.com name is allowed automatically
-      # (RENDER_EXTERNAL_HOSTNAME). With a custom domain, add
-      # SPIKECLIP_ALLOWED_HOSTS=api.your-domain in the dashboard.
-      - key: SPIKECLIP_DATA_DIR
-        value: /data
-      # Paddle (server/billing.py). Values come from the Paddle dashboard;
-      # sync: false means Render asks for them instead of storing them here.
-      - key: PADDLE_ENV
-        value: sandbox
-      - key: PADDLE_CLIENT_TOKEN
+      - key: DATABASE_URL
         sync: false
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: CORS_ORIGINS
+        value: https://spikeclip-app.vercel.app,https://spikeclip-eight.vercel.app
+      - key: SIGNUP
+        value: open
       - key: PADDLE_WEBHOOK_SECRET
         sync: false
-      - key: PADDLE_PRICE_PRO_MONTHLY
+      - key: DOWNLOAD_WINDOWS_URL
         sync: false
-      - key: PADDLE_PRICE_PRO_YEARLY
+      - key: DOWNLOAD_MAC_URL
         sync: false
-      - key: PADDLE_PRICE_MAX_MONTHLY
-        sync: false
-      - key: PADDLE_PRICE_MAX_YEARLY
-        sync: false
-      - key: SPIKECLIP_VERSION
+      - key: APP_VERSION
         value: 2.1.0

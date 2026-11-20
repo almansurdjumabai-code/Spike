@@ -9,7 +9,8 @@ import './theme.css'
 import { applyAppearance, loadAppearance } from './lib/appearance'
 import { installBrowserShim } from './lib/browserShim'
 import { installAuthFetch } from './lib/backend'
-import AuthGate, { LandingRoute } from './components/AuthGate'
+import { LandingRoute } from './components/AuthGate'
+import Account from './components/landing/Account'
 
 // Before anything renders. Under Electron this returns immediately; it only
 // does something when the renderer is opened in a browser, which is how the
@@ -30,7 +31,9 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
     {/* Outside App on purpose: a crash in App's own render has to be caught
         too. A blank window is the one failure that tells nobody anything. */}
     <AppBoundary>
-      {/* Web build: the welcome page at /, the studio at /app. */}
+      {/* Web build: the welcome page at /, the buyer's account (license key,
+          downloads) at /app. Clipping runs in the desktop app on the user's
+          PC, so the website never shows the studio. */}
       {(import.meta as unknown as { env: { DEV: boolean } }).env.DEV && window.location.search.includes('studio-preview') ? (
         // Dev server only: the studio without a backend, to work on its look.
         <App />
@@ -39,9 +42,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       ) : inBrowser && !window.location.pathname.startsWith('/app') ? (
         <LandingRoute />
       ) : inBrowser ? (
-        <AuthGate>
-          <App />
-        </AuthGate>
+        <Account />
       ) : (
         <App />
       )}

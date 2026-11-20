@@ -1,0 +1,6 @@
+target-version = "py311"
+line-length = 120
+
+[lint]
+# FastAPI's dependency injection is written as Depends(...) defaults.
+ignore = ["B008"]
