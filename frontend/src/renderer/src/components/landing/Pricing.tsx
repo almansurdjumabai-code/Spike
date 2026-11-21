@@ -131,6 +131,7 @@ function Odometer({ value }: { value: number }): JSX.Element {
       <span className="vc-odo-cur">$</span>
       {digits.map((d, i) => (
         <span key={`${digits.length}-${i}`} className="vc-odo-col">
+          <span className="vc-odo-size">{d}</span>
           <span className="vc-odo-reel" style={{ '--n': Number(d), transitionDelay: `${i * 0.08}s` } as CSSProperties}>
             {'0123456789'.split('').map((x) => (
               <span key={x}>{x}</span>
