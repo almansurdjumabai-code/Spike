@@ -108,7 +108,9 @@ def create_app(db: Database | None = None) -> FastAPI:
     @app.get("/health")
     def health():
         # `auth` tells the website that this API signs people in.
-        return {"ok": True, "service": "spikeclip-api", "api_version": API_VERSION, "auth": True}
+        # `db` says whether keys survive a restart: "postgres" yes, "sqlite" only on a persistent disk.
+        return {"ok": True, "service": "spikeclip-api", "api_version": API_VERSION, "auth": True,
+                "db": "postgres" if db.postgres else "sqlite"}
 
     # ---------------------------------------------------------- accounts
     @app.get("/auth/config")
