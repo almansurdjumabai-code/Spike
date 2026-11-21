@@ -63,7 +63,10 @@ function useReveal(): void {
   }, [])
 }
 
-function VideoWall(): JSX.Element {
+function VideoWall(): JSX.Element | null {
+  // Eight looping videos are the heaviest thing on the page; phones skip them.
+  const [show] = useState(() => !window.matchMedia('(max-width: 760px), (hover: none)').matches)
+  if (!show) return null
   // Each column: one moving clip and two stills, repeated so the loop is seamless.
   const cols = [
     [1, 3, 5],
@@ -80,7 +83,7 @@ function VideoWall(): JSX.Element {
               {[0, 1].map((rep) =>
                 col.map((n, k) =>
                   k === 0 ? (
-                    <video key={`${rep}-${k}`} src={`${M}/w${n}.mp4`} poster={`${M}/c${n}.jpg`} autoPlay muted loop playsInline preload="auto" />
+                    <video key={`${rep}-${k}`} src={`${M}/w${n}.mp4`} poster={`${M}/c${n}.jpg`} autoPlay muted loop playsInline preload="metadata" />
                   ) : (
                     <img key={`${rep}-${k}`} src={`${M}/c${n}.jpg`} alt="" loading="lazy" style={{ width: '100%', aspectRatio: '9/16', objectFit: 'cover', borderRadius: 16 }} />
                   )
@@ -201,13 +204,38 @@ export default function Landing({
 
   const root = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const onScroll = (): void => {
-      setScrolled(window.scrollY > 20)
-      root.current?.style.setProperty('--sy', String(Math.min(window.scrollY, 1200)))
+    // Hero parallax: set --sy on the hero text only (not the page root, which
+    // would restyle the whole page), at most once per frame, and not on phones.
+    const hero = root.current?.querySelector<HTMLElement>('.vc-hero-inner')
+    const parallax = !window.matchMedia('(max-width: 760px), (hover: none), (prefers-reduced-motion: reduce)').matches
+    let queued = false
+    const apply = (): void => {
+      queued = false
+      const y = window.scrollY
+      setScrolled(y > 20)
+      if (parallax && hero && y < 1300) hero.style.setProperty('--sy', String(y))
     }
-    onScroll()
+    const onScroll = (): void => {
+      if (!queued) {
+        queued = true
+        requestAnimationFrame(apply)
+      }
+    }
+    apply()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
+  useEffect(() => {
+    // Pause every CSS animation inside sections that are off screen.
+    const blocks = root.current?.querySelectorAll('.vc-section, .vc-hero, .vc-marquee')
+    if (!blocks || !('IntersectionObserver' in window)) return
+    const io = new IntersectionObserver(
+      (es) => es.forEach((e) => e.target.classList.toggle('vc-off', !e.isIntersecting)),
+      { rootMargin: '200px 0px' }
+    )
+    blocks.forEach((b) => io.observe(b))
+    return () => io.disconnect()
   }, [])
 
   useEffect(() => {
@@ -219,10 +247,11 @@ export default function Landing({
   }, [])
 
   useEffect(() => {
+    if (window.matchMedia('(hover: none)').matches) return
     const onMove = (e: PointerEvent): void => {
       if (cursor.current) cursor.current.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`
     }
-    window.addEventListener('pointermove', onMove)
+    window.addEventListener('pointermove', onMove, { passive: true })
     return () => window.removeEventListener('pointermove', onMove)
   }, [])
 

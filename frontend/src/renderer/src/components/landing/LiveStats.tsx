@@ -11,7 +11,8 @@ import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
  *  here claims real usage numbers.
  */
 
-const BARS = 56
+const PHONE = typeof window !== 'undefined' && window.matchMedia('(max-width: 760px)').matches
+const BARS = PHONE ? 34 : 56
 const BEFORE = 10 // bars before the peak inside the clip window (≈20 s)
 const AFTER = 5 // bars after it (≈10 s)
 
@@ -134,7 +135,7 @@ function SpikeMonitor(): React.JSX.Element {
         }
         setChat((c) => [...c.slice(-7), m])
       }
-    }, still ? 600 : 160)
+    }, still ? 600 : PHONE ? 240 : 160)
     return () => window.clearInterval(tick)
   }, [on])
 

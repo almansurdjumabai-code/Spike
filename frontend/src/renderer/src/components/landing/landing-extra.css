@@ -1298,3 +1298,34 @@
   .vc::after, .vc-bgword span, .vc-floor, .vc-stripes, .vc-qmark, .vc-final-sun,
   .vc-art *, .vc-art-frame { animation: none !important; }
 }
+
+/* ------------------------------------------------------------ performance */
+/* Sections off screen (Landing sets .vc-off) stop all their CSS animations. */
+.vc-off, .vc-off *, .vc-off *::before, .vc-off *::after { animation-play-state: paused !important; }
+
+/* Phones and touch devices: keep the look, drop what makes scrolling stutter.
+   Frosted glass, SVG glow filters, full-screen grain, paint-heavy shadow pulses
+   and scroll-linked transforms are the expensive parts on mobile GPUs. */
+@media (max-width: 760px), (hover: none) {
+  .vc *, .vc *::before, .vc *::after { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+  .vc-glass { background: linear-gradient(160deg, #22123f, #170c30); }
+  .vc-nav.is-scrolled, .vc-nav { background: rgb(13 7 34 / 0.94); }
+
+  .vc::after, .vc-grain { display: none; }
+  .vc-scene [filter], .vc-scene .vc-sun { filter: none !important; }
+  .vc-scene .vc-window, .vc-scene .vc-flap, .vc-scene .vc-trail, .vc-scene .vc-water-shine * { animation: none !important; }
+  .vc-wall, .vc-wall-tint { display: none; }
+
+  .vc-hero-inner { transform: none !important; opacity: 1 !important; }
+  .vc-section .vc-h2, .vc-gallery-item, .vc-feature, .vc-step, .vc-plan-inner, .vc-marquee { animation: none !important; translate: none; rotate: none; scale: none; }
+
+  .vc-bgword span, .vc-stripes, .vc-qmark, .vc-final-sun { animation: none !important; }
+  .vc-floor { animation-duration: 4s; }
+  .vc-pipe .vc-board-tile, .vc-hub-core, .vc-stat-num { animation: none !important; filter: none; }
+  .vc-hub-core { box-shadow: 0 0 40px -10px rgb(255 79 163 / 0.7); }
+  .vc-mon-graph i { transition: none; }
+  .vc-mon-graph i.hot { box-shadow: none; }
+  .vc-monitor.hot { box-shadow: 0 0 0 1px rgb(255 79 163 / 0.5); }
+  .vc-poster:hover { transform: none; box-shadow: none; }
+  .vc-spike-badge { text-shadow: 0 3px 0 var(--vc-hot); }
+}

@@ -85,17 +85,13 @@ export default function ViceScene({ children }: { children?: ReactNode }): JSX.E
   // Pointer parallax: each [data-depth] layer moves by its depth.
   useEffect(() => {
     const el = root.current
-    if (!el || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (!el || window.matchMedia('(prefers-reduced-motion: reduce), (hover: none)').matches) return
     const layers = Array.from(el.querySelectorAll<SVGGElement>('[data-depth]'))
     let raf = 0
     let tx = 0
     let ty = 0
     let cx = 0
     let cy = 0
-    const onMove = (e: PointerEvent): void => {
-      tx = e.clientX / window.innerWidth - 0.5
-      ty = e.clientY / window.innerHeight - 0.5
-    }
     const tick = (): void => {
       cx += (tx - cx) * 0.06
       cy += (ty - cy) * 0.06
@@ -103,10 +99,16 @@ export default function ViceScene({ children }: { children?: ReactNode }): JSX.E
         const d = Number(l.dataset.depth)
         l.setAttribute('transform', `translate(${(-cx * d).toFixed(2)} ${(-cy * d * 0.5).toFixed(2)})`)
       }
-      raf = requestAnimationFrame(tick)
+      // Stop once settled; the next pointer move starts it again.
+      raf = Math.abs(tx - cx) + Math.abs(ty - cy) > 0.0005 ? requestAnimationFrame(tick) : 0
     }
-    window.addEventListener('pointermove', onMove)
-    raf = requestAnimationFrame(tick)
+    const onMove = (e: PointerEvent): void => {
+      if (window.scrollY > window.innerHeight) return // hero is off screen
+      tx = e.clientX / window.innerWidth - 0.5
+      ty = e.clientY / window.innerHeight - 0.5
+      if (!raf) raf = requestAnimationFrame(tick)
+    }
+    window.addEventListener('pointermove', onMove, { passive: true })
     return () => {
       window.removeEventListener('pointermove', onMove)
       cancelAnimationFrame(raf)
