@@ -106,6 +106,9 @@ def downloads() -> dict:
         "version": env("APP_VERSION", default=APP_VERSION),
         "windows": bool(download_url("windows")),
         "mac": bool(download_url("mac")),
+        # Where the links point, without the links: the public releases repo or
+        # custom DOWNLOAD_*_URL values set on the host.
+        "source": "releases" if all(download_url(p) in ("", DEFAULT_DOWNLOADS[p]) for p in DEFAULT_DOWNLOADS) else "custom",
     }
 
 

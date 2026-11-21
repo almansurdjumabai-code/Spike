@@ -143,7 +143,7 @@ def test_downloads_are_for_subscribers_only(client, monkeypatch):
     monkeypatch.setenv("DOWNLOAD_WINDOWS_URL", "https://files.example/secret/SpikeClip-Setup.exe")
     monkeypatch.setenv("DOWNLOAD_MAC_URL", "off")
     pub = client.get("/downloads").json()
-    assert pub["windows"] is True and pub["mac"] is False and "secret" not in str(pub)
+    assert pub["windows"] is True and pub["mac"] is False and "secret" not in str(pub) and pub["source"] == "custom"
     assert client.get("/downloads/windows").status_code == 401
     token, uid = signup(client)
     auth = {"Authorization": f"Bearer {token}"}
@@ -157,7 +157,7 @@ def test_downloads_are_for_subscribers_only(client, monkeypatch):
 def test_downloads_default_to_the_public_releases(client, monkeypatch):
     monkeypatch.delenv("DOWNLOAD_WINDOWS_URL", raising=False)
     monkeypatch.delenv("DOWNLOAD_MAC_URL", raising=False)
-    assert client.get("/downloads").json() == {"version": "1.0.2", "windows": True, "mac": True}
+    assert client.get("/downloads").json() == {"version": "1.0.2", "windows": True, "mac": True, "source": "releases"}
     token, uid = signup(client)
     webhook(client, user=uid)
     got = client.get("/downloads/mac", headers={"Authorization": f"Bearer {token}"})
