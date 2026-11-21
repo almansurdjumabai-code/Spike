@@ -30,7 +30,7 @@ Render: сервис с **Root Directory = `backend`** (Dockerfile подхва�
 | `CORS_ORIGINS` | да | адрес сайта, например `https://spikeclip-app.vercel.app` (старое `SPIKECLIP_CORS_ORIGINS` тоже работает) |
 | `PADDLE_WEBHOOK_SECRET` | да | Paddle → Events → Notifications → destination → Secret key |
 | `SIGNUP` | нет | `open` (по умолчанию), `invite` (+ `INVITE_CODE`) или `closed` |
-| `DOWNLOAD_WINDOWS_URL`, `DOWNLOAD_MAC_URL`, `APP_VERSION` | когда будут сборки | где лежат установщики. Ссылку получает **только владелец активного ключа** (`GET /downloads/{windows,mac}`); публично видно лишь, какие сборки есть |
+| `DOWNLOAD_WINDOWS_URL`, `DOWNLOAD_MAC_URL`, `APP_VERSION` | не обязательно | по умолчанию ссылки ведут на последний релиз публичного репо `spikeclip-releases` (файлы `SpikeClip-Setup.exe`, `SpikeClip-mac-arm64.dmg`), версия по умолчанию задана в `backend/app/settings.py`. Ссылку в кабинете получает **только владелец активного ключа**; значение `off` прячет сборку |
 
 Ключ клиента Paddle и ID цен уже вшиты в `backend/app/paddle.py` (переменные `PADDLE_*` их переопределяют).
 

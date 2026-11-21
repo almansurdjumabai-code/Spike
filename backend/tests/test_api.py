@@ -141,6 +141,7 @@ def test_paddle_config_has_live_defaults(client, monkeypatch):
 
 def test_downloads_are_for_subscribers_only(client, monkeypatch):
     monkeypatch.setenv("DOWNLOAD_WINDOWS_URL", "https://files.example/secret/SpikeClip-Setup.exe")
+    monkeypatch.setenv("DOWNLOAD_MAC_URL", "off")
     pub = client.get("/downloads").json()
     assert pub["windows"] is True and pub["mac"] is False and "secret" not in str(pub)
     assert client.get("/downloads/windows").status_code == 401
@@ -151,6 +152,16 @@ def test_downloads_are_for_subscribers_only(client, monkeypatch):
     got = client.get("/downloads/windows", headers=auth)
     assert got.status_code == 200 and got.json()["url"].endswith("SpikeClip-Setup.exe")
     assert client.get("/downloads/mac", headers=auth).status_code == 404
+
+
+def test_downloads_default_to_the_public_releases(client, monkeypatch):
+    monkeypatch.delenv("DOWNLOAD_WINDOWS_URL", raising=False)
+    monkeypatch.delenv("DOWNLOAD_MAC_URL", raising=False)
+    assert client.get("/downloads").json() == {"version": "1.0.2", "windows": True, "mac": True}
+    token, uid = signup(client)
+    webhook(client, user=uid)
+    got = client.get("/downloads/mac", headers={"Authorization": f"Bearer {token}"})
+    assert got.json()["url"].endswith("/spikeclip-releases/releases/latest/download/SpikeClip-mac-arm64.dmg")
 
 
 def test_owner_stats_and_status_page(client):

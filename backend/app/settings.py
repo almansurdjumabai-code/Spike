@@ -10,6 +10,8 @@
     PADDLE_PRICE_{PRO,MAX}_{MONTHLY,YEARLY}   Paddle Billing (see paddle.py)
 
     DOWNLOAD_WINDOWS_URL, DOWNLOAD_MAC_URL, APP_VERSION   desktop builds for /downloads
+                              (default: the latest release of the public spikeclip-releases
+                              repo; set a variable to "off" to hide that build)
 """
 
 from __future__ import annotations
@@ -77,15 +79,31 @@ OFFLINE_GRACE_DAYS = 7
 RENEWAL_GRACE_SECONDS = 3 * 86400
 
 
+# Installers are attached to releases of a public, files-only repository with
+# fixed names, so "latest/download/<file>" always serves the newest build. The
+# app itself is useless without a license key, so a public file is fine; the
+# site still shows the buttons only to subscribers.
+RELEASES = "https://github.com/almansurdjumabai-code/spikeclip-releases/releases/latest/download/"
+DEFAULT_DOWNLOADS = {
+    "windows": RELEASES + "SpikeClip-Setup.exe",
+    "mac": RELEASES + "SpikeClip-mac-arm64.dmg",
+}
+APP_VERSION = "1.0.2"
+
+
 def download_url(platform: str) -> str:
-    """Where the installer lives. Kept private: only licence holders get it."""
-    return env({"windows": "DOWNLOAD_WINDOWS_URL", "mac": "DOWNLOAD_MAC_URL"}.get(platform, ""))
+    """Where the installer lives; only licence holders are given it."""
+    name = {"windows": "DOWNLOAD_WINDOWS_URL", "mac": "DOWNLOAD_MAC_URL"}.get(platform)
+    if not name:
+        return ""
+    url = env(name, default=DEFAULT_DOWNLOADS[platform])
+    return "" if url.lower() == "off" else url
 
 
 def downloads() -> dict:
     """Public: which builds exist, never where they are."""
     return {
-        "version": env("APP_VERSION", default="1.0.0"),
+        "version": env("APP_VERSION", default=APP_VERSION),
         "windows": bool(download_url("windows")),
         "mac": bool(download_url("mac")),
     }

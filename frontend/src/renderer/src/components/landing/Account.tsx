@@ -100,17 +100,16 @@ function Setup({ dl }: { dl: Downloads }): JSX.Element {
     os === 'windows'
       ? [
           'Download the Windows installer above and run it.',
-          'If Windows SmartScreen appears, click “More info” → “Run anyway”.',
-          'Open SpikeClip from the Start menu. First launch sets up the AI models (a few minutes).',
-          'Go to Settings → License, paste your key and press Activate.',
-          'Paste a stream link, let it find the chat peaks, and your 9:16 clips appear in the library.'
+          'Windows SmartScreen will warn about an unrecognised app (the build is not code-signed yet): click “More info” → “Run anyway”.',
+          'Open SpikeClip from the Start menu. On first launch it asks for your license key: paste it and press Activate.',
+          'Paste a Twitch VOD link, let it find the chat peaks, and your 9:16 clips land in Documents\\SpikeClip.'
         ]
       : [
           'Download the macOS build above and open the .dmg file.',
           'Drag SpikeClip into Applications.',
-          'First launch: right-click SpikeClip → Open, then confirm (macOS asks once for apps from the internet).',
-          'Go to Settings → License, paste your key and press Activate.',
-          'Paste a stream link, let it find the chat peaks, and your 9:16 clips appear in the library.'
+          'First launch: right-click SpikeClip → Open, then Open again (macOS asks once, because the build is not notarised yet).',
+          'SpikeClip asks for your license key: paste it and press Activate.',
+          'Paste a Twitch VOD link, let it find the chat peaks, and your 9:16 clips land in Documents/SpikeClip.'
         ]
   return (
     <div className="vc-glass vc-setup">
@@ -133,6 +132,16 @@ function Setup({ dl }: { dl: Downloads }): JSX.Element {
       <p className="vc-note" style={{ marginTop: 14 }}>
         Needs {os === 'windows' ? 'Windows 10/11 (64-bit)' : 'macOS 12 or newer'}, 8 GB RAM (16 GB recommended).
         Everything runs on your computer: nothing is uploaded to our servers.{dl.version ? ` Current version: ${dl.version}.` : ''}
+        {os === 'mac' && (
+          <>
+            {' '}
+            Intel Mac?{' '}
+            <a href="https://github.com/almansurdjumabai-code/spikeclip-releases/releases/latest/download/SpikeClip-mac-x64.dmg">
+              Get the Intel build
+            </a>
+            .
+          </>
+        )}
       </p>
     </div>
   )
