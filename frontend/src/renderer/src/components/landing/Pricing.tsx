@@ -1,5 +1,5 @@
 import '@fontsource/alfa-slab-one/400.css'
-import { useState, type MouseEvent } from 'react'
+import { useRef, useState, type CSSProperties, type MouseEvent } from 'react'
 import { BigHeli, BigPalm, Bill, CashStack, Coin, Diamond, GoldBars, MoneyBag } from './Decor'
 
 /** Plans: Pro (on sale) and Max (coming soon) — priced like GTA cash. */
@@ -122,6 +122,47 @@ const DECOR: Record<Plan['id'], JSX.Element> = {
   )
 }
 
+/** Price digits on reels: switching monthly/yearly spins them to the new value. */
+function Odometer({ value }: { value: number }): JSX.Element {
+  const digits = String(value).split('')
+  return (
+    <span className="vc-odo" aria-label={`$${value}`}>
+      <span className="vc-odo-cur">$</span>
+      {digits.map((d, i) => (
+        <span key={`${digits.length}-${i}`} className="vc-odo-col">
+          <span className="vc-odo-reel" style={{ '--n': Number(d), transitionDelay: `${i * 0.08}s` } as CSSProperties}>
+            {'0123456789'.split('').map((x) => (
+              <span key={x}>{x}</span>
+            ))}
+          </span>
+        </span>
+      ))}
+    </span>
+  )
+}
+
+/** A short spray of cash from an element (desktop only). */
+function cashSpray(from: HTMLElement | null): void {
+  if (!from || !window.matchMedia('(min-width: 761px) and (hover: hover)').matches) return
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  const r = from.getBoundingClientRect()
+  const icons = ['💵', '💸', '🪙', '💰']
+  for (let i = 0; i < 10; i++) {
+    const s = document.createElement('span')
+    s.className = 'vc-burst vc-burst-cash'
+    s.textContent = icons[i % icons.length]
+    const a = -Math.PI / 2 + (Math.random() - 0.5) * 2.2
+    const d = 70 + Math.random() * 90
+    s.style.left = `${r.left + r.width * 0.35}px`
+    s.style.top = `${r.top + r.height * 0.4}px`
+    s.style.setProperty('--dx', `${Math.cos(a) * d}px`)
+    s.style.setProperty('--dy', `${Math.sin(a) * d}px`)
+    s.style.setProperty('--r', `${(Math.random() - 0.5) * 120}deg`)
+    document.body.appendChild(s)
+    s.addEventListener('animationend', () => s.remove())
+  }
+}
+
 /** Tilt a card toward the pointer. */
 function tilt(e: MouseEvent<HTMLDivElement>): void {
   const el = e.currentTarget
@@ -142,6 +183,11 @@ export default function Pricing({
   onChoose: (plan: Plan['id'], period: 'monthly' | 'yearly') => void
 }): JSX.Element {
   const [yearly, setYearly] = useState(false)
+  const proPrice = useRef<HTMLDivElement>(null)
+  const pick = (y: boolean): void => {
+    if (y && !yearly) cashSpray(proPrice.current)
+    setYearly(y)
+  }
   return (
     <section className="vc-section vc-pricing" id="pricing">
       <div className="vc-money-rain" aria-hidden="true">
@@ -168,11 +214,12 @@ export default function Pricing({
         <p className="vc-lead" style={{ margin: '0 auto' }}>
           One license, everything unlocked. Your PC does the rendering, so there are no cloud fees on top.
         </p>
-        <div className="vc-billing" role="group" aria-label="Billing period">
-          <button className={!yearly ? 'on' : ''} onClick={() => setYearly(false)}>
+        <div className={`vc-billing${yearly ? ' is-yearly' : ''}`} role="group" aria-label="Billing period">
+          <span className="vc-billing-knob" aria-hidden="true" />
+          <button className={!yearly ? 'on' : ''} onClick={() => pick(false)}>
             Monthly
           </button>
-          <button className={yearly ? 'on' : ''} onClick={() => setYearly(true)}>
+          <button className={yearly ? 'on' : ''} onClick={() => pick(true)}>
             Yearly <span className="vc-save">−20%</span>
           </button>
         </div>
@@ -205,10 +252,15 @@ export default function Pricing({
                   </div>
                 </div>
 
-                <div className="vc-plan-price">
-                  <span className="vc-cash" key={`${p.id}-${price}`}>
-                    ${price}
+                <div className="vc-plan-price" ref={p.id === 'pro' ? proPrice : undefined}>
+                  <span className="vc-cash">
+                    <Odometer value={price} />
                   </span>
+                  {yearly && (
+                    <span className="vc-stamp" key="stamp">
+                      SAVE ${(p.monthly - p.yearly) * 12}/YR
+                    </span>
+                  )}
                   <span className="vc-per">
                     / month
                     {yearly && <em>billed ${price * 12}/yr</em>}
@@ -225,8 +277,8 @@ export default function Pricing({
                 </button>
 
                 <ul className="vc-perks">
-                  {p.perks.map((perk) => (
-                    <li key={perk.text} className={perk.hot ? 'hot' : ''}>
+                  {p.perks.map((perk, k) => (
+                    <li key={perk.text} className={perk.hot ? 'hot' : ''} style={{ '--k': k } as CSSProperties}>
                       <span className="vc-check" aria-hidden>
                         ✓
                       </span>

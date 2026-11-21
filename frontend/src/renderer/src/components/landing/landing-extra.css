@@ -606,13 +606,13 @@
 .d-palm { width: 190px; left: -96px; bottom: -34px; --r: -6deg; animation-duration: 7s; }
 .d-coin1 { width: 46px; left: -26px; top: 58px; --r: 14deg; --d: -1s; }
 .d-coin2 { width: 34px; left: -14px; top: 122px; --r: -10deg; --d: -2.5s; }
-.d-bag { width: 118px; right: 18px; top: -92px; --r: 10deg; --d: -0.8s; }
+.d-bag { width: 112px; left: -78px; top: 150px; --r: -12deg; --d: -0.8s; }
 .d-cash { width: 150px; left: 22px; bottom: -58px; --r: -7deg; --d: -2s; }
 .d-coin3 { width: 44px; right: 40px; bottom: -34px; --r: -16deg; --d: -3s; }
 .d-heli { width: 190px; right: -92px; top: -74px; --r: 6deg; animation-duration: 6s; }
 .d-gold { width: 150px; right: -58px; bottom: -28px; --r: 6deg; --d: -1.5s; }
 .d-diamond { width: 62px; right: -34px; top: 34%; --r: 14deg; --d: -2.2s; }
-.vc-plan:hover .d-bag { translate: 8px -8px; }
+.vc-plan:hover .d-bag { translate: -10px -4px; }
 .vc-plan:hover .d-heli { translate: 10px -6px; }
 .vc-plan:hover .d-cash { translate: 0 8px; }
 .vc-plan.is-popular { z-index: 2; }
@@ -1456,4 +1456,87 @@
 }
 @media (prefers-reduced-motion: reduce) {
   .vc-sticker, .vc-tags-track { animation: none; }
+}
+
+/* ------------------------------------------------------------ pricing, livelier */
+/* billing switch: a knob that slides instead of two buttons swapping colour */
+.vc-billing { position: relative; isolation: isolate; display: inline-grid; grid-template-columns: 1fr 1fr; }
+.vc-billing button.on { background: transparent; }
+.vc-billing button { position: relative; z-index: 1; transition: color 0.3s; }
+.vc-billing-knob {
+  position: absolute;
+  z-index: 0;
+  top: 5px;
+  bottom: 5px;
+  left: 5px;
+  width: calc(50% - 7px);
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 6px 20px -6px rgb(255 255 255 / 0.6);
+  transition: transform 0.45s cubic-bezier(0.3, 1.5, 0.5, 1), background 0.3s;
+}
+.vc-billing.is-yearly .vc-billing-knob { transform: translateX(calc(100% + 4px)); background: linear-gradient(90deg, #fff, #c9ffe9); }
+
+/* price on reels */
+.vc-odo { display: inline-flex; align-items: flex-end; line-height: 1; }
+.vc-odo-col { display: inline-block; height: calc(1em + 6px); padding-right: 4px; margin-right: -9px; overflow: hidden; }
+.vc-odo-reel {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(calc(var(--n) * -1em));
+  transition: transform 0.9s cubic-bezier(0.25, 1.35, 0.4, 1);
+}
+.vc-odo-reel span { height: 1em; line-height: 1; display: block; }
+.vc-cash { animation: none; }
+
+/* "SAVE $36/YR" rubber stamp */
+.vc-plan-price { position: relative; }
+.vc-stamp {
+  position: absolute;
+  right: -4px;
+  top: -34px;
+  padding: 6px 12px;
+  border: 3px solid var(--vc-mint);
+  border-radius: 10px;
+  font-family: 'Dela Gothic One', 'Anton', sans-serif;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+  color: var(--vc-mint);
+  transform: rotate(-12deg);
+  background: rgb(94 255 193 / 0.08);
+  box-shadow: inset 0 0 0 2px rgb(94 255 193 / 0.25);
+  animation: vc-stamp 0.5s cubic-bezier(0.2, 1.6, 0.4, 1) both;
+}
+@keyframes vc-stamp {
+  0% { opacity: 0; transform: rotate(-30deg) scale(2.4); }
+  60% { opacity: 1; transform: rotate(-10deg) scale(0.92); }
+  100% { transform: rotate(-12deg) scale(1); }
+}
+
+/* a sweep of light across the main button */
+.vc-plan-pro .vc-plan-cta { position: relative; overflow: hidden; }
+.vc-plan-pro .vc-plan-cta::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -40%;
+  width: 30%;
+  background: linear-gradient(100deg, transparent, rgb(255 255 255 / 0.7), transparent);
+  transform: skewX(-20deg);
+  animation: vc-cta-sweep 3.2s ease-in-out infinite;
+}
+@keyframes vc-cta-sweep { 0%, 55% { left: -40%; } 85%, 100% { left: 130%; } }
+
+/* perks tick in one by one when the card appears */
+.vc-plan.in-view .vc-perks li { animation: vc-perk-in 0.45s cubic-bezier(0.2, 1.3, 0.4, 1) both; animation-delay: calc(0.25s + var(--k, 0) * 0.08s); }
+.vc-plan.in-view .vc-check { animation: vc-check-pop 0.5s cubic-bezier(0.2, 1.8, 0.4, 1) both; animation-delay: calc(0.35s + var(--k, 0) * 0.08s); }
+@keyframes vc-perk-in { from { opacity: 0; transform: translateX(-14px); } }
+@keyframes vc-check-pop { from { transform: scale(0) rotate(-90deg); } }
+
+.vc-burst-cash { font-size: 28px; text-shadow: none; }
+
+@media (max-width: 760px), (hover: none) {
+  .vc-plan-pro .vc-plan-cta::after { animation: none; display: none; }
+  .vc-plan.in-view .vc-perks li, .vc-plan.in-view .vc-check { animation: none; }
 }
