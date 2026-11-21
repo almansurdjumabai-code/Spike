@@ -35,12 +35,13 @@ const FEATURES = [
   { ico: '⚡', title: 'Fast on your hardware', text: "Uses your CPU and GPU directly. No uploading hours of footage, no waiting in someone else's queue." },
   { ico: '🎛️', title: 'You control the limits', text: 'Clip as many streams as your plan allows, whenever you want. What you pay is what you get.' },
   { ico: '📈', title: 'Chat-spike detection', text: 'Finds the moments chat explodes and cuts from 20 seconds before the peak to 10 seconds after.' },
-  { ico: '📱', title: 'Vertical 9:16, captioned', text: 'Facecam and gameplay framed for TikTok, Shorts and Reels, with captions burned in.' },
+  { ico: '📱', title: 'Vertical 9:16, framed for you', text: 'Facecam on top, gameplay below, or a plain 9:16 crop: set it once on a real frame and every clip follows.' },
   { ico: '🔒', title: 'Your footage stays yours', text: 'Videos never leave your computer. Our servers only know your account and your license key.' }
 ]
 
 const FAQ = [
   { q: 'Where is the video processed?', a: 'On your computer. SpikeClip is a desktop app for Windows and Mac: downloading the stream, finding chat peaks and rendering the clips all happen locally. Nothing is uploaded to our servers, which only handle your account, payment and license key.' },
+  { q: 'Which streams can I clip?', a: 'Twitch VODs today: paste the link and SpikeClip downloads the chat and the parts of the video it needs. You can also cut from a recording on your PC. Kick and YouTube support is on the way.' },
   { q: 'How does it pick the moments?', a: 'It measures chat activity across the whole stream and finds the spikes. Each clip starts 20 seconds before a peak and ends 10 seconds after, so you get the build-up and the reaction.' },
   { q: 'What do I need to run it?', a: 'A Windows 10/11 or macOS computer with at least 8 GB of RAM (16 GB recommended) and free disk space for the streams you clip. A dedicated graphics card makes rendering faster but is not required.' },
   { q: 'How does the license key work?', a: 'After you buy, a key like CLIP-XXXX-XXXX-XXXX appears in your account. Paste it into the app to unlock it. Every key is unique and bound to one computer, so it cannot be shared; moving to a new PC takes one click in your account.' },
@@ -378,7 +379,7 @@ export default function Landing({
           <h2 className="vc-display vc-h2">
             Straight off the <span className="vc-gradient-text">For You page</span>
           </h2>
-          <p className="vc-lead">GTA 6 moments the way SpikeClip delivers them: vertical, captioned, cut on the spike. Hit 🔇 on any clip for sound.</p>
+          <p className="vc-lead">GTA 6 moments, vertical and cut on the spike: the kind of clip SpikeClip makes from a stream. Hit 🔇 on any clip for sound.</p>
         </div>
         <div className="vc-gallery">
           {CLIPS.map((c, i) => (
@@ -408,10 +409,10 @@ export default function Landing({
         </div>
         <div className="vc-steps vc-steps-4">
           {[
-            { n: '01', t: 'Pick a stream', p: 'Paste a Twitch, Kick or YouTube VOD link, or open a recording on your PC. SpikeClip grabs the chat replay with it.' },
+            { n: '01', t: 'Pick a stream', p: 'Paste a Twitch VOD link. SpikeClip downloads the chat replay itself, and you can cut from a recording already on your PC. Kick and YouTube are coming.' },
             { n: '02', t: 'Find the peaks', p: 'The app scans chat activity across the whole stream on your computer and marks every spike.' },
-            { n: '03', t: 'Cut 9:16 clips', p: 'Each peak becomes a vertical clip, from 20 s before to 10 s after, with captions. Your PC does the rendering.' },
-            { n: '04', t: 'Polish & post', p: 'Trim, fix captions and switch layouts in the built-in editor, then export for TikTok, Shorts and Reels.' }
+            { n: '03', t: 'Cut 9:16 clips', p: 'Each peak becomes a vertical 1080×1920 clip, from 20 s before to 10 s after. Your PC does the rendering.' },
+            { n: '04', t: 'Tweak & post', p: 'Nudge each clip’s start and end, place the facecam and gameplay boxes, then post the MP4s to TikTok, Shorts and Reels.' }
           ].map((s, i) => (
             <div key={s.n} className={`vc-poster vc-step vc-step-${i} vc-reveal`} style={{ transitionDelay: `${i * 0.1}s` }}>
               <div className="vc-step-num">{s.n}</div>

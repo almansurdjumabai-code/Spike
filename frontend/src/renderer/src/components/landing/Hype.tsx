@@ -27,7 +27,7 @@ export function Sticker({ children, tone = 'pink', rot = -6, style }: {
   )
 }
 
-const TAGS = ['#fyp', '#gta6', '#clipit', '#streamer', '#viral', '#twitchclips', '#w', '#nocap', '#foryou', '#kickstreaming', '#reaction', '#chatwentcrazy']
+const TAGS = ['#fyp', '#gta6', '#clipit', '#streamer', '#viral', '#twitchclips', '#w', '#nocap', '#foryou', '#twitchstreamer', '#reaction', '#chatwentcrazy']
 
 export function HashtagStrip(): React.JSX.Element {
   const row = [...TAGS, ...TAGS]
@@ -46,7 +46,7 @@ export function HashtagStrip(): React.JSX.Element {
 
 const TOASTS = [
   { ico: '⚡', t: 'Spike found', s: '02:14:07 · chat ×9' },
-  { ico: '✂️', t: 'clip_012.mp4 ready', s: '0:30 · 1080×1920 · captions on' },
+  { ico: '✂️', t: 'clip_012.mp4 ready', s: '0:30 · 1080×1920 · facecam on top' },
   { ico: '📤', t: 'Exported for TikTok', s: 'saved to /SpikeClip/exports' },
   { ico: '🎯', t: 'Facecam framed', s: 'layout: split · auto-detected' },
   { ico: '💬', t: 'Chat replay synced', s: '48,210 messages read' },

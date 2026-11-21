@@ -1553,3 +1553,7 @@
 @media (max-width: 760px), (hover: none) {
   .vc-cash { animation: none; }
 }
+
+/* sources that are not supported yet */
+.vc-pipe .vc-board-tile.is-soon { opacity: 0.45; animation: none; filter: grayscale(0.6); }
+.vc-pipe .vc-board-tile.is-soon small { margin-left: 2px; padding: 2px 7px; border-radius: 999px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; background: rgb(255 255 255 / 0.12); }

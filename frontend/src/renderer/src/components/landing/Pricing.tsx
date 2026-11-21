@@ -78,8 +78,8 @@ const PLANS: Plan[] = [
       { text: 'Unlimited clips — your PC does the work', hot: true },
       { text: '1080p export, no watermark', hot: true },
       { text: 'Personal license key, bound to your PC' },
-      { text: 'Gaming / Reaction facecam layouts' },
-      { text: 'Every caption style + the clip editor' },
+      { text: 'Facecam-on-top and plain 9:16 layouts' },
+      { text: 'Adjust every clip’s start, end and framing' },
       { text: 'All updates while subscribed' }
     ]
   },

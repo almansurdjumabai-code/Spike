@@ -73,7 +73,7 @@ export function FeatureIcon({ i }: { i: number }): React.JSX.Element {
     </>,
     // chat-spike detection: a spike on a line
     <path d="M2 17h5l2-3 3 7 4-18 3 14h3" {...P} />,
-    // vertical 9:16, captioned: a phone with caption lines
+    // vertical 9:16: a phone with a facecam strip
     <>
       <rect x="7" y="2" width="10" height="20" rx="2" {...P} />
       <path d="M9.5 15h5M10.5 17.5h3" {...P} />

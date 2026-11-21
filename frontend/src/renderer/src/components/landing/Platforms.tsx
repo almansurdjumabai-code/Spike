@@ -122,4 +122,6 @@ export function PlatformIcon({ id, delay = 0 }: { id: PlatformId; delay?: number
 }
 
 export const POST_TO: PlatformId[] = ['tiktok', 'shorts', 'reels', 'x', 'facebook']
-export const CLIP_FROM: PlatformId[] = ['twitch', 'kick', 'youtube']
+/** Sources the desktop app supports today, and the ones that are on the way. */
+export const CLIP_FROM: PlatformId[] = ['twitch']
+export const CLIP_FROM_SOON: PlatformId[] = ['kick', 'youtube']

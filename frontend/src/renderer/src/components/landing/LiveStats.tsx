@@ -1,6 +1,6 @@
 import '@fontsource/dela-gothic-one/400.css'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
-import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
+import { CLIP_FROM, CLIP_FROM_SOON, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import { Sticker } from './Hype'
 
 /** The block under the marquee: the pipeline (where clips come from and go),
@@ -201,7 +201,7 @@ function SpikeMonitor(): React.JSX.Element {
           {clips > 0 ? (
             <>
               <span className="vc-saved">✓ clip_{String(clips).padStart(3, '0')}.mp4</span>
-              <span>0:30 · 1080×1920 · captions on</span>
+              <span>0:30 · 1080×1920 · facecam on top</span>
             </>
           ) : (
             <span>waiting for chat to lose it…</span>
@@ -222,6 +222,13 @@ function Pipeline(): React.JSX.Element {
             <PlatformIcon id={p} />
             {PLATFORMS[p].label}
             <em className="vc-pipe-wire" />
+          </span>
+        ))}
+        {CLIP_FROM_SOON.map((p) => (
+          <span key={p} className="vc-board-tile is-soon" title="Coming soon">
+            <PlatformIcon id={p} />
+            {PLATFORMS[p].label}
+            <small>soon</small>
           </span>
         ))}
       </div>
@@ -283,7 +290,7 @@ export default function LiveStats(): React.JSX.Element {
           <div className="vc-stat-num">
             <span className="vc-roll">9:16</span>
           </div>
-          <div className="vc-stat-label">vertical, captions burned in</div>
+          <div className="vc-stat-label">vertical, facecam on top</div>
           <div className="vc-stat-phone"><i /></div>
         </div>
       </div>

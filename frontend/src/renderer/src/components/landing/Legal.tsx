@@ -65,7 +65,7 @@ function Terms(): JSX.Element {
       <p>
         Plan limits apply per calendar month. The app checks your license with our servers from time to time and keeps
         working offline for a limited period. How fast clips are made depends on your computer. Clips are produced
-        automatically, so their selection and captions may contain mistakes. We work to keep our license servers
+        automatically, so their selection may contain mistakes. We work to keep our license servers
         available but do not guarantee they will be uninterrupted.
       </p>
       <h2>5. Liability</h2>
