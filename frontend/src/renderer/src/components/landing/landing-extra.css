@@ -1545,3 +1545,23 @@
   .vc-plan-pro .vc-plan-cta::after { animation: none; display: none; }
   .vc-plan.in-view .vc-perks li, .vc-plan.in-view .vc-check { animation: none; }
 }
+
+/* price shine: a soft green glow that breathes, plus a glint sliding across */
+.vc-cash { position: relative; filter: drop-shadow(0 0 14px rgb(114 211 90 / 0.45)); animation: vc-cash-glow 3s ease-in-out infinite; }
+@keyframes vc-cash-glow { 50% { filter: drop-shadow(0 0 22px rgb(140 255 110 / 0.7)); } }
+.vc-cash::after {
+  content: '';
+  position: absolute;
+  inset: -4px -6px;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 35%, rgb(255 255 255 / 0.75) 50%, transparent 65%) no-repeat;
+  background-size: 250% 100%;
+  mix-blend-mode: overlay;
+  animation: vc-cash-glint 3.6s ease-in-out infinite;
+}
+@keyframes vc-cash-glint { 0%, 50% { background-position: 150% 0; } 85%, 100% { background-position: -50% 0; } }
+.vc-plan-max .vc-cash { filter: drop-shadow(0 0 12px rgb(114 211 90 / 0.3)); }
+@media (max-width: 760px), (hover: none) {
+  .vc-cash { animation: none; }
+  .vc-cash::after { animation-duration: 5s; }
+}

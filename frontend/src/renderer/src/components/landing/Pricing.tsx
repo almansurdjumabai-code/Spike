@@ -95,6 +95,7 @@ const PLANS: Plan[] = [
     soon: true,
     perks: [
       { text: 'Everything in Pro' },
+      { text: 'Autopilot: pick streamers, AI clips and posts to your channels for you', hot: true },
       { text: 'Clip straight from YouTube & Twitch links', hot: true },
       { text: 'Works from any device', hot: true },
       { text: 'No queue — clips start right away', hot: true },
