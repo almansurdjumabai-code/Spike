@@ -88,7 +88,7 @@ DEFAULT_DOWNLOADS = {
     "windows": RELEASES + "SpikeClip-Setup.exe",
     "mac": RELEASES + "SpikeClip-mac-arm64.dmg",
 }
-APP_VERSION = "1.0.2"
+APP_VERSION = "1.0.3"
 
 
 def download_url(platform: str) -> str:

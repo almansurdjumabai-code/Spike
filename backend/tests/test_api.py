@@ -157,7 +157,7 @@ def test_downloads_are_for_subscribers_only(client, monkeypatch):
 def test_downloads_default_to_the_public_releases(client, monkeypatch):
     monkeypatch.delenv("DOWNLOAD_WINDOWS_URL", raising=False)
     monkeypatch.delenv("DOWNLOAD_MAC_URL", raising=False)
-    assert client.get("/downloads").json() == {"version": "1.0.2", "windows": True, "mac": True, "source": "releases"}
+    assert client.get("/downloads").json() == {"version": "1.0.3", "windows": True, "mac": True, "source": "releases"}
     token, uid = signup(client)
     webhook(client, user=uid)
     got = client.get("/downloads/mac", headers={"Authorization": f"Bearer {token}"})
