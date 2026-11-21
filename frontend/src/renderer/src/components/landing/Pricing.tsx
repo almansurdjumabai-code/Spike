@@ -95,11 +95,12 @@ const PLANS: Plan[] = [
     soon: true,
     perks: [
       { text: 'Everything in Pro' },
-      { text: 'License key for 3 computers', hot: true },
+      { text: 'Clip straight from YouTube & Twitch links', hot: true },
+      { text: 'Works from any device', hot: true },
+      { text: 'No queue — clips start right away', hot: true },
       { text: 'Up to 4K export', hot: true },
-      { text: 'Batch-clip several streams at once' },
-      { text: 'Priority support' },
-      { text: 'Early access to new features' }
+      { text: 'License key for 3 computers' },
+      { text: 'Priority support' }
     ]
   }
 ]
