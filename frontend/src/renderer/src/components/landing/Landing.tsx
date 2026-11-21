@@ -8,6 +8,7 @@ import AuthModal, { type AuthTab } from './AuthModal'
 import ClipCard, { type ClipSpec } from './ClipCard'
 import Pricing from './Pricing'
 import LiveStats from './LiveStats'
+import { HashtagStrip, SpikeToasts, Sticker, useClickBurst } from './Hype'
 import { FeatureIcon, StepArt } from './StepArt'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
 import ViceScene from './ViceScene'
@@ -201,6 +202,7 @@ export default function Landing({
   const [scrolled, setScrolled] = useState(false)
   const cursor = useRef<HTMLDivElement>(null)
   useReveal()
+  useClickBurst()
 
   const root = useRef<HTMLDivElement>(null)
   useEffect(() => {
@@ -234,7 +236,12 @@ export default function Landing({
       (es) => es.forEach((e) => e.target.classList.toggle('vc-off', !e.isIntersecting)),
       { rootMargin: '200px 0px' }
     )
-    blocks.forEach((b) => io.observe(b))
+    // Mark them right away too, before the first observer callback lands.
+    blocks.forEach((b) => {
+      const r = b.getBoundingClientRect()
+      b.classList.toggle('vc-off', r.bottom < -200 || r.top > window.innerHeight + 200)
+      io.observe(b)
+    })
     return () => io.disconnect()
   }, [])
 
@@ -260,6 +267,7 @@ export default function Landing({
   return (
     <div className="vc" ref={root}>
       <div className="vc-cursor" ref={cursor} aria-hidden="true" />
+      <SpikeToasts />
 
       <nav className={`vc-nav${scrolled ? ' is-scrolled' : ''}`}>
         <a className="vc-logo" translate="no" href="#top">
@@ -363,6 +371,8 @@ export default function Landing({
 
       <section className="vc-section vc-bg-clips" id="clips">
         <div className="vc-bgword" aria-hidden="true"><span>FOR YOU · FOR YOU · FOR YOU · FOR YOU · </span></div>
+        <Sticker tone="black" rot={-8} style={{ right: '5%', top: 96 }}>#FYP</Sticker>
+        <Sticker tone="gold" rot={7} style={{ right: '3%', top: 196, animationDelay: '-2s' }}>🔥 TRENDING</Sticker>
         <div className="vc-reveal">
           <div className="vc-kicker">Clips that went off</div>
           <h2 className="vc-display vc-h2">
@@ -384,8 +394,12 @@ export default function Landing({
         </div>
       </section>
 
+      <HashtagStrip />
+
       <section className="vc-section vc-bg-how" id="how">
         <div className="vc-floor" aria-hidden="true" />
+        <Sticker tone="cyan" rot={6} style={{ right: '4%', top: 84 }}>W CHAT 👑</Sticker>
+        <Sticker tone="pink" rot={-6} style={{ right: '17%', top: 40, animationDelay: '-1.5s' }}>💀💀💀</Sticker>
         <div className="vc-reveal">
           <div className="vc-kicker">How it works</div>
           <h2 className="vc-display vc-h2">
@@ -414,6 +428,7 @@ export default function Landing({
       <section className="vc-section vc-bg-features" id="features">
         <div className="vc-stripes" aria-hidden="true" />
         <div className="vc-bigword" aria-hidden="true">YOUR PC</div>
+        <Sticker tone="mint" rot={-7} style={{ right: '6%', top: 210 }}>GPU GO BRRR 🚀</Sticker>
         <div className="vc-reveal">
           <div className="vc-kicker">Why a desktop app</div>
           <h2 className="vc-display vc-h2">
@@ -455,6 +470,7 @@ export default function Landing({
 
       <section className="vc-section vc-bg-faq" id="faq">
         <div className="vc-qmark" aria-hidden="true">?</div>
+        <Sticker tone="white" rot={8} style={{ left: '56%', top: 104 }}>fr fr 🤝</Sticker>
         <div className="vc-reveal">
           <div className="vc-kicker">FAQ</div>
           <h2 className="vc-display vc-h2">

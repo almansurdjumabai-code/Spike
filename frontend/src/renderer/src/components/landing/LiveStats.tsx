@@ -1,6 +1,7 @@
 import '@fontsource/dela-gothic-one/400.css'
 import { useEffect, useRef, useState, type CSSProperties } from 'react'
 import { CLIP_FROM, PLATFORMS, POST_TO, PlatformIcon } from './Platforms'
+import { Sticker } from './Hype'
 
 /** The block under the marquee: the pipeline (where clips come from and go),
  *  a live demo of the spike detector, and four big numbers that count up.
@@ -249,6 +250,8 @@ function Pipeline(): React.JSX.Element {
 export default function LiveStats(): React.JSX.Element {
   return (
     <section className="vc-section vc-live" style={{ paddingTop: 40, paddingBottom: 40 }}>
+      <Sticker tone="gold" rot={-9} style={{ left: '3%', top: 18 }}>NO CAP 🧢</Sticker>
+      <Sticker tone="black" rot={6} style={{ right: '3%', top: 18, animationDelay: '-2.5s' }}>LIVE 🔴</Sticker>
       <Pipeline />
       <SpikeMonitor />
       <div className="vc-stats">
