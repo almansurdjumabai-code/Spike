@@ -19,7 +19,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from pydantic import BaseModel, Field
 
-from . import accounts, licenses, paddle, settings
+from . import accounts, licenses, paddle, settings, whop
 from .db import Database
 from .status_page import STATUS_HTML
 
@@ -154,7 +154,24 @@ def create_app(db: Database | None = None) -> FastAPI:
     # ---------------------------------------------------------- billing
     @app.get("/billing/config")
     def billing_config():
-        return paddle.config()
+        # provider: which checkout the website opens. Whop when its links are set.
+        cfg = paddle.config()
+        cfg["whop"] = whop.config()
+        cfg["provider"] = settings.env("BILLING_PROVIDER") or ("whop" if cfg["whop"]["enabled"] else "paddle")
+        return cfg
+
+    @app.post("/billing/whop/webhook")
+    async def whop_webhook(request: Request):
+        raw = await request.body()
+        if not whop.verify_signature(raw, request.headers, settings.env("WHOP_WEBHOOK_SECRET")):
+            raise HTTPException(401, "bad signature")
+        try:
+            event = json.loads(raw)
+        except ValueError as e:
+            raise HTTPException(400, "not JSON") from e
+        with db.connect() as c:
+            result = whop.apply_event(c, request.headers.get("webhook-id", ""), event)
+        return {"ok": True, "result": result}
 
     @app.post("/billing/paddle/webhook")
     async def paddle_webhook(request: Request):
@@ -274,15 +291,16 @@ def create_app(db: Database | None = None) -> FastAPI:
             rows = c.all(f"SELECT {licenses.COLUMNS}, price_id FROM licenses")
             activations = c.one("SELECT COUNT(*) FROM activations")[0]
             new_week = c.one("SELECT COUNT(*) FROM users WHERE created_at > ?", (now - 7 * 86400,))[0]
-        value = {paddle.setting(k): v for k, v in settings.MONTHLY_VALUE.items()}
+        value = {paddle.setting(k): v for k, v in settings.MONTHLY_VALUE.items()} | whop.MONTHLY_VALUE
         active = [r for r in rows if licenses.state(licenses._row(r[:-1]), now) == "ok"]
-        mrr = sum(value.get(r[-1], 0.0) for r in active if r[8] == "paddle")
+        paid = [r for r in active if r[8] in ("paddle", "whop")]
+        mrr = sum(value.get(r[-1], 0.0) for r in paid)
         return {
             "users": users,
             "users_last_7_days": new_week,
             "licenses_total": len(rows),
             "licenses_active": len(active),
-            "paid_active": sum(1 for r in active if r[8] == "paddle"),
+            "paid_active": len(paid),
             "by_plan": {p: sum(1 for r in active if r[4] == p) for p in settings.PLANS},
             "activations": activations,
             "mrr_usd": round(mrr, 2),

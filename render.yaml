@@ -27,6 +27,8 @@ services:
         value: open
       - key: PADDLE_WEBHOOK_SECRET
         sync: false
+      - key: WHOP_WEBHOOK_SECRET
+        sync: false
       - key: DOWNLOAD_WINDOWS_URL
         sync: false
       - key: DOWNLOAD_MAC_URL

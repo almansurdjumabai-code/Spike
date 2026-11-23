@@ -1,6 +1,7 @@
 import { API_BASE, getApiToken } from './backend'
 
-/** Paid plans through Paddle (checkout overlay) — see backend/app/paddle.py. */
+/** Paid plans: Whop checkout pages (backend/app/whop.py) or the Paddle overlay
+ *  (backend/app/paddle.py), whichever the API names as `provider`. */
 
 export type PaidPlan = 'pro' | 'max'
 export type Period = 'monthly' | 'yearly'
@@ -10,6 +11,8 @@ export interface BillingConfig {
   environment: 'sandbox' | 'production'
   client_token: string
   prices: Record<string, string>
+  provider?: 'whop' | 'paddle'
+  whop?: { enabled: boolean; checkout: Record<string, string> }
 }
 
 export interface MyPlan {
@@ -97,9 +100,17 @@ export function takePendingPlan(): { plan: PaidPlan; period: Period } | null {
   }
 }
 
-/** Open Paddle's checkout for the signed-in user. */
+/** Open checkout for the signed-in user: Whop's page, or Paddle's overlay. */
 export async function openCheckout(plan: PaidPlan, period: Period): Promise<void> {
   const cfg = await billingConfig()
+  if (cfg?.provider === 'whop') {
+    const url = cfg.whop?.checkout[`${plan}_${period}`]
+    if (!url) throw new Error('This plan is not on sale yet.')
+    // The key is matched to the buyer by email, so the account must exist first.
+    if (!getApiToken()) throw new Error('Sign in first.')
+    window.location.href = url
+    return
+  }
   if (!cfg?.enabled) throw new Error('Payments are not switched on yet. Try again soon.')
   const priceId = cfg.prices[`${plan}_${period}`]
   const meRes = await fetch(`${API_BASE}/auth/me`)

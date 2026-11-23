@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 
 /** Terms, Privacy and Refund pages for the web app.
  *
- *  Paddle (the merchant of record) reviews these before switching payments
+ *  The payment provider (Whop, and Paddle if it is switched on) reviews these before switching payments
  *  on. Fill in LEGAL below with the seller's real details, and have the text
  *  checked by someone qualified: it is a sensible starting point, not legal
  *  advice.
@@ -28,7 +28,7 @@ const contact = (): ReactNode =>
       {LEGAL.email}
     </a>
   ) : (
-    'the support address on your Paddle receipt'
+    'the support address on your Whop receipt'
   )
 
 function Terms(): JSX.Element {
@@ -56,8 +56,8 @@ function Terms(): JSX.Element {
       <p>
         {LEGAL.product} is sold as paid subscriptions with the features shown on our pricing page. A paid
         plan comes with a license key that unlocks the app on the number of computers your plan allows; keys are
-        personal and may not be shared or resold. Our order process is conducted by our online reseller Paddle.com. Paddle.com is the Merchant of Record for
-        all our orders. Paddle provides all customer service inquiries and handles returns. Subscriptions renew
+        personal and may not be shared or resold. Payments are processed by Whop (whop.com): you pay on Whop's checkout, and your card details go to Whop,
+        never to us. Subscriptions renew
         automatically each month or year until cancelled; you can cancel at any time and keep access until the end of
         the paid period. Prices may change with at least 30 days' notice before your next renewal.
       </p>
@@ -104,8 +104,8 @@ function Privacy(): JSX.Element {
           random device id, the device name you see in your account, the platform and the app version).
         </li>
         <li>
-          <b>Billing:</b> handled by Paddle, our merchant of record. We receive your plan, subscription status and a
-          customer ID — never your card details.
+          <b>Billing:</b> handled by Whop. We receive your email, your plan, the membership status and a Whop
+          membership ID — never your card details.
         </li>
         <li>
           <b>Technical:</b> your sign-in session is kept in your browser's local storage. We do not use advertising or
@@ -130,9 +130,9 @@ function Privacy(): JSX.Element {
       </p>
       <h2>Payments</h2>
       <p>
-        Paddle processes payments under its own privacy policy:{' '}
-        <a className="vc-link" href="https://www.paddle.com/legal/privacy" target="_blank" rel="noreferrer">
-          paddle.com/legal/privacy
+        Whop processes payments under its own privacy policy:{' '}
+        <a className="vc-link" href="https://whop.com/privacy" target="_blank" rel="noreferrer">
+          whop.com/privacy
         </a>
         .
       </p>
@@ -151,16 +151,16 @@ function Refund(): JSX.Element {
       </p>
       <h2>How to request a refund</h2>
       <p>
-        Our orders are processed by Paddle, our merchant of record. Request a refund at{' '}
-        <a className="vc-link" href="https://paddle.net" target="_blank" rel="noreferrer">
-          paddle.net
+        Orders are processed by Whop. Request a refund from your Whop account at{' '}
+        <a className="vc-link" href="https://whop.com/orders" target="_blank" rel="noreferrer">
+          whop.com
         </a>{' '}
-        (look up your order with the email you paid with), or write to {contact()}. Refunds go back to the original
+        (your orders and memberships), or write to {contact()}. Refunds go back to the original
         payment method, usually within 5–10 business days.
       </p>
       <h2>Cancelling</h2>
       <p>
-        You can cancel any time from your account menu in the studio. You keep your plan until the end of the period
+        You can cancel any time from your Whop account (your memberships at whop.com). You keep your plan until the end of the period
         you paid for, and you will not be charged again.
       </p>
     </>

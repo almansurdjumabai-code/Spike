@@ -6,6 +6,7 @@
     SIGNUP                    "open" (default) | "invite" | "closed"
     INVITE_CODE               required for SIGNUP=invite (SPIKECLIP_INVITE_CODE also accepted)
 
+    WHOP_WEBHOOK_SECRET, WHOP_PRODUCTS, WHOP_CHECKOUT_*, BILLING_PROVIDER   Whop (see whop.py)
     PADDLE_ENV, PADDLE_CLIENT_TOKEN, PADDLE_WEBHOOK_SECRET,
     PADDLE_PRICE_{PRO,MAX}_{MONTHLY,YEARLY}   Paddle Billing (see paddle.py)
 

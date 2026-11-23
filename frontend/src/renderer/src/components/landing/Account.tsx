@@ -179,7 +179,19 @@ export default function Account(): JSX.Element {
     if (pending) openCheckout(pending.plan, pending.period).catch((e: Error) => setError(e.message))
   }, [user])
 
-  // Back from checkout: the key appears once Paddle's webhook arrives.
+  // Back on this tab after paying on Whop: look for the new key.
+  useEffect(() => {
+    if (!user) return
+    const onFocus = (): void => {
+      void myLicenses()
+        .then(setLics)
+        .catch(() => undefined)
+    }
+    window.addEventListener('focus', onFocus)
+    return () => window.removeEventListener('focus', onFocus)
+  }, [user])
+
+  // Back from checkout: the key appears once the payment webhook arrives.
   useEffect(() => {
     if (!purchased || !user || (lics && lics.length > 0)) return
     let tries = 0
@@ -263,6 +275,10 @@ export default function Account(): JSX.Element {
                 <p className="vc-note" style={{ marginTop: 6 }}>
                   SpikeClip needs a license key to run. Pro unlocks unlimited clips in 1080p with no watermark on your
                   computer. The download and your personal key appear here right after payment.
+                </p>
+                <p className="vc-note" style={{ marginTop: 6 }}>
+                  Checkout runs on Whop. Pay with <b>{user?.email}</b>, the email of this account, and the key shows up
+                  here within seconds. Bought with another email? Log in with that email instead.
                 </p>
                 <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', marginTop: 16 }}>
                   <button className="vc-btn vc-btn-primary" onClick={() => buy('monthly')}>

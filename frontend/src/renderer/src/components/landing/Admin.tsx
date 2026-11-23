@@ -146,7 +146,7 @@ export default function Admin(): JSX.Element {
         {authed && stats && (
           <>
             <div className="vc-adm-stats">
-              <Stat label="Monthly revenue" value={`$${stats.mrr_usd.toLocaleString('en-US')}`} cash sub="from active Paddle subscriptions" />
+              <Stat label="Monthly revenue" value={`$${stats.mrr_usd.toLocaleString('en-US')}`} cash sub="from active subscriptions" />
               <Stat label="Paying customers" value={stats.paid_active} sub={`Pro ${stats.by_plan.pro ?? 0} · Max ${stats.by_plan.max ?? 0}`} />
               <Stat label="Active keys" value={stats.licenses_active} sub={`${stats.licenses_total} issued in total`} />
               <div className="vc-glass vc-adm-stat">
@@ -164,7 +164,7 @@ export default function Admin(): JSX.Element {
                   🔑 Issue a key
                 </p>
                 <p className="vc-note" style={{ marginTop: 4 }}>
-                  For testers, giveaways or Paddle&apos;s reviewer.
+                  For testers, giveaways or a payment provider&apos;s reviewer.
                 </p>
                 <div className="vc-adm-form">
                   <label className="vc-field">

@@ -66,13 +66,20 @@ def register(c: Conn, email: str, password: str, name: str, invite: str = "") ->
         raise AccountError("An account with this email already exists. Log in instead.")
     uid = c.insert("INSERT INTO users (email, name, password, created_at) VALUES (?, ?, ?, ?)",
                    (email, name, hash_password(password), int(time.time())))
+    claim_licenses(c, uid, email)
     return new_session(c, uid), {"id": uid, "email": email, "name": name}
+
+
+def claim_licenses(c: Conn, user_id: int, email: str) -> None:
+    """Keys bought elsewhere (Whop) under this email, with no account yet, join this account."""
+    c.execute("UPDATE licenses SET user_id = ? WHERE user_id IS NULL AND email = ?", (user_id, email))
 
 
 def login(c: Conn, email: str, password: str) -> tuple[str, dict]:
     row = c.one("SELECT id, email, name, password FROM users WHERE email = ?", ((email or "").strip().lower(),))
     if not row or not check_password(password or "", row[3]):
         raise AccountError("Wrong email or password.")
+    claim_licenses(c, row[0], row[1])
     return new_session(c, row[0]), user_dict(row)
 
 
