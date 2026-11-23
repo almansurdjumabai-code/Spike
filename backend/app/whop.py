@@ -63,7 +63,9 @@ def checkout() -> dict[str, str]:
 
 def config() -> dict:
     links = checkout()
-    return {"enabled": bool(links["pro_monthly"] or links["pro_yearly"]), "checkout": links}
+    # webhook_ready: the secret is set, so paid memberships can turn into keys (never the secret itself).
+    return {"enabled": bool(links["pro_monthly"] or links["pro_yearly"]), "checkout": links,
+            "webhook_ready": bool(env("WHOP_WEBHOOK_SECRET"))}
 
 
 def _key(secret: str) -> bytes:
