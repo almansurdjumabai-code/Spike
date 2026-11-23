@@ -75,7 +75,8 @@ def test_existing_account_gets_the_key_and_deactivation_stops_it(client):
 
 
 def test_unknown_products_and_other_events_are_ignored(client):
-    assert send(client, "membership.activated", product="prod_someone_else").json()["result"] == "ignored"
+    # Any product of our own (signed) company is Pro by default.
+    assert send(client, "membership.activated", product="prod_new_one").json()["result"] == "created"
     assert send(client, "payment.failed").json()["result"] == "ignored"
 
 
@@ -107,10 +108,6 @@ def test_payment_events_issue_and_refunds_stop_the_key(client):
     assert send_payment(client, "payment.refunded", msg="m2").json()["result"] == "stopped"
 
 
-def test_an_ignored_event_can_be_replayed_after_a_fix(client, monkeypatch):
-    monkeypatch.setenv("WHOP_PRODUCTS", "prod_other:pro")
-    import app.whop as w
-    monkeypatch.setattr(w, "PRODUCTS", {})
-    assert send_payment(client, msg="same").json()["result"] == "ignored"
-    monkeypatch.setattr(w, "PRODUCTS", {MONTHLY: "pro"})
+def test_an_ignored_event_can_be_replayed_after_a_fix(client):
+    assert send_payment(client, "payment.pending", msg="same").json()["result"] == "ignored"
     assert send_payment(client, msg="same").json()["result"] == "created"

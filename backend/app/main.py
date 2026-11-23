@@ -171,7 +171,11 @@ def create_app(db: Database | None = None) -> FastAPI:
             raise HTTPException(400, "not JSON") from e
         with db.connect() as c:
             result = whop.apply_event(c, request.headers.get("webhook-id", ""), event)
-        return {"ok": True, "result": result}
+        # Shown in Whop's delivery log, to see at a glance why a key did or did not appear.
+        data = event.get("data") or {}
+        return {"ok": True, "result": result, "type": event.get("type"),
+                "membership_found": bool(whop._find(data, whop._str_id("mem_"))) or str(data.get("id", "")).startswith("mem_"),
+                "email_found": bool(whop._email(data))}
 
     @app.post("/billing/paddle/webhook")
     async def paddle_webhook(request: Request):

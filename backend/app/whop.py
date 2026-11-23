@@ -161,8 +161,10 @@ def _apply(c: Conn, kind: str, data: dict) -> str:
         return "ignored"
     mem_id = _id(data) if _id(data).startswith("mem_") else str(_find(data, _str_id("mem_")) or "")
     product = str(_find(data, _str_id("prod_")) or "")
-    plan = products().get(product)
-    if not mem_id.startswith("mem_") or plan is None:
+    # Only our own Whop company can sign these webhooks, so any of its products is
+    # SpikeClip: Pro unless WHOP_PRODUCTS maps it to another plan.
+    plan = products().get(product, "pro")
+    if not mem_id.startswith("mem_"):
         return "ignored"
     status = str(data.get("status") or "")
     if kind in STOP or (kind == "membership.updated" and status and status not in ACTIVE):
