@@ -8,6 +8,9 @@ the only thing that creates or changes a Whop licence:
     membership.activated / membership.updated  -> create the key on first
                                                   sight, keep it active
     membership.deactivated                      -> stop the key
+    payment.succeeded                           -> same as activated (for webhooks
+                                                  that only subscribe to payments)
+    payment.refunded / refund.created           -> stop the key
 
 A Whop buyer has no account on our site yet, so the key is stored with the
 buyer's email; signing up or logging in with that email puts it in the
@@ -96,42 +99,78 @@ def verify_signature(raw: bytes, headers, secret: str, now: float | None = None)
     return any(hmac.compare_digest(expected, s) for s in sigs)
 
 
+def _find(obj, test, depth: int = 0):
+    """First value anywhere in the payload (depth-first) that passes test(key, value)."""
+    if depth > 6:
+        return None
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            if test(k, v):
+                return v
+        for v in obj.values():
+            hit = _find(v, test, depth + 1)
+            if hit is not None:
+                return hit
+    elif isinstance(obj, list):
+        for v in obj:
+            hit = _find(v, test, depth + 1)
+            if hit is not None:
+                return hit
+    return None
+
+
+def _str_id(prefix: str):
+    return lambda k, v: isinstance(v, str) and v.startswith(prefix) and k in ("id", f"{prefix[:-1]}_id",
+                                                                             "membership_id", "product_id",
+                                                                             "membership", "product")
+
+
 def _email(data: dict) -> str | None:
-    user = data.get("user") if isinstance(data.get("user"), dict) else {}
-    email = data.get("email") or user.get("email") or ""
-    email = str(email).strip().lower()
-    return email or None
+    email = _find(data, lambda k, v: k == "email" and isinstance(v, str) and "@" in v)
+    return str(email).strip().lower() if email else None
 
 
 def _id(value) -> str:
     return str(value.get("id") if isinstance(value, dict) else value or "")
 
 
-def apply_event(c: Conn, msg_id: str, event: dict) -> str:
-    """Apply one webhook event. Returns what happened, for the response/logs."""
-    kind = str(event.get("type") or event.get("action") or "")
-    if msg_id:
-        seen = f"whop:{msg_id}"
-        if c.one("SELECT 1 FROM paddle_events WHERE event_id = ?", (seen,)):
-            return "duplicate"
-        c.execute("INSERT INTO paddle_events VALUES (?, ?, ?)", (seen, kind, int(time.time())))
-    if not kind.startswith("membership."):
-        return "ignored"
+START = ("membership.activated", "membership.went_valid", "payment.succeeded")
+STOP = ("membership.deactivated", "membership.went_invalid", "payment.refunded", "refund.created")
 
-    data = event.get("data") or {}
-    mem_id = _id(data)
-    product = _id(data.get("product")) or _id(data.get("product_id"))
+
+def apply_event(c: Conn, msg_id: str, event: dict) -> str:
+    """Apply one webhook event. Returns what happened, for the response/logs.
+
+    Whop sends either membership events or payment events, depending on what the
+    webhook subscribes to, so both are understood: the membership id, product id
+    and buyer email are looked up wherever they sit in the payload.
+    """
+    kind = str(event.get("type") or event.get("action") or "")
+    seen = f"whop:{msg_id}" if msg_id else ""
+    if seen and c.one("SELECT 1 FROM paddle_events WHERE event_id = ?", (seen,)):
+        return "duplicate"
+    result = _apply(c, kind, event.get("data") or {})
+    # Only remember events that changed something, so a replay after a fix still works.
+    if seen and result not in ("ignored",):
+        c.execute("INSERT INTO paddle_events VALUES (?, ?, ?)", (seen, kind, int(time.time())))
+    return result
+
+
+def _apply(c: Conn, kind: str, data: dict) -> str:
+    if not kind.startswith(("membership.", "payment.", "refund.")):
+        return "ignored"
+    mem_id = _id(data) if _id(data).startswith("mem_") else str(_find(data, _str_id("mem_")) or "")
+    product = str(_find(data, _str_id("prod_")) or "")
     plan = products().get(product)
     if not mem_id.startswith("mem_") or plan is None:
         return "ignored"
     status = str(data.get("status") or "")
-    active = kind in ("membership.activated", "membership.went_valid") or (
-        kind == "membership.updated" and status in ACTIVE)
-    if kind in ("membership.deactivated", "membership.went_invalid") or (
-            kind == "membership.updated" and status and status not in ACTIVE):
+    if kind in STOP or (kind == "membership.updated" and status and status not in ACTIVE):
         active = False
-    elif not active:
-        return "ignored"
+    elif kind in START or (kind == "membership.updated" and status in ACTIVE):
+        active = True
+    else:
+        return "ignored"  # payment.failed, payment.pending and the like
 
     sub = f"whop:{mem_id}"
     now = int(time.time())
@@ -143,12 +182,13 @@ def apply_event(c: Conn, msg_id: str, event: dict) -> str:
                    now, row[0]))
         return "updated" if active else "stopped"
     if not active:
-        return "ignored"  # deactivated before we ever saw it: nothing to stop
+        return "ignored"  # stopped before we ever saw it: nothing to stop
 
     email = _email(data)
     user = c.one("SELECT id FROM users WHERE email = ?", (email,)) if email else None
+    whop_user = _find(data, _str_id("user_"))
     lic = licenses.issue(c, plan=plan, user_id=user[0] if user else None, email=email, source="whop",
-                         status="active", subscription_id=sub, customer_id=_id(data.get("user")) or None)
+                         status="active", subscription_id=sub, customer_id=str(whop_user) if whop_user else None)
     c.execute("UPDATE licenses SET price_id = ? WHERE id = ?", (product, lic["id"]))
     return "created"
 

@@ -76,9 +76,41 @@ def test_existing_account_gets_the_key_and_deactivation_stops_it(client):
 
 def test_unknown_products_and_other_events_are_ignored(client):
     assert send(client, "membership.activated", product="prod_someone_else").json()["result"] == "ignored"
-    assert send(client, "payment.succeeded").json()["result"] == "ignored"
+    assert send(client, "payment.failed").json()["result"] == "ignored"
 
 
 def test_config_prefers_whop_checkout(client):
     cfg = client.get("/billing/config").json()
     assert cfg["provider"] == "whop" and cfg["whop"]["checkout"]["pro_monthly"].startswith("https://whop.com/")
+
+
+def send_payment(client, kind="payment.succeeded", msg="msg_pay_1", email="fan@example.com"):
+    """Shaped like Whop's v1 payment webhook: ids nested under membership/product/user."""
+    body = json.dumps({
+        "account_id": "biz_x", "api_version": "v1", "type": kind,
+        "data": {"id": "pay_1", "status": "paid", "amount_after_fees": {"amount": "0.00"},
+                 "membership": {"id": "mem_pay", "status": "active"}, "product": {"id": MONTHLY, "title": "Pro"},
+                 "plan": {"id": "plan_1"}, "user": {"id": "user_9", "email": email, "username": "fan"}},
+    }).encode()
+    ts = str(int(time.time()))
+    key = base64.b64decode(SECRET[len("whsec_"):])
+    sig = base64.b64encode(hmac.new(key, f"{msg}.{ts}.".encode() + body, hashlib.sha256).digest()).decode()
+    return client.post("/billing/whop/webhook", content=body,
+                       headers={"webhook-id": msg, "webhook-timestamp": ts, "webhook-signature": f"v1,{sig}"})
+
+
+def test_payment_events_issue_and_refunds_stop_the_key(client):
+    token = register(client)
+    assert send_payment(client, "payment.failed", msg="m0").json()["result"] == "ignored"
+    assert send_payment(client).json()["result"] == "created"
+    assert my_keys(client, token)[0]["state"] == "ok"
+    assert send_payment(client, "payment.refunded", msg="m2").json()["result"] == "stopped"
+
+
+def test_an_ignored_event_can_be_replayed_after_a_fix(client, monkeypatch):
+    monkeypatch.setenv("WHOP_PRODUCTS", "prod_other:pro")
+    import app.whop as w
+    monkeypatch.setattr(w, "PRODUCTS", {})
+    assert send_payment(client, msg="same").json()["result"] == "ignored"
+    monkeypatch.setattr(w, "PRODUCTS", {MONTHLY: "pro"})
+    assert send_payment(client, msg="same").json()["result"] == "created"
