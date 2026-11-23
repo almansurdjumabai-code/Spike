@@ -111,3 +111,45 @@ def test_payment_events_issue_and_refunds_stop_the_key(client):
 def test_an_ignored_event_can_be_replayed_after_a_fix(client):
     assert send_payment(client, "payment.pending", msg="same").json()["result"] == "ignored"
     assert send_payment(client, msg="same").json()["result"] == "created"
+
+
+def test_real_payment_payload_and_email_backfill_on_replay(client):
+    """Trimmed from a real Whop payment.succeeded: email in customer_email, ids as flat strings."""
+    token = register(client, "buyer@example.ru")
+    payload = {"account_id": "biz_7IVEABBhVVI2FS", "api_version": "v1", "type": "payment.succeeded",
+               "id": "msg_real", "data": {"id": "pay_1", "customer_email": "buyer@example.ru",
+               "membership_id": "mem_TFq1", "product_id": MONTHLY, "status": "paid",
+               "line_items": [{"product_id": MONTHLY, "variant_id": "plan_1"}],
+               "user": {"id": "user_1", "username": "fan"}}}
+
+    def post(msg):
+        body = json.dumps(payload).encode()
+        ts = str(int(time.time()))
+        key = base64.b64decode(SECRET[len("whsec_"):])
+        sig = base64.b64encode(hmac.new(key, f"{msg}.{ts}.".encode() + body, hashlib.sha256).digest()).decode()
+        return client.post("/billing/whop/webhook", content=body,
+                           headers={"webhook-id": msg, "webhook-timestamp": ts, "webhook-signature": f"v1,{sig}"})
+
+    r = post("msg_real").json()
+    assert r["result"] == "created" and r["email_found"] and r["membership_found"]
+    assert my_keys(client, token)[0]["state"] == "ok"
+
+
+def test_replay_links_a_key_created_without_email(tmp_path, monkeypatch):
+    from app import licenses
+    monkeypatch.setenv("WHOP_WEBHOOK_SECRET", SECRET)
+    db = Database(f"sqlite:///{tmp_path / 'replay.db'}")
+    client = TestClient(create_app(db))
+    token = register(client, "buyer@example.ru")
+    with db.connect() as c:
+        licenses.issue(c, plan="pro", user_id=None, email=None, source="whop", subscription_id="whop:mem_old")
+        c.execute("INSERT INTO paddle_events VALUES (?, ?, ?)", ("whop:msg_old", "payment.succeeded", 0))
+    body = json.dumps({"type": "payment.succeeded", "data": {"customer_email": "buyer@example.ru",
+                       "membership_id": "mem_old", "product_id": MONTHLY}}).encode()
+    ts = str(int(time.time()))
+    key = base64.b64decode(SECRET[len("whsec_"):])
+    sig = base64.b64encode(hmac.new(key, f"msg_old.{ts}.".encode() + body, hashlib.sha256).digest()).decode()
+    r = client.post("/billing/whop/webhook", content=body,
+                    headers={"webhook-id": "msg_old", "webhook-timestamp": ts, "webhook-signature": f"v1,{sig}"})
+    assert r.json()["result"] == "duplicate (email linked)"
+    assert len(my_keys(client, token)) == 1

@@ -126,7 +126,8 @@ def _str_id(prefix: str):
 
 
 def _email(data: dict) -> str | None:
-    email = _find(data, lambda k, v: k == "email" and isinstance(v, str) and "@" in v)
+    # Whop's payment payload has "customer_email"; membership payloads nest "email" under user.
+    email = _find(data, lambda k, v: k in ("customer_email", "email", "user_email") and isinstance(v, str) and "@" in v)
     return str(email).strip().lower() if email else None
 
 
@@ -148,7 +149,8 @@ def apply_event(c: Conn, msg_id: str, event: dict) -> str:
     kind = str(event.get("type") or event.get("action") or "")
     seen = f"whop:{msg_id}" if msg_id else ""
     if seen and c.one("SELECT 1 FROM paddle_events WHERE event_id = ?", (seen,)):
-        return "duplicate"
+        # Already applied; a replay may still fill in a buyer email the first pass missed.
+        return "duplicate" + (" (email linked)" if _backfill(c, event.get("data") or {}) else "")
     result = _apply(c, kind, event.get("data") or {})
     # Only remember events that changed something, so a replay after a fix still works.
     if seen and result not in ("ignored",):
@@ -156,10 +158,28 @@ def apply_event(c: Conn, msg_id: str, event: dict) -> str:
     return result
 
 
+def _membership(data: dict) -> str:
+    return _id(data) if _id(data).startswith("mem_") else str(_find(data, _str_id("mem_")) or "")
+
+
+def _backfill(c: Conn, data: dict) -> bool:
+    """Give an email-less Whop key the buyer's email, and their account if one exists."""
+    mem_id, email = _membership(data), _email(data)
+    if not mem_id.startswith("mem_") or not email:
+        return False
+    row = c.one("SELECT id FROM licenses WHERE paddle_subscription_id = ? AND email IS NULL", (f"whop:{mem_id}",))
+    if not row:
+        return False
+    user = c.one("SELECT id FROM users WHERE email = ?", (email,))
+    c.execute("UPDATE licenses SET email = ?, user_id = COALESCE(user_id, ?), updated_at = ? WHERE id = ?",
+              (email, user[0] if user else None, int(time.time()), row[0]))
+    return True
+
+
 def _apply(c: Conn, kind: str, data: dict) -> str:
     if not kind.startswith(("membership.", "payment.", "refund.")):
         return "ignored"
-    mem_id = _id(data) if _id(data).startswith("mem_") else str(_find(data, _str_id("mem_")) or "")
+    mem_id = _membership(data)
     product = str(_find(data, _str_id("prod_")) or "")
     # Only our own Whop company can sign these webhooks, so any of its products is
     # SpikeClip: Pro unless WHOP_PRODUCTS maps it to another plan.
