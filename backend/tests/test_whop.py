@@ -153,3 +153,27 @@ def test_replay_links_a_key_created_without_email(tmp_path, monkeypatch):
                     headers={"webhook-id": "msg_old", "webhook-timestamp": ts, "webhook-signature": f"v1,{sig}"})
     assert r.json()["result"] == "duplicate (email linked)"
     assert len(my_keys(client, token)) == 1
+
+
+def test_event_marked_seen_without_a_key_is_applied_on_replay(tmp_path, monkeypatch):
+    """The first live delivery was recorded as seen by an older version that skipped payments."""
+    monkeypatch.setenv("WHOP_WEBHOOK_SECRET", SECRET)
+    db = Database(f"sqlite:///{tmp_path / 'seen.db'}")
+    client = TestClient(create_app(db))
+    token = register(client, "buyer@example.ru")
+    with db.connect() as c:
+        c.execute("INSERT INTO paddle_events VALUES (?, ?, ?)", ("whop:msg_first", "payment.succeeded", 0))
+    body = json.dumps({"type": "payment.succeeded", "data": {"customer_email": "buyer@example.ru",
+                       "membership_id": "mem_first", "product_id": MONTHLY}}).encode()
+
+    def post():
+        ts = str(int(time.time()))
+        key = base64.b64decode(SECRET[len("whsec_"):])
+        sig = base64.b64encode(hmac.new(key, f"msg_first.{ts}.".encode() + body, hashlib.sha256).digest()).decode()
+        return client.post("/billing/whop/webhook", content=body, headers={
+            "webhook-id": "msg_first", "webhook-timestamp": ts, "webhook-signature": f"v1,{sig}"}).json()["result"]
+
+    assert post() == "created"
+    assert my_keys(client, token)[0]["state"] == "ok"
+    assert post() == "duplicate"  # and only one key
+    assert len(my_keys(client, token)) == 1

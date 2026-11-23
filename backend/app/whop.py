@@ -147,13 +147,21 @@ def apply_event(c: Conn, msg_id: str, event: dict) -> str:
     and buyer email are looked up wherever they sit in the payload.
     """
     kind = str(event.get("type") or event.get("action") or "")
+    data = event.get("data") or {}
     seen = f"whop:{msg_id}" if msg_id else ""
-    if seen and c.one("SELECT 1 FROM paddle_events WHERE event_id = ?", (seen,)):
-        # Already applied; a replay may still fill in a buyer email the first pass missed.
-        return "duplicate" + (" (email linked)" if _backfill(c, event.get("data") or {}) else "")
-    result = _apply(c, kind, event.get("data") or {})
+    already = bool(seen and c.one("SELECT 1 FROM paddle_events WHERE event_id = ?", (seen,)))
+    if already:
+        # A replay may still fill in a buyer email the first pass missed...
+        if _backfill(c, data):
+            return "duplicate (email linked)"
+        # ...and an event an older version marked as seen without making the key
+        # (e.g. it skipped payment events) is applied now.
+        mem_id = _membership(data)
+        if not mem_id or c.one("SELECT 1 FROM licenses WHERE paddle_subscription_id = ?", (f"whop:{mem_id}",)):
+            return "duplicate"
+    result = _apply(c, kind, data)
     # Only remember events that changed something, so a replay after a fix still works.
-    if seen and result not in ("ignored",):
+    if seen and not already and result not in ("ignored",):
         c.execute("INSERT INTO paddle_events VALUES (?, ?, ?)", (seen, kind, int(time.time())))
     return result
 
